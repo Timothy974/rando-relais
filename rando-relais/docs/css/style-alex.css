@@ -17,3 +17,8 @@ h2 {
 input[type="checkbox"] {
     margin-right: 0.5em;
 }
+
+input[type="email"], input[type="password"], input[type="email"], input[type="password"] {
+    color: #333;
+}
+
