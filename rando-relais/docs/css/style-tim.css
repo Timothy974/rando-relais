@@ -9,23 +9,6 @@ body {
     background-color: #ededed;
 }
 
-header {
-    height: 50vh;
-    background: no-repeat url("../images/rando26.jpg");
-    background-size: 100%;
-    background-position: center;
-}
-
-.navigation {
-    position: relative;
-    top : 2em;
-}
-
-.custom-nav {
-    background-color: rgba(32, 31, 31, 0.2);
-    color: white;
-}
-
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Oswald', sans-serif;
 }
@@ -41,6 +24,12 @@ h1, h2, h3, h4, h5, h6 {
 .logo-service {
     width: 4em;
 }
+
+.custom-modal {
+    background-color:rgba(79, 102, 25, 0.4);
+}
+
+.modal-color
 
 .dark {
     color: #fff;
