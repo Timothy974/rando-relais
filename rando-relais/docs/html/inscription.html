@@ -84,7 +84,7 @@
                         <label for="tent"><img src="../icons/tent.png" alt="tente" class="rounded-circle w-25 "></label>
                         <p>
                             Emplacement tente
-                            <img src="/home/student/Téléchargements/validate.png" id="validate_tent" class="d-none">
+                            <img src="../icons/validate-20x20.png" id="validate_tent" class="d-none">
                         </p>
                     </div>
 
@@ -94,7 +94,7 @@
                                 class="rounded-circle w-25"></label>
                         <p>
                             Douche
-                            <img src="/home/student/Téléchargements/validate.png" id="validate_shower" class="d-none">
+                            <img src="../icons/validate-20x20.png" id="validate_shower" class="d-none">
                         </p>
                     </div>
 
@@ -103,7 +103,7 @@
                         <label for="breakfast"><img src="../icons/breakfast.png " alt="petit déjeuner"
                                 class="rounded-circle w-25"></label>
                         <p>Petit déjeuner
-                            <img src="/home/student/Téléchargements/validate.png" id="validate_breakfast" class="d-none">
+                            <img src="../icons/validate-20x20.png" id="validate_breakfast" class="d-none">
                         </p>
                        
                     </div>
@@ -116,7 +116,7 @@
                                 class="rounded-circle w-25"></label>
                         <p>
                             Chambre
-                            <img src="/home/student/Téléchargements/validate.png" id="validate_bedroom" class="d-none">
+                            <img src="../icons/validate-20x20.png" id="validate_bedroom" class="d-none">
                         </p>
                     </div>
 
@@ -126,7 +126,7 @@
                                 class="rounded-circle w-25"></label>
                         <p>
                             Colis
-                            <img src="/home/student/Téléchargements/validate.png" id="validate_delivery" class="d-none">
+                            <img src="../icons/validate-20x20.png" id="validate_delivery" class="d-none">
                         </p>
                     </div>
 
@@ -136,40 +136,51 @@
                                 class="rounded-circle w-25"></label>
                         <p>
                             Sandwich
-                            <img src="/home/student/Téléchargements/validate.png" id="validate_sandwich" class="d-none">
+                            <img src="../icons/validate-20x20.png" id="validate_sandwich" class="d-none">
                         </p>
                     </div>
                 </div>
 
-                <div class="row justify-content-center opacity-50">
-                    <div class="col-lg-2 col-md-4 text-center">
-                        <input class="form-check-input align-middle" type="checkbox" name="dinner" id="dinner_checkbox">
+                <div class="row justify-content-center">
+                    <div class="col-lg-2 col-md-4 text-center opacity-50" id="dinner_service">
+                        <input class="form-check-input align-middle d-none" type="checkbox" name="dinner" id="dinner_checkbox">
                         <label for="dinner"><img src="../icons/diner.png" alt="dîner"
                                 class="rounded-circle w-25"></label>
-                        <p>Dîner</p>
+                        <p>
+                            Dîner
+                            <img src="../icons/validate-20x20.png" id="validate_dinner" class="d-none">
+                        </p>
                     </div>
 
-
-                    <div class="col-lg-2 col-md-4 text-center opacity-50">
-                        <input class="form-check-input align-middle" type="checkbox" name="shelter" id="shelter_checkbox">
+                    <div class="col-lg-2 col-md-4 text-center opacity-50" id="shelter_service">
+                        <input class="form-check-input align-middle d-none" type="checkbox" name="shelter" id="shelter_checkbox">
                         <label for="shelter"><img src="../icons/shelter.png" alt="abri"
                                 class="rounded-circle w-25"></label>
-                        <p>Abri</p>
+                        <p>
+                            Abri
+                            <img src="../icons/validate-20x20.png" id="validate_shelter" class="d-none">
+                        </p>
                     </div>
 
-                    <div class="col-lg-2 col-md-4 text-center opacity-50">
-                        <input class="form-check-input align-middle" type="checkbox" name="water" id="water_checkbox">
+                    <div class="col-lg-2 col-md-4 text-center opacity-50" id="water_service">
+                        <input class="form-check-input align-middle d-none" type="checkbox" name="water" id="water_checkbox">
                         <label for="water"><img src="../icons/water.png" alt="eau" class="rounded-circle w-25"></label>
-                        <p>Eau</p>
+                        <p>
+                            Eau
+                            <img src="../icons/validate-20x20.png" id="validate_water" class="d-none">
+                        </p>
                     </div>
                 </div>
 
-                <div class="row justify-content-center opacity-50">
-                    <div class="col-lg-2 col-md-4 text-center">
+                <div class="row justify-content-center opacity-50" id="power_service">
+                    <div class="col-lg-2 col-md-4 text-center d-none">
                         <input class="form-check-input align-middle" type="checkbox" name="power" id="power_checkbox">
-                        <label for="power"><img src="../icons/power.png" alt="electricite"
+                        <label for="power"><img src="../icons/power.png" alt="électricité"
                                 class="rounded-circle w-25"></label>
-                        <p>Electricité</p>
+                        <p>
+                            Electricité
+                            <img src="../icons/validate-20x20.png" id="validate_power" class="d-none">
+                        </p>
                     </div>
                 </div>
 
@@ -216,6 +227,36 @@
         bedroomCheckBox.addEventListener('click', function(event) {
             document.getElementById('bedroom_service').classList.toggle('opacity-50');
             document.getElementById('validate_bedroom').classList.toggle('d-none');
+        })
+
+        deliveryCheckBox.addEventListener('click', function(event) {
+            document.getElementById('delivery_service').classList.toggle('opacity-50');
+            document.getElementById('validate_delivery').classList.toggle('d-none');
+        })
+
+        sandwichCheckBox.addEventListener('click', function(event) {
+            document.getElementById('sandwich_service').classList.toggle('opacity-50');
+            document.getElementById('validate_sandwich').classList.toggle('d-none');
+        })
+
+        dinnerCheckBox.addEventListener('click', function(event) {
+            document.getElementById('dinner_service').classList.toggle('opacity-50');
+            document.getElementById('validate_dinner').classList.toggle('d-none');
+        })
+
+        shelterCheckBox.addEventListener('click', function(event) {
+            document.getElementById('shelter_service').classList.toggle('opacity-50');
+            document.getElementById('validate_shelter').classList.toggle('d-none');
+        })
+
+        waterCheckBox.addEventListener('click', function(event) {
+            document.getElementById('water_service').classList.toggle('opacity-50');
+            document.getElementById('validate_water').classList.toggle('d-none');
+        })
+
+        powerCheckBox.addEventListener('click', function(event) {
+            document.getElementById('power_service').classList.toggle('opacity-50');
+            document.getElementById('validate_power').classList.toggle('d-none');
         })
      
 
