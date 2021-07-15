@@ -25,13 +25,31 @@ h1, h2, h3, h4, h5, h6 {
     width: 4em;
 }
 
+.hide {
+    display: none;
+}
+
+.custom-button {
+    border-radius: 50%;
+    border: rgba(0, 0, 0, 0.5) solid 2px;
+    background-color: #a06363;
+    width: 60px;
+    height: 60px;
+    font-style: italic;
+    font-size: 35px;
+    position: absolute;
+    bottom: 50px;
+    right: 10px;    
+}
+
 .custom-modal {
-    background-color:rgba(120, 145, 64, 0.4);
-    color: white;
+    background-color:rgba(120, 145, 64, 0.4); 
+    
 }
 
 .modal-color {
-    background-color:rgb(155, 178, 53)
+    background-color:rgb(25, 135,84);
+    color: white;
 }
 
 .dark {

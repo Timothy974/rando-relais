@@ -13,39 +13,68 @@
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
 		<link rel="stylesheet" href="../css/style-tim.css">
-		<title>Information</title>
+		<title>modal</title>
 	</head>
 	<body>
-		
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#informationModal">
-  Launch demo modal
-</button>
 
-<!-- Modal -->
-<div class="modal fade custom-modal" id="informationModal" tabindex="-1" aria-labelledby="informationModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content modal-color">
-      <div class="modal-header">
-        <h5 class="modal-title" id="informationModalLabel">Quelques informations</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-	  	<img src="../images/randonnee.gif" alt="image illustration" width="200px" class="float-start pe-2 rounded-1">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium sint libero inventore, quibusdam magnam, veniam illum id reprehenderit tenetur aspernatur ipsa, nesciunt perspiciatis minus voluptas pariatur officia voluptate temporibus velit eos illo facere! Eaque quidem sequi aperiam tempora modi veritatis eius nostrum, doloribus ad nesciunt explicabo sunt, veniam dolore ut, ducimus aspernatur sed. Mollitia, cupiditate doloremque! Aliquid vitae aspernatur sapiente modi, minima quas reiciendis quibusdam. Assumenda possimus nesciunt quis. Architecto repellat commodi unde quisquam sint labore voluptate, deserunt necessitatibus placeat itaque soluta repellendus omnis, dolorum expedita totam tenetur sed, dolor nostrum molestiae porro eum tempora accusantium ab. Aperiam, dolore error.</p>
-		<ul class="list-style">
-			<li class="mb-2"><img src="../icons/diner.png" alt=""  width="30px"> : si vous souhaitez proposé un dîner au Marcheur</li>
-			<li class="mb-2"><img src="../icons/diner.png" alt=""  width="30px"> : si vous souhaitez proposé un dîner au Marcheur</li>
-			<li class="mb-2"><img src="../icons/diner.png" alt=""  width="30px"> : si vous souhaitez proposé un dîner au Marcheur</li>
-			<li class="mb-2"><img src="../icons/diner.png" alt=""  width="30px"> : si vous souhaitez proposé un dîner au Marcheur</li>
-		</ul>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-success" data-bs-dismiss="modal">Fermer</button>
-      </div>
-    </div>
-  </div>
-</div>
+		<!-- Bouton Modal il faut ajouter cette ligne dans la nav -->
+		<a type="button" data-bs-toggle="modal" data-bs-target="#informationModal">Information</a>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+		<!-- bouton pour la version mobile -->
+		<button type="button" data-bs-toggle="modal" data-bs-target="#informationModal" class="custom-button">i</button>
+
+
+		<!-- Modal ajouter ce code dans le header -->
+		<div class="modal  fade custom-modal" id="informationModal" tabindex="-1" aria-labelledby="informationModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content modal-color">
+					<div class="modal-header">
+						<h5 class="modal-title" id="informationModalLabel">Quelques informations</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<img src="../images/randonnee.gif" alt="image illustration" width="200px" class="float-start me-2 rounded">
+						<p>Le site Rando-Relais a pour but d’aider le randonneur itinérant à bénéficier de différents services sur son parcours grâce aux Anges du chemin.Les services offerts peuvent être de différentes natures : un emplacement dans un jardin pour monter la tente, un simple robinet pour remplir la poche à eau, ou encore une adresse postale à mi-parcours pour s’envoyer un colis contenant de quelques provision, quelques effets personnels, ou encore de nouveaux topo-guides par exemple.
+                        </p>
+						<p>
+							Selon les cas, il pourra également s’agir d’une douche, d’une chambre pour la nuit, ou encore d’un pique-nique. Dans tous les cas, ces services sont offerts gracieusement par les Anges du chemin.
+                        </p>
+
+						<p>Amis visiteurs, vous pouvez remplir un formulaire d’inscription très simple pour devenir utilisateur. Vous pourrez alors choisir d’être  Marcheur ou Ange du chemin !!
+                        </p>
+
+						<p>Marcheur : vous profitez d’un accès complet au site et pouvez demander à bénéficier des services proposés sur votre parcours.</p>
+
+						<p>Ange du chemin : vous êtes un marcheur, mais en plus, passionné et généreux, vous souhaitez mettre à disposition de la communauté un ou plusieurs services.
+                        </p>
+						<p>Fonctionnement : sur la page d’accueil est présentée, triée par date d’inscription, la liste des Anges du chemin. Une recherche affinée par commune permet de réduire efficacement cette liste en la limitant à votre zone d’évolution.
+                        </p>
+
+
+						<p>Sous réserve d’être connecté, il vous est alors possible d’accéder à la page information d’un Ange du chemin qui propose ses services dans votre zone de recherche.
+                        </p>
+
+						<p>Vous prenez contact avec lui par téléphone, pour vous assurer que le service convoité est toujours disponible (En effet, l’emplacement pour monter la tente, par exemple, est peut-être déjà occupé !) et, le cas échéant, vous récupérez auprès de lui, l’adresse ou l’itinéraire pour arriver à destination.
+						</p>
+						<ul class="list-style">
+							<li class="mb-2"><img src="../icons/diner.png" alt="" width="30px">
+								: si vous souhaitez proposé un dîner au Marcheur</li>
+							<li class="mb-2"><img src="../icons/diner.png" alt="" width="30px">
+								: si vous souhaitez proposé un dîner au Marcheur</li>
+							<li class="mb-2"><img src="../icons/diner.png" alt="" width="30px">
+								: si vous souhaitez proposé un dîner au Marcheur</li>
+							<li class="mb-2"><img src="../icons/diner.png" alt="" width="30px">
+								: si vous souhaitez proposé un dîner au Marcheur</li>
+						</ul>
+						<p>Enfin, n’oubliez pas que ce site, donc l’accès à ces services, n’existe que par les Anges du chemin. Pensez donc à distiller un petit mot gentil à leur égard, à votre arrivée, comme à votre départ, ce sera pour eux le meilleurs remerciement !!</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success" data-bs-dismiss="modal">Fermer</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 	</body>
+</html>
