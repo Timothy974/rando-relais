@@ -5,10 +5,15 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet"> 
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet"> 
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.6/css/all.css">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
 		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-		<link rel="stylesheet" href="../css/danielstyle.css">
+	<link rel="stylesheet" href="../css/danielstyle.css">
+	<link rel="stylesheet" href="../css/media-queries.css">
 
 	<title>randoRelais</title>
 </head>
@@ -19,14 +24,14 @@
 			<h1 class="mt-5 text-center">Bienvenue sur le site rando relais</h1>
 		</div>
 		<div class="album py-5 bg-light">
-			<div class="container">
-			
+			<div class="container-fluid ">
+
 				<div class="row row-cols-1 row-cols-xl-3 row-cols-lg-2 align-items-stretch g-4 py-5 ">
 					<div class="col">
 						<div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg"
 							style="background-image: url('../images/rando9.jpg'); background-position: center">
-							<div class="d-flex flex-column h-100 p-3 pb-3 text-shadow-1">
-								<div class="text-center"><img src="images/timothy.jpg" alt="Bootstrap" width="32" height="32"
+							<div class="d-flex flex-column h-100 p-5  text-shadow-1">
+								<div class="text-center"><img src="../images/timothy.jpg" alt="Bootstrap" width="32" height="32"
 										class=" rounded-circle border border-white"></div>
 								<h2 class="mt-5 display-6 lh-1 fw-bold text-center">Timothy</h2>
 								<p class=" mb-5 display-6 lh-1 fw-bold text-center">La Réunion</p>
@@ -40,20 +45,19 @@
 											class="mx-2 rounded-circle border border-white" src="../icons/diner.png" alt="diner"
 											width="30px"><img class="mx-2 rounded-circle border border-white" src="../icons/breakfast.png"
 											alt="petit déjeuner" width="30px">
-
-										<svg class="bi me-2" width="1em" height="1em">
-											<use xlink:href="#geo-fill" /></svg>
-										<small class="bg-dark">Arrivée avant 20h00</small>
 									</li>
 								</ul>
+								<div class="d-inline-flex justify-content-center">
+									<small class="bg-dark  px-2">Arrivée avant 20h00</small>
+								</div>
 							</div>
 						</div>
 					</div>
 					<div class="col">
 						<div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg"
 							style="background-image: url('../images/rando12.jpg');background-position: center">
-							<div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">
-								<div class="text-center"><img src="images/aimerick.png" alt="Bootstrap" width="32" height="32"
+							<div class="d-flex flex-column h-100 p-5  text-shadow-1">
+								<div class="text-center"><img src="../images/aimerick.png" alt="Bootstrap" width="32" height="32"
 										class=" rounded-circle border border-white"></div>
 								<h2 class="mt-5 display-6 lh-1 fw-bold text-center">Aimerick</h2>
 								<p class=" mb-5 display-6 lh-1 fw-bold text-center">Paris</p>
@@ -67,14 +71,9 @@
 											class="mx-2 rounded-circle border border-white" src="../icons/diner.png" alt="diner"
 											width="30px"><img class="mx-2 rounded-circle border border-white" src="../icons/breakfast.png"
 											alt="petit déjeuner" width="30px">
-
-										<svg class="bi me-2" width="1em" height="1em">
-											<use xlink:href="#geo-fill" /></svg>
-										<small class="bg-dark">Ptit déj à 8h00</small>
-
-
 									</li>
 								</ul>
+								<small class="bg-dark text-center">Ptit déj à 8h00</small>
 							</div>
 						</div>
 					</div>
@@ -82,8 +81,8 @@
 					<div class="col">
 						<div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg"
 							style="background-image: url('../images/rando11.jpg');background-position: center">
-							<div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">
-								<div class="text-center"><img src="images/alex.jpg" alt="Bootstrap" width="32" height="32"
+							<div class="d-flex flex-column h-100 p-5  text-shadow-1">
+								<div class="text-center"><img src="../images/alex.jpg" alt="Bootstrap" width="32" height="32"
 										class=" rounded-circle border border-white"></div>
 								<h2 class="mt-5 display-6 lh-1 fw-bold text-center">Alex</h2>
 								<p class=" mb-5 display-6 lh-1 fw-bold text-center">La Rochelle</p>
@@ -97,134 +96,18 @@
 											class="mx-2 rounded-circle border border-white" src="../icons/diner.png" alt="diner"
 											width="30px"><img class="mx-2 rounded-circle border border-white" src="../icons/breakfast.png"
 											alt="petit déjeuner" width="30px">
-
-										<svg class="bi me-2" width="1em" height="1em">
-											<use xlink:href="#geo-fill" /></svg>
-										<small class="bg-dark">Départ avant 10h00</small>
 									</li>
-
 								</ul>
+								<div class="d-inline-flex justify-content-center">
+									<small class="bg-dark px-2">Départ avant 10h00</small>
+								</div>
 							</div>
 						</div>
 					</div>
 					<div class="col">
 						<div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg"
-							style="background-image: url('../images/rando10.jpg');background-position: center">
-							<div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">
-								<div class="text-center"><img src="images/daniel.png" alt="Bootstrap" width="32" height="32"
-										class=" rounded-circle border border-white"></div>
-								<h2 class="mt-5 display-6 lh-1 fw-bold text-center">Daniel</h2>
-								<p class=" mb-5 display-6 lh-1 fw-bold text-center">Bois Ratier</p>
-								<ul class="d-flex list-unstyled  mt-auto">
-									<li class="me-auto"></li>
-									<li class="me-auto">
-										<img src="../icons/tent.png" class="mx-2 rounded-circle border border-white" alt="emplacement"
-											width="30px"><img class="mx-2 rounded-circle border border-white" src="../icons/delivery.png"
-											alt="réception colis" width="30px"><img class="mx-2 rounded-circle border border-white"
-											src="../icons/shower.png" alt="douche" width="30px"><img
-											class="mx-2 rounded-circle border border-white" src="../icons/diner.png" alt="diner"
-											width="30px"><img class="mx-2 rounded-circle border border-white" src="../icons/breakfast.png"
-											alt="petit déjeuner" width="30px">
-									</li>
-									<li class="d-flex align-items-center ">
-										<svg class="bi me-2" width="1em" height="1em">
-											<use xlink:href="#geo-fill" /></svg>
-										<small class="bg-dark"></small>
-									</li>
-
-								</ul>
-							</div>
-						</div>
-					</div>
-					<div class="col">
-						<div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg"
-							style="background-image: url('../images/rando9.jpg'); background-position: center">
-							<div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">
-								<div class="text-center"><img src="images/timothy.jpg" alt="Bootstrap" width="32" height="32"
-										class=" rounded-circle border border-white"></div>
-								<h2 class="mt-5 display-6 lh-1 fw-bold text-center">Timothy</h2>
-								<p class=" mb-5 display-6 lh-1 fw-bold text-center">La Réunion</p>
-								<ul class="d-flex list-unstyled text-center mt-auto">
-									<li class="me-auto"></li>
-									<li class="me-auto">
-										<img src="../icons/tent.png" class="mx-2 rounded-circle border border-white" alt="emplacement"
-											width="30px"><img class="mx-2 rounded-circle border border-white" src="../icons/delivery.png"
-											alt="réception colis" width="30px"><img class="mx-2 rounded-circle border border-white"
-											src="../icons/shower.png" alt="douche" width="30px"><img
-											class="mx-2 rounded-circle border border-white" src="../icons/diner.png" alt="diner"
-											width="30px"><img class="mx-2 rounded-circle border border-white" src="../icons/breakfast.png"
-											alt="petit déjeuner" width="30px">
-
-										<svg class="bi me-2" width="1em" height="1em">
-											<use xlink:href="#geo-fill" /></svg>
-										<small class="bg-dark">Arrivée avant 20h00</small>
-
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<div class="col">
-						<div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg"
-							style="background-image: url('../images/rando12.jpg');background-position: center">
-							<div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">
-								<div class="text-center"><img src="images/aimerick.png" alt="Bootstrap" width="32" height="32"
-										class=" rounded-circle border border-white"></div>
-								<h2 class="mt-5 display-6 lh-1 fw-bold text-center">Aimerick</h2>
-								<p class=" mb-5 display-6 lh-1 fw-bold text-center">Paris</p>
-								<ul class="d-flex list-unstyled text-center mt-auto">
-									<li class="me-auto"></li>
-									<li class="me-auto">
-										<img src="../icons/tent.png" class="mx-2 rounded-circle border border-white" alt="emplacement"
-											width="30px"><img class="mx-2 rounded-circle border border-white" src="../icons/delivery.png"
-											alt="réception colis" width="30px"><img class="mx-2 rounded-circle border border-white"
-											src="../icons/shower.png" alt="douche" width="30px"><img
-											class="mx-2 rounded-circle border border-white" src="../icons/diner.png" alt="diner"
-											width="30px"><img class="mx-2 rounded-circle border border-white" src="../icons/breakfast.png"
-											alt="petit déjeuner" width="30px">
-
-										<svg class="bi me-2" width="1em" height="1em">
-											<use xlink:href="#geo-fill" /></svg>
-										<small class="bg-dark">Ptit déj à 8h00</small>
-
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-
-					<div class="col">
-						<div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg"
-							style="background-image: url('../images/rando11.jpg');background-position: center">
-							<div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">
-								<div class="text-center"><img src="images/alex.jpg" alt="Bootstrap" width="32" height="32"
-										class=" rounded-circle border border-white"></div>
-								<h2 class="mt-5 display-6 lh-1 fw-bold text-center">Alex</h2>
-								<p class=" mb-5 display-6 lh-1 fw-bold text-center">La Rochelle</p>
-								<ul class="d-flex list-unstyled text-center mt-auto">
-									<li class="me-auto"></li>
-									<li class="me-auto">
-										<img src="../icons/tent.png" class="mx-2 rounded-circle border border-white" alt="emplacement"
-											width="30px"><img class="mx-2 rounded-circle border border-white" src="../icons/delivery.png"
-											alt="réception colis" width="30px"><img class="mx-2 rounded-circle border border-white"
-											src="../icons/shower.png" alt="douche" width="30px"><img
-											class="mx-2 rounded-circle border border-white" src="../icons/diner.png" alt="diner"
-											width="30px"><img class="mx-2 rounded-circle border border-white" src="../icons/breakfast.png"
-											alt="petit déjeuner" width="30px">
-
-										<svg class="bi me-2" width="1em" height="1em">
-											<use xlink:href="#geo-fill" /></svg>
-										<small class="bg-dark">Départ avant 10h00</small>
-
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<div class="col">
-						<div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg"
-							style="background-image: url('../images/rando10.jpg');background-position: center">
-							<div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">
+							style="background-image: url('../images/rando18.jpg');background-position: center">
+							<div class="d-flex flex-column h-100 p-5 text-shadow-1">
 								<div class="text-center"><img src="../images/daniel.png" alt="Bootstrap" width="32" height="32"
 										class=" rounded-circle border border-white"></div>
 								<h2 class="mt-5 display-6 lh-1 fw-bold text-center">Daniel</h2>
@@ -240,21 +123,18 @@
 											width="30px"><img class="mx-2 rounded-circle border border-white" src="../icons/breakfast.png"
 											alt="petit déjeuner" width="30px">
 									</li>
-									<li class="d-flex align-items-center ">
-										<svg class="bi me-2" width="1em" height="1em">
-											<use xlink:href="#geo-fill" /></svg>
-										<small class="bg-dark"></small>
-									</li>
-
 								</ul>
+								<div class="d-inline-flex justify-content-center">
+									<small class="bg-dark  px-2">Bonjour la Team</small>
+								</div>
 							</div>
 						</div>
 					</div>
 					<div class="col">
 						<div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg"
 							style="background-image: url('../images/rando9.jpg'); background-position: center">
-							<div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">
-								<div class="text-center"><img src="images/timothy.jpg" alt="Bootstrap" width="32" height="32"
+							<div class="d-flex flex-column h-100 p-5 text-shadow-1">
+								<div class="text-center"><img src="../images/timothy.jpg" alt="Bootstrap" width="32" height="32"
 										class=" rounded-circle border border-white"></div>
 								<h2 class="mt-5 display-6 lh-1 fw-bold text-center">Timothy</h2>
 								<p class=" mb-5 display-6 lh-1 fw-bold text-center">La Réunion</p>
@@ -268,62 +148,114 @@
 											class="mx-2 rounded-circle border border-white" src="../icons/diner.png" alt="diner"
 											width="30px"><img class="mx-2 rounded-circle border border-white" src="../icons/breakfast.png"
 											alt="petit déjeuner" width="30px">
-
-										<svg class="bi me-2" width="1em" height="1em">
-											<use xlink:href="#geo-fill" /></svg>
-										<small class="bg-dark">Arrivée avant 20h00</small>
-
 									</li>
 								</ul>
+								<div class="d-inline-flex justify-content-center">
+									<small class="bg-dark  px-2">Arrivée avant 20h00 SVP</small>
+								</div>
 							</div>
 						</div>
 					</div>
 					<div class="col">
 						<div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg"
-							style="background-image: url('unsplash-photo-1.jpg');">
-							<div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
-								<h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Short title, long jacket</h2>
-								<ul class="d-flex list-unstyled mt-auto">
+							style="background-image: url('../images/rando12.jpg');background-position: center">
+							<div class="d-flex flex-column h-100 p-5 text-shadow-1">
+								<div class="text-center"><img src="../images/aimerick.png" alt="Bootstrap" width="32" height="32"
+										class=" rounded-circle border border-white"></div>
+								<h2 class="mt-5 display-6 lh-1 fw-bold text-center">Aimerick</h2>
+								<p class=" mb-5 display-6 lh-1 fw-bold text-center">Paris</p>
+								<ul class="d-flex list-unstyled text-center mt-auto">
+									<li class="me-auto"></li>
 									<li class="me-auto">
-										<img src="https://github.com/twbs.png" alt="Bootstrap" width="32" height="32"
-											class="rounded-circle border border-white">
-									</li>
-									<li class="d-flex align-items-center me-3">
-										<svg class="bi me-2" width="1em" height="1em">
-											<use xlink:href="#geo-fill" /></svg>
-										<small>Earth</small>
-									</li>
-									<li class="d-flex align-items-center">
-										<svg class="bi me-2" width="1em" height="1em">
-											<use xlink:href="#calendar3" /></svg>
-										<small>3d</small>
+										<img src="../icons/tent.png" class="mx-2 rounded-circle border border-white" alt="emplacement"
+											width="30px"><img class="mx-2 rounded-circle border border-white" src="../icons/delivery.png"
+											alt="réception colis" width="30px"><img class="mx-2 rounded-circle border border-white"
+											src="../icons/shower.png" alt="douche" width="30px"><img
+											class="mx-2 rounded-circle border border-white" src="../icons/diner.png" alt="diner"
+											width="30px"><img class="mx-2 rounded-circle border border-white" src="../icons/breakfast.png"
+											alt="petit déjeuner" width="30px">
 									</li>
 								</ul>
+								<small class="bg-dark text-center">Ptit déj à 8h00</small>
 							</div>
 						</div>
 					</div>
 
 					<div class="col">
 						<div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg"
-							style="background-image: url('unsplash-photo-2.jpg');">
-							<div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
-								<h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Much longer title that wraps to multiple lines</h2>
-								<ul class="d-flex list-unstyled mt-auto">
+							style="background-image: url('../images/rando11.jpg');background-position: center">
+							<div class="d-flex flex-column h-100 p-5 text-shadow-1">
+								<div class="text-center"><img src="../images/alex.jpg" alt="Bootstrap" width="32" height="32"
+										class=" rounded-circle border border-white"></div>
+								<h2 class="mt-5 display-6 lh-1 fw-bold text-center">Alex</h2>
+								<p class=" mb-5 display-6 lh-1 fw-bold text-center">La Rochelle</p>
+								<ul class="d-flex list-unstyled text-center mt-auto">
+									<li class="me-auto"></li>
 									<li class="me-auto">
-										<img src="https://github.com/twbs.png" alt="Bootstrap" width="32" height="32"
-											class="rounded-circle border border-white">
-									</li>
-									<li class="d-flex align-items-center me-3">
-										<svg class="bi me-2" width="1em" height="1em">
-											<use xlink:href="#geo-fill" /></svg>
-										<small>Pakistan</small>
-									</li>
-									<li class="d-flex align-items-center">
-										<svg class="bi me-2" width="1em" height="1em">
-											<use xlink:href="#calendar3" /></svg>
-										<small>4d</small>
+										<img src="../icons/tent.png" class="mx-2 rounded-circle border border-white" alt="emplacement"
+											width="30px"><img class="mx-2 rounded-circle border border-white" src="../icons/delivery.png"
+											alt="réception colis" width="30px"><img class="mx-2 rounded-circle border border-white"
+											src="../icons/shower.png" alt="douche" width="30px"><img
+											class="mx-2 rounded-circle border border-white" src="../icons/diner.png" alt="diner"
+											width="30px"><img class="mx-2 rounded-circle border border-white" src="../icons/breakfast.png"
+											alt="petit déjeuner" width="30px">
 									</li>
 								</ul>
+								<div class="d-inline-flex justify-content-center">
+									<small class="bg-dark  px-2">Je vous invite à ma table</small>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col">
+						<div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg"
+							style="background-image: url('../images/rando18.jpg');background-position: center">
+							<div class="d-flex flex-column h-100 p-5 text-shadow-1">
+								<div class="text-center"><img src="../images/daniel.png" alt="Bootstrap" width="32" height="32"
+										class=" rounded-circle border border-white"></div>
+								<h2 class="mt-5 display-6 lh-1 fw-bold text-center">Daniel</h2>
+								<p class=" mb-5 display-6 lh-1 fw-bold text-center">Bois Ratier</p>
+								<ul class="d-flex list-unstyled  mt-auto">
+									<li class="me-auto"></li>
+									<li class="me-auto">
+										<img src="../icons/tent.png" class="mx-2 rounded-circle border border-white" alt="emplacement"
+											width="30px"><img class="mx-2 rounded-circle border border-white" src="../icons/delivery.png"
+											alt="réception colis" width="30px"><img class="mx-2 rounded-circle border border-white"
+											src="../icons/shower.png" alt="douche" width="30px"><img
+											class="mx-2 rounded-circle border border-white" src="../icons/diner.png" alt="diner"
+											width="30px"><img class="mx-2 rounded-circle border border-white" src="../icons/breakfast.png"
+											alt="petit déjeuner" width="30px">
+									</li>
+								</ul>
+								<div class="d-inline-flex justify-content-center">
+									<small class="bg-dark  px-2">Pas de bruit en arrivant svp....</small>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col">
+						<div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg"
+							style="background-image: url('../images/rando9.jpg'); background-position: center">
+							<div class="d-flex flex-column h-100 p-5 text-shadow-1">
+								<div class="text-center"><img src="../images/timothy.jpg" alt="Bootstrap" width="32" height="32"
+										class=" rounded-circle border border-white"></div>
+								<h2 class="mt-5 display-6 lh-1 fw-bold text-center">Timothy</h2>
+								<p class=" mb-5 display-6 lh-1 fw-bold text-center">La Réunion</p>
+								<ul class="d-flex list-unstyled text-center mt-auto">
+									<li class="me-auto"></li>
+									<li class="me-auto">
+										<img src="../icons/tent.png" class="mx-2 rounded-circle border border-white" alt="emplacement"
+											width="30px"><img class="mx-2 rounded-circle border border-white" src="../icons/delivery.png"
+											alt="réception colis" width="30px"><img class="mx-2 rounded-circle border border-white"
+											src="../icons/shower.png" alt="douche" width="30px"><img
+											class="mx-2 rounded-circle border border-white" src="../icons/diner.png" alt="diner"
+											width="30px"><img class="mx-2 rounded-circle border border-white" src="../icons/breakfast.png"
+											alt="petit déjeuner" width="30px">
+									</li>
+								</ul>
+								<div class="d-inline-flex justify-content-center">
+									<small class="bg-dark  px-2">Je vous attends pour l'apéro...</small>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -332,67 +264,47 @@
 		</div>
 	</section>
 
-	 <!-- Footer -->
-	 <footer class="bg-image  d-flex text-white  sm-flex-column justify-content-around p-5" style="background-image:  url('../images/1.jpg'); background-size: 100vw; background-position: right; height: 50vh;">
-		<div class="footer-top">
+	<!-- Footer -->
+	<footer>
+		<div class="footer-top ">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-4 col-lg-3 footer-about wow fadeInUp">
-						<img class="logo-footer" src="assets/img/logo.png" alt="logo-footer" data-at2x="assets/img/logo.png">
-						<p>
-							We are a young company always looking for new and creative ideas to help you with our products in your everyday work.
-						</p>
-						<p><a href="#">Our Team</a></p>
-								</div>
-					<div class="col-md-4 col-lg-4 offset-lg-1 footer-contact wow fadeInDown">
-						<h3>Contact</h3>
-								<p><i class="fas fa-map-marker-alt"></i> Via Rossini 10, 10136 Turin Italy</p>
-								<p><i class="fas fa-phone"></i> Phone: (0039) 333 12 68 347</p>
-								<p><i class="fas fa-envelope"></i> Email: <a href="mailto:hello@domain.com">hello@domain.com</a></p>
-								<p><i class="fab fa-skype"></i> Skype: you_online</p>
-								</div>
-								<div class="col-md-4 col-lg-4 footer-links wow fadeInUp">
-									<div class="row">
-										<div class="col">
-											<h3>Links</h3>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-md-6">
-											<p><a class="scroll-link" href="#top-content">Top</a></p>
-											<p><a class="scroll-link" href="#section-1">Section 1</a></p>
-											<p><a class="scroll-link" href="#section-2">Section 2</a></p>
-											<p><a class="scroll-link" href="#section-3">Section 3</a></p>
-										</div>
-										<div class="col-md-6">
-											<p><a class="scroll-link" href="#section-4">Section 4</a></p>
-											<p><a href="#">Affiliates</a></p>
-											<p><a href="#">Terms</a></p>
-										</div>
-									</div>
-								</div>
+					<div class="text-center d-flex align-items-center justify-content-center col-md-4 col-lg-3 footer-about">
+						<img class="logo-footer text-center" src="../images/logo-rando-relais-552x302.png" alt="logo-footer">
+
 					</div>
+					<div class=" text-center col-md-4 col-lg-4 offset-lg-1 footer-contact">
+						<h3>Contact</h3>
+						<p><i class="fas fa-map-marker-alt"></i> Ecole O'Clock</p>
+						<p><i class="fas fa-phone"></i> Phone: 00 11 22 33 44</p>
+						<p ><i class="fas fa-envelope"></i> Email: <a class="text-light text-decoration-none" href="mailto:hello@domain.com">contact@randorelais.com</a></p>
+					</div>
+					<div class="text-center col-md-4 col-lg-4 footer-links">
+						<h3>Liens</h3>
+						<p><a class="text-decoration-none" href="#">Our Team</a></p>
+						<p><a class="text-decoration-none" href="#">CGU</a></p>
+						<p><a class="text-decoration-none" href="#">Mentions Légales</a></p>
+					</div>
+				</div>
 			</div>
 		</div>
 		<div class="footer-bottom">
 			<div class="container">
 				<div class="row">
-						 <div class="col-md-6 footer-copyright">
-									&copy; Bootstrap Footer Template by <a href="https://azmind.com">AZMIND</a>
-								</div>
-						 <div class="col-md-6 footer-social">
-									<a href="#"><i class="fab fa-facebook"></i></a> 
-				<a href="#"><i class="fab fa-twitter"></i></a> 
-				<a href="#"><i class="fab fa-google-plus-g"></i></a> 
-				<a href="#"><i class="fab fa-instagram"></i></a> 
-				<a href="#"><i class="fab fa-pinterest"></i></a>
-								</div>
-					 </div>
+					<div class="col-md-6 footer-copyright">
+						&copy; Copyright Rando-relais O'clock 2021 Promo SHEHERAZADE
+					</div>
+					<div class="col-md-6 footer-social">
+						<a href="#"><i class="fab fa-facebook"></i></a>
+						<a href="#"><i class="fab fa-twitter"></i></a>
+						<a href="#"><i class="fab fa-google-plus-g"></i></a>
+						<a href="#"><i class="fab fa-instagram"></i></a>
+						<a href="#"><i class="fab fa-pinterest"></i></a>
+					</div>
+				</div>
 			</div>
 		</div>
-	</footer >
-
-	
+	</footer>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
 		crossorigin="anonymous"></script>
