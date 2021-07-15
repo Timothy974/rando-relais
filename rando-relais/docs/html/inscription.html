@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/style-alex.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,11 +24,14 @@
 
 <body>
     <div class="container">
+        <!-- Subscribe title  -->
+        <h2 class="text-center">Connexion</h2>
         <!-- Connection form -->
         <form>
             <!-- Toogle button -->
             <div class="form-check form-switch d-flex justify-content-center">
                 <input class="form-check-input" type="checkbox" id="flexSwitchAngel">
+
                 <label class="form-check-label" for="flexSwitchAngel">S'inscrire en tant qu'ange du chemin</label>
             </div>
 
@@ -44,7 +47,8 @@
 
             <!-- Password confirmation -->
             <div class="mb-3 col-lg-6 mx-auto">
-                <input type="password" class="form-control" id="password_confirmation" placeholder="Confirmez votre mot de passe">
+                <input type="password" class="form-control" id="password_confirmation"
+                    placeholder="Confirmez votre mot de passe">
             </div>
 
             <!-- Last name -->
@@ -75,68 +79,78 @@
 
                 <!-- Services -->
                 <div class="row justify-content-center">
-                    <div class="col-lg-2 text-center">
-                        <input type="checkbox" name="" id="tent" class="">
-                        <label for="tent"> <img src="../icons/tent.png" alt="..." class="rounded-circle w-25"></label>
+                    <div class="col-lg-2 col-md-4 text-center">
+                        <input class="form-check-input align-middle" type="checkbox" name="tent" id="tent">
+                        <label for="tent"><img src="../icons/tent.png" alt="tente" class="rounded-circle w-25 "></label>
                         <p>Emplacement tente</p>
                     </div>
 
-                    <div class="col-lg-2 text-center">
-                        <img src="../icons/shower.png" alt="..." class="rounded-circle w-25">
+                    <div class="col-lg-2 col-md-4 text-center">
+                        <input class="form-check-input align-middle" type="checkbox" name="shower" id="shower">
+                        <label for="shower"><img src="../icons/shower.png" alt="douche"
+                                class="rounded-circle w-25"></label>
                         <p>Douche</p>
                     </div>
 
-                    <div class="col-lg-2 text-center">
-                        <img src="../icons/breakfast.png " alt="..." class="rounded-circle w-25">
+                    <div class="col-lg-2 col-md-4 text-center">
+                        <input class="form-check-input align-middle" type="checkbox" name="breakfast" id="breakfast">
+                        <label for="breakfast"><img src="../icons/breakfast.png " alt="petit déjeuner"
+                                class="rounded-circle w-25"></label>
                         <p>Petit déjeuner</p>
                     </div>
                 </div>
 
                 <div class="row justify-content-center">
-                    <div class="col-lg-2 text-center">
-                        <img src="../icons/beedroom.png" alt="..."
-                            class="rounded-circle w-25">
+                    <div class="col-lg-2 col-md-4 text-center">
+                        <input class="form-check-input align-middle" type="checkbox" name="bedroom" id="bedroom">
+                        <label for="bedroom"><img src="../icons/beedroom.png" alt="chambre"
+                                class="rounded-circle w-25"></label>
                         <p>Chambre</p>
                     </div>
 
-                    <div class="col-lg-2 text-center">
-                        <img src="../icons/delivery.png" alt="..."
-                            class="rounded-circle w-25">
+                    <div class="col-lg-2 col-md-4 text-center">
+                        <input class="form-check-input align-middle" type="checkbox" name="delivery" id="delivery">
+                        <label for="delivery"><img src="../icons/delivery.png" alt="colis"
+                                class="rounded-circle w-25"></label>
                         <p>Colis</p>
                     </div>
 
-                    <div class="col-lg-2 text-center">
-                        <img src="../icons/sandwich.png" alt="..."
-                            class="rounded-circle w-25">
+                    <div class="col-lg-2 col-md-4 text-center">
+                        <input class="form-check-input align-middle" type="checkbox" name="sandwich" id="sandwich">
+                        <label for="sandwich"><img src="../icons/sandwich.png" alt="sandwich"
+                                class="rounded-circle w-25"></label>
                         <p>Sandwich</p>
                     </div>
                 </div>
 
                 <div class="row justify-content-center">
-                    <div class="col-lg-2 text-center">
-                        <img src="../icons/diner.png" alt="..."
-                            class="rounded-circle w-25">
+                    <div class="col-lg-2 col-md-4 text-center">
+                        <input class="form-check-input align-middle" type="checkbox" name="dinner" id="dinner">
+                        <label for="dinner"><img src="../icons/diner.png" alt="dîner"
+                                class="rounded-circle w-25"></label>
                         <p>Dîner</p>
                     </div>
 
-                    <div class="col-lg-2 text-center">
-                        <img src="../icons/shelter.png" alt="..."
-                            class="rounded-circle w-25">
+
+                    <div class="col-lg-2 col-md-4 text-center">
+                        <input class="form-check-input align-middle" type="checkbox" name="shelter" id="shelter">
+                        <label for="shelter"><img src="../icons/shelter.png" alt="abri"
+                                class="rounded-circle w-25"></label>
                         <p>Abri</p>
                     </div>
 
-                    <div class="col-lg-2 text-center">
-                        <img src="../icons/water.png" alt="..."
-                            class="rounded-circle w-25">
+                    <div class="col-lg-2 col-md-4 text-center">
+                        <input class="form-check-input align-middle" type="checkbox" name="water" id="water">
+                        <label for="water"><img src="../icons/water.png" alt="eau" class="rounded-circle w-25"></label>
                         <p>Eau</p>
                     </div>
                 </div>
 
-
                 <div class="row justify-content-center">
-                    <div class="col-lg-2 text-center">
-                        <img src="../icons/power.png" alt="..."
-                            class="rounded-circle w-25">
+                    <div class="col-lg-2 col-md-4 text-center">
+                        <input class="form-check-input align-middle" type="checkbox" name="power" id="power">
+                        <label for="power"><img src="../icons/power.png" alt="electricite"
+                                class="rounded-circle w-25"></label>
                         <p>Electricité</p>
                     </div>
                 </div>
