@@ -209,20 +209,6 @@ input:checked + .slider-status:before {
   cursor: pointer;
 }
 
-/* When mode = dark */
-.form-control_color_white {
-  background-color: #333;
-}
-
-.form-control_color_black::placeholder {
-  color: #fff;
-}
-
-/* When mode = light */
-.form-control_color_white {
-  background-color: #fff;
-}
-
 .form-control::placeholder {
   color: #333;
 }
