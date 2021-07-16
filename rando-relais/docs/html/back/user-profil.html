@@ -12,9 +12,8 @@
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
 		<link rel="stylesheet" href="../../css/style-tim.css">
-		<title>Liste service</title>
+		<title>Accueil</title>
 	</head>
-
 	<body>
 		<header>
 			<!-- NAVBAR -->
@@ -60,42 +59,47 @@
 			<main>
 				<!-- MAIN CONTENT -->
 				<section class="container">
-					<h1 class="mt-5">Liste des services</h1>
-					<!-- button to add a service -->
-					<div class="ms-3">
-						<div class="btn btn-success mb-4 mt-4 ">
-							<a class="text-decoration-none text-reset" href="">Ajouter un service</a>
-						</div>
+					<div class="mt-5">
+                  <!-- show user id -->
+						<h2>Profil de l'utilisateur #id</h2>
 					</div>
-					<!-- service table -->
-					<div class="ms-3 me-3">
-						<table class="table table-hover">
-							<thead>
-								<tr>
-									<td>#</td>
-									<td>Nom</td>
-									<td>Logo</td>
-									<td>Actions</td>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<!-- service id -->
-									<td>1</td>
-									<!-- service name -->
-									<td>Douche</td>
-									<!-- service logo -->
-									<td>tent.png</td>
-									<td>
-										<a href="" class="btn btn-sm btn-outline-success mb-1">Editer</a>
-										<a href="" class="btn btn-sm btn-outline-success mb-1">Supprimer</a>
-									</td>
-								</tr>
-							</tbody>
-						</table>
+               <!-- user profile avatar -->
+               <div>
+                  <img width="100em" src="../../images/rando1.jpg" alt="photo de profile">
+               </div>
+               <!-- user information -->
+					<div class="mt-3">
+						<ul class="list-style">
+                     <!-- user last name -->
+							<li>Nom :</li>
+                     <!-- user first name-->
+							<li>Prénom :</li>
+                     <!-- user email-->
+							<li>E-mail :</li>
+                     <!-- user phone number-->
+							<li>Téléphone :</li>
+                     <!-- user city-->
+							<li>Commune</li>
+                     <!-- user zip code-->
+							<li>Code postale</li>
+                     <!-- user service-->
+							<li>Liste des services :
+								<ul class="list-style">
+                           <!-- service name -->
+									<li>Douche</li>
+                           <!-- service name -->
+									<li>Emplacement tente</li>
+                           <!-- service name -->
+									<li>Lit</li>
+                           <!-- service name -->
+									<li>Dîner</li>
+								</ul>
+							</li>
+						</ul>
 					</div>
 				</section>
 			</main>
 		</body>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+	</body>
 </html>

@@ -11,14 +11,13 @@
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
-
-
 		<link rel="stylesheet" href="../../css/style-tim.css">
 		<title>Liste utilisateur</title>
 	</head>
+
 	<body>
 		<header>
-
+		<!-- NAVBAR -->
 			<nav class="navbar navbar-expand-lg navbar-light bg-light">
 				<div class="container-fluid">
 					<a class="navbar-brand" href="#">Back-office</a>
@@ -56,28 +55,26 @@
 					</div>
 				</div>
 			</nav>
-
 		</header>
-		<main class="container">
+
+		<main>
+		<!-- MAIN CONTENT -->
+		<section class="container">
         <h1 class="mt-5">Liste des utilisateurs</h1>
+		  <!-- button to add a user -->
 			<div class="ms-3">
 				<div class="btn btn-success mb-4 mt-4 ">
-
 					<a class="text-decoration-none text-reset" href="">Ajouter un utilisateur</a>
-
 				</div>
 			</div>
-
-
+			<!-- user table -->
 			<div class="ms-3 me-3">
 				<table class="table table-hover">
 					<thead>
 						<tr>
 							<td>#</td>
 							<td>Prénom</td>
-							<td>Nom</td>
-							<td>Commune</td>
-							<td>Code postal</td>
+							<td>E-mail</td>
 							<td>Rôle</td>
 							<td>Statut</td>
 							<td>Actions</td>
@@ -85,12 +82,15 @@
 					</thead>
 					<tbody>
 						<tr>
+							<!-- user id -->
 							<td>1</td>
+							<!-- user first name -->
 							<td>Tim</td>
-							<td>Gomis</td>
-							<td>Saint-denis</td>
-							<td>97490</td>
+							<!-- user email -->
+							<td>tim@tim.fr</td>
+							<!-- user role -->
 							<td>Admin</td>
+							<!-- user status -->
 							<td>Marcheur</td>
 							<td>
 								<a href="" class="btn btn-sm btn-outline-success mb-1">Voir</a>
@@ -101,8 +101,8 @@
 					</tbody>
 				</table>
 			</div>
+			</section>
 		</main>
 	</body>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
 </html>
