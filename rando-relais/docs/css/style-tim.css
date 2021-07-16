@@ -33,9 +33,9 @@ h6 {
 }
 
 /* ANGELS INFORMATION PAGE */
-.avatar-info {
-    width: 7em;
-    border-radius: 50%;
+.avatar-size {
+    width: 10em;
+    height: 10em;
 }
 
 .logo-service {
