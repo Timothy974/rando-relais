@@ -3,6 +3,21 @@
 {% block title %}Hello MainController!{% endblock %}
 
 {% block body %}
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.6/css/all.css">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<link rel="stylesheet" href={{ "assets/css/danielstyle.css" }}>
+	<link rel="stylesheet" href={{ "assets/css/media-queries.css" }}>
+	<title>randoRelais</title>
+</head>
 <style>
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
@@ -16,25 +31,22 @@
 			<div class="container-fluid ">
 				<div class="row row-cols-1 row-cols-xl-3 row-cols-lg-2 align-items-stretch g-4 py-5 ">
 					<!-- Angel Card-->
+                    {% for angel in angels %}
 					<div class="col">
-						<div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg"
-							style="background-image: url('../images/rando9.jpg'); background-position: center">
+						<div class="card card-cover h-100 overflow-hidden text-white bg-success rounded-5 shadow-lg">
+							<!--style="background-image: url('assets/images/{% if angel.picture %}profil_picture/{{ angel.picture }}  {% else %} background/rando6.jpg {% endif %}'); background-position: center"> -->
 							<div class="d-flex flex-column h-100 p-5  text-shadow-1">
-								<div class="text-center"><img src="../images/timothy.jpg" alt="Bootstrap" width="80" height="80"
+								<div class="text-center"><img src= "assets/images/profil_picture/{{ angel.picture }}" alt="Bootstrap" width="80" height="80"
 										class=" rounded-circle border border-white"></div>
-								<h2 class="mt-5 display-6 lh-1 fw-bold text-center">Timothy</h2>
-								<p class=" mb-5 display-6 lh-1 fw-bold text-center">La Réunion</p>
+								<h2 class="mt-5 display-6 lh-1 fw-bold text-center">{{ angel.firstName}}</h2>
+								<p class=" mb-5 display-6 lh-1 fw-bold text-center">{{ angel. zipCode }} - {{ angel.city }}</p>
 								<ul class="d-flex list-unstyled text-center mt-auto">
 									<li class="me-auto"></li>
 									<li class="me-auto">
-										<img src="../icons/tent.png" class="mx-2 rounded-circle border border-white"
-											alt="emplacement" width="30px"><img class="mx-2 rounded-circle border border-white"
-											src="../icons/delivery.png" alt="réception colis" width="30px"><img
-											class="mx-2 rounded-circle border border-white" src="../icons/shower.png" alt="douche"
-											width="30px"><img class="mx-2 rounded-circle border border-white"
-											src="../icons/diner.png" alt="diner" width="30px"><img
-											class="mx-2 rounded-circle border border-white" src="../icons/breakfast.png"
-											alt="petit déjeuner" width="30px">
+                                        {% for service in angel.services %}
+										<img src="{{ service.image }}" class="mx-2 rounded-circle border border-white"
+											alt="{{ service.name }}" width="50px">
+                                        {% endfor %}
 									</li>
 								</ul>
 								<!--<div class="d-inline-flex justify-content-center">
@@ -43,26 +55,26 @@
 							</div>
 						</div>
 					</div>
+                    {%  endfor %}
 					<!-- End Angel Card-->
 					<div class="col">
-						<div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg"
-							style="background-image: url('../images/rando12.jpg');background-position: center">
+						<div class="card bg-success card-cover h-100 overflow-hidden text-white rounded-5 shadow-lg">
 							<div class="d-flex flex-column h-100 p-5  text-shadow-1">
-								<div class="text-center"><img src="../images/aimerick.png" alt="Bootstrap" width="80"
+								<div class="text-center"><img src={{ "assets/images/profil_picture/aimerick.png" }} alt="Bootstrap" width="80"
 										height="80" class=" rounded-circle border border-white"></div>
 								<h2 class="mt-5 display-6 lh-1 fw-bold text-center">Aimerick</h2>
-								<p class=" mb-5 display-6 lh-1 fw-bold text-center">Paris</p>
+								<p class=" mb-5 display-6 lh-1 fw-bold text-center">75000 Paris</p>
 								<ul class="d-flex list-unstyled text-center mt-auto">
 									<li class="me-auto"></li>
 									<li class="me-auto">
-										<img src="../icons/tent.png" class="mx-2 rounded-circle border border-white"
-											alt="emplacement" width="30px"><img class="mx-2 rounded-circle border border-white"
-											src="../icons/delivery.png" alt="réception colis" width="30px"><img
-											class="mx-2 rounded-circle border border-white" src="../icons/shower.png" alt="douche"
-											width="30px"><img class="mx-2 rounded-circle border border-white"
-											src="../icons/diner.png" alt="diner" width="30px"><img
-											class="mx-2 rounded-circle border border-white" src="../icons/breakfast.png"
-											alt="petit déjeuner" width="30px">
+										<img src={{ "assets/images/service_icons/shelter.png" }} class="mx-2 rounded-circle border border-white"
+											alt="emplacement" width="50px"><img class="mx-2 rounded-circle border border-white"
+											src={{ "assets/images/service_icons/delivery.png" }} alt="réception colis" width="50px"><img
+											class="mx-2 rounded-circle border border-white" src={{ "assets/images/service_icons/power.png" }} alt="douche"
+											width="50px"><img class="mx-2 rounded-circle border border-white"
+											src={{ "assets/images/service_icons/sandwich.png" }} alt="diner" width="50px"><img
+											class="mx-2 rounded-circle border border-white" src={{ "assets/images/service_icons/shower.png" }}
+											alt="petit déjeuner" width="50px">
 									</li>
 								</ul>
 							</div>
@@ -70,23 +82,21 @@
 					</div>
 					<div class="col">
 						<div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg"
-							style="background-image: url('../images/rando11.jpg');background-position: center">
+							style="background-image: url( {{ 'assets/images/background/rando11.jpg' }} );background-position: center">
 							<div class="d-flex flex-column h-100 p-5  text-shadow-1">
-								<div class="text-center"><img src="../images/alex.jpg" alt="Bootstrap" width="80" height="80"
+								<div class="text-center"><img src={{ "assets/images/profil_picture/alex.jpg" }} alt="Bootstrap" width="80" height="80"
 										class=" rounded-circle border border-white"></div>
 								<h2 class="mt-5 display-6 lh-1 fw-bold text-center">Alex</h2>
-								<p class=" mb-5 display-6 lh-1 fw-bold text-center">La Rochelle</p>
+								<p class=" mb-5 display-6 lh-1 fw-bold text-center">17000 La Rochelle</p>
 								<ul class="d-flex list-unstyled text-center mt-auto">
 									<li class="me-auto"></li>
 									<li class="me-auto">
-										<img src="../icons/tent.png" class="mx-2 rounded-circle border border-white"
-											alt="emplacement" width="30px"><img class="mx-2 rounded-circle border border-white"
-											src="../icons/delivery.png" alt="réception colis" width="30px"><img
-											class="mx-2 rounded-circle border border-white" src="../icons/shower.png" alt="douche"
-											width="30px"><img class="mx-2 rounded-circle border border-white"
-											src="../icons/diner.png" alt="diner" width="30px"><img
-											class="mx-2 rounded-circle border border-white" src="../icons/breakfast.png"
-											alt="petit déjeuner" width="30px">
+										<img src={{ "assets/images/service_icons/beedroom.png" }} class="mx-2 rounded-circle border border-white"
+											alt="emplacement" width="50px"><img class="mx-2 rounded-circle border border-white"
+											src={{ "assets/images/service_icons/delivery.png" }} alt="réception colis" width="50px"><img
+											class="mx-2 rounded-circle border border-white" src={{ "assets/images/service_icons/shower.png" }} alt="douche"
+											width="50px"><img class="mx-2 rounded-circle border border-white"
+											src={{ "assets/images/service_icons/diner.png" }} alt="diner" width="50px">
 									</li>
 								</ul>
 							</div>
@@ -94,23 +104,18 @@
 					</div>
 					<div class="col">
 						<div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg"
-							style="background-image: url('../images/rando18.jpg');background-position: center">
+							style="background-image: url( {{ 'assets/images/background/rando6.jpg' }} );background-position: center">
 							<div class="d-flex flex-column h-100 p-5 text-shadow-1">
-								<div class="text-center"><img src="../images/daniel.png" alt="Bootstrap" width="80" height="80"
+								<div class="text-center"><img src={{ "assets/images/profil_picture/daniel.png" }} alt="Bootstrap" width="80" height="80"
 										class=" rounded-circle border border-white"></div>
 								<h2 class="mt-5 display-6 lh-1 fw-bold text-center">Daniel</h2>
-								<p class=" mb-5 display-6 lh-1 fw-bold text-center">Bois Ratier</p>
+								<p class=" mb-5 display-6 lh-1 fw-bold text-center">18290 Bois Ratier</p>
 								<ul class="d-flex list-unstyled  mt-auto">
 									<li class="me-auto"></li>
 									<li class="me-auto">
-										<img src="../icons/tent.png" class="mx-2 rounded-circle border border-white"
-											alt="emplacement" width="30px"><img class="mx-2 rounded-circle border border-white"
-											src="../icons/delivery.png" alt="réception colis" width="30px"><img
-											class="mx-2 rounded-circle border border-white" src="../icons/shower.png" alt="douche"
-											width="30px"><img class="mx-2 rounded-circle border border-white"
-											src="../icons/diner.png" alt="diner" width="30px"><img
-											class="mx-2 rounded-circle border border-white" src="../icons/breakfast.png"
-											alt="petit déjeuner" width="30px">
+										<img src={{ "assets/images/service_icons/tent.png" }} class="mx-2 rounded-circle border border-white"
+											alt="emplacement" width="50px"><img class="mx-2 rounded-circle border border-white"
+											src={{ "assets/images/service_icons/shower.png" }} alt="réception colis" width="50px">
 									</li>
 								</ul>
 							</div>
@@ -118,23 +123,20 @@
 					</div>
 					<div class="col">
 						<div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg"
-							style="background-image: url('../images/rando9.jpg'); background-position: center">
+							style="background-image: url( {{ 'assets/images/background/rando9.jpg' }} ); background-position: center">
 							<div class="d-flex flex-column h-100 p-5 text-shadow-1">
-								<div class="text-center"><img src="../images/timothy.jpg" alt="Bootstrap" width="80" height="80"
+								<div class="text-center"><img src={{ "assets/images/profil_picture/timothy.jpg" }} alt="Bootstrap" width="80" height="80"
 										class=" rounded-circle border border-white"></div>
 								<h2 class="mt-5 display-6 lh-1 fw-bold text-center">Timothy</h2>
-								<p class=" mb-5 display-6 lh-1 fw-bold text-center">La Réunion</p>
+								<p class=" mb-5 display-6 lh-1 fw-bold text-center">97400 La Réunion</p>
 								<ul class="d-flex list-unstyled text-center mt-auto">
 									<li class="me-auto"></li>
 									<li class="me-auto">
-										<img src="../icons/tent.png" class="mx-2 rounded-circle border border-white"
-											alt="emplacement" width="30px"><img class="mx-2 rounded-circle border border-white"
-											src="../icons/delivery.png" alt="réception colis" width="30px"><img
-											class="mx-2 rounded-circle border border-white" src="../icons/shower.png" alt="douche"
-											width="30px"><img class="mx-2 rounded-circle border border-white"
-											src="../icons/diner.png" alt="diner" width="30px"><img
-											class="mx-2 rounded-circle border border-white" src="../icons/breakfast.png"
-											alt="petit déjeuner" width="30px">
+										<img src={{ "assets/images/service_icons/shelter.png" }} class="mx-2 rounded-circle border border-white"
+											alt="emplacement" width="50px"><img class="mx-2 rounded-circle border border-white"
+											src={{ "assets/images/service_icons/power.png" }} alt="réception colis" width="50px"><img
+											class="mx-2 rounded-circle border border-white" src={{ "assets/images/service_icons/water.png" }} alt="douche"
+											width="50px">
 									</li>
 								</ul>
 							</div>
@@ -142,24 +144,24 @@
 					</div>
 					<div class="col">
 						<div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg"
-							style="background-image: url('../images/rando12.jpg');background-position: center">
+							style="background-image: url( {{ 'assets/images/background/rando12.jpg' }} );background-position: center">
 							<div class="d-flex flex-column h-100 p-5 text-shadow-1">
-								<div class="text-center"><img src="../images/aimerick.png" alt="Bootstrap" width="80
+								<div class="text-center"><img src={{ "assets/images/profil_picture/aimerick.png" }} alt="Bootstrap" width="80
 									" height="80
 									" class=" rounded-circle border border-white"></div>
 								<h2 class="mt-5 display-6 lh-1 fw-bold text-center">Aimerick</h2>
-								<p class=" mb-5 display-6 lh-1 fw-bold text-center">Paris</p>
+								<p class=" mb-5 display-6 lh-1 fw-bold text-center">75000 PARIS</p>
 								<ul class="d-flex list-unstyled text-center mt-auto">
 									<li class="me-auto"></li>
 									<li class="me-auto">
-										<img src="../icons/tent.png" class="mx-2 rounded-circle border border-white"
-											alt="emplacement" width="30px"><img class="mx-2 rounded-circle border border-white"
-											src="../icons/delivery.png" alt="réception colis" width="30px"><img
-											class="mx-2 rounded-circle border border-white" src="../icons/shower.png" alt="douche"
-											width="30px"><img class="mx-2 rounded-circle border border-white"
-											src="../icons/diner.png" alt="diner" width="30px"><img
-											class="mx-2 rounded-circle border border-white" src="../icons/breakfast.png"
-											alt="petit déjeuner" width="30px">
+										<img src={{ "assets/images/service_icons/tent.png" }} class="mx-2 rounded-circle border border-white"
+											alt="emplacement" width="50px"><img class="mx-2 rounded-circle border border-white"
+											src={{ "assets/images/service_icons/delivery.png" }} alt="réception colis" width="50px"><img
+											class="mx-2 rounded-circle border border-white" src={{ "assets/images/service_icons/shower.png" }} alt="douche"
+											width="50px"><img class="mx-2 rounded-circle border border-white"
+											src={{ "assets/images/service_icons/water.png" }} alt="diner" width="50px"><img
+											class="mx-2 rounded-circle border border-white" src={{ "assets/images/service_icons/breakfast.png" }}
+											alt="petit déjeuner" width="50px">
 									</li>
 								</ul>
 							</div>
@@ -167,24 +169,24 @@
 					</div>
 					<div class="col">
 						<div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg"
-							style="background-image: url('../images/rando11.jpg');background-position: center">
+							style="background-image: url( {{ 'assets/images/background/rando11.jpg' }} );background-position: center">
 							<div class="d-flex flex-column h-100 p-5 text-shadow-1">
-								<div class="text-center"><img src="../images/alex.jpg" alt="Bootstrap" width="80
+								<div class="text-center"><img src={{ "assets/images/profil_picture/alex.jpg" }} alt="Bootstrap" width="80
 									" height="80
 									" class=" rounded-circle border border-white"></div>
 								<h2 class="mt-5 display-6 lh-1 fw-bold text-center">Alex</h2>
-								<p class=" mb-5 display-6 lh-1 fw-bold text-center">La Rochelle</p>
+								<p class=" mb-5 display-6 lh-1 fw-bold text-center">17000 La Rochelle</p>
 								<ul class="d-flex list-unstyled text-center mt-auto">
 									<li class="me-auto"></li>
 									<li class="me-auto">
-										<img src="../icons/tent.png" class="mx-2 rounded-circle border border-white"
-											alt="emplacement" width="30px"><img class="mx-2 rounded-circle border border-white"
-											src="../icons/delivery.png" alt="réception colis" width="30px"><img
-											class="mx-2 rounded-circle border border-white" src="../icons/shower.png" alt="douche"
-											width="30px"><img class="mx-2 rounded-circle border border-white"
-											src="../icons/diner.png" alt="diner" width="30px"><img
-											class="mx-2 rounded-circle border border-white" src="../icons/breakfast.png"
-											alt="petit déjeuner" width="30px">
+										<img src={{ "assets/images/service_icons/shelter.png" }} class="mx-2 rounded-circle border border-white"
+											alt="emplacement" width="50px"><img class="mx-2 rounded-circle border border-white"
+											src={{ "assets/images/service_icons/delivery.png" }} alt="réception colis" width="50px"><img
+											class="mx-2 rounded-circle border border-white" src={{ "assets/images/service_icons/power.png" }} alt="douche"
+											width="50px"><img class="mx-2 rounded-circle border border-white"
+											src={{ "assets/images/service_icons/sandwich.png" }} alt="diner" width="50px"><img
+											class="mx-2 rounded-circle border border-white" src={{ "assets/images/service_icons/shower.png" }}
+											alt="petit déjeuner" width="50px">
 									</li>
 								</ul>
 							</div>
@@ -192,24 +194,24 @@
 					</div>
 					<div class="col">
 						<div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg"
-							style="background-image: url('../images/rando18.jpg');background-position: center">
+							style="background-image: url( {{ 'assets/images/background/rando6.jpg' }} );background-position: center">
 							<div class="d-flex flex-column h-100 p-5 text-shadow-1">
-								<div class="text-center"><img src="../images/daniel.png" alt="Bootstrap" width="80
+								<div class="text-center"><img src={{ "assets/images/profil_picture/daniel.png" }} alt="Bootstrap" width="80
 									" height="80
 									" class=" rounded-circle border border-white"></div>
-								<h2 class="mt-5 display-6 lh-1 fw-bold text-center">Daniel</h2>
-								<p class=" mb-5 display-6 lh-1 fw-bold text-center">Bois Ratier</p>
-								<ul class="d-flex list-unstyled  mt-auto">
+								<h2 class="mt-5 display-6 lh-1 fw-bold text-center">Daniel</h2>                              
+								<p class=" mb-5 display-6 lh-1 fw-bold text-center">18290 Bois Ratier</p>
+								<ul class="d-flex list-unstyled text-center mt-auto">
 									<li class="me-auto"></li>
 									<li class="me-auto">
-										<img src="../icons/tent.png" class="mx-2 rounded-circle border border-white"
-											alt="emplacement" width="30px"><img class="mx-2 rounded-circle border border-white"
-											src="../icons/delivery.png" alt="réception colis" width="30px"><img
-											class="mx-2 rounded-circle border border-white" src="../icons/shower.png" alt="douche"
-											width="30px"><img class="mx-2 rounded-circle border border-white"
-											src="../icons/diner.png" alt="diner" width="30px"><img
-											class="mx-2 rounded-circle border border-white" src="../icons/breakfast.png"
-											alt="petit déjeuner" width="30px">
+										<img src={{ "assets/images/service_icons/shelter.png" }} class="mx-2 rounded-circle border border-white"
+											alt="emplacement" width="50px"><img class="mx-2 rounded-circle border border-white"
+											src={{ "assets/images/service_icons/delivery.png" }} alt="réception colis" width="50px"><img
+											class="mx-2 rounded-circle border border-white" src={{ "assets/images/service_icons/power.png" }} alt="douche"
+											width="50px"><img class="mx-2 rounded-circle border border-white"
+											src={{ "assets/images/service_icons/sandwich.png" }} alt="diner" width="50px"><img
+											class="mx-2 rounded-circle border border-white" src={{ "assets/images/service_icons/shower.png" }}
+											alt="petit déjeuner" width="50px">
 									</li>
 								</ul>
 							</div>
@@ -217,25 +219,25 @@
 					</div>
 					<div class="col">
 						<div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg"
-							style="background-image: url('../images/rando9.jpg'); background-position: center">
+							style="background-image: url( {{ 'assets/images/background/rando9.jpg' }} ); background-position: center">
 							<div class="d-flex flex-column h-100 p-5 text-shadow-1">
 								<div class="text-center">
-									<img src="../images/timothy.jpg" alt="Bootstrap" width="80" height="80"
+									<img src={{ "assets/images/profil_picture/timothy.jpg" }} alt="Bootstrap" width="80" height="80"
 										class=" rounded-circle border border-white">
 								</div>
 								<h2 class="mt-5 display-6 lh-1 fw-bold text-center">Timothy</h2>
-								<p class=" mb-5 display-6 lh-1 fw-bold text-center">La Réunion</p>
+								<p class=" mb-5 display-6 lh-1 fw-bold text-center">97400 La Réunion</p>
 								<ul class="d-flex list-unstyled text-center mt-auto">
 									<li class="me-auto"></li>
 									<li class="me-auto">
-										<img src="../icons/tent.png" class="mx-2 rounded-circle border border-white"
-											alt="emplacement" width="30px"><img class="mx-2 rounded-circle border border-white"
-											src="../icons/delivery.png" alt="réception colis" width="30px"><img
-											class="mx-2 rounded-circle border border-white" src="../icons/shower.png" alt="douche"
-											width="30px"><img class="mx-2 rounded-circle border border-white"
-											src="../icons/diner.png" alt="diner" width="30px"><img
-											class="mx-2 rounded-circle border border-white" src="../icons/breakfast.png"
-											alt="petit déjeuner" width="30px">
+										<img src={{ "assets/images/service_icons/shelter.png" }} class="mx-2 rounded-circle border border-white"
+											alt="emplacement" width="50px"><img class="mx-2 rounded-circle border border-white"
+											src={{ "assets/images/service_icons/delivery.png" }} alt="réception colis" width="50px"><img
+											class="mx-2 rounded-circle border border-white" src={{ "assets/images/service_icons/power.png" }} alt="douche"
+											width="50px"><img class="mx-2 rounded-circle border border-white"
+											src={{ "assets/images/service_icons/sandwich.png" }} alt="diner" width="50px"><img
+											class="mx-2 rounded-circle border border-white" src={{ "assets/images/service_icons/shower.png" }}
+											alt="petit déjeuner" width="50px">
 									</li>
 								</ul>
 							</div>
@@ -245,5 +247,4 @@
 			</div>
 		</div>
 	</section>
-
 {% endblock %}
