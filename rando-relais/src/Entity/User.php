@@ -46,7 +46,7 @@ class User
     private $city;
 
     /**
-     * @ORM\Column(type="smallint", nullable=true)
+     * @ORM\Column(type="string", length=10, nullable=true)
      */
     private $zip_code;
 

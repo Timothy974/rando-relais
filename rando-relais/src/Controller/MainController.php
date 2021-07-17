@@ -19,4 +19,14 @@ class MainController extends AbstractController
             'angels' => $angel->findAll()
         ]);
     }
+
+     /**
+     * @Route("/404", name="404")
+     */
+    public function error404(): Response
+    {
+        return $this->render('main/404.html.twig', [
+            
+        ]);
+    }
 }

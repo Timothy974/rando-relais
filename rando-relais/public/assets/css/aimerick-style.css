@@ -49,14 +49,14 @@ h3 {
 
 /* START `header` */
 .header-home {
-  background-image: url("../images/background-header.jpg");
+  background-image: url("../images/background/background-header.jpg");
   background-size: cover;
   background-position: center;
   height: 100vh;
 }
 
 .header-shared {
-  background-image: url("../images/background-header.jpg");
+  background-image: url("../images/background/background-header.jpg");
   background-size: cover;
   background-position: center;
   height: 50vh;
