@@ -15,24 +15,7 @@ class AppFixtures extends Fixture
         // instanciation of faker
         $faker = Faker\Factory::create('fr_FR');
 
-        // create 20 user
-        for ($i = 0; $i < 20; $i++) {
-            $user = new User();
-            $user->setFirstName($faker->firstName());
-            $user->setLastName($faker->lastName());
-            $user->setEmail($faker->email());
-            $user->setPassword('pass_1234');
-            $user->setCity($faker->city());
-            $user->setZipCode(974);
-            $user->setRole('ROLE_USER');
-            $user->setPhoneNumber(0102030405);
-            $user->setStatus(mt_rand(0, 1));
-            $manager->persist($user);
-        }
-
-        // create services
-
-        // services name
+        // services name array
         $servicesList = [
             "Douche",
             "emplacement tente",
@@ -46,16 +29,33 @@ class AppFixtures extends Fixture
             "Sandwich"
         ];
 
-        $totalServices = count($servicesList);
+        // create 20 user
+        for ($i = 0; $i < 20; $i++) {
+            $user = new User();
+            $user->setFirstName($faker->firstName());
+            $user->setLastName($faker->lastName());
+            $user->setEmail($faker->email());
+            $user->setPassword('pass_1234');
+            $user->setCity($faker->city());
+            $user->setZipCode(974);
+            $user->setRole('ROLE_USER');
+            $user->setPhoneNumber(0102030405);
+            $user->setStatus(mt_rand(0, 1));
+            
+            // create services 
+            foreach ($servicesList as $currentService) {
 
-        foreach ($servicesList as $currentService) {
+                $service= new Service();
+                $service->setName($currentService);
+                $service->setDescription($faker->sentence(4));
+                $service->setImage('tent.png');
+                // add services to a user
+                $user->addService($service);    
+            }
 
-            $service= new Service();
-            $service->setName($currentService);
-            $service->setDescription($faker->sentence(4));
-            $service->setImage('tent.png');
             $manager->persist($service);
-        }
+            $manager->persist($user);
+        } 
 
         $manager->flush();
     }
