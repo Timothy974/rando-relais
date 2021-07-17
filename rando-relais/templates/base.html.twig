@@ -37,6 +37,9 @@
 			{% include "layout/header-shared.html.twig" %}
 		{% endblock %}
 		{# END `header` #}
+		{# START Flash messages #}
+		{% include "partials/_flash.html.twig" %}
+		{# END Flash messages #}
 		<main>
 			{# START `body` #}
 			{% block body %}{% endblock %}
