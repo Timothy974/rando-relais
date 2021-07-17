@@ -37,7 +37,7 @@ class AppFixtures extends Fixture
             $user->setEmail($faker->email());
             $user->setPassword('pass_1234');
             $user->setCity($faker->city());
-            $user->setZipCode(974);
+            $user->setZipCode(97490);
             $user->setRole('ROLE_USER');
             $user->setPhoneNumber(0102030405);
             $user->setStatus(mt_rand(0, 1));
@@ -51,9 +51,9 @@ class AppFixtures extends Fixture
                 $service->setImage('tent.png');
                 // add services to a user
                 $user->addService($service);    
+                $manager->persist($service);
             }
 
-            $manager->persist($service);
             $manager->persist($user);
         } 
 
