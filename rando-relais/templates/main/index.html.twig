@@ -1,6 +1,8 @@
 {% extends 'base.html.twig' %}
 
-
+{% block header %}
+			{% include "layout/header-home.html.twig" %}
+		{% endblock %}
 
 {% block body %}
 
@@ -11,7 +13,7 @@
 
 <section class="mb-5">
 		<div>
-			<h1 class="mt-5 text-center">Bienvenue sur le site rando relais</h1>
+			<h1 class="mt-5 text-center">Bienvenue sur le site Rando Relais</h1>
 		</div>
 		<div class="album py-5 bg-light">
 			<div class="container-fluid ">
@@ -30,7 +32,7 @@
 									<li class="me-auto"></li>
 									<li class="me-auto">
                                         {% for service in angel.services %}
-										<img src="{{ service.image }}" class="mx-2 rounded-circle border border-white"
+										<img src="assets/images/service_icons/{{ service.image }}" class="mx-2 rounded-circle border border-white"
 											alt="{{ service.name }}" width="50px">
                                         {% endfor %}
 									</li>
@@ -68,7 +70,7 @@
 					</div>
 					<div class="col">
 						<div class="card card-cover h-100 overflow-hidden  bg-dark rounded-5 shadow-lg"
-							style="background-image: url( {{ 'assets/images/background/rando32.jpg' }} );background-position: center">
+							style="background-image: url( {{ 'assets/images/background/rando32.jpg' }} ); background-position: center">
 							<div class="d-flex flex-column h-100 p-5  text-shadow-1">
 								<div class="text-center"><img src={{ "assets/images/profil_picture/alex.jpg" }} alt="Bootstrap" width="80" height="80"
 										class=" rounded-circle border border-white"></div>
