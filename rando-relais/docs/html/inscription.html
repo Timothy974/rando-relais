@@ -1,3 +1,4 @@
+  
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="../css/style-alex.css">
+    <link rel="stylesheet" href="../rando-relais/alex-style.css">
     <!-- Google fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -67,6 +68,7 @@
                     <input type="text" class="form-control" id="city" placeholder="Commune">
                 </div>
                 <!-- Services -->
+                <!-- TODO START : div pour boucle twig. Afin que le getElementById() du JS fonctionne dans la boucle twig il faut que l'id du serice soit id="{{ service.id }}"  -->
                 <div class="row justify-content-center">
                     <!-- Tent -->
                     <div class="col-lg-2 col-md-4 text-center opacity-50" id="tent_service">
@@ -75,9 +77,10 @@
                         <label for="tent"><img src="../icons/tent.png" alt="tente" class="rounded-circle w-25 "></label>
                         <p>
                             Emplacement tente
-                            <img src="../icons/validate-20x20.png" id="validate_tent" class="d-none">
+                            <img src="{{ asset('assets/images/service_icons/' ~ service.image) }}" id="{{ serice.id }}" class="d-none">
                         </p>
                     </div>
+                     <!-- TODO END -->
                     <!-- Shower -->
                     <div class="col-lg-2 col-md-4 text-center opacity-50" id="shower_service">
                         <input class="form-check-input align-middle d-none" type="checkbox" name="shower_checkbox"
@@ -188,78 +191,11 @@
             </div>
         </form>
     </div>
+    <script type="text/javascript" src="../rando-relais/app.js"></script>
+    <script type="text/javascript" src="../rando-relais/angelRegistration.js"></script>
+    <script type="text/javascript" src="../rando-relais/switchToAngel.js"></script>
 
-    <script>
-        // DOM Elements
-        const angelSwitch = document.getElementById('flexSwitchAngel');
-
-        const tentCheckBox = document.getElementById('tent_service');
-        const showerCheckBox = document.getElementById('shower_service');
-        const breakfastCheckBox = document.getElementById('breakfast_service');
-        const bedroomCheckBox = document.getElementById('bedroom_service');
-        const deliveryCheckBox = document.getElementById('delivery_service');
-        const sandwichCheckBox = document.getElementById('sandwich_service');
-        const dinnerCheckBox = document.getElementById('dinner_service');
-        const shelterCheckBox = document.getElementById('shelter_service');
-        const waterCheckBox = document.getElementById('water_service');
-        const powerCheckBox = document.getElementById('power_service');
-
-        // Listeners
-        tentCheckBox.addEventListener('click', function () {
-            document.getElementById('tent_service').classList.toggle('opacity-50');
-            document.getElementById('validate_tent').classList.toggle('d-none');
-        })
-
-        showerCheckBox.addEventListener('click', function (event) {
-            document.getElementById('shower_service').classList.toggle('opacity-50');
-            document.getElementById('validate_shower').classList.toggle('d-none');
-        })
-
-        breakfastCheckBox.addEventListener('click', function (event) {
-            document.getElementById('breakfast_service').classList.toggle('opacity-50');
-            document.getElementById('validate_breakfast').classList.toggle('d-none');
-        })
-
-        bedroomCheckBox.addEventListener('click', function (event) {
-            document.getElementById('bedroom_service').classList.toggle('opacity-50');
-            document.getElementById('validate_bedroom').classList.toggle('d-none');
-        })
-
-        deliveryCheckBox.addEventListener('click', function (event) {
-            document.getElementById('delivery_service').classList.toggle('opacity-50');
-            document.getElementById('validate_delivery').classList.toggle('d-none');
-        })
-
-        sandwichCheckBox.addEventListener('click', function (event) {
-            document.getElementById('sandwich_service').classList.toggle('opacity-50');
-            document.getElementById('validate_sandwich').classList.toggle('d-none');
-        })
-
-        dinnerCheckBox.addEventListener('click', function (event) {
-            document.getElementById('dinner_service').classList.toggle('opacity-50');
-            document.getElementById('validate_dinner').classList.toggle('d-none');
-        })
-
-        shelterCheckBox.addEventListener('click', function (event) {
-            document.getElementById('shelter_service').classList.toggle('opacity-50');
-            document.getElementById('validate_shelter').classList.toggle('d-none');
-        })
-
-        waterCheckBox.addEventListener('click', function (event) {
-            document.getElementById('water_service').classList.toggle('opacity-50');
-            document.getElementById('validate_water').classList.toggle('d-none');
-        })
-
-        powerCheckBox.addEventListener('click', function (event) {
-            document.getElementById('power_service').classList.toggle('opacity-50');
-            document.getElementById('validate_power').classList.toggle('d-none');
-        })
-
-
-        angelSwitch.addEventListener('click', function () {
-            document.getElementById('angel_subscription_form').classList.toggle('d-none');
-        });
-    </script>
+ 
 </body>
 
 </html>
