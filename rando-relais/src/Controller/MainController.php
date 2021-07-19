@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-
 use App\Repository\UserRepository;
+use App\Repository\ServiceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -20,13 +20,23 @@ class MainController extends AbstractController
         ]);
     }
 
-     /**
-     * @Route("/404", name="404")
-     */
+    /**
+    * @Route("/404", name="404")
+    */
     public function error404(): Response
     {
         return $this->render('main/404.html.twig', [
             
+        ]);
+    }
+
+    /**
+    * @Route("/informations", name="main_information", methods={"GET"})
+    */
+    public function information(ServiceRepository $service): Response
+    {
+        return $this->render("main/information.html.twig", [
+            "services" => $service->findAll()   
         ]);
     }
 }
