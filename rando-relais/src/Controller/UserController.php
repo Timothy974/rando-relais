@@ -18,13 +18,4 @@ class UserController extends AbstractController
         return $this->render('user/info-ange.html.twig');
     }
 
-      /**
-     * Method to display an angel information page
-     * 
-     * @Route("/connexion", name="connection")
-     */
-    public function userConnection(): Response
-    {
-        return $this->render('user/connection.html.twig');
-    }
 }
