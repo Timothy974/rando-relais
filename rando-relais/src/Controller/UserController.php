@@ -20,10 +20,11 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/info/{id}", name="angel", requirements={"id" = "\d+"})
+     * @Route("/info/{id}", name="show_angel", requirements={"id" = "\d+"})
      */
     public function showAngel(int $id, UserRepository $userRepository): Response
     {
+
         // Get the data of the specific angel called in the route ({id)}) in database
         $angelData = $userRepository->find($id);
 
