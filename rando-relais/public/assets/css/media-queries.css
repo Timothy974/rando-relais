@@ -27,7 +27,11 @@
 
 @media (max-width: 750px) {
 
+<<<<<<< HEAD
+	.footer-top {background: no-repeat url('assets/images/background/1.jpg'); background-size: 180%; background-position: center; }
+=======
 	.footer-top {background: no-repeat url('../images/background/1.jpg'); background-size: 180%; background-position: center; }
+>>>>>>> dev
 
 
 	.inner-bg { padding: 100px 0 80px 0; }
