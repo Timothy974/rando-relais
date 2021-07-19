@@ -41,21 +41,19 @@ class AppFixtures extends Fixture
             $user->setRole('ROLE_USER');
             $user->setPhoneNumber(0102030405);
             $user->setStatus(mt_rand(0, 1));
-            
-            // create services 
-            foreach ($servicesList as $currentService) {
-
-                $service= new Service();
-                $service->setName($currentService);
-                $service->setDescription($faker->sentence(4));
-                $service->setImage('tent.png');
-                // add services to a user
-                $user->addService($service);    
-                $manager->persist($service);
-            }
-
-            $manager->persist($user);
         } 
+
+        // create services 
+        foreach ($servicesList as $currentService) {
+
+            $service= new Service();
+            $service->setName($currentService);
+            $service->setDescription($faker->sentence(4));
+            $service->setImage('tent.png');
+            // add services to a user
+            $user->addService($service);    
+            $manager->persist($service);
+        }
 
         $manager->flush();
     }
