@@ -47,4 +47,21 @@ class UserRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    /***
+     * Method to get all user filtered by city
+     * 
+     */
+    public function findUserByCity($cityName)
+    {
+        $qb = $this->createQueryBuilder('user');
+
+        $qb->where('user.city LIKE :city');
+
+        $qb->setParameter(':city', "%$cityName%");
+
+        $query = $qb->getQuery();
+
+        return $query->getResult();
+    }
 }
