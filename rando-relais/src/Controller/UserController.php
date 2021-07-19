@@ -9,13 +9,13 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserController extends AbstractController
 {
     /**
-     * Method to display an angel information page
-     * 
      * @Route("/user", name="user")
      */
-    public function angelInformation(): Response
+    public function index(): Response
     {
-        return $this->render('user/info-ange.html.twig');
+        return $this->render('user/index.html.twig', [
+            'controller_name' => 'UserController',
+        ]);
     }
 
 }
