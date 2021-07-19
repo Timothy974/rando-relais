@@ -35,7 +35,7 @@
 									<li class="me-auto"></li>
 									<li class="me-auto">
                                         {% for service in angel.services %}
-										<img src="assets/images/service_icons/{{ service.image }}" class="mx-2 rounded-circle border border-white"
+										<img src="{{ asset('assets/images/service_icons/' ~ service.image) }}" class="mx-2 rounded-circle border border-white"
 											alt="{{ service.name }}" width="50px">
                                         {% endfor %}
 									</li>
