@@ -26,7 +26,7 @@
 							<div class="d-flex flex-column h-100 p-5 text-shadow-1">
 								<div class="text-center"><img src= "assets/images/profil_picture/{{ angel.picture }}" alt="Bootstrap" width="80" height="80"
 										class=" rounded-circle border border-white"></div>
-								<h2 class="mt-5 display-6 lh-1 fw-bold text-white text-center">{{ angel.firstName}}</h2>
+								<h2 class="mt-5 display-6 lh-1 fw-bold text-white text-center"><a href="{{ path('show_angel', {id: angel.id}) }}">{{ angel.firstName}}</a></h2>
 								<p class=" mb-5 display-6 lh-1 fw-bold text-white text-center">{{ angel. zipCode }} - {{ angel.city }}</p>
 								<ul class="d-flex list-unstyled text-center mt-auto">
 									<li class="me-auto"></li>
