@@ -12,7 +12,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class MainController extends AbstractController
 {
     /**
-     * @Route("/", name="main")
+     * @Route("/", name="main", methods={"GET"})
+     * 
+     * @return Response
      */
     public function index(UserRepository $angel): Response
     {
@@ -22,21 +24,21 @@ class MainController extends AbstractController
     }
 
     /**
-    * @Route("/404", name="404")
-    */
+     * @Route("/404", name="404", methods={"GET"})
+     *
+     * @return Response
+     */
     public function error404(): Response
     {
-        return $this->render('main/404.html.twig', [
-            
-        ]);
+        return $this->render('main/404.html.twig', []);
     }
 
     /**
-     * @Route("/filtrer", name="search")
+     * @Route("/filtrer", name="search", methods={"GET"})
      *
-     * @return void
+     * @return Response
      */
-    public function search(Request $request, UserRepository $angel)
+    public function search(Request $request, UserRepository $angel): Response
     {
         // Get the information from input search form
         $searchValue = $request->get('query');
@@ -45,10 +47,15 @@ class MainController extends AbstractController
         $angelFilter = $angel->findUserByCity($searchValue);
 
         return $this->render('main/index.html.twig', [
-            'angels' => $angelFilter,
+            'angels' => $angelFilter
+        ]);
+    }
 
-    * @Route("/informations", name="main_information", methods={"GET"})
-    */
+    /**
+     * @Route("/informations", name="main_information", methods={"GET"})
+     *
+     * @return Response
+     */
     public function information(ServiceRepository $service): Response
     {
         // In order to have access to the object Entity Service we call the ServiceRepository in argument of the information() method.
