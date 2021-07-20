@@ -1,7 +1,15 @@
 {% extends 'base.html.twig' %}
 
+{% set currentRoute = app.request.get('_route') %}
+
 {% block header %}
-	{% include "layout/header-home.html.twig" %}
+
+	{% if currentRoute == 'main' %}
+		{% include "layout/header-home.html.twig" %}
+	{% else %}
+		{% include "layout/header-shared.html.twig" %}
+	{% endif %}
+
 {% endblock %}
 
 {% block body %}
@@ -47,8 +55,8 @@
 										</li>
 									</ul>
 									<!--<div class="d-inline-flex justify-content-center">
-																		<small class="bg-dark  px-2">Arrivée avant 20h00</small>
-																	</div>-->
+																											<small class="bg-dark  px-2">Arrivée avant 20h00</small>
+																										</div>-->
 								</div>
 							</div>
 						</div>
