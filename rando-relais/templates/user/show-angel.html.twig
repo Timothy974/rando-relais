@@ -49,6 +49,19 @@
          {% endfor %}
             </div>
          </section>
+         {# User reviews #}
+         <section>
+            <h4 class="mx-5">Commentaires</h2>
+            <ul class="mt-4">
+               {% for review in userReviews %}
+                  <li>
+                     <p class="fw-bold m-0">Gérard<span class="fw-normal">| {{review.rating}}/5</span></p>
+                     <small class="text-secondary">Le {{review.createdAt | date("m/d/Y")}}</small>
+                     <p>{{review.comment}}</p>
+                  </li>
+               {% endfor %}
+            </ul>
+         </section>
       </main>
    {% else %}
       {# TODO: Display a message when the user is not logged in, or redirect him to the homepage #}
