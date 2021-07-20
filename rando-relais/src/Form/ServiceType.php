@@ -3,9 +3,14 @@
 namespace App\Form;
 
 use App\Entity\Service;
+use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
+
 
 class ServiceType extends AbstractType
 {
@@ -14,10 +19,28 @@ class ServiceType extends AbstractType
         $builder
             ->add('name')
             ->add('description')
-            ->add('image')
-            
-            
-        ;
+            ->add('slug')
+            ->add('image', FileType::class, [
+                'label'=> 'Téléchargez une icone du service',
+                'mapped' =>false,
+                'required'=>false, 
+                'constraints' => [
+                    new File([
+                        'maxSize' => '3000k',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/png',
+                        ],
+                        'mimeTypesMessage' => 'Veuillez télécharger une image valide',
+                    ])
+                ]
+                ])
+            ->add('users', EntityType::class, [
+                'by_reference' => false,
+                'class' => User::class,
+                'multiple' => true,
+                'attr' => ['size' => 10]
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

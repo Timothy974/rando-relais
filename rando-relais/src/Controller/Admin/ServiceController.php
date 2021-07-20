@@ -3,12 +3,14 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Service;
+use App\Entity\User;
 use App\Form\ServiceType;
 use App\Repository\ServiceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Service\ImageUploader;
 
 /**
  * @Route("/admin/service")
@@ -26,19 +28,23 @@ class ServiceController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="admin_service_new", methods={"GET","POST"})
+     * @Route("/new", name="admin_service_new", methods={"GET", "POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, ImageUploader $imageUploader): Response
     {
         $service = new Service();
         $form = $this->createForm(ServiceType::class, $service);
         $form->handleRequest($request);
-
+       
         if ($form->isSubmitted() && $form->isValid()) {
+            
+            $newFileName = $imageUploader->imageUpload($form, 'image');
+            $service->setimage($newFileName);
+           
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($service);
             $entityManager->flush();
-
+            $this->addFlash('success', 'Nouveau service  ajouté avec succès');
             return $this->redirectToRoute('admin_service_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -61,14 +67,23 @@ class ServiceController extends AbstractController
     /**
      * @Route("/{id}/edit", name="admin_service_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Service $service): Response
+    public function edit(Request $request, Service $service, ImageUploader $imageUploader): Response
     {
-        $form = $this->createForm(ServiceType::class, $service);
+        $form = $this->createForm(ServiceType::class, $service );
         $form->handleRequest($request);
+        
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $newFileName = $imageUploader->imageUpload($form, 'image');
+            if ($newFileName !== null) {
+            {        // On met à jour le chemin vers l'image en BDD
+                $service->setImage($newFileName);
+            }
+        }
+            $em= $this->getDoctrine()->getManager();
 
+            $em->flush();
+            $this->addFlash('success','Mise à jour du service effectuée');
             return $this->redirectToRoute('admin_service_index', [], Response::HTTP_SEE_OTHER);
         }
 

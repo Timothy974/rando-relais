@@ -7,6 +7,7 @@ use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ServiceRepository::class)
@@ -22,6 +23,12 @@ class Service
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 50,
+     *      minMessage = "Le nom du service doit comprendre au moins {{ limit }} charactères",
+     *      maxMessage = "La longueur du nom du service ne peut excéder {{ limit }} charactères"
+     * )
      */
     private $name;
 
@@ -30,8 +37,10 @@ class Service
      */
     private $description;
 
+    
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=100, nullable=true)
+     *
      */
     private $image;
 
@@ -50,6 +59,11 @@ class Service
      */
     private $users;
 
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $slug;
+
     public function __construct()
     {
         $this->created_at = new DateTime();
@@ -57,7 +71,6 @@ class Service
         $this->users = new ArrayCollection();
     }
 
-    
 
     public function getId(): ?int
     {
@@ -93,7 +106,7 @@ class Service
         return $this->image;
     }
 
-    public function setImage(string $image): self
+    public function setImage( ?string $image): self
     {
         $this->image = $image;
 
@@ -147,6 +160,18 @@ class Service
         if ($this->users->removeElement($user)) {
             $user->removeService($this);
         }
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

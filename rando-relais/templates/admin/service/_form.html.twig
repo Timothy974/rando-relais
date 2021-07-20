@@ -1,51 +1,77 @@
 {{ form_start(form) }}
-			<div class="danger w-100">
+			<div class="bg-danger w-100">
 				{{ form_errors(form) }}
 			</div>
 			<div
 				class="container">
-
-				<!-- Service name's -->
+				<!-- Service name -->
+                <div class="bg-danger ">
+                    {{ form_errors(form.name)}}
+                </div>
 				<div class="mb-3 mt-5 col-lg-6 mx-auto">
+                    {{ form_label(form.name, 'Nom du service')}} 
 					{{ form_widget(form.name, {
                     'attr':
                         {'class': 'form-control',
-                        'placeholder':'Nom du service'}}) }}
+                        }}) }}
 				</div>
 
 				<!-- Description -->
+                <div class="bg-danger ">
+                    {{ form_errors(form.description)}}
+                </div>
 				<div class="mb-3 mt-3 col-lg-6 mx-auto">
+                    {{ form_label(form.description, 'Description du service')}} 
 					{{ form_widget(form.description, {
                     'attr':
                         {'class': 'form-control',
-                        'placeholder':'Description'}}) }}
+                        }}) }}
 				</div>
 
-				<!-- Image name's -->
+                <!-- slug name -->
+                <div class="bg-danger ">
+                    {{ form_errors(form.slug)}}
+                </div>
 				<div class="mb-3 mt-3 col-lg-6 mx-auto">
+                    {{ form_label(form.slug, 'Nom du slug')}}   
+					{{ form_widget(form.slug, {
+                    'attr':
+                        {'class': 'form-control',
+                       }}) }}
+                </div>
+
+				<!-- Image name -->
+                
+              
+                <div class="mb-3 mt-3 col-lg-6 mx-auto">
+                  {{ form_label(form.users, 'Utilisateurs proposant ce service')}}   
+					{{ form_widget(form.users, {
+                    'attr':
+                        {'class': 'form-control',
+                        }}) }}
+				</div>
+               
+                <!-- Icon upload -->
+                 <div class="bg-danger ">
+                    {{ form_errors(form.image)}}
+                </div>
+                <div class="mb-3 mt-3 col-lg-6 mx-auto %}">
+                  {{ form_label(form.image) }}   
 					{{ form_widget(form.image, {
                     'attr':
                         {'class': 'form-control',
-                        'placeholder':'Nom de l\'image plus extension'}}) }}
-                </div>
-            
-                <!-- Icon upload -->
-                <div class="row justify-content-center mb-5">
-                    <div class="text-center" >
-                        <label for="icon">Téléchargez une icone</label>
-                        <input class=" align-middle " type="file" name="icon" id="icon">  
-                    </div>
-                </div>
-
+                        }}) }}
+				</div>
+    
                 <!-- Back button -->
                 <div class="d-flex justify-content-center mb-5 ">
-                    <div class="col-md-2 ">
-                        <a role="button" class="btn btn-success" href="{{ path('admin_service_index') }}">Retour à la liste</a>
+                    <div class="mx-3">
+                        <a role="button" class="btn btn-success" href="{{ path('admin_service_index') }}">Liste des services</a>
                     </div>
                     
                     <!-- Submit -->
-                    <div class="col-md-2">                      
-                        <button type="submit" class="btn  btn-success w-100 mb-3">{{ button_label|default('Créer un compte') }}</button>
+                    <div class="mx-3">                      
+                        <button type="submit" class="btn  btn-success w-100 mb-3">{{ button_label }}</button>
                     </div>
                 </div>
 {{ form_end(form) }}
