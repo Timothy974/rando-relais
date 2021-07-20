@@ -27,7 +27,7 @@ class AppFixtures extends Fixture
         $servicesList = [
             "Emplacement de tente",
             "Lit",
-            "Abris",
+            "Abri",
             "Réception de colis",
             "Douche",
             "Eau",
