@@ -8,7 +8,7 @@
 			{% endblock %}
 		</title>
 		{% block stylesheets %}
-			{# START `style` CSS #}
+			{# START style CSS #}
 			<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"/>
 			<link rel="stylesheet" href="{{ asset('assets/css/aimerick-style.css') }}"/>
 			<link rel="stylesheet" href="{{ asset('assets/css/danielstyle.css') }}"/>
@@ -16,35 +16,35 @@
 			<link rel="stylesheet" href="{{ asset('assets/css/style-tim.css') }}"/>
 			<link rel="stylesheet" href="{{ asset('assets/css/media-queries.css') }}"/>
 			<link rel="stylesheet" href="{{ asset('assets/css/404.css') }}"/>
-			<!-- Google fonts for the titles : `Oswald Font` -->
+			<!-- Google fonts for the titles : Oswald Font -->
 			<link rel="preconnect" href="https://fonts.googleapis.com"/>
 			<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 			<link
 			href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet"/>
-			<!-- Google fonts for the paragrafes : `Open Sans Font` -->
+			<!-- Google fonts for the paragrafes : Open Sans Font -->
 			<link
 			href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet"/>
 			{# Font Awesome #}
 			<link
 			rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.6/css/all.css"/>
-		{# END `style` CSS #}
+		{# END style CSS #}
 		{% endblock %}
 	</head>
 	<body>
-		{# START `header for each page` #}
+		{# START header for each page #}
 		{% block header %}
 			{% include "layout/header-shared.html.twig" %}
 		{% endblock %}
-		{# END `header` #}
+		{# END header #}
 		{# START Flash messages #}
 		{% include "partials/_flash.html.twig" %}
 		{# END Flash messages #}
 		<main>
-			{# START `body` #}
+			{# START body #}
 			{% block body %}{% endblock %}
-			{# END `body` #}
+			{# END body #}
 		</main>
-		{# START `footer` #}
+		{# START footer #}
 		{% block footer %}
 			<footer>
 				<div class="footer-top ">
@@ -110,11 +110,14 @@
 				</div>
 			</footer>
 		{% endblock %}
-		{# END `footer` #}
-		{# START `scripts` JS #}
+		{# END footer #}
+		{# START scripts JS #}
 		{% block javascripts %}
 			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+			<script type="text/javascript" src="{{ asset('assets/js/app.js') }}"></script>
+			<script type="text/javascript" src="{{ asset('assets/js/components/angelRegistration.js') }}"></script>
+			<script type="text/javascript" src="{{ asset('assets/js/components/switchToAngel.js') }}"></script>
 		{% endblock %}
-		{# END `scripts` JS #}
+		{# END scripts JS #}
 	</body>
 </html>

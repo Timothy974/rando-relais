@@ -50,6 +50,11 @@ class Service
      */
     private $users;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $slug;
+
     public function __construct()
     {
         $this->created_at = new DateTime();
@@ -145,6 +150,18 @@ class Service
         if ($this->users->removeElement($user)) {
             $user->removeService($this);
         }
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }
