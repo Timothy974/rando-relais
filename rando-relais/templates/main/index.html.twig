@@ -24,15 +24,18 @@
 						<div class="card card-cover h-100 overflow-hidden  bg-success rounded-5 shadow-lg"
 							style="background-image: url('assets/images/background/rando{{ random(31 , 37) }}.jpg') ; background-position: center"> 
 							<div class="d-flex flex-column h-100 p-5 text-shadow-1">
-								<div class="text-center"><img src= "assets/images/profil_picture/{{ angel.picture }}" alt="Bootstrap" width="80" height="80"
-										class=" rounded-circle border border-white"></div>
-								<h2 class="mt-5 display-6 lh-1 fw-bold text-white text-center">{{ angel.firstName}}</h2>
+								<div class="text-center">
+									<a href="{{ path('show_angel', {id: angel.id}) }}">
+										<img src= "{{ asset('assets/images/profile_picture/' ~ angel.picture) }}" alt="Bootstrap" width="80" height="80" class=" rounded-circle border border-white">
+									</a>
+							</div>
+								<a href="{{ path('show_angel', {id: angel.id}) }}" class="text-decoration-none"><h2 class="mt-5 display-6 lh-1 fw-bold text-white text-center">{{ angel.firstName | capitalize}}</h2></a>
 								<p class=" mb-5 display-6 lh-1 fw-bold text-white text-center">{{ angel. zipCode }} - {{ angel.city }}</p>
 								<ul class="d-flex list-unstyled text-center mt-auto">
 									<li class="me-auto"></li>
 									<li class="me-auto">
                                         {% for service in angel.services %}
-										<img src="assets/images/service_icons/{{ service.image }}" class="mx-2 rounded-circle border border-white"
+										<img src="{{ asset('assets/images/service_icons/' ~ service.image) }}" class="mx-2 rounded-circle border border-white"
 											alt="{{ service.name }}" width="50px">
                                         {% endfor %}
 									</li>
