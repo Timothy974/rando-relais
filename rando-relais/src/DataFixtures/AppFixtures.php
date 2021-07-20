@@ -25,16 +25,16 @@ class AppFixtures extends Fixture
 
         // services name array
         $servicesList = [
-            "Douche",
-            "emplacement tente",
-            "Dîner",
-            "Petit-déjeuner",
-            "Energie",
+            "Emplacement de tente",
             "Lit",
             "Abris",
-            "Livraison de colis",
+            "Réception de colis",
+            "Douche",
             "Eau",
-            "Sandwich"
+            "Petit-déjeuner",
+            "Sandwich", 
+            "Dîner",
+            "Prise électrique"
         ];
 
         // create services 
