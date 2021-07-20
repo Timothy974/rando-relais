@@ -35,8 +35,10 @@ class MainController extends AbstractController
     */
     public function information(ServiceRepository $service): Response
     {
+        // In order to have access to the object Entity Service we call the ServiceRepository in argument of the information() method.
+        // We pass the object to the render() method with the findAll() method form the ServiceRepository so we can catch all the services.
         return $this->render("main/information.html.twig", [
-            "services" => $service->findAll()   
+            "services" => $service->findAll()
         ]);
     }
 }
