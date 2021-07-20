@@ -70,3 +70,8 @@ h6 {
     }
 
 }
+
+/* search bar size */
+.search {
+    width: 30em;
+}
