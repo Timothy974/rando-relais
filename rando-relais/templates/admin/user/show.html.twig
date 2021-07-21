@@ -1,78 +1,72 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}User{% endblock %}
+{% block title %}Utilsateur : {{user.firstName}} - {{parent()}}{% endblock %}
 
 {% block body %}
-    <h1>User</h1>
+    <h1 class='text-center'>Utilisateur : {{ user.firstName }} {{user.lastName}}</h1>
+<div class="container admin pt-5">
 
-    <table class="table">
+    <table class="table table-striped text-center mw-50">
+    <thead>
+    <tr>
+      <th scope="col">Propriété</th>
+      <th scope="col">Valeur</th>
+    </tr>
+    </thead>
         <tbody>
             <tr>
                 <th>Id</th>
                 <td>{{ user.id }}</td>
             </tr>
             <tr>
-                <th>FirstName</th>
-                <td>{{ user.firstName }}</td>
-            </tr>
-            <tr>
-                <th>LastName</th>
+                <th>Nom</th>
                 <td>{{ user.lastName }}</td>
             </tr>
             <tr>
-                <th>Email</th>
-                <td>{{ user.email }}</td>
+                <th>Prénom</th>
+                <td>{{ user.firstName }}</td>
             </tr>
             <tr>
-                <th>Roles</th>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+            <th>Avatar</th>
+            <td>
+                <div ><img class="header-icons"  src="{{ asset('assets/images/profile_picture/' ~ user.picture ) }}"  alt="avatar de l'utilisateur"/></div>
+            </td>
             </tr>
             <tr>
-                <th>Password</th>
-                <td>{{ user.password }}</td>
-            </tr>
-            <tr>
-                <th>City</th>
+                <th>Commune</th>
                 <td>{{ user.city }}</td>
             </tr>
             <tr>
-                <th>ZipCode</th>
+                <th>Code postal</th>
                 <td>{{ user.zipCode }}</td>
             </tr>
             <tr>
-                <th>Picture</th>
-                <td>{{ user.picture }}</td>
-            </tr>
-            <tr>
-                <th>PhoneNumber</th>
+                <th>Téléphone</th>
                 <td>{{ user.phoneNumber }}</td>
             </tr>
             <tr>
-                <th>Latitude</th>
-                <td>{{ user.latitude }}</td>
+                <th>Roles</th>
+                <td>{{ user.roles|json_encode() }}</td>
             </tr>
             <tr>
-                <th>Longitude</th>
-                <td>{{ user.longitude }}</td>
-            </tr>
-            <tr>
-                <th>Status</th>
+                <th>Statut</th>
                 <td>{{ user.status }}</td>
             </tr>
             <tr>
-                <th>CreatedAt</th>
+                <th>Créé le</th>
                 <td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
-                <th>UpdatedAt</th>
+                <th>Modifié le</th>
                 <td>{{ user.updatedAt ? user.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
         </tbody>
     </table>
+</div>
 
-    <a href="{{ path('admin_user_index') }}">back to list</a>
-
-    <a href="{{ path('admin_user_edit', {'id': user.id}) }}">edit</a>
-
-    {{ include('admin_user/_delete_form.html.twig') }}
+<div class="d-flex justify-content-center align-items-center mb-5 flex-wrap">
+    <a role="button" class="btn btn-success text-center mx-5" href="{{ path('admin_user_index') }}">Liste des utilisateurs</a>
+    {{ include('admin/user/_delete_form.html.twig') }}
+    <a role="button" class="btn btn-success text-center mx-5" href="{{ path('admin_user_edit', {'id': user.id}) }}">Modifier</a>
+</div>
 {% endblock %}
