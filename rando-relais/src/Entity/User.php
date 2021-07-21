@@ -99,11 +99,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $services;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Review::class, mappedBy="user", orphanRemoval=true)
+     */
+    private $reviews;
+
     public function __construct()
     {
         $this->createdAt = new DateTime();
         $this->updatedAt = new DateTime();
         $this->services = new ArrayCollection();
+        $this->reviews = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -362,5 +368,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection|Review[]
+     */
+    public function getReviews(): Collection
+    {
+        return $this->reviews;
+    }
+
+    public function addReview(Review $review): self
+    {
+        if (!$this->reviews->contains($review)) {
+            $this->reviews[] = $review;
+            $review->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReview(Review $review): self
+    {
+        if ($this->reviews->removeElement($review)) {
+            // set the owning side to null (unless already changed)
+            if ($review->getUser() === $this) {
+                $review->setUser(null);
+            }
+        }
+
+        return $this;
     }
 }
