@@ -37,7 +37,6 @@ class AppFixtures extends Fixture
             "Prise électrique"
         ];
 
-
         // create services 
         foreach ($servicesList as $currentService) {
             
@@ -45,7 +44,7 @@ class AppFixtures extends Fixture
             $service->setName($currentService);
             $service->setDescription($faker->sentence(6));
             $service->setImage('tent.png'); 
-
+            $service->setSlug('my-slug');
             $manager->persist($service);
         }
 
