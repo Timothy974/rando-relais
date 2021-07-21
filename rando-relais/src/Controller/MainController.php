@@ -13,7 +13,7 @@ class MainController extends AbstractController
 {
     /**
      * @Route("/", name="main", methods={"GET"})
-     * 
+     *
      * @return Response
      */
     public function index(UserRepository $angel, ServiceRepository $service): Response
@@ -66,4 +66,14 @@ class MainController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/download", name="main_download", methods={"GET"})
+     *
+     * @return Response
+     */
+    public function download(): Response
+    {
+        // The path to the files is relative to the public folder.
+        return $this->file('assets/files/rando-relais-calendar.pdf', 'rando-relais-calendrier.pdf');
+    }
 }
