@@ -16,10 +16,11 @@ class MainController extends AbstractController
      *
      * @return Response
      */
-    public function index(UserRepository $angel): Response
+    public function index(UserRepository $angel, ServiceRepository $service): Response
     {
         return $this->render('main/index.html.twig', [
-            'angels' => $angel->findAll()
+            'angels' => $angel->findAll(),
+            "services" => $service->findAll()
         ]);
     }
 
@@ -38,7 +39,7 @@ class MainController extends AbstractController
      *
      * @return Response
      */
-    public function search(Request $request, UserRepository $angel): Response
+    public function search(Request $request, UserRepository $angel, ServiceRepository $service): Response
     {
         // Get the information from input search form
         $searchValue = $request->get('query');
@@ -47,7 +48,8 @@ class MainController extends AbstractController
         $angelFilter = $angel->findUserByCity($searchValue);
 
         return $this->render('main/index.html.twig', [
-            'angels' => $angelFilter
+            'angels' => $angelFilter,
+            'services' => $service->findAll()
         ]);
     }
 

@@ -13,12 +13,13 @@
 {% endblock %}
 
 {% block body %}
+{% include "partials/_modal-info.html.twig" %}
 	<div>
-		<a href="{{ path("main_information")}}"><img class="custom-button d-md-block d-lg-none" src="{{asset('assets/images/service_icons/info.png')}}" alt="icone information"></a>
+		<a data-bs-target="#informationModal" data-bs-toggle="modal" type="button" ><img class="custom-button d-md-block d-lg-none" src="{{asset('assets/images/service_icons/info.png')}}" alt="icone information"></a>
 	</div>
 	<section class="mb-5">
 		<div>
-			<h1 class="mt-5 text-center">Marcher & partager</h1>
+			<h1 class="mt-5 text-center">Marcher & Partager</h1>
 		</div>
 		<div class="container search">
 			<form class="d-flex mt-5" action="{{path('search')}}">
