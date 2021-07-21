@@ -37,6 +37,7 @@ class AppFixtures extends Fixture
             "Prise électrique"
         ];
 
+
         // create services 
         foreach ($servicesList as $currentService) {
             
