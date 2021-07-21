@@ -79,7 +79,6 @@ class RegistrationFormType extends AbstractType
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
-                // TODO : delete de password label.
                 'label'  => false,
                 'attr'   => [
                     'autocomplete'  => 'new-password',
