@@ -1,61 +1,52 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}User index{% endblock %}
+{% block title %}Liste des Utilisateurs - {{parent()}}{% endblock %}
 
 {% block body %}
-    <h1>User index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>FirstName</th>
-                <th>LastName</th>
-                <th>Email</th>
-                <th>Roles</th>
-                <th>Password</th>
-                <th>City</th>
-                <th>ZipCode</th>
-                <th>Picture</th>
-                <th>PhoneNumber</th>
-                <th>Latitude</th>
-                <th>Longitude</th>
-                <th>Status</th>
-                <th>CreatedAt</th>
-                <th>UpdatedAt</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for user in users %}
-            <tr>
-                <td>{{ user.id }}</td>
-                <td>{{ user.firstName }}</td>
-                <td>{{ user.lastName }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-                <td>{{ user.password }}</td>
-                <td>{{ user.city }}</td>
-                <td>{{ user.zipCode }}</td>
-                <td>{{ user.picture }}</td>
-                <td>{{ user.phoneNumber }}</td>
-                <td>{{ user.latitude }}</td>
-                <td>{{ user.longitude }}</td>
-                <td>{{ user.status }}</td>
-                <td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ user.updatedAt ? user.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('admin_user_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('admin_user_edit', {'id': user.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="16">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('admin_user_new') }}">Create new</a>
+<div class="container admin mt-5">
+					<h1 class="text-center mb-5">Liste des utilisateurs</h1>
+					<div class="d-grid w-75 mx-auto d-md-flex justify-content-md-end">
+						<a role="button" class="btn btn-success " href="{{ path('admin_user_new') }}">Ajouter un utilisateur</a>
+					</div>
+					<table class="table table-striped text-center w-75 mx-auto">
+						<thead>
+							<tr>
+								<th scope="col">Id</th>
+								<th scope="col">Nom</th>
+								<th scope="col">Prénom</th>
+                                <th scope="col">Email</th>
+								<th scope="col">Roles</th>
+                                <th scope="col">Commune</th>
+                                <th scope="col">Code Postal</th>
+                                <th scope="col">Téléphone</th>
+                                <th scope="col">Statut</th>
+								<th scope="col">actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for user in users %}
+							
+								<tr>
+									<th scope="row">{{ user.id }}</th>
+								    <td>{{ user.lastName }}</td>
+                                    <td>{{ user.firstName}}</td>
+                                    <td>{{ user.email}}</td>
+                                    <td>{{ user.roles|json_encode()}}</td>
+                                    <td>{{ user.city}}</td>
+                                    <td>{{ user.zipCode}}</td>
+                                    <td>{{ user.phoneNumber}}</td>
+                                    <td>{{ user.status}}</td>
+							        <td>
+								        <a role="button" class="btn btn-success mb-2" href="{{ path('admin_user_show', {'id': user.id}) }}">show</a>
+								        <a role="button" class="btn btn-success"  href="{{ path('admin_user_edit', {'id': user.id}) }}">edit</a>
+							        </td>
+                                 </tr>
+						    {% else %}
+					            <tr>
+						            <td colspan="7">no records found</td>
+					            </tr>
+                            {% endfor %}
+                        </tbody>
+		            </table>
+	            </div>
 {% endblock %}
