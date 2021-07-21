@@ -10,12 +10,13 @@
 		{% block stylesheets %}
 			{# START style CSS #}
 			<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"/>
-			<link rel="stylesheet" href="{{ asset('assets/css/aimerick-style.css') }}"/>
+			<!--<link rel="stylesheet" href="{{ asset('assets/css/aimerick-style.css') }}"/>
 			<link rel="stylesheet" href="{{ asset('assets/css/danielstyle.css') }}"/>
 			<link rel="stylesheet" href="{{ asset('assets/css/style-alex.css') }}"/>
 			<link rel="stylesheet" href="{{ asset('assets/css/style-tim.css') }}"/>
 			<link rel="stylesheet" href="{{ asset('assets/css/media-queries.css') }}"/>
-			<link rel="stylesheet" href="{{ asset('assets/css/404.css') }}"/>
+			<link rel="stylesheet" href="{{ asset('assets/css/404.css') }}"/>-->
+			<link rel="stylesheet" href="{{ asset('assets/css/style.css') }}"/>
 			<!-- Google fonts for the titles : Oswald Font -->
 			<link rel="preconnect" href="https://fonts.googleapis.com"/>
 			<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -46,69 +47,7 @@
 		</main>
 		{# START footer #}
 		{% block footer %}
-			<footer class="mt-5">
-				<div class="footer-top">
-					<div class="container">
-						<div class="row">
-							<div class="text-center d-flex align-items-center justify-content-center col-md-4 col-lg-3 footer-about">
-								<img class="logo-footer text-center" src="{{ asset('assets/images/background/logo-rando-relais-552x302.png') }}" alt="logo-footer">
-							</div>
-							<div class=" text-center col-md-4 col-lg-4 offset-lg-1 footer-contact">
-								<h3>Contact</h3>
-								<p>
-									<i class="fas fa-map-marker-alt"></i>
-									Ecole O'Clock</p>
-								<p>
-									<i class="fas fa-phone"></i>
-									Phone: 00 11 22 33 44</p>
-								<p>
-									<i class="fas fa-envelope"></i>
-									Email:
-									<a class="text-light text-decoration-none" href="mailto:hello@domain.com">contact@randorelais.com</a>
-								</p>
-							</div>
-							<div class="text-center col-md-4 col-lg-4 footer-links">
-								<h3>Liens</h3>
-								<p>
-									<a class="text-decoration-none" href="#">Our Team</a>
-								</p>
-								<p>
-									<a class="text-decoration-none" href="{{ path('404') }}">CGU</a>
-								</p>
-								<p>
-									<a class="text-decoration-none" href="daniel404.html">Mentions Légales</a>
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="footer-bottom">
-					<div class="container">
-						<div class="row">
-							<div class="col-md-6 footer-copyright">
-								&copy; Copyright Rando-relais O'clock 2021 Promo SHEHERAZADE
-							</div>
-							<div class="col-md-6 footer-social">
-								<a href="#">
-									<i class="fab fa-facebook"></i>
-								</a>
-								<a href="#">
-									<i class="fab fa-twitter"></i>
-								</a>
-								<a href="#">
-									<i class="fab fa-google-plus-g"></i>
-								</a>
-								<a href="#">
-									<i class="fab fa-instagram"></i>
-								</a>
-								<a href="#">
-									<i class="fab fa-pinterest"></i>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</footer>
+		  {% include "layout/footer.html.twig" %}
 		{% endblock %}
 		{# END footer #}
 		{# START scripts JS #}
@@ -117,6 +56,7 @@
 			<script type="text/javascript" src="{{ asset('assets/js/app.js') }}"></script>
 			<script type="text/javascript" src="{{ asset('assets/js/components/angelRegistration.js') }}"></script>
 			<script type="text/javascript" src="{{ asset('assets/js/components/switchToAngel.js') }}"></script>
+			<script type="text/javascript" src="{{ asset('assets/js/components/darkMode.js') }}"></script>
 		{% endblock %}
 		{# END scripts JS #}
 	</body>

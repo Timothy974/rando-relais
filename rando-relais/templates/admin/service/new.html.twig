@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau  Service{% endblock %}
+
+{% block body %}
+<div class="admin mt-5 mw-100vw">
+    <h1 class="text-center">Créer un nouveau service</h1>
+
+    {{ include('admin/service/_form.html.twig', {'button_label': 'Enregistrer'}) }}
+
+    
+</div>
+{% endblock %}

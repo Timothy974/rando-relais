@@ -22,3 +22,8 @@ input[type="email"], input[type="password"], input[type="email"], input[type="pa
     color: #333;
 }
 
+/* Fix to avoid horizontal scrolling bar when the user's menu is displaying */
+.dropdown-menu.show  {
+    left: -5em;
+} 
+

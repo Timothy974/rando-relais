@@ -7,6 +7,7 @@ use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ServiceRepository::class)
@@ -22,6 +23,12 @@ class Service
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 50,
+     *      minMessage = "Le nom du service doit comprendre au moins {{ limit }} charactères",
+     *      maxMessage = "La longueur du nom du service ne peut excéder {{ limit }} charactères"
+     * )
      */
     private $name;
 
@@ -30,8 +37,10 @@ class Service
      */
     private $description;
 
+    
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=100, nullable=true)
+     *
      */
     private $image;
 
@@ -50,9 +59,8 @@ class Service
      */
     private $users;
 
-    // TODO : delete "nullable=true" when the admin form will contain a field for create a slug. 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=50)
      */
     private $slug;
 
@@ -62,6 +70,7 @@ class Service
         $this->updated_at = new DateTime();
         $this->users = new ArrayCollection();
     }
+
 
     public function getId(): ?int
     {
@@ -97,7 +106,7 @@ class Service
         return $this->image;
     }
 
-    public function setImage(string $image): self
+    public function setImage( ?string $image): self
     {
         $this->image = $image;
 
