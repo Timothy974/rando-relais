@@ -12,7 +12,7 @@
 		{{ form_start(registrationForm, {'attr': {'novalidate': 'novalidate'}}) }}
         {# TODO START : switch to angel to finish #}
 		<div class="mb-3 col-lg-6 mx-auto">
-			<div class="form-check form-switch d-flex justify-content-center">
+			<div class="form-check form-switch d-flex justify-content-center" id="switch-to-angel-registration">
 				{{ form_row(registrationForm.status) }}
 			</div>
 		</div>
@@ -32,7 +32,7 @@
 		{# Angel Data #}
 		{# After a click on the switch the status switch form 1 => ("Marcheur" to 2 => "Angel") and we display the angel data. #}
 		{# TODO START : delete the comment around the <div class="d-none" id="angel_subscription_form"> #}
-		{# <div class="d-none" id="angel_subscription_form"> #}
+		<div class="d-none" id="angel_subscription_form">
 			<div class="mb-3 col-lg-6 mx-auto"> {{ form_row(registrationForm.phonenumber) }}
 		</div>
 		<div class="mb-3 col-lg-6 mx-auto">
@@ -53,7 +53,7 @@
 				</div>
 			{% endfor %}
 		</div>
-		{# </div> #}
+		</div>
 		{# TODO END #}
 		<div class="mb-3 col-lg-6 mx-auto">
 			{{ form_row(registrationForm.agreeTerms) }}

@@ -17,11 +17,11 @@ const angelRegistration = {
     // We add a listener & a handler on the click evt on each of them.
 
     // Switch to angel element.
-    // angelRegistration.angelSwitch = document.getElementById("flexSwitchAngel");
-    // angelRegistration.angelSwitch.addEventListener(
-    //   "click",
-    //   angelRegistration.handleSelectElement
-    // );
+    angelRegistration.angelSwitch = document.getElementById("switch-to-angel-registration");
+    angelRegistration.angelSwitch.addEventListener(
+      "click",
+      angelRegistration.handleSelectElement
+    );
 
     // Service Emplacement de tente icon element.
     angelRegistration.tentCheckBox = document.getElementById(

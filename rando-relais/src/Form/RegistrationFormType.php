@@ -21,6 +21,9 @@ class RegistrationFormType extends AbstractType
         $builder
         ->add('status', CheckboxType::class, [
             'label' => 'Ange du chemin',
+            // 'attr'  => [
+            //     'id' => 'flexSwitchAngel'
+            // ]
         ])
             ->add('lastname', null, [
                 'label' => false,
