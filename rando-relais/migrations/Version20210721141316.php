@@ -10,22 +10,22 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20210721131348 extends AbstractMigration
+final class Version20210721141316 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return 'Add author property in Review entity';
+        return 'Add authorId property in Review entity';
     }
 
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE review ADD author VARCHAR(128) NOT NULL');
+        $this->addSql('ALTER TABLE review ADD author_id INT NOT NULL, DROP author');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE review DROP author');
+        $this->addSql('ALTER TABLE review ADD author VARCHAR(128) CHARACTER SET utf8mb4 NOT NULL COLLATE `utf8mb4_unicode_ci`, DROP author_id');
     }
 }
