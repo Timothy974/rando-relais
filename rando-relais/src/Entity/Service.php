@@ -50,6 +50,7 @@ class Service
      */
     private $users;
 
+    // TODO : delete "nullable=true" when the admin form will contain a field for create a slug. 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
