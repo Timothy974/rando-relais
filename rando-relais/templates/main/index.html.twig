@@ -13,8 +13,9 @@
 {% endblock %}
 
 {% block body %}
+{% include "partials/_modal-info.html.twig" %}
 	<div>
-		<a href="{{ path("main_information")}}"><img class="custom-button d-md-block d-lg-none" src="{{asset('assets/images/service_icons/info.png')}}" alt="icone information"></a>
+		<a data-bs-target="#informationModal" data-bs-toggle="modal" type="button" ><img class="custom-button d-md-block d-lg-none" src="{{asset('assets/images/service_icons/info.png')}}" alt="icone information"></a>
 	</div>
 	<section class="mb-5">
 		<div>
