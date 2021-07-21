@@ -13,7 +13,7 @@ class MainController extends AbstractController
 {
     /**
      * @Route("/", name="main", methods={"GET"})
-     * 
+     *
      * @return Response
      */
     public function index(UserRepository $angel, ServiceRepository $service): Response
@@ -39,7 +39,7 @@ class MainController extends AbstractController
      *
      * @return Response
      */
-    public function search(Request $request, UserRepository $angel): Response
+    public function search(Request $request, UserRepository $angel, ServiceRepository $service): Response
     {
         // Get the information from input search form
         $searchValue = $request->get('query');
@@ -48,7 +48,8 @@ class MainController extends AbstractController
         $angelFilter = $angel->findUserByCity($searchValue);
 
         return $this->render('main/index.html.twig', [
-            'angels' => $angelFilter
+            'angels' => $angelFilter,
+            'services' => $service->findAll()
         ]);
     }
 
@@ -66,4 +67,14 @@ class MainController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/download", name="main_download", methods={"GET"})
+     *
+     * @return Response
+     */
+    public function download(): Response
+    {
+        // The path to the files is relative to the public folder.
+        return $this->file('assets/files/rando-relais-calendar.pdf', 'rando-relais-calendrier.pdf');
+    }
 }

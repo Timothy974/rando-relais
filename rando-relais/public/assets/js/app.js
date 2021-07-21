@@ -1,10 +1,10 @@
 const app = {
    init: function () {
      // We load the component angelInscrption.js.
-     // angelRegistration.init();
+     angelRegistration.init();
  
      // We load the component switchToAngel.js.
-     switchToAngel.init();
+    //  switchToAngel.init();
    },
  };
  

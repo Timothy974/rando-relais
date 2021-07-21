@@ -31,13 +31,6 @@ const switchToAngel = {
       switchToAngel.handleSelectElement
     );
 
-    // Service Emplacement de tente icon element.
-    switchToAngel.tentCheckBox = document.getElementById("emplacement-tente");
-    switchToAngel.tentCheckBox.addEventListener(
-      "click",
-      switchToAngel.handleSelectElement
-    );
-
     // Service Lit icon element.
     switchToAngel.bedroomCheckBox = document.getElementById("lit");
     switchToAngel.bedroomCheckBox.addEventListener(
@@ -54,7 +47,7 @@ const switchToAngel = {
 
     // Serice Réception de colis icon element.
     switchToAngel.deliveryCheckBox =
-      document.getElementById("livraison-de-colis");
+      document.getElementById("reception-de-colis");
     switchToAngel.deliveryCheckBox.addEventListener(
       "click",
       switchToAngel.handleSelectElement
@@ -75,7 +68,8 @@ const switchToAngel = {
     );
 
     // Service Petit déjeuner icon element.
-    switchToAngel.breakfastCheckBox = document.getElementById("petit-dejeuner");
+    switchToAngel.breakfastCheckBox =
+      document.getElementById("petit-dejeuner");
     switchToAngel.breakfastCheckBox.addEventListener(
       "click",
       switchToAngel.handleSelectElement
@@ -96,7 +90,8 @@ const switchToAngel = {
     );
 
     // Serice Prise électrique icon element.
-    switchToAngel.powerCheckBox = document.getElementById("prise-electrique");
+    switchToAngel.powerCheckBox =
+      document.getElementById("prise-electrique");
     switchToAngel.powerCheckBox.addEventListener(
       "click",
       switchToAngel.handleSelectElement
@@ -123,31 +118,41 @@ const switchToAngel = {
       // We get the DOM elements on wich the CSS classes will be toggle.
       // We get the toggle the CSS classes with the JS API classList.
       switchToAngel.tentCheckBox.classList.toggle("opacity-50");
-      document.getElementById("validate-tent").classList.toggle("d-none");
+      document
+        .getElementById("validate-emplacement-de-tente")
+        .classList.toggle("d-none");
     }
 
     // If the selectedElement is bedroomCheckBox.
-    if (switchToAngel.selectedElement == switchToAngel.bedroomCheckBox) {
+    if (
+      switchToAngel.selectedElement == switchToAngel.bedroomCheckBox
+    ) {
       // We get the DOM elements on wich the CSS classes will be toggle.
       // We get the toggle the CSS classes with the JS API classList.
       switchToAngel.bedroomCheckBox.classList.toggle("opacity-50");
-      document.getElementById("validate-bedroom").classList.toggle("d-none");
+      document.getElementById("validate-lit").classList.toggle("d-none");
     }
 
     // If the selectedElement is shelterCheckBox.
-    if (switchToAngel.selectedElement == switchToAngel.shelterCheckBox) {
+    if (
+      switchToAngel.selectedElement == switchToAngel.shelterCheckBox
+    ) {
       // We get the DOM elements on wich the CSS classes will be toggle.
       // We get the toggle the CSS classes with the JS API classList.
       switchToAngel.shelterCheckBox.classList.toggle("opacity-50");
-      document.getElementById("validate-shelter").classList.toggle("d-none");
+      document.getElementById("validate-abri").classList.toggle("d-none");
     }
 
     // If the selectedElement is deliveryCheckBox.
-    if (switchToAngel.selectedElement == switchToAngel.deliveryCheckBox) {
+    if (
+      switchToAngel.selectedElement == switchToAngel.deliveryCheckBox
+    ) {
       // We get the DOM elements on wich the CSS classes will be toggle.
       // We get the toggle the CSS classes with the JS API classList.
       switchToAngel.deliveryCheckBox.classList.toggle("opacity-50");
-      document.getElementById("validate-delivery").classList.toggle("d-none");
+      document
+        .getElementById("validate-reception-de-colis")
+        .classList.toggle("d-none");
     }
 
     // If the selectedElement is showerCheckBox.
@@ -155,19 +160,33 @@ const switchToAngel = {
       // We get the DOM elements on wich the CSS classes will be toggle.
       // We get the toggle the CSS classes with the JS API classList.
       switchToAngel.showerCheckBox.classList.toggle("opacity-50");
-      document.getElementById("validate-shower").classList.toggle("d-none");
+      document.getElementById("validate-douche").classList.toggle("d-none");
+    }
+
+    // If the selectedElement is waterCheckBox.
+    if (switchToAngel.selectedElement == switchToAngel.waterCheckBox) {
+      // We get the DOM elements on wich the CSS classes will be toggle.
+      // We get the toggle the CSS classes with the JS API classList.
+      switchToAngel.waterCheckBox.classList.toggle("opacity-50");
+      document.getElementById("validate-eau").classList.toggle("d-none");
     }
 
     // If the selectedElement is breakfastCheckBox.
-    if (switchToAngel.selectedElement == switchToAngel.breakfastCheckBox) {
+    if (
+      switchToAngel.selectedElement == switchToAngel.breakfastCheckBox
+    ) {
       // We get the DOM elements on wich the CSS classes will be toggle.
       // We get the toggle the CSS classes with the JS API classList.
       switchToAngel.breakfastCheckBox.classList.toggle("opacity-50");
-      document.getElementById("validate-breakfast").classList.toggle("d-none");
+      document
+        .getElementById("validate-petit-dejeuner")
+        .classList.toggle("d-none");
     }
 
     // If the selectedElement is sandwichCheckBox.
-    if (switchToAngel.selectedElement == switchToAngel.sandwichCheckBox) {
+    if (
+      switchToAngel.selectedElement == switchToAngel.sandwichCheckBox
+    ) {
       // We get the DOM elements on wich the CSS classes will be toggle.
       // We get the toggle the CSS classes with the JS API classList.
       switchToAngel.sandwichCheckBox.classList.toggle("opacity-50");
@@ -179,7 +198,7 @@ const switchToAngel = {
       // We get the DOM elements on wich the CSS classes will be toggle.
       // We get the toggle the CSS classes with the JS API classList.
       switchToAngel.dinnerCheckBox.classList.toggle("opacity-50");
-      document.getElementById("validate-dinner").classList.toggle("d-none");
+      document.getElementById("validate-diner").classList.toggle("d-none");
     }
 
     // If the selectedElement is powerCheckBox.
@@ -187,7 +206,9 @@ const switchToAngel = {
       // We get the DOM elements on wich the CSS classes will be toggle.
       // We get the toggle the CSS classes with the JS API classList.
       switchToAngel.powerCheckBox.classList.toggle("opacity-50");
-      document.getElementById("validate-power").classList.toggle("d-none");
+      document
+        .getElementById("validate-prise-electrique")
+        .classList.toggle("d-none");
     }
 
     // If selectedElement is updateButton.
