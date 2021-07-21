@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edition d'un  Service{% endblock %}
+
+{% block body %}
+<div class="admin mt-5 mw-100vw">
+    <h1 class="text-center mt-5" >Service n° {{ service.id }} - {{ service.name }}</h1>
+
+    {{ include('admin/service/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+</div>
+
+    
+{% endblock %}
