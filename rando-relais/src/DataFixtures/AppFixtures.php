@@ -7,9 +7,17 @@ use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
+    private $encoder;
+
+    public function __construct(UserPasswordHasherInterface $encoder)
+    {
+        $this->encoder = $encoder;
+    }
+
     public function load(ObjectManager $manager)
     {
         // instanciation of faker
@@ -17,44 +25,50 @@ class AppFixtures extends Fixture
 
         // services name array
         $servicesList = [
-            "Douche",
-            "emplacement tente",
-            "Dîner",
-            "Petit-déjeuner",
-            "Energie",
+            "Emplacement de tente",
             "Lit",
-            "Abris",
-            "Livraison de colis",
+            "Abri",
+            "Réception de colis",
+            "Douche",
             "Eau",
-            "Sandwich"
+            "Petit-déjeuner",
+            "Sandwich", 
+            "Dîner",
+            "Prise électrique"
         ];
+
+        // create services 
+        foreach ($servicesList as $currentService) {
+            
+            $service= new Service();
+            $service->setName($currentService);
+            $service->setDescription($faker->sentence(6));
+            $service->setImage('tent.png'); 
+
+            $manager->persist($service);
+        }
 
         // create 20 user
         for ($i = 0; $i < 20; $i++) {
+
             $user = new User();
             $user->setFirstName($faker->firstName());
             $user->setLastName($faker->lastName());
             $user->setEmail($faker->email());
-            $user->setPassword('pass_1234');
+            $password = $this->encoder->hashPassword($user, 'pass_1234');
+            $user->setPassword($password);
             $user->setCity($faker->city());
-            $user->setZipCode(97490);
+            $user->setZipCode(mt_rand(11100, 97499));
             $user->setRole('ROLE_USER');
             $user->setPhoneNumber(0102030405);
-            $user->setStatus(mt_rand(0, 1));
+            $user->setStatus(mt_rand(1, 2));
+            
+            // add a service to each user
+            $user->addService($service);
+
+            $manager->persist($user);
         } 
-
-        // create services 
-        foreach ($servicesList as $currentService) {
-
-            $service= new Service();
-            $service->setName($currentService);
-            $service->setDescription($faker->sentence(4));
-            $service->setImage('tent.png');
-            // add services to a user
-            $user->addService($service);    
-            $manager->persist($service);
-        }
-
+        
         $manager->flush();
     }
 }

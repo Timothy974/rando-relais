@@ -1,3 +1,4 @@
+  
 <!DOCTYPE html>
 <html lang="en">
 
@@ -64,18 +65,19 @@
           <input type="text" class="form-control" id="city" placeholder="Commune" disabled="disabled">
        </div>
        <!-- Angels data -->
+        <!-- TODO START : div pour boucle twig. Afin que le getElementById() du JS fonctionne dans la boucle twig il faut que l'id du serice soit id="{{ service.slug }}"  -->
        <div class="d-none" id="angel_subscription_form">
            <h3 class="text-center">Quels services souhaitez-vous proposer aux marcheurs ?</h3>
           <!-- Services -->
           <div class="row justify-content-center">
              <!-- Tent -->
-             <div class="col-lg-2 col-md-4 text-center opacity-50" id="tente-service">
+             <div class="col-lg-2 col-md-4 text-center opacity-50" id="tent_service">
                 <input class="form-check-input align-middle d-none" type="checkbox" name="tent_checkbox"
                     id="tent_checkbox">
                 <label for="tent"><img src="../icons/tent.png" alt="tente" class="rounded-circle w-25 "></label>
                 <p>
                     Emplacement tente
-                    <img src="../icons/validate-20x20.png" id="validate-tent" class="d-none">
+                    <img src="{{ asset('assets/images/service_icons/' ~ service.image) }}" id="{{ service.slug }}" class="d-none">
                 </p>
             </div>
             <!-- Shower -->
@@ -100,6 +102,7 @@
                 </p>
             </div>
         </div>
+        <!-- TODO END : end of the <div> -->
         <div class="row justify-content-center">
             <!-- Bedroom -->
             <div class="col-lg-2 col-md-4 text-center opacity-50" id="bedroom-service">
@@ -194,7 +197,7 @@
  <!-- END page `user_profil` -->
  <!-- Scripts JS -->
  <script type="text/javascript" src="../rando-relais/app.js"></script>
- <!-- <script type="text/javascript" src="../rando-relais/angelRegistration.js"></script> -->
+ <script type="text/javascript" src="../rando-relais/angelRegistration.js"></script>
  <script type="text/javascript" src="../rando-relais/switchToAngel.js"></script>
  
  </body>
