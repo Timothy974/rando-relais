@@ -30,3 +30,6 @@
 .footer-copyright a { color: #fff; border: 0; }
 .footer-copyright a:hover, .footer-copyright a:focus { color: #aaa; border: 0; }
 
+.admin{
+  min-height: 60vh;
+}
