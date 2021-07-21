@@ -38,6 +38,11 @@ class Review
      */
     private $user;
 
+    /**
+     * @ORM\Column(type="string", length=128)
+     */
+    private $author;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -87,6 +92,18 @@ class Review
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?string
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(string $author): self
+    {
+        $this->author = $author;
 
         return $this;
     }
