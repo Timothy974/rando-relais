@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% set currentRoute = app.request.get('_route') %}
+
+{% block header %}
+
+	{% if currentRoute == 'main' %}
+		{% include "layout/header-home.html.twig" %}
+	{% else %}
+		{% include "layout/header-shared.html.twig" %}
+	{% endif %}
+
+{% endblock %}
+
+{% block body %}
+   <div class="container">
+		{# Review header #}
+		<header class="text-center mb-3">
+			<h2 class="text-center mb-5">Laisser une évaluation à {{reviewedUser.firstName}}</h2>
+			<img src="{{ asset('assets/images/profile_picture/' ~ reviewedUser.picture )}}" alt="{{ reviewedUser.firstName }}" class="rounded-circle img-fluid" style="width: 15%">
+		</header>
+		{# Review form #}
+      <section class="mt-5">
+			{{ form(reviewForm) }}
+		</section>
+   	</div>
+{% endblock %}
