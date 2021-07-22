@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-			{% block title %}Service index
+			{% block title %}Liste des services - {{parent()}}
 			{% endblock %}
 
 			{% block body %}
@@ -13,10 +13,10 @@
 						<thead>
 							<tr>
 								<th scope="col">Id</th>
-								<th scope="col">Name</th>
+								<th scope="col">Nom</th>
 								<th scope="col">Image</th>
 								
-								<th scope="col">actions</th>
+								<th scope="col">Actions</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -32,8 +32,8 @@
 							
 
 							<td>
-								<a role="button" class="btn btn-success" href="{{ path('admin_service_show', {'id': service.id}) }}">show</a>
-								<a role="button" class="btn btn-success"  href="{{ path('admin_service_edit', {'id': service.id}) }}">edit</a>
+								<a role="button" class="btn btn-success" href="{{ path('admin_service_show', {'id': service.id}) }}">Voir</a>
+								<a role="button" class="btn btn-success"  href="{{ path('admin_service_edit', {'id': service.id}) }}">Editer</a>
 							</td>
 
 							</tr>
@@ -41,7 +41,7 @@
 				
 				{% else %}
 					<tr>
-						<td colspan="7">no records found</td>
+						<td colspan="7">No records found</td>
 					</tr>
 
 				{% endfor %}

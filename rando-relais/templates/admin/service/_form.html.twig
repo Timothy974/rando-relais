@@ -41,23 +41,30 @@
                 </div>
 
 				<!-- Image name -->
-                
-              
-                <div class="mb-3 mt-3 col-lg-6 mx-auto">
-                  {{ form_label(form.users, 'Utilisateurs proposant ce service')}}   
-					{{ form_widget(form.users, {
+                <div class="bg-danger ">
+                    {{ form_errors(form.image)}}
+                </div>
+				<div class="mb-3 mt-3 col-lg-6 mx-auto">
+                    {{ form_label(form.image, 'Nom de l\'image')}}   
+					{{ form_widget(form.image, {
                     'attr':
                         {'class': 'form-control',
-                        }}) }}
-				</div>
+                       }}) }}
+                </div>
+              
+               
                
                 <!-- Icon upload -->
                  <div class="bg-danger ">
-                    {{ form_errors(form.image)}}
+                    {{ form_errors(form.uploadimage)}}
                 </div>
                 <div class="mb-3 mt-3 col-lg-6 mx-auto %}">
-                  {{ form_label(form.image) }}   
-					{{ form_widget(form.image, {
+                {% if service.image %}
+                  {{ form_label(form.uploadimage, 'Changer l\'image') }}  
+                {% else %} 
+                {{ form_label(form.uploadimage, 'Télécharger une image') }}
+                {% endif %}
+					{{ form_widget(form.uploadimage, {
                     'attr':
                         {'class': 'form-control',
                         }}) }}
