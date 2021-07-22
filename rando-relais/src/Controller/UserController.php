@@ -32,7 +32,7 @@ class UserController extends AbstractController
         // Get the reviews from a user
         $userReviews = $reviewRepository->findBy(['user' => $id]);
 
-        // dd($userReviews);
+        // Get the name of the author that has id = authorId
 
         // Return the angel data to the view
         return $this->render('user/show-angel.html.twig', [

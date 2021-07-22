@@ -2,8 +2,9 @@
 
 namespace App\Entity;
 
-use App\Repository\ReviewRepository;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=ReviewRepository::class)
@@ -37,6 +38,16 @@ class Review
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $authorId;
+
+    public function __construct()
+    {
+        $this->createdAt = new DateTime();
+    }
 
     public function getId(): ?int
     {
@@ -87,6 +98,18 @@ class Review
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getAuthorId(): ?int
+    {
+        return $this->authorId;
+    }
+
+    public function setAuthorId(int $authorId): self
+    {
+        $this->authorId = $authorId;
 
         return $this;
     }
