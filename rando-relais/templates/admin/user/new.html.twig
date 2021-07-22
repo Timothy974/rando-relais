@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New User{% endblock %}
+
+{% block body %}
+    <div class="admin container">
+    <h1 class="text-center">Créer un nouvel utilisateur</h1>
+
+    {{ include('admin/user/_form.html.twig', {'button_label': 'Enregistrer'}) }}
+
+    
+</div>
+{% endblock %}
