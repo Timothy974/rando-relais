@@ -38,7 +38,25 @@ class RegistrationController extends AbstractController
             if ($status === true) {
                 // We set the value 2 (Ange) to the status.
                 $user->setStatus(2);
-            // Else if the switch is not checked $status === false, user will be registered as a marcheur (status = 2).
+                // TODO START : code to improve.
+                // We get the value of the field with the input of the user.
+                $phoneNumber = $form->get('phonenumber')->getData();
+                $zipCode = $form->get('zipcode')->getData();
+                $city = $form->get('city')->getData();
+                $services = $form->get('services')->getData();
+                // We check is the data exist.
+                // If the data is emtpy or null we display a flash message message for the user.
+                if ((!empty($phoneNumber) || !isset($phoneNumber)) || (!empty($zipCode) || !isset($zipCode)) || (!empty($city) || !isset($city)) || (!empty($services) || !isset($services))) {
+                    $this->addFlash('danger', 'Merci de compléter tous les champs.');
+                    // We redirect to user to the login page & we specify the related HTTP response status code.
+                    return $this->redirectToRoute('app_register', [], 301);
+                // Else if the data is correct.
+                } else {
+                    // We stop the code. The registration continue.
+                    exit();
+                }
+                // TODO END.
+                // Else if the switch is not checked $status === false, user will be registered as a marcheur (status = 2).
             } elseif ($status === false) {
                 // We set the value 1 (Marcheur) to the status.
                 $user->setStatus(1);
@@ -50,7 +68,7 @@ class RegistrationController extends AbstractController
             // do anything else you need here, like send an email
 
             // We display a flash message for the user.
-            $this->addFlash('success', 'Bonjour' .$user->getFirstName(). '. Votre compte a bien été créé.');
+            $this->addFlash('success', 'Bonjour ' .$user->getFirstName(). '. Votre compte a bien été créé.');
 
             // We redirect to user to the login page & we specify the related HTTP response status code.
             return $this->redirectToRoute('app_login', [], 301);
