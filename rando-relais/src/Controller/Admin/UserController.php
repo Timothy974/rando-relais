@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
+use App\Service\ImageUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,7 +30,7 @@ class UserController extends AbstractController
     /**
      * @Route("/new", name="new", methods={"GET","POST"})
      */
-    public function new(Request $request, UserPasswordHasherInterface $UserPasswordHasherInterface): Response
+    public function new(Request $request, UserPasswordHasherInterface $UserPasswordHasherInterface, ImageUploader $imageUploader): Response
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
@@ -43,6 +44,9 @@ class UserController extends AbstractController
                     $form->get('password')->getData()
                 )
             );
+
+            $newFileName = $imageUploader->imageUpload($form, 'picture');
+            $user->setpicture($newFileName);
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
@@ -71,12 +75,16 @@ class UserController extends AbstractController
     /**
      * @Route("/{id}/edit", name="edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, User $user): Response
+    public function edit(Request $request, User $user, ImageUploader $imageUploader): Response
     {
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $newFileName = $imageUploader->imageUpload($form, 'picture');
+            $user->setpicture($newFileName);
+
             $this->getDoctrine()->getManager()->flush();
 
             $this->addFlash('success', 'L\'utilisateur ' .$user->getFirstName(). ' ' .$user->getLastName(). ' a bien été modifié');
