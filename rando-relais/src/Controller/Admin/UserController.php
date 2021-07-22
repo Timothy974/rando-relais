@@ -48,6 +48,7 @@ class UserController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
+            $this->addFlash('success', 'l\'utilisateur ' .$user->getFirstName(). ' ' .$user->getLastName(). ' a bien été créé');
             return $this->redirectToRoute('admin_user_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -78,7 +79,8 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('admin_user_index', [], Response::HTTP_SEE_OTHER);
+            $this->addFlash('success', 'L\'utilisateur ' .$user->getFirstName(). ' ' .$user->getLastName(). ' a bien été modifié');
+            return $this->redirectToRoute('admin_user_edit', ['id' => $user->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('admin/user/edit.html.twig', [
@@ -98,6 +100,7 @@ class UserController extends AbstractController
             $entityManager->flush();
         }
 
+        $this->addFlash('success', 'Utilisateur supprimer');
         return $this->redirectToRoute('admin_user_index', [], Response::HTTP_SEE_OTHER);
     }
 }
