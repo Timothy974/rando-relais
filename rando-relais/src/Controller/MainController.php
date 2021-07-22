@@ -20,7 +20,7 @@ class MainController extends AbstractController
     {
         return $this->render('main/index.html.twig', [
             'angels' => $angel->findAll(),
-            "services" => $service->findAll()
+            'services' => $service->findAll()
         ]);
     }
 
@@ -50,20 +50,6 @@ class MainController extends AbstractController
         return $this->render('main/index.html.twig', [
             'angels' => $angelFilter,
             'services' => $service->findAll()
-        ]);
-    }
-
-    /**
-     * @Route("/informations", name="main_information", methods={"GET"})
-     *
-     * @return Response
-     */
-    public function information(ServiceRepository $service): Response
-    {
-        // In order to have access to the object Entity Service we call the ServiceRepository in argument of the information() method.
-        // We pass the object to the render() method with the findAll() method form the ServiceRepository so we can catch all the services.
-        return $this->render("main/information.html.twig", [
-            "services" => $service->findAll()
         ]);
     }
 
