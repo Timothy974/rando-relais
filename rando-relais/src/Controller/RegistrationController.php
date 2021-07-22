@@ -44,9 +44,9 @@ class RegistrationController extends AbstractController
                 $zipCode = $form->get('zipcode')->getData();
                 $city = $form->get('city')->getData();
                 $services = $form->get('services')->getData();
-                // We check is the data exist.
+                // We check if the data exist.
                 // If the data is emtpy or null we display a flash message message for the user.
-                if ((!empty($phoneNumber) || !isset($phoneNumber)) || (!empty($zipCode) || !isset($zipCode)) || (!empty($city) || !isset($city)) || (!empty($services) || !isset($services))) {
+                if ((empty($phoneNumber) || isset($phoneNumber)) || (empty($zipCode) || isset($zipCode)) || (empty($city) || isset($city)) || (empty($services) || isset($services))) {
                     $this->addFlash('danger', 'Merci de compléter tous les champs.');
                     // We redirect to user to the login page & we specify the related HTTP response status code.
                     return $this->redirectToRoute('app_register', [], 301);
