@@ -35,16 +35,14 @@
 								{% for angel in angels %}
 									<div class="col">
 										<a href="{{ app.user ? path('show_angel', {id: angel.id}) : path('app_login') }}" class="nav-link">
-											<div class="card card-cover h-100 overflow-hidden bg-success rounded-5 shadow-lg opacity-85" style="background-image: url('assets/images/background/rando{{ random(40 , 94) }}.jpg'); background-position: center; background-size: cover;">
+											<div class="card card-cover overflow-hidden bg-success rounded-5 shadow-lg opacity-85" style="height: 25rem; background-image: url('assets/images/background/rando{{ random(40 , 94) }}.jpg'); background-position: center; background-size: cover;">
 												<div class="d-flex flex-column h-100 p-5 text-shadow-1">
 													<div class="text-center">
 														{# <img src="{{ asset('assets/images/profile_picture/' ~ angel.picture) }}" alt="Bootstrap" width="80" height="80" class=" rounded-circle border border-white"> #}
 														<img src="{{ asset('assets/images/profile_picture/' ~ random(['aimerick.png','alex.jpg','daniel.png','timothy.jpg'])) }}" alt="Bootstrap" width="80" height="80" class=" rounded-circle border border-white">
 													</div>
 													<h2 class="mt-5 display-6 lh-1 fw-bold text-white text-center text-custom-shadow">{{ angel.firstName | capitalize}}</h2>
-													<p class=" mb-5 display-6 lh-1 fw-bold text-white text-center text-custom-shadow">{{ angel. zipCode }}
-														·
-														{{ angel.city }}</p>
+													<p class="mb-5 lh-1 fw-bold text-white text-center text-custom-shadow" style="font-size: 1.7rem">{{ angel. zipCode }} · {{ angel.city }}</p>
 													<ul class="d-flex list-unstyled text-center mt-auto">
 														<li class="me-auto"></li>
 														<li class="me-auto">

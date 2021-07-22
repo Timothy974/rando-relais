@@ -436,7 +436,6 @@ input[type="password"] {
       padding: 40px 0;
    }
 
-
    .opacity-85 {
       opacity: 85%;
    }
@@ -444,7 +443,6 @@ input[type="password"] {
    .card:hover {
       opacity: 100%;
    }
-
 }
 
 @media (min-width: 750px) and (max-width: 991px) {
