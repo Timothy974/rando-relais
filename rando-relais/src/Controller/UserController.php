@@ -67,4 +67,14 @@ class UserController extends AbstractController
             'authorNameArray' => $authorNameArray
         ]);
     }
+
+    /**
+     * @Route("/user/{id}/profile", name="user_profile")
+     */
+    public function profile(int $id): Response
+    {
+        return $this->render('user/profile.html.twig', [
+           'id' => $id
+        ]);
+    }
 }

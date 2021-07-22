@@ -54,4 +54,24 @@ class ReviewController extends AbstractController
             'reviewedUser' => $reviewedUser
         ]);
     }
+
+    /**
+     * @Route("/review/{id}/madelist", name="madelist_review")
+     */
+    public function madeList(int $id)
+    {
+        return $this->render('review/madelist.html.twig',[
+            'id'=> $id
+        ]);
+    }
+
+    /**
+     * @Route("/review/{id}/receivedlist", name="receivedlist_review")
+     */
+    public function receivedList(int $id)
+    {
+        return $this->render('review/receivedlist.html.twig',[
+            'id'=> $id
+        ]);
+    }
 }

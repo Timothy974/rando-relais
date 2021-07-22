@@ -20,8 +20,8 @@ class ServiceType extends AbstractType
             ->add('name')
             ->add('description')
             ->add('slug')
-            ->add('image', FileType::class, [
-                'label'=> 'Téléchargez une icone du service',
+            ->add('image')
+            ->add('uploadimage', FileType::class, [
                 'mapped' =>false,
                 'required'=>false, 
                 'constraints' => [
@@ -35,13 +35,7 @@ class ServiceType extends AbstractType
                     ])
                 ]
                 ])
-            ->add('users', EntityType::class, [
-                'by_reference' => false,
-                'class' => User::class,
-                'required'=>false,
-                'multiple' => true,
-                'attr' => ['size' => 10]
-            ]);
+           ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
