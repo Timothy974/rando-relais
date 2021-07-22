@@ -1,11 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block header %}
-			{% include "layout/header-shared.html.twig" %}
+   {% include "layout/header-shared.html.twig" %}
 {% endblock %}
 
 {% block body %}
-{{dump(authorNameArray)}}
    <div class="container">
       {# If user is logged in (either ROLE_USER or ROLE_ADMIN), display the Angel profile #}
       {% if is_granted('ROLE_USER') or is_granted('ROLE_ADMIN') %}
@@ -85,7 +84,4 @@
    {% else %}
       {# TODO: Display a message when the user is not logged in, or redirect him to the homepage #}
    {% endif %}
-
-
-
 {% endblock %}
