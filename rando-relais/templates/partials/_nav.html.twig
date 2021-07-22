@@ -2,7 +2,7 @@
 <div class="container-nav">
 	<nav id="navbar_color_transparent" class="navbar navbar-expand-lg navbar-dark p-2">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="#"><img class="rando-relais-logo m-auto w-100" src="{{ asset('assets/images/background/logo-rando-relais-128x70.png') }}" alt=""/></a>
+			<a class="navbar-brand" href="{{ path("main") }}"><img class="rando-relais-logo m-auto w-100" src="{{ asset('assets/images/background/logo-rando-relais-128x70.png') }}" alt=""/></a>
 			<label class="switch m-2">
 				<input type="checkbox"/>
 				<span class="slider round"></span>
@@ -16,10 +16,9 @@
 						<a class="nav-link active" aria-current="page" href="{{ path("main")}}">Accueil</a>
 					</li>
 					<li class="nav-item">
-						{# <a class="nav-link" href="{{ path("main_information")}}">Informations</a> #}
 						<a type="button" class="nav-link" data-bs-toggle="modal" data-bs-target="#informationModal">Information</a>
 					</li>
-				</liclass="nav-item">
+				</li class="nav-item">
 				<a class="nav-link btn" href="{{ path('main_download') }}">Télécharger calendrier</a>
 			</li>
 		</ul>
@@ -31,21 +30,25 @@
 					<a
 						class="nav-link dropdown-toggle btn-success" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 						{# We display the first name of the user logged in #}
-						{{ app.user.firstname }}
+						Bonjour {{ app.user.firstname }} 
 					</a>
 					<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+						{# TODO Mettre à jour les liens vers la page profil et compte utilisateur#}
+						<li>
+							<a class="dropdown-item" href="#">Gérer mon profil</a>
+						</li>
+						<li>
+							<a class="dropdown-item" href="#">Comptes utilisateurs</a>
+						</li>"
+						{# TODO Décommenter les blocs "if" et "endif" quand les permissions seront opérationnelles #}
+						{# {% if is_granted('ROLE_ADMIN') %} #}
 						<li>
 							<a class="dropdown-item" href="{{ path('admin_main') }}">Dashboard</a>
 						</li>
 						<li>
-							<a class="dropdown-item" href="">Comptes utilisateurs</a>
-						</li>
-						<li>
 							<a class="dropdown-item" href="{{ path('admin_service_index') }}">Services</a>
 						</li>
-						<li>
-							<a class="dropdown-item" href="">Mon profil</a>
-						</li>
+						{# {% endif %} #}
 						<li>
 							<hr class="dropdown-divider"/>
 						</li>
