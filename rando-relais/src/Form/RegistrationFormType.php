@@ -103,8 +103,8 @@ class RegistrationFormType extends AbstractType
                     ])
                 ],
             ])
-
-            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+            // We add a event listener on POST_SET_DATA for reading data after having pre-populated the form.
+            ->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event) {
                 // We get the form.
                 $form = $event->getForm();
                 // We get the user data wich is input in the form.

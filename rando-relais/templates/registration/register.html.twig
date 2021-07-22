@@ -42,7 +42,7 @@
 			{# Services icons #}
 			<div class="row justify-content-center">
 				{{ form_row(registrationForm.services) }}
-				{% for service in services %}
+				{# {% for service in services %}
 					<div class="col-lg-2 col-md-4 text-center opacity-50" id="{{ service.slug }}">
 						<input class="form-check-input align-middle d-none" type="checkbox" name="service-checkbox" id="{{ 'service-checkbox-' ~ service.slug }}">
 						<label for="tent"><img src="{{ asset('assets/images/service_icons/' ~ service.image) }}" alt="service-icon" class="rounded-circle w-25 "></label>
@@ -50,7 +50,7 @@
 							<img src="{{ asset('assets/images/service_icons/validate-20x20.png') }}" id="{{ 'validate-' ~ service.slug }}" class="d-none">
 						</p>
 					</div>
-				{% endfor %}
+				{% endfor %} #}
 			</div>
 		</div>
 		{# TODO END #}
