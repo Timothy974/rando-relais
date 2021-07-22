@@ -1,0 +1,130 @@
+{% extends 'base.html.twig' %}
+
+			{% set currentRoute = app.request.get('_route') %}
+
+			{% block header %}
+
+				{% if currentRoute == 'main' %}
+					{% include "layout/header-home.html.twig" %}
+				{% else %}
+					{% include "layout/header-shared.html.twig" %}
+				{% endif %}
+
+			{% endblock %}
+
+			{% block body %}
+				{% include "partials/_modal-info.html.twig" %}
+				<div>
+					<a data-bs-target="#informationModal" data-bs-toggle="modal" type="button"><img class="custom-button d-md-block d-lg-none" src="{{asset('assets/images/service_icons/info.png')}}" alt="icone information"></a>
+				</div>
+				<section class="mb-5">
+					<div>
+						<h1 class="mt-5 text-center">Marcher & Partager</h1>
+					</div>
+					<div class="container search">
+						<form class="d-flex mt-5" action="{{path('search')}}">
+							<input class="form-control me-2" name="query" type="search" placeholder="Ex : Annecy" aria-label="Search">
+							<button class="btn btn-outline-secondary" type="submit">Filtrer</button>
+						</form>
+					</div>
+					<div class="album py-5">
+						<div class="container-fluid ">
+							<div
+								class="row row-cols-1 row-cols-xl-3 row-cols-lg-2 align-items-stretch g-4 py-5 ">
+								<!-- Angel Card-->
+								{% for angel in angels %}
+									<div class="col">
+										<a href="{{ app.user ? path('show_angel', {id: angel.id}) : path('app_login') }}" class="nav-link">
+											<div class="card card-cover h-100 overflow-hidden  bg-success rounded-5 shadow-lg" style="background-image: url('assets/images/background/rando{{ random(31 , 37) }}.jpg') ; background-position: center">
+												<div class="d-flex flex-column h-100 p-5 text-shadow-1">
+													<div class="text-center">
+														<img src="{{ asset('assets/images/profile_picture/' ~ angel.picture) }}" alt="Bootstrap" width="80" height="80" class=" rounded-circle border border-white">
+													</div>
+													<h2 class="mt-5 display-6 lh-1 fw-bold text-white text-center">{{ angel.firstName | capitalize}}</h2>
+													<p class=" mb-5 display-6 lh-1 fw-bold text-white text-center">{{ angel. zipCode }}
+														-
+														{{ angel.city }}</p>
+													<ul class="d-flex list-unstyled text-center mt-auto">
+														<li class="me-auto"></li>
+														<li class="me-auto">
+															{% for service in angel.services %}
+																<img src="{{ asset('assets/images/service_icons/' ~ service.image) }}" class="mx-2 rounded-circle border border-white" alt="{{ service.name }}" width="50px">
+															{% endfor %}
+														</li>
+													</ul>
+													<!-- Small informative text on the bottom picture card
+															<div class="d-inline-flex justify-content-center">
+																	<small class="bg-dark  px-2">Arrivée avant 20h00</small>
+															</div>
+													-->
+												</div>
+											</div>
+										</a>
+									</div>
+								{%  endfor %}
+								<!-- End Angel Card-->
+								<div class="col">
+									<div class="card bg-success card-cover h-100 overflow-hidden  rounded-5 shadow-lg">
+										<div class="d-flex flex-column h-100 p-5  text-shadow-1">
+											<div class="text-center"><img src={{ "assets/images/profil_picture/aimerick.png" }} alt="Bootstrap" width="80" height="80" class=" rounded-circle border border-white"></div>
+											<h2 class="mt-5 display-6 lh-1 fw-bold  text-white text-center">Aimerick</h2>
+											<p class=" mb-5 display-6 lh-1 fw-bold text-white text-center">75000 Paris</p>
+											<ul class="d-flex list-unstyled text-center mt-auto">
+												<li class="me-auto"></li>
+												<li class="me-auto">
+													<img src={{ "assets/images/service_icons/shelter.png" }} class="mx-2 rounded-circle border border-white" alt="emplacement" width="50px"><img class="mx-2 rounded-circle border border-white" src={{ "assets/images/service_icons/delivery.png" }} alt="réception colis" width="50px"><img class="mx-2 rounded-circle border border-white" src={{ "assets/images/service_icons/power.png" }} alt="douche" width="50px"><img class="mx-2 rounded-circle border border-white" src={{ "assets/images/service_icons/sandwich.png" }} alt="diner" width="50px"><img class="mx-2 rounded-circle border border-white" src={{ "assets/images/service_icons/shower.png" }} alt="petit déjeuner" width="50px">
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="col">
+									<div class="card card-cover h-100 overflow-hidden  bg-dark rounded-5 shadow-lg" style="background-image: url( {{ 'assets/images/background/rando32.jpg' }} ); background-position: center">
+										<div class="d-flex flex-column h-100 p-5  text-shadow-1">
+											<div class="text-center"><img src={{ "assets/images/profil_picture/alex.jpg" }} alt="Bootstrap" width="80" height="80" class=" rounded-circle border border-white"></div>
+											<h2 class="mt-5 display-6 lh-1 fw-bold text-white text-center">Alex</h2>
+											<p class=" mb-5 display-6 lh-1 fw-bold text-white text-center">La Rochelle</p>
+											<ul class="d-flex list-unstyled text-center mt-auto">
+												<li class="me-auto"></li>
+												<li class="me-auto">
+													<img src={{ "assets/images/service_icons/beedroom.png" }} class="mx-2 rounded-circle border border-white" alt="emplacement" width="50px"><img class="mx-2 rounded-circle border border-white" src={{ "assets/images/service_icons/delivery.png" }} alt="réception colis" width="50px"><img class="mx-2 rounded-circle border border-white" src={{ "assets/images/service_icons/shower.png" }} alt="douche" width="50px"><img class="mx-2 rounded-circle border border-white" src={{ "assets/images/service_icons/diner.png" }} alt="diner" width="50px">
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="col">
+									<div class="card card-cover h-100 overflow-hidden  bg-dark rounded-5 shadow-lg" style="background-image: url( {{ 'assets/images/background/rando36.jpg' }} );background-position: center">
+										<div class="d-flex flex-column h-100 p-5 text-shadow-1">
+											<div class="text-center"><img src={{ "assets/images/profil_picture/daniel.png" }} alt="Bootstrap" width="80" height="80" class=" rounded-circle border border-white"></div>
+											<h2 class="mt-5 display-6 lh-1 fw-bold text-white text-center">Daniel</h2>
+											<p class=" mb-5 display-6 lh-1 fw-bold  text-white text-center">18290 Bois Ratier</p>
+											<ul class="d-flex list-unstyled  mt-auto">
+												<li class="me-auto"></li>
+												<li class="me-auto">
+													<img src={{ "assets/images/service_icons/tent.png" }} class="mx-2 rounded-circle border border-white" alt="emplacement" width="50px"><img class="mx-2 rounded-circle border border-white" src={{ "assets/images/service_icons/shower.png" }} alt="réception colis" width="50px">
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="col">
+									<div class="card card-cover h-100 overflow-hidden bg-dark rounded-5 shadow-lg" style="background-image: url( {{ 'assets/images/background/rando35.jpg' }} ); background-position: center">
+										<div class="d-flex flex-column h-100 p-5 text-shadow-1">
+											<div class="text-center"><img src={{ "assets/images/profil_picture/timothy.jpg" }} alt="Bootstrap" width="80" height="80" class=" rounded-circle border border-white"></div>
+											<h2 class="mt-5 display-6 lh-1 fw-bold text-white text-center">Timothy</h2>
+											<p class=" mb-5 display-6 lh-1 fw-bold text-white text-center">97400 La Réunion</p>
+											<ul class="d-flex list-unstyled text-center mt-auto">
+												<li class="me-auto"></li>
+												<li class="me-auto">
+													<img src={{ "assets/images/service_icons/shelter.png" }} class="mx-2 rounded-circle border border-white" alt="emplacement" width="50px"><img class="mx-2 rounded-circle border border-white" src={{ "assets/images/service_icons/power.png" }} alt="réception colis" width="50px"><img class="mx-2 rounded-circle border border-white" src={{ "assets/images/service_icons/water.png" }} alt="douche" width="50px">
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+			{% endblock %}

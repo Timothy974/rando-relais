@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block header %}
+			{% include "layout/header-shared.html.twig" %}
+{% endblock %}
+
+{% block body %}
+   <div class="container">
+      {# If user is logged in (either ROLE_USER or ROLE_ADMIN), display the Angel profile #}
+      {% if is_granted('ROLE_USER') or is_granted('ROLE_ADMIN') %}
+            <!-- information about the Angel -->
+            <section class="my-3 d-flex flex-column align-items-center align-items-md-start">
+               <div>
+                  <h2>A propos de moi</h2>
+               </div>
+               <div class="mb-3 mt-4 d-inline-flex flex flex-column flex-md-row">
+                  <div>
+                     <!-- angel's avatar -->
+                     <img src="{{ asset('assets/images/profile_picture/' ~ angelData.picture) }}" class="rounded avatar-size mb-2" alt="photo de profile">
+                  </div>
+                  <div class="card-body d-flex flex-column align-items-center align-items-md-start pt-0">
+                     <!-- first name of the angel -->
+                     <h5 class="card-title">{{ angelData.firstName | capitalize }}</h5>
+                     <ul class="card-text list-style ps-0 d-flex flex-column align-items-center align-items-md-start">
+                        <!-- city -->
+                        <li>{{ angelData.city | capitalize }}</li>
+                        <!-- zip code -->
+                        <li>{{ angelData.zipCode }}</li>
+                        <!-- phone number -->
+                        <li>{{ angelData.phoneNumber }}</li>
+                        <!-- email address -->
+                        <li>{{ angelData.email }}</li>
+                     </ul>
+                  </div>
+               </div>
+            </section>
+            <!-- information about the service -->
+            <section class="my-3">
+               <div class="d-flex justify-content-center justify-content-md-start mb-3">
+                  <h2>Mes services</h2>
+               </div>
+               <div class="d-lg-flex flex-lg-row flex-wrap">
+               {% for service in angelData.services %}
+                  <!-- logo and name of the service -->
+                  <div class="d-flex flex-column align-items-center">
+                     <img src="{{ asset('assets/images/service_icons/' ~ service.image) }}" alt="logo du service {{ service.name }}" class="logo-service">
+                     <p class="pe-4 ps-4 text-center">{{ service.name }}</p>
+                  </div>
+            {% endfor %}
+               </div>
+            </section>
+            <hr/>
+            {# User reviews #}
+            <section>
+               <h4 class="">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
+                     <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
+                  </svg>
+                  4,5 · 5 Commentaires
+               </h4>
+               {# List of all the reviews of the user #}
+                  <ul class="mt-4 row list-unstyled">
+                     {% for review in userReviews %}
+                        <li class="col-md-4 col-sm-6 mb-3">
+                           <p class="fw-bold m-0">{{ review.authorId }}<span class="fw-normal">| {{review.rating}}/5</span></p>
+                           <small class="text-secondary">Le {{review.createdAt | date("m/d/Y")}}</small>
+                           <p>{{review.comment}}</p>
+                        </li>
+                     {% endfor %}
+                  </ul>
+                   {# Make a review of the user #}
+               <p>
+                  <a href="{{ path('add_review', {'id': angelData.id }) }}" class="">
+                     Laisser un commentaire à {{ angelData.firstName | capitalize }}
+                  </a>
+               </p>
+            </section>
+   </div>
+   {% else %}
+      {# TODO: Display a message when the user is not logged in, or redirect him to the homepage #}
+   {% endif %}
+
+
+
+{% endblock %}
