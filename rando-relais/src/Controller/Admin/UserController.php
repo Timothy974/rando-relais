@@ -79,12 +79,15 @@ class UserController extends AbstractController
     {
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
-
+       
         if ($form->isSubmitted() && $form->isValid()) {
 
             $newFileName = $imageUploader->imageUpload($form, 'picture');
-            $user->setpicture($newFileName);
+            if ($newFileName !== null) {
 
+                $user->setpicture($newFileName);
+            }
+             
             $this->getDoctrine()->getManager()->flush();
 
             $this->addFlash('success', 'L\'utilisateur ' .$user->getFirstName(). ' ' .$user->getLastName(). ' a bien été modifié');
