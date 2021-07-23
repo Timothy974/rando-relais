@@ -27,6 +27,9 @@ class ReviewController extends AbstractController
         // Review instance
         $review = new Review();
 
+        // Set the user to be the current user to be review
+        $review->setUser($reviewedUser);
+
         // Create a form to add a review
         $reviewForm = $this->createForm(ReviewType::class, $review);
 
@@ -45,7 +48,8 @@ class ReviewController extends AbstractController
             $entityManager->persist($review);
             $entityManager->flush();
 
-            dd('Review bien ajoutée !');
+            // Redirect the reviewed user's profile
+            return $this->redirectToRoute('show_angel', ['id' => $id]);
         }
 
         return $this->render('review/add.html.twig', [
@@ -60,8 +64,8 @@ class ReviewController extends AbstractController
      */
     public function madeList(int $id)
     {
-        return $this->render('review/madelist.html.twig',[
-            'id'=> $id
+        return $this->render('review/madelist.html.twig', [
+            'id' => $id
         ]);
     }
 
@@ -70,8 +74,8 @@ class ReviewController extends AbstractController
      */
     public function receivedList(int $id)
     {
-        return $this->render('review/receivedlist.html.twig',[
-            'id'=> $id
+        return $this->render('review/receivedlist.html.twig', [
+            'id' => $id
         ]);
     }
 }

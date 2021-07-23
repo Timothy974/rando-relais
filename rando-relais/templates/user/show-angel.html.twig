@@ -64,7 +64,7 @@
                </h4>
                {# List of all the reviews of the user #}
                   <ul class="mt-4 row list-unstyled">
-                     {% set i = 0 %}
+                     {% set i = 1 %}
                      {% for review in userReviews %}
                         <li class="col-md-4 col-sm-6 mb-3">
                            <p class="fw-bold m-0">{{ authorNameArray[i] }}<span class="fw-normal">| {{review.rating}}/5</span></p>

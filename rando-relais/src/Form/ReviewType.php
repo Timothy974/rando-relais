@@ -16,14 +16,13 @@ class ReviewType extends AbstractType
     {
         $builder
             ->add('rating', null, [
-                'label' => 'Note sur 5'
+                'label' => 'Note sur 5',
+                'required' => true
             ])
             ->add('comment', null, [
-                'label' => 'Commentaire'
+                'label' => 'Commentaire',
+                'required' => true
             ])
-            // ->add('author', TextType::class, [
-
-            // ])
             ->add('user')
             ->add('save', SubmitType::class, []);
     }
