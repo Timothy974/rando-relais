@@ -19,3 +19,6 @@ Faire un export via adminer
 Faire la même chose qu'avec la commande scp  plus haut pour votre fichier sql exporté
 Puis sur le serveur :flèche_bas:
 mysql -uUserBdd -p nomBdd < fichier.sql => importe un fichier sql dans la bdd choisie (-uUserBdd  n'est pas une erreur, c'est bien collé)
+
+
+php -S localhost:8000 -t public
