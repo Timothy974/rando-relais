@@ -17,14 +17,19 @@ class ReviewType extends AbstractType
         $builder
             ->add('rating', null, [
                 'label' => 'Note sur 5',
-                'required' => true
+                'required' => true,
             ])
             ->add('comment', null, [
                 'label' => 'Commentaire',
                 'required' => true
             ])
-            ->add('user')
-            ->add('save', SubmitType::class, []);
+            //->add('user')
+            ->add('save', SubmitType::class, [
+                'label' => 'Enregistrer',
+                'attr' => [
+                    'class' => 'btn-success'
+                ]
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

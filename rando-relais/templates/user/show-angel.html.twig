@@ -23,18 +23,17 @@
                      <!-- first name of the angel -->
                      <h5 class="card-title">{{ angelData.firstName | capitalize }}</h5>
                      <ul class="card-text list-style ps-0 d-flex flex-column align-items-center align-items-md-start">
-                        <!-- city -->
-                        <li>{{ angelData.city | capitalize }}</li>
-                        <!-- zip code -->
-                        <li>{{ angelData.zipCode }}</li>
+                        <!-- city · zip code -->
+                        <li><i class="fas fa-map-marker-alt"></i> {{ angelData.zipCode }} · {{ angelData.city | capitalize }}</li>
                         <!-- phone number -->
-                        <li>{{ angelData.phoneNumber }}</li>
+                        <li><i class="fas fa-mobile-alt"></i> {{ angelData.phoneNumber }}</li>
                         <!-- email address -->
-                        <li>{{ angelData.email }}</li>
+                        <li><i class="far fa-envelope"></i> {{ angelData.email }}</li>
                      </ul>
                   </div>
                </div>
             </section>
+            <hr/>
             <!-- information about the service -->
             <section class="my-3">
                <div class="d-flex justify-content-center justify-content-md-start mb-3">
@@ -57,9 +56,13 @@
                   {# Display the average rating of the user and the number of reviews #}
                   <img src="{{ asset('assets/images/service_icons/star.png') }}">
                   {% if averageRating != 0 %}
-                     {{ averageRating | round(2, 'floor')}} · {{ totalReviewsCount }} Commentaires
+                     {% if totalReviewsCount == 1 %}
+                        {{ averageRating | round(2, 'floor')}}<span class="text-muted">/5</span> · {{ totalReviewsCount }} Commentaire
+                     {% else %}
+                        {{ averageRating | round(2, 'floor')}}<span class="text-muted">/5</span> · {{ totalReviewsCount }} Commentaires
+                     {% endif %}
                   {% else %}
-                     Cet utilisateur n'a pas encore de commentaires
+                     {{ angelData.firstName | capitalize }} n'a pas encore de commentaires
                   {% endif %}
                </h4>
                {# List of all the reviews of the user #}
