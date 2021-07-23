@@ -19,8 +19,7 @@ class MainController extends AbstractController
     public function index(UserRepository $angel, ServiceRepository $service): Response
     {
         return $this->render('main/index.html.twig', [
-            'angels' => $angel->findAll(),
-            'services' => $service->findAll()
+            'angels' => $angel->findAll(),           
         ]);
     }
 
@@ -49,7 +48,6 @@ class MainController extends AbstractController
 
         return $this->render('main/index.html.twig', [
             'angels' => $angelFilter,
-            'services' => $service->findAll()
         ]);
     }
      /**
