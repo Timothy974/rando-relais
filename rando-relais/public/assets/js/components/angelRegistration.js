@@ -16,7 +16,7 @@ const angelRegistration = {
     // We get the DOM elements that we need to interate with.
     // We add a listener & a handler on the click evt on each of them.
 
-    // Switch to angel element.
+    // Switch to angel registration element.
     angelRegistration.angelSwitch = document.getElementById("switch-to-angel-registration");
     angelRegistration.angelSwitch.addEventListener(
       "click",
