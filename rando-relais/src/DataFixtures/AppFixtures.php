@@ -59,7 +59,7 @@ class AppFixtures extends Fixture
             $user->setPassword($password);
             $user->setCity($faker->city());
             $user->setZipCode(mt_rand(11100, 97499));
-            $user->setRole('ROLE_USER');
+            $user->setRoles(['ROLE_USER']);
             $user->setPhoneNumber(0102030405);
             $user->setStatus(mt_rand(1, 2));
             

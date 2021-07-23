@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Utilsateur : {{user.firstName}} - {{parent()}}{% endblock %}
+{% block title %}Fiche utilsateur - {{parent()}}{% endblock %}
 
 {% block body %}
     <h1 class='text-center'>Utilisateur : {{ user.firstName }} {{user.lastName}}</h1>
@@ -29,7 +29,7 @@
             <tr>
             <th>Avatar</th>
             <td>
-                <div ><img class="header-icons"  src="{{ asset('assets/images/profile_picture/' ~ user.picture ) }}"  alt="avatar de l'utilisateur"/></div>
+                <div ><img class="header-icons"  src="{{ asset('assets/uploads/' ~ user.picture ) }}"  alt="avatar de l'utilisateur"/></div>
             </td>
             </tr>
             <tr>
@@ -43,6 +43,18 @@
             <tr>
                 <th>Téléphone</th>
                 <td>{{ user.phoneNumber }}</td>
+            </tr>
+            <tr>
+                <th>Mes services</th>
+                <td>
+                <ul class="list-style">
+                {% for service in user.services %}
+                    <li>
+                    {{ service.name }}
+                    </li>
+                {% endfor %}
+                </ul>
+                    </td>
             </tr>
             <tr>
                 <th>Roles</th>
