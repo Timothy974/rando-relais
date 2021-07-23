@@ -52,8 +52,7 @@ class MainController extends AbstractController
             'services' => $service->findAll()
         ]);
     }
-
-    /**
+     /**
      * @Route("/download", name="main_download", methods={"GET"})
      *
      * @return Response
