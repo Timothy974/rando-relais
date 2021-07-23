@@ -32,6 +32,8 @@
 		{% endblock %}
 	</head>
 	<body>
+		{# include the modal to have it in all pages#}
+		{% include "partials/_modal-info.html.twig" %}
 		{# START header for each page #}
 		{% block header %}
 			{% include "layout/header-shared.html.twig" %}

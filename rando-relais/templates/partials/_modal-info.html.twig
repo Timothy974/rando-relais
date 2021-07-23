@@ -38,7 +38,7 @@
 			      </thead>
 			      <tbody>
 				   {# For each service in the variable services #}
-				   {% for service in services %}
+				   {% for service in listService.shareService %}
 					   <tr>
 						   <th scope="row"><img src="{{ asset('assets/images/service_icons/' ~ service.image) }}" alt="" width="30px"></th>
 				         <td>{{ service.name }}</td>
