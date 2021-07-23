@@ -3,8 +3,8 @@
 {% block title %}Edition d'un utilisateur - {{parent()}}{% endblock %}
 
 {% block body %}
-<div class="container">
-    <h1>Modifier {{user.firstname}} {{user.lastname}}</h1>
+<div class="mx-5 md-mx-auto">
+    <h1 class="text-center">Modifier {{user.firstname}} {{user.lastname}}</h1>
 
     {{ include('admin/user/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
 
