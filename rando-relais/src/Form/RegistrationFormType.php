@@ -139,94 +139,78 @@ class RegistrationFormType extends AbstractType
                 //     ])
                     
                 // ]
-                // // We add a event listener on POST_SET_DATA for reading data after having pre-populated the form.
-            // ->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event) {
-
-            //     //     // We get the form.
-            // //     $form = $event->getForm();
-
-            // //     // // We get the user data wich is input in the form.
-            // //     // $userData = $event->getData();
-
-            // //     // We check if switch button is checked.
-            // //     // We get the value of the checkbox (true or false).
-            // //     $status = $form->get('status')->getData();
-
-            // //     // If the switch is checked $status === true : the user will be registered as a Angel (status = 1).
-            // //     if ($status === true) {
-            // //         // We display the fields required for the Ange status.
-            // //         $required = true;
-                    
-            // //     // Else if the switch is not checked $status === false, user will be registered as a marcheur (status = 2).
-            // //     } elseif ($status === false) {
-            // //         // We not display the fields required for the angel status but only the field for the Marcheur status
-            // //         $required = false;
-            // //     }
-            //     //...
-            //     $form = $event->getForm();
-            //     $user = $event->getData();
-            //     dd($user->getStatus());
-                
-            //     //...
-            //     if ($user->getStatus() === true) {
-            //         $required = true;
-            //     } elseif ($user->getStatus() === false) {
-            //         $required = false;
-            //     }
-
-            //     // We dynamically add the fields we want to display according to the status.
-            //     $required = true;
-            //     $form->add('phonenumber', null, [
-            //         'required' => $required,
-            //         'label' => false,
-            //         'attr'  => [
-            //             'placeholder' => 'Numéro de téléphone'
-            //         ],
-            //         'constraints' => [
-            //             // new NotBlank([
-            //             //     'message' => 'Merci de saisir votre numéro de téléphone.'
-            //             // ]),
-                        
-            //         ]
-            //     ])
-            //     ->add('zipcode', null, [
-            //         'required' => $required,
-            //         'label' => false,
-            //         'attr'  => [
-            //             'placeholder' => 'Code postale'
-            //         ],
-            //         // 'constraints' => [
-            //         //     new NotBlank([
-            //         //         'message' => 'Merci de saisir votre code postale.'
-            //         //     ])
-            //         // ]
-            //     ])
-            //     ->add('city', null, [
-            //         'required' => $required,
-            //         'label' => false,
-            //         'attr'  => [
-            //             'placeholder' => 'Commune'
-            //         ],
-            //         // 'constraints' => [
-            //         //     new NotBlank([
-            //         //         'message' => 'Merci de saisir le nom de votre commune.'
-            //         //     ])
-            //         // ]
-            //     ])
-            //     ->add('services', EntityType::class, [
-            //         'required'      => $required,
-            //         'class'         => Service::class,
-            //         'by_reference'  => false,
-            //         'multiple'      => true,
-            //         // 'constraints'   => [
-            //         //     new NotBlank([
-            //         //         'message' => 'Merci de sélectionner au minimum un service.'
-            //         //     ]),
-                        
-            //         // ]
-            //     ]);
-            // });
             ]);
+        // // We add a event listener.
+        // ->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event) {
+        //     // We get the form.
+        //     $form = $event->getForm();
+        //     dump($form);
+
+        //     // By default $required = true.
+        //     $required = true;
+
+        //     // We check if switch button is checked.
+        //     // We get the value of the checkbox (true or false).
+        //     $status = $form->get('status')->getData();
+        //     // If the switch is checked $status === true : the user will be registered as a Angel (status = 1).
+        //     if ($status === true) {
+        //         // We display the fields required for the Ange status.
+        //         $required = true;
+        //         // Else if the switch is not checked $status === false, user will be registered as a marcheur (status = 2).
+        //     } elseif ($status === false) {
+        //         // We not display the fields required for the angel status but only the field for the Marcheur status
+        //         $required = false;
+        //     }
+
+        //     // We dynamically add the fields we want to display according to the status
+        //     $form->add('phonenumber', null, [
+        //         'required'  => $required,
+        //         'label'     => false,
+        //         'attr'       => [
+        //                 'placeholder' => 'Numéro de téléphone'
+        //         ],
+        //         'constraints' => [
+        //             new NotBlank([
+        //                 'message' => 'Merci de saisir votre numéro de téléphone.'
+        //             ]),
+        //         ]
+        //     ])
+        //     ->add('zipcode', null, [
+        //         'required'  => $required,
+        //         'label'     => false,
+        //         'attr'      => [
+        //             'placeholder' => 'Code postale'
+        //         ],
+        //         'constraints' => [
+        //             new NotBlank([
+        //                 'message' => 'Merci de saisir votre code postale.'
+        //             ])
+        //         ]
+        //     ])
+        //     ->add('city', null, [
+        //         'required' => $required,
+        //         'label'     => false,
+        //             'attr'  => [
+        //                 'placeholder' => 'Commune'
+        //             ],
+        //             'constraints' => [
+        //                 new NotBlank([
+        //                         'message' => 'Merci de saisir le nom de votre commune.'
+        //                 ])
+        //             ]
+        //     ])
+        //     ->add('services', EntityType::class, [
+        //         'required'      => $required,
+        //         'class'         => Service::class,
+        //         'by_reference'  => false,
+        //         'multiple'      => true,
+        //         'constraints'   => [
+        //             new NotBlank([
+        //                 'message' => 'Merci de sélectionner au minimum un service.'
+        //             ]),
+        //         ]
+        //     ]);
+        // });
     }
 
     public function configureOptions(OptionsResolver $resolver)

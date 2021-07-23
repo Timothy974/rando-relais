@@ -31,7 +31,7 @@ class RegistrationController extends AbstractController
                 )
             );
 
-            // We check if switch button is checked.
+            // We check if the switch button is checked.
             // We get the value of the checkbox (true or false).
             $status = $form->get('status')->getData();
             // If the switch is checked $status === true : the user will be registered as a Angel (status = 1).

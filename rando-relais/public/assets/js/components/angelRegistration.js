@@ -17,86 +17,89 @@ const angelRegistration = {
     // We add a listener & a handler on the click evt on each of them.
 
     // Switch to angel registration element.
-    angelRegistration.angelSwitch = document.getElementById("switch-to-angel-registration");
+    angelRegistration.angelSwitch = document.getElementById(
+      "switch-to-angel-registration"
+    );
     angelRegistration.angelSwitch.addEventListener(
       "click",
       angelRegistration.handleSelectElement
     );
 
-    // Service Emplacement de tente icon element.
-    angelRegistration.tentCheckBox = document.getElementById(
-      "emplacement-de-tente"
-    );
-    angelRegistration.tentCheckBox.addEventListener(
-      "click",
-      angelRegistration.handleSelectElement
-    );
+    // // Service Emplacement de tente icon element.
+    // angelRegistration.tentCheckBox = document.getElementById(
+    //   "emplacement-de-tente"
+    // );
 
-    // Service Lit icon element.
-    angelRegistration.bedroomCheckBox = document.getElementById("lit");
-    angelRegistration.bedroomCheckBox.addEventListener(
-      "click",
-      angelRegistration.handleSelectElement
-    );
+    // angelRegistration.tentCheckBox.addEventListener(
+    //   "click",
+    //   angelRegistration.handleSelectElement
+    // );
 
-    // Service Abri icon element.
-    angelRegistration.shelterCheckBox = document.getElementById("abri");
-    angelRegistration.shelterCheckBox.addEventListener(
-      "click",
-      angelRegistration.handleSelectElement
-    );
+    // // Service Lit icon element.
+    // angelRegistration.bedroomCheckBox = document.getElementById("lit");
+    // angelRegistration.bedroomCheckBox.addEventListener(
+    //   "click",
+    //   angelRegistration.handleSelectElement
+    // );
 
-    // Serice Réception de colis icon element.
-    angelRegistration.deliveryCheckBox =
-      document.getElementById("reception-de-colis");
-    angelRegistration.deliveryCheckBox.addEventListener(
-      "click",
-      angelRegistration.handleSelectElement
-    );
+    // // Service Abri icon element.
+    // angelRegistration.shelterCheckBox = document.getElementById("abri");
+    // angelRegistration.shelterCheckBox.addEventListener(
+    //   "click",
+    //   angelRegistration.handleSelectElement
+    // );
 
-    // Service Douche inco element.
-    angelRegistration.showerCheckBox = document.getElementById("douche");
-    angelRegistration.showerCheckBox.addEventListener(
-      "click",
-      angelRegistration.handleSelectElement
-    );
+    // // Serice Réception de colis icon element.
+    // angelRegistration.deliveryCheckBox =
+    //   document.getElementById("reception-de-colis");
+    // angelRegistration.deliveryCheckBox.addEventListener(
+    //   "click",
+    //   angelRegistration.handleSelectElement
+    // );
 
-    // Service Eau icon element.
-    angelRegistration.waterCheckBox = document.getElementById("eau");
-    angelRegistration.waterCheckBox.addEventListener(
-      "click",
-      angelRegistration.handleSelectElement
-    );
+    // // Service Douche inco element.
+    // angelRegistration.showerCheckBox = document.getElementById("douche");
+    // angelRegistration.showerCheckBox.addEventListener(
+    //   "click",
+    //   angelRegistration.handleSelectElement
+    // );
 
-    // Service Petit déjeuner icon element.
-    angelRegistration.breakfastCheckBox =
-      document.getElementById("petit-dejeuner");
-    angelRegistration.breakfastCheckBox.addEventListener(
-      "click",
-      angelRegistration.handleSelectElement
-    );
+    // // Service Eau icon element.
+    // angelRegistration.waterCheckBox = document.getElementById("eau");
+    // angelRegistration.waterCheckBox.addEventListener(
+    //   "click",
+    //   angelRegistration.handleSelectElement
+    // );
 
-    // Servce Sandwich icon element.
-    angelRegistration.sandwichCheckBox = document.getElementById("sandwich");
-    angelRegistration.sandwichCheckBox.addEventListener(
-      "click",
-      angelRegistration.handleSelectElement
-    );
+    // // Service Petit déjeuner icon element.
+    // angelRegistration.breakfastCheckBox =
+    //   document.getElementById("petit-dejeuner");
+    // angelRegistration.breakfastCheckBox.addEventListener(
+    //   "click",
+    //   angelRegistration.handleSelectElement
+    // );
 
-    // Service Dîner icon element.
-    angelRegistration.dinnerCheckBox = document.getElementById("diner");
-    angelRegistration.dinnerCheckBox.addEventListener(
-      "click",
-      angelRegistration.handleSelectElement
-    );
+    // // Servce Sandwich icon element.
+    // angelRegistration.sandwichCheckBox = document.getElementById("sandwich");
+    // angelRegistration.sandwichCheckBox.addEventListener(
+    //   "click",
+    //   angelRegistration.handleSelectElement
+    // );
 
-    // Serice Prise électrique icon element.
-    angelRegistration.powerCheckBox =
-      document.getElementById("prise-electrique");
-    angelRegistration.powerCheckBox.addEventListener(
-      "click",
-      angelRegistration.handleSelectElement
-    );
+    // // Service Dîner icon element.
+    // angelRegistration.dinnerCheckBox = document.getElementById("diner");
+    // angelRegistration.dinnerCheckBox.addEventListener(
+    //   "click",
+    //   angelRegistration.handleSelectElement
+    // );
+
+    // // Serice Prise électrique icon element.
+    // angelRegistration.powerCheckBox =
+    //   document.getElementById("prise-electrique");
+    // angelRegistration.powerCheckBox.addEventListener(
+    //   "click",
+    //   angelRegistration.handleSelectElement
+    // );
   },
   // Method that handle the toggle of some CSS classes from a click event on selected DOM element.
   handleSelectElement: function (evt) {
