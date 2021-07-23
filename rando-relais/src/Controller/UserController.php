@@ -37,6 +37,7 @@ class UserController extends AbstractController
         // Set the total rating to 0
         $totalRating = 0;
         $averageRating = 0;
+        $authorNameArray[] = '';
 
         // Review: Calculate the average rating of the user and get the firstname of the author 
         foreach ($userReviews as $currentReview) {
