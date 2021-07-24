@@ -60,4 +60,14 @@ class MainController extends AbstractController
         // The path to the files is relative to the public folder.
         return $this->file('assets/files/rando-relais-calendar.pdf', 'rando-relais-calendrier.pdf');
     }
+
+    /**
+     * @Route("/team", name="team", methods={"GET"})
+     *
+     * @return Response
+     */
+    public function team(): Response
+    {
+        return $this->render('main/team.html.twig', []);
+    }
 }
