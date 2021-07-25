@@ -19,83 +19,105 @@ const switchToAngel = {
 
     // Update button element.
     switchToAngel.updateButton = document.getElementById("update-button");
-    switchToAngel.updateButton.addEventListener(
-      "click",
-      switchToAngel.handleSelectElement
-    );
+    if (switchToAngel.updateButton) {
+      switchToAngel.updateButton.addEventListener(
+        "click",
+        switchToAngel.handleSelectElement
+      );
+    }
 
-    // Switch to angel element.
-    switchToAngel.angelSwitch = document.getElementById("switch-to-angel");
-    switchToAngel.angelSwitch.addEventListener(
-      "click",
-      switchToAngel.handleSelectElement
+    // Service Emplacement de tente icon element.
+    switchToAngel.tentCheckBox = document.getElementById(
+      "emplacement-de-tente"
     );
+    if (switchToAngel.tentCheckBox) {
+      switchToAngel.tentCheckBox.addEventListener(
+        "click",
+        switchToAngel.handleSelectElement
+      );
+    }
 
     // Service Lit icon element.
     switchToAngel.bedroomCheckBox = document.getElementById("lit");
-    switchToAngel.bedroomCheckBox.addEventListener(
-      "click",
-      switchToAngel.handleSelectElement
-    );
+    if (switchToAngel.bedroomCheckBox) {
+      switchToAngel.bedroomCheckBox.addEventListener(
+        "click",
+        switchToAngel.handleSelectElement
+      );
+    }
 
     // Service Abri icon element.
     switchToAngel.shelterCheckBox = document.getElementById("abri");
-    switchToAngel.shelterCheckBox.addEventListener(
-      "click",
-      switchToAngel.handleSelectElement
-    );
+    if (switchToAngel.shelterCheckBox) {
+      switchToAngel.shelterCheckBox.addEventListener(
+        "click",
+        switchToAngel.handleSelectElement
+      );
+    }
 
     // Serice Réception de colis icon element.
     switchToAngel.deliveryCheckBox =
       document.getElementById("reception-de-colis");
-    switchToAngel.deliveryCheckBox.addEventListener(
-      "click",
-      switchToAngel.handleSelectElement
-    );
+    if (switchToAngel.deliveryCheckBox) {
+      switchToAngel.deliveryCheckBox.addEventListener(
+        "click",
+        switchToAngel.handleSelectElement
+      );
+    }
 
     // Service Douche inco element.
     switchToAngel.showerCheckBox = document.getElementById("douche");
-    switchToAngel.showerCheckBox.addEventListener(
-      "click",
-      switchToAngel.handleSelectElement
-    );
+    if (switchToAngel.showerCheckBox) {
+      switchToAngel.showerCheckBox.addEventListener(
+        "click",
+        switchToAngel.handleSelectElement
+      );
+    }
 
     // Service Eau icon element.
     switchToAngel.waterCheckBox = document.getElementById("eau");
-    switchToAngel.waterCheckBox.addEventListener(
-      "click",
-      switchToAngel.handleSelectElement
-    );
+    if (switchToAngel.waterCheckBox) {
+      switchToAngel.waterCheckBox.addEventListener(
+        "click",
+        switchToAngel.handleSelectElement
+      );
+    }
 
     // Service Petit déjeuner icon element.
-    switchToAngel.breakfastCheckBox =
-      document.getElementById("petit-dejeuner");
-    switchToAngel.breakfastCheckBox.addEventListener(
-      "click",
-      switchToAngel.handleSelectElement
-    );
+    switchToAngel.breakfastCheckBox = document.getElementById("petit-dejeuner");
+    if (switchToAngel.breakfastCheckBox) {
+      switchToAngel.breakfastCheckBox.addEventListener(
+        "click",
+        switchToAngel.handleSelectElement
+      );
+    }
 
     // Servce Sandwich icon element.
     switchToAngel.sandwichCheckBox = document.getElementById("sandwich");
-    switchToAngel.sandwichCheckBox.addEventListener(
-      "click",
-      switchToAngel.handleSelectElement
-    );
+    if (switchToAngel.sandwichCheckBox) {
+      switchToAngel.sandwichCheckBox.addEventListener(
+        "click",
+        switchToAngel.handleSelectElement
+      );
+    }
 
     // Service Dîner icon element.
     switchToAngel.dinnerCheckBox = document.getElementById("diner");
-    switchToAngel.dinnerCheckBox.addEventListener(
-      "click",
-      switchToAngel.handleSelectElement
-    );
+    if (switchToAngel.dinnerCheckBox) {
+      switchToAngel.dinnerCheckBox.addEventListener(
+        "click",
+        switchToAngel.handleSelectElement
+      );
+    }
 
     // Serice Prise électrique icon element.
-    switchToAngel.powerCheckBox =
-      document.getElementById("prise-electrique");
-    switchToAngel.powerCheckBox.addEventListener(
-      "click",
-      switchToAngel.handleSelectElement
-    );
+    switchToAngel.powerCheckBox = document.getElementById("prise-electrique");
+    if (switchToAngel.powerCheckBox) {
+      switchToAngel.powerCheckBox.addEventListener(
+        "click",
+        switchToAngel.handleSelectElement
+      );
+    }
   },
   // Method that handle the toggle of some CSS classes from a click event on selected DOM element.
   handleSelectElement: function (evt) {
@@ -124,9 +146,7 @@ const switchToAngel = {
     }
 
     // If the selectedElement is bedroomCheckBox.
-    if (
-      switchToAngel.selectedElement == switchToAngel.bedroomCheckBox
-    ) {
+    if (switchToAngel.selectedElement == switchToAngel.bedroomCheckBox) {
       // We get the DOM elements on wich the CSS classes will be toggle.
       // We get the toggle the CSS classes with the JS API classList.
       switchToAngel.bedroomCheckBox.classList.toggle("opacity-50");
@@ -134,9 +154,7 @@ const switchToAngel = {
     }
 
     // If the selectedElement is shelterCheckBox.
-    if (
-      switchToAngel.selectedElement == switchToAngel.shelterCheckBox
-    ) {
+    if (switchToAngel.selectedElement == switchToAngel.shelterCheckBox) {
       // We get the DOM elements on wich the CSS classes will be toggle.
       // We get the toggle the CSS classes with the JS API classList.
       switchToAngel.shelterCheckBox.classList.toggle("opacity-50");
@@ -144,9 +162,7 @@ const switchToAngel = {
     }
 
     // If the selectedElement is deliveryCheckBox.
-    if (
-      switchToAngel.selectedElement == switchToAngel.deliveryCheckBox
-    ) {
+    if (switchToAngel.selectedElement == switchToAngel.deliveryCheckBox) {
       // We get the DOM elements on wich the CSS classes will be toggle.
       // We get the toggle the CSS classes with the JS API classList.
       switchToAngel.deliveryCheckBox.classList.toggle("opacity-50");
@@ -172,9 +188,7 @@ const switchToAngel = {
     }
 
     // If the selectedElement is breakfastCheckBox.
-    if (
-      switchToAngel.selectedElement == switchToAngel.breakfastCheckBox
-    ) {
+    if (switchToAngel.selectedElement == switchToAngel.breakfastCheckBox) {
       // We get the DOM elements on wich the CSS classes will be toggle.
       // We get the toggle the CSS classes with the JS API classList.
       switchToAngel.breakfastCheckBox.classList.toggle("opacity-50");
@@ -184,9 +198,7 @@ const switchToAngel = {
     }
 
     // If the selectedElement is sandwichCheckBox.
-    if (
-      switchToAngel.selectedElement == switchToAngel.sandwichCheckBox
-    ) {
+    if (switchToAngel.selectedElement == switchToAngel.sandwichCheckBox) {
       // We get the DOM elements on wich the CSS classes will be toggle.
       // We get the toggle the CSS classes with the JS API classList.
       switchToAngel.sandwichCheckBox.classList.toggle("opacity-50");

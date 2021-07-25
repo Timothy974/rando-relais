@@ -39,20 +39,26 @@ class RegistrationController extends AbstractController
                 // We set the value 2 (Ange) to the status.
                 $user->setStatus(2);
                 // TODO START : code to improve.
-                // We get the value of the field with the input of the user.
+                // We get the value of the form fields with the input of the user.
                 $phoneNumber = $form->get('phonenumber')->getData();
                 $zipCode = $form->get('zipcode')->getData();
                 $city = $form->get('city')->getData();
                 $services = $form->get('services')->getData();
                 // We check if the data exist.
                 // If the data is emtpy or null we display a flash message message for the user.
-                if ((empty($phoneNumber) || isset($phoneNumber)) || (empty($zipCode) || isset($zipCode)) || (empty($city) || isset($city)) || (empty($services) || isset($services))) {
+                if ($phoneNumber && $zipCode && $city && $services) {
+                    // Else if the data is correct.
+                    $entityManager = $this->getDoctrine()->getManager();
+                    $entityManager->persist($user);
+                    // dd($user);
+                // Else if the data is emtpy or null.
+                } elseif ((empty($phoneNumber) || isset($phoneNumber)) || (empty($zipCode) || isset($zipCode)) || (empty($city) || isset($city)) || (empty($services) || isset($services))) {
+                    // We display a flash message for the user.
                     $this->addFlash('danger', 'Merci de compléter tous les champs.');
                     // We redirect to user to the login page & we specify the related HTTP response status code.
                     return $this->redirectToRoute('app_register', [], 301);
-                // Else if the data is correct.
                 } else {
-                    // We stop the code. The registration continue.
+                    // We stop the execution of the condition.
                     exit();
                 }
                 // TODO END.
