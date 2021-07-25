@@ -29,8 +29,8 @@
                                     <td>{{ user.roles|json_encode()}}</td>
                                     <td>{{ user.status}}</td>
 							        <td>
-								        <a role="button" class="btn btn-success" href="{{ path('admin_user_show', {'id': user.id}) }}">Voir</a>
-								        <a role="button" class="btn btn-success"  href="{{ path('admin_user_edit', {'id': user.id}) }}">Editer</a>
+								        <a role="button" class="btn btn-success mb-1" href="{{ path('admin_user_show', {'id': user.id}) }}">Voir</a>
+								        <a role="button" class="btn btn-success mb-1"  href="{{ path('admin_user_edit', {'id': user.id}) }}">Editer</a>
 							        </td>
                                  </tr>
 						    {% else %}

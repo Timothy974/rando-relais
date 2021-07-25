@@ -19,8 +19,7 @@ class MainController extends AbstractController
     public function index(UserRepository $angel, ServiceRepository $service): Response
     {
         return $this->render('main/index.html.twig', [
-            'angels' => $angel->findAll(),
-            'services' => $service->findAll()
+            'angels' => $angel->findAll(),           
         ]);
     }
 
@@ -49,7 +48,6 @@ class MainController extends AbstractController
 
         return $this->render('main/index.html.twig', [
             'angels' => $angelFilter,
-            'services' => $service->findAll()
         ]);
     }
      /**
@@ -61,5 +59,15 @@ class MainController extends AbstractController
     {
         // The path to the files is relative to the public folder.
         return $this->file('assets/files/rando-relais-calendar.pdf', 'rando-relais-calendrier.pdf');
+    }
+
+    /**
+     * @Route("/team", name="team", methods={"GET"})
+     *
+     * @return Response
+     */
+    public function team(): Response
+    {
+        return $this->render('main/team.html.twig', []);
     }
 }
