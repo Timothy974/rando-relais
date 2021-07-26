@@ -14,20 +14,20 @@
 							<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 								<li class="nav-item">
 									<a class="nav-link btn active" aria-current="page" href="{{ path("main")}}">
-										<i class="fas fa-home">
-											Accueil</i>
+										<i class="fas  fa-home"></i>
+											 Accueil
 									</a>
 								</li>
 								<li class="nav-item">
-									<a  class="nav-link btn" data-bs-toggle="modal" data-bs-target="#informationModal">
-										<i class="fas fa-info-circle">
-											Information</i>
+									<a  class="nav-link  btn" data-bs-toggle="modal" data-bs-target="#informationModal">
+										<i class="fas  fa-info-circle"></i>
+											 Information
 									</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link btn" href="{{ path('main_download') }}">
-										<i class="fas fa-upload">
-											Télécharger calendrier</i>
+									<a class="nav-link  btn" href="{{ path('main_download') }}">
+										<i class="fas fa-upload"></i>
+											 Télécharger calendrier
 									</a>
 								</li>
 							</ul>
@@ -37,7 +37,7 @@
 								{% if app.user %}
 									<li class="nav-item dropdown">
 										<a
-											class="nav-link dropdown-toggle btn-success" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+											class="nav-link dropdown-toggle  btn-success fw-bold" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 											{# We display the first name of the user logged in #}
 											Bonjour
 											{{ app.user.firstname }}
@@ -94,4 +94,3 @@
 				</nav>
 			</div>
 			{# END nav #}
-

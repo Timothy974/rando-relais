@@ -10,13 +10,12 @@
 		<h2 class="text-center mt-3">Inscription</h2>
 		{# Registration form #}
 		{{ form_start(registrationForm, {'attr': {'novalidate': 'novalidate'}}) }}
-        {# TODO START : switch to angel to finish #}
+		{# After a click on the switch the status switch form 1 => "Marcheur" to 2 => "Angel"#}
 		<div class="mb-3 col-lg-6 mx-auto">
-			<div class="form-check form-switch d-flex justify-content-center" id="switch-to-angel-registration">
+			<div class="form-switch form-switch d-flex justify-content-center">
 				{{ form_row(registrationForm.status) }}
 			</div>
 		</div>
-        {# TODO END #}
 		<div class="mb-3 col-lg-6 mx-auto">
 			{{ form_row(registrationForm.lastname) }}
 		</div>
@@ -31,33 +30,37 @@
 		</div>
 		{# Angel Data #}
 		{# After a click on the switch the status switch form 1 => ("Marcheur" to 2 => "Angel") and we display the angel data. #}
-		{# TODO START : delete the comment around the <div class="d-none" id="angel_subscription_form"> #}
+		{# TODO START : make this fields required for Status = 2 (Ange).  #}
 		<div class="d-none" id="angel_subscription_form">
-			<div class="mb-3 col-lg-6 mx-auto"> {{ form_row(registrationForm.phonenumber) }}
+				<div class="mb-3 col-lg-6 mx-auto">
+				{{ form_row(registrationForm.phonenumber) }}
+			</div>
+			<div class="mb-3 col-lg-6 mx-auto">
+				{{ form_row(registrationForm.zipcode) }}
+			</div>
+			<div class="mb-3 col-lg-6 mx-auto">
+				{{ form_row(registrationForm.city) }}
+			</div>
+			{# TODO END #}
+			{# Services icons #}
+			{# TODO START : improve display like in the integration. #}
+			<div class="row justify-content-center">
+				{{ form_row(registrationForm.services) }}
+				{# {% for service in services %}
+					<div class="col-lg-2 col-md-4 text-center opacity-50" id="{{ service.slug }}">
+						<input class="form-check-input align-middle d-none" type="checkbox" name="service-checkbox" id="{{ 'service-checkbox-' ~ service.slug }}">
+						<label for="tent"><img src="{{ asset('assets/images/service_icons/' ~ service.image) }}" alt="service-icon" class="rounded-circle w-25 "></label>
+						<p>{{ service.name}}
+							<img src="{{ asset('assets/images/service_icons/validate-20x20.png') }}" id="{{ 'validate-' ~ service.slug }}" class="d-none">
+						</p>
+					</div>
+				{% endfor %} #}
+			</div>
+			{# TODO END #}
 		</div>
-		<div class="mb-3 col-lg-6 mx-auto">
-			{{ form_row(registrationForm.zipcode) }}
-		</div>
-		<div class="mb-3 col-lg-6 mx-auto">
-			{{ form_row(registrationForm.city) }}
-		</div>
-		{# Services icons #}
-		<div class="row justify-content-center">
-			{% for service in services %}
-				<div class="col-lg-2 col-md-4 text-center opacity-50" id="{{ service.slug }}">
-					<input class="form-check-input align-middle d-none" type="checkbox" name="service-checkbox" id="{{ 'service-checkbox-' ~ service.slug }}">
-					<label for="tent"><img src="{{ asset('assets/images/service_icons/' ~ service.image) }}" alt="service-icon" class="rounded-circle w-25 "></label>
-					<p>{{ service.name}}
-						<img src="{{ asset('assets/images/service_icons/validate-20x20.png') }}" id="{{ 'validate-' ~ service.slug }}" class="d-none">
-					</p>
-				</div>
-			{% endfor %}
-		</div>
-		</div>
-		{# TODO END #}
-		<div class="mb-3 col-lg-6 mx-auto">
+		{# <div class="mb-3 col-lg-6 mx-auto">
 			{{ form_row(registrationForm.agreeTerms) }}
-		</div>
+		</div> #}
 		{# Submit buttom #}
 		<div class="col-lg-6 mx-auto">
 			<button type="submit" class="btn btn-success w-100 mb-3">Créer un compte</button>

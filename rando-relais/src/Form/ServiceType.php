@@ -20,8 +20,8 @@ class ServiceType extends AbstractType
             ->add('name')
             ->add('description')
             ->add('slug')
-            ->add('image')
-            ->add('uploadimage', FileType::class, [
+            ->add('image', FileType::class, [
+                'label'=> 'Téléchargez une icone du service',
                 'mapped' =>false,
                 'required'=>false, 
                 'constraints' => [

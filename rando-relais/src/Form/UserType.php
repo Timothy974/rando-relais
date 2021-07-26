@@ -34,7 +34,7 @@ class UserType extends AbstractType
             ->add('city')
             ->add('zipCode')
             ->add('picture', FileType::class, [
-                'label'=> 'Téléchargez une icone du service',
+                'label'=> 'Téléchargez un Avatar',
                 'mapped' =>false,
                 'required'=>false, 
                 'constraints' => [

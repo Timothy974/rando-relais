@@ -32,6 +32,8 @@
 		{% endblock %}
 	</head>
 	<body>
+		{# include the modal to have it in all pages#}
+		{% include "partials/_modal-info.html.twig" %}
 		{# START header for each page #}
 		{% block header %}
 			{% include "layout/header-shared.html.twig" %}
@@ -58,7 +60,7 @@
 			<script type="text/javascript" src="{{ asset('assets/js/app.js') }}"></script>
 			<script type="text/javascript" src="{{ asset('assets/js/components/angelRegistration.js') }}"></script>
 			<script type="text/javascript" src="{{ asset('assets/js/components/switchToAngel.js') }}"></script>
-			<script type="text/javascript" src="{{ asset('assets/js/components/darkMode.js') }}"></script>
+			<script type="text/javascript" src="{{ asset('assets/js/components/mode.js') }}"></script>
 		{% endblock %}
 		{# END scripts JS #}
 	</body>
