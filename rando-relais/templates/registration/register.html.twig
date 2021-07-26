@@ -10,8 +10,9 @@
 		<h2 class="text-center mt-3">Inscription</h2>
 		{# Registration form #}
 		{{ form_start(registrationForm, {'attr': {'novalidate': 'novalidate'}}) }}
+		{# After a click on the switch the status switch form 1 => "Marcheur" to 2 => "Angel"#}
 		<div class="mb-3 col-lg-6 mx-auto">
-			<div class="form-switch form-switch d-flex justify-content-center" id="switch-to-angel-registration">
+			<div class="form-switch form-switch d-flex justify-content-center">
 				{{ form_row(registrationForm.status) }}
 			</div>
 		</div>
@@ -29,8 +30,9 @@
 		</div>
 		{# Angel Data #}
 		{# After a click on the switch the status switch form 1 => ("Marcheur" to 2 => "Angel") and we display the angel data. #}
-		{# TODO START : delete the comment around the <div class="d-none" id="angel_subscription_form"> #}
-			<div class="d-none" id="angel_subscription_form"> <div class="mb-3 col-lg-6 mx-auto">
+		{# TODO START : make this fields required for Status = 2 (Ange).  #}
+		<div class="d-none" id="angel_subscription_form">
+				<div class="mb-3 col-lg-6 mx-auto">
 				{{ form_row(registrationForm.phonenumber) }}
 			</div>
 			<div class="mb-3 col-lg-6 mx-auto">
@@ -39,7 +41,9 @@
 			<div class="mb-3 col-lg-6 mx-auto">
 				{{ form_row(registrationForm.city) }}
 			</div>
+			{# TODO END #}
 			{# Services icons #}
+			{# TODO START : improve display like in the integration. #}
 			<div class="row justify-content-center">
 				{{ form_row(registrationForm.services) }}
 				{# {% for service in services %}
@@ -52,8 +56,8 @@
 					</div>
 				{% endfor %} #}
 			</div>
+			{# TODO END #}
 		</div>
-		{# TODO END #}
 		{# <div class="mb-3 col-lg-6 mx-auto">
 			{{ form_row(registrationForm.agreeTerms) }}
 		</div> #}
