@@ -21,7 +21,10 @@ class ReviewType extends AbstractType
             ])
             ->add('comment', null, [
                 'label' => 'Commentaire',
-                'required' => true
+                'required' => true,
+                'attr' => [
+                    'style' => 'height: 10rem'
+                ]
             ])
             //->add('user')
             ->add('save', SubmitType::class, [
