@@ -1,6 +1,6 @@
 const app = {
   init: function () {
-    // We load the component angelInscrption.js.
+    // We load the component mode.js.
     mode.init();
 
     // We load the component angelInscrption.js.

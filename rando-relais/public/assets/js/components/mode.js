@@ -23,10 +23,7 @@ const mode = {
 
     // The body element.
     mode.body = document.body;
-    // TODO START : add some code to get the other DOM elements impacted...
-
-    // TODO END.
-
+    
     // When the page is charged we load to the page the backgroundColor wich is backup in localSatorage.
     mode.loadMode();
   },
@@ -34,24 +31,23 @@ const mode = {
   loadMode: function () {
     // We get the value backup in localStorage.
     mode.backgroundColor = localStorage.getItem("mode");
+    console.log(mode.backgroundColor);
 
     // If backgroundColor === true.
     if (mode.backgroundColor) {
-      // We call the switchBackgroundColor() method to change the font color with the value of backgroundColor.
+     console.log(mode.backgroundColor);
+      // We call the switchBackgroundColor() method to change the color with the value of backgroundColor.
       mode.switchBackgroundColor(mode.backgroundColor);
     } // Else backgroundColor === false.
-    else if (mode.backgroundColor === false) {
+    else {
       // We set a value to backgroundColor in localStorage.
       mode.backgroundColorByDefault = localStorage.setItem("mode", "light");
-      // We call the switchBackgroundColor() method to change the font color with the value of backgroundColor.
+      console.log(mode.backgroundColorByDefault);
+      // We call the switchBackgroundColor() method to change the color with the value of backgroundColor.
       mode.switchBackgroundColor(mode.backgroundColorByDefault);
-    } // Else just in case.
-    else {
-      // We stop the execution of the condition.
-      return;
-    }
+    } 
   },
-  // Method who get the DOM element on wich we click, get the value of the Item backup in localStorage, backup a new Item value in localStorage, set this new value for the backgroundColor and call the switchElementsColor() method with backgroundColor in argument.
+  // Method who get the DOM element on wich we click, get the value of the Item backup in localStorage, backup a new Item value in localStorage and set this new value for the backgroundColor.
   handleSelectBackgroundColorSwitch: function (evt) {
     // We get the DOM element from wich the event occured.
     mode.clickedSwitch = evt.currentTarget;
@@ -63,6 +59,7 @@ const mode = {
       localStorage.setItem("mode", "dark");
       // We set the value dark to backgroundColor.
       mode.backgroundColor = "dark";
+      console.log(mode.backgroundColor);
       // We call the switchBackgroundColor() method to change the background color with the backgroundColor in argument.
       mode.switchBackgroundColor(mode.backgroundColor);
     } // Else if the mode backup in localStorage have the dark value.
@@ -72,12 +69,8 @@ const mode = {
       // We set the value dark to backgroundColor.
       mode.backgroundColor = "light";
       // We call the switchBackgroundColor() method to change the background color with the backgroundColor in argument.
-      mode.switchBackgroundColor(mode.backgroundColor);
-      // Else just in case. 
-    } else {
-      // We stop the execution of the condition.
-      return;
-    }
+      mode.switchBackgroundColor(mode.backgroundColor); 
+    } 
   },
   // Method who handle the color switch of the background.
   switchBackgroundColor: function (newBackgroundColor) {
@@ -88,3 +81,4 @@ const mode = {
     }
   },
 };
+
