@@ -55,6 +55,7 @@ class UserType extends AbstractType
                 'class' => Service::class,
                 'required'=>false,
                 'multiple' => true,
+                'expanded' =>true,
                 'attr' => ['size' => 10]
             ])
             ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {

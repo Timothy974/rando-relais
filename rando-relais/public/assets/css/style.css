@@ -322,6 +322,19 @@ input[type="password"] {
    min-height: 60vh;
 }
 
+@media  (min-width: 1200px) {
+.asidefixed{
+   position: sticky;
+   top: 0;
+   left: 0;
+   width: 20vw;
+}
+.asidefixed .menufixed{
+   border-right: 3px solid green;
+   margin-top: 10vh;
+}
+
+}
 /**** 404 ****/
 
 #bg404 {
@@ -486,6 +499,7 @@ input[type="password"] {
    .footer-contact i {
       padding-right: 5px;
    }
+   
 
 }
 
@@ -554,6 +568,7 @@ input[type="password"] {
    h2 {
       font-size: 32px;
    }
+   
 }
    /**** TEAM ****/
 
