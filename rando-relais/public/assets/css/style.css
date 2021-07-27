@@ -431,6 +431,19 @@ figure img {
    min-height: 60vh;
 }
 
+@media  (min-width: 1200px) {
+.asidefixed{
+   position: sticky;
+   top: 0;
+   left: 0;
+   width: 20vw;
+}
+.asidefixed .menufixed{
+   border-right: 3px solid green;
+   margin-top: 10vh;
+}
+
+}
 /**** 404 ****/
 
 #bg404 {
@@ -595,6 +608,7 @@ figure img {
    .footer-contact i {
       padding-right: 5px;
    }
+   
 
 }
 
@@ -722,6 +736,7 @@ figure img {
    h2 {
       font-size: 32px;
    }
+   
 }
 
 

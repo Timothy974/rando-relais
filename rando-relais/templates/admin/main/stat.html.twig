@@ -4,9 +4,11 @@
 	{% endblock %}
 
 	{% block body %}
-		<section class="container admin">
-
+	
+	{% include "partials/_admin-aside.html.twig" %}
+		<section class="container admin w-75">
 			<h1 class="text-center  mt-5">Statistiques</h1>
+			
 			<div class="d-flex flex-column  align-items-center align-items-lg-start flex-lg-row justify-content-around">
 				<div class="mt-5">
 					<h2>Utilisateurs</h2>
@@ -58,4 +60,5 @@
 				</div>
 			</div>
 		</section>
+		</div>
 	{% endblock %}
