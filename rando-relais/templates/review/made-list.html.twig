@@ -1,6 +1,28 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-<div class="container admin">
-<h1 class="text-center">Vous n'avez déposé aucun commentaire à ce jour</h1>
+<div class="container text-center">
+   <h2 class="mb-5">Voici les évaluations que vous avez émises</h1>
+      {# List of all the reviews made by the user #}
+      <ul class="mt-4 row list-unstyled">
+         {% for madeReview in madeReviews %}
+         {# Card #}
+            <li>
+               <div class="card text-dark bg-light mb-3" style="">
+                  <div class="card-header">
+                     <h4>     
+                     <span class="btn btn-secondary">{{madeReview.rating}}/5</span>
+                  </h4>
+                  </div>
+                  <div class="card-body">
+                     <h5 class="card-title">
+                        <small>A</small>
+                        {{ madeReview.user.firstName}} {{ madeReview.user.lastName | upper | first}}.
+                     </h5>
+                     <p class="card-text">{{madeReview.comment}}</p>
+                  </div>
+               </div>
+            </li>
+         {% endfor %}
+   </ul>
 </div>
 {% endblock %}
