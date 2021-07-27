@@ -16,18 +16,25 @@ class ReviewType extends AbstractType
     {
         $builder
             ->add('rating', null, [
-                'label' => 'Note sur 5',
+                'label' => false,
+                'attr'  => [
+                    'placeholder' => 'Note sur 5'
+                ],
                 'required' => true,
             ])
             ->add('comment', null, [
-                'label' => 'Commentaire',
-                'required' => true
+                'label' => false,
+                'required' => true,
+                'attr' => [
+                    'placeholder' => 'Commentaire',
+                    'style' => 'height: 10rem'
+                ]
             ])
             //->add('user')
             ->add('save', SubmitType::class, [
                 'label' => 'Enregistrer',
                 'attr' => [
-                    'class' => 'btn-success'
+                    'class' => 'btn-success w-100'
                 ]
             ]);
     }

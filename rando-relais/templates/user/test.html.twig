@@ -1,0 +1,8 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<div>
+   <img src="{{asset('assets/images/{{i}}.png')}}" alt="">
+   <p>il fait {{temp}} °C à {{c}} c'est {{weather}}</p>
+</div>
+ 
+{% endblock %}
