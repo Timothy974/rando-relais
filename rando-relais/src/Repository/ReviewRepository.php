@@ -3,8 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\Review;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Validator\Constraints\Date;
 
 /**
  * @method Review|null find($id, $lockMode = null, $lockVersion = null)
@@ -36,15 +38,15 @@ class ReviewRepository extends ServiceEntityRepository
     }
     */
 
-    /*
-    public function findOneBySomeField($value): ?Review
+    
+    public function findByDate($days)
     {
+        $date = (date('Y-m-d', strtotime($days . 'days')));
+    
         return $this->createQueryBuilder('r')
-            ->andWhere('r.exampleField = :val')
-            ->setParameter('val', $value)
+            ->andWhere("r.createdAt > $date")
             ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->getResult();
     }
-    */
+    
 }
