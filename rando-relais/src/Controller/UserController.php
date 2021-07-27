@@ -51,9 +51,9 @@ class UserController extends AbstractController
             $averageRating = $totalRating / $totalReviewsCount;
         }
 
-        // use weatherApi service to get weather data by angel id
-        $city = $angelData->getCity();
-        $weather = $weatherApi->getWeather($city);
+        // Get user zipCode to use it for weatherApi service
+        $zipCode = $angelData->getZipCode();
+        $weather = $weatherApi->getWeather($zipCode);
 
         // Return the angel data to the view
         return $this->render('user/show-angel.html.twig', [
