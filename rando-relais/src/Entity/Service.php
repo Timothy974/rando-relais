@@ -2,15 +2,18 @@
 
 namespace App\Entity;
 
-use App\Repository\ServiceRepository;
+
 use DateTime;
+use App\Repository\ServiceRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
+
 /**
  * @ORM\Entity(repositoryClass=ServiceRepository::class)
+ * 
  */
 class Service
 {
@@ -29,6 +32,7 @@ class Service
      *      minMessage = "Le nom du service doit comprendre au moins {{ limit }} charactères",
      *      maxMessage = "La longueur du nom du service ne peut excéder {{ limit }} charactères"
      * )
+     * 
      */
     private $name;
 
@@ -40,7 +44,7 @@ class Service
     
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
-     *
+     * 
      */
     private $image;
 
@@ -56,6 +60,7 @@ class Service
 
     /**
      * @ORM\ManyToMany(targetEntity=User::class, mappedBy="services")
+     * 
      */
     private $users;
 

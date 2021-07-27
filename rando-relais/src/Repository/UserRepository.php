@@ -64,4 +64,23 @@ class UserRepository extends ServiceEntityRepository
 
         return $query->getResult();
     }
+
+
+    /**
+     * Méthode to get all angel and their services array
+     *
+     * @param [type] $value
+     * @return User[] Returns an array of User object
+     */
+    public function findAngelAndServices($status)
+    {
+        
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.status = :val')
+            ->setParameter('val', $status)
+            ->orderBy('a.id', 'ASC')
+            ->leftJoin('a.services', 'services')
+            ->getQuery()
+            ->getResult();
+    }
 }
