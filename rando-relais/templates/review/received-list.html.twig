@@ -1,10 +1,5 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-{# <div class="container admin">
-<h1 class="text-center">Vous n'avez reçu aucun commentaire à ce jour</h1>
-</div> #}
-
-{# Alex #}
 <div class="container text-center">
    <h2 class="mb-5">Voici les évaluations que vous avez reçues</h1>
       {# List of all the reviews of the user #}
@@ -16,11 +11,20 @@
                <div class="card text-dark bg-light mb-3" style="">
                   <div class="card-header">
                      <h4>     
-                     {# Default badge color: grey. If rating is good, it will be green. If it is bad, it will be red #}
+                     {# Default badge color: grey. 
+                        Rating = 5 : green
+                        Rating = 3 : grey
+                        Rating >= 1 && <= 2 : orange
+                        Rating = 0 : red
+                     #}
                      {% set badgeType = 'badge bg-secondary' %}
                      {% if  review.rating == 5 %}
                         {% set badgeType = 'badge bg-success' %}
-                     {% elseif review.rating >= 0 and review.rating <= 2 %}
+                     {% elseif review.rating >= 1 and review.rating <= 2 %}
+                        {% set badgeType = 'badge bg-warning' %}
+                     {% elseif review.rating == 3  %}
+                        {% set badgeType = 'badge bg-secondary' %}
+                     {% elseif review.rating == 0 %}
                         {% set badgeType = 'badge bg-danger' %}
                      {% endif %}
                      <span class="{{ badgeType }}">{{review.rating}}/5</span>
@@ -29,26 +33,14 @@
                   <div class="card-body">
                      <h5 class="card-title">
                         <small>De</small>
-                        <a href="{{ path('show_angel', {id: review.authorId}) }}">{{ authorNameArray[i] }}</a>
+                        {{ authorNameArray[i] }}
                      </h5>
                      <p class="card-text">{{review.comment}}</p>
                   </div>
                </div>
             </li>
-{# End card #}
-
-           {#  <li class="col-md-12 col-sm-6 mb-3">
-               <p class="fw-bold m-0">
-                  <a href="{{ path('show_angel', {id: review.authorId}) }}">{{ authorNameArray[i] }}</a>
-                  <span class="badge bg-secondary">{{review.rating}}/5</span>
-               </p>
-               <small class="text-secondary">Le {{review.createdAt | date("m/d/Y")}}</small>
-               <p>{{review.comment}}</p>
-            </li> #}
             {% set i = i + 1 %}
          {% endfor %}
    </ul>
 </div>
-
-
 {% endblock %}
