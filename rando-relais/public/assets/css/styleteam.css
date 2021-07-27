@@ -4,6 +4,8 @@
    margin-right: 2em;
    position: relative;
    top: 17em;
+ 
+   
    
    
 }
@@ -79,23 +81,46 @@ figure img {
 }
 
 .animation {
+   animation-duration: 7s;
+   animation-name: slide;
+   animation-iteration-count: initial;
+   
+}
+
+.animationTwo {
+   animation-duration: 6s;
+   animation-name: slide;
+   animation-iteration-count: initial;
+}
+
+.animationThree {
    animation-duration: 5s;
    animation-name: slide;
    animation-iteration-count: initial;
 }
 
-.arrive {
-   animation-direction: normal;
+.animationFour {
+   animation-duration: 4s;
+   animation-name: slide;
+   animation-iteration-count: initial;
 }
+
+
 
 @keyframes slide {
    from {
-     margin-right: 800%;
-     width: 300%;
+      transform: translateX(-1500px);
+      /*
+     margin-left: 800%;
+     width: 300%;*/
    }
  
    to {
-     margin-right: 0%;
-     width: 100%;
+      transform: translateX(0);
+      /*
+     margin-left: 0%;
+     width: 100%;*/
    }
  }
+
+
