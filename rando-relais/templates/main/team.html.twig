@@ -1,38 +1,93 @@
 {% extends 'base.html.twig' %}
 
 
-			{% block body %}
-
-				<div class="team-page">
-					<div class="team-page_group">
-						<div class="team-page_avatar">
-							<img src="{{ asset('assets/uploads/alex.jpg') }}" alt="">
-                     <p class="presentation">Alex</p>
-                     <p class="presentation">Scrum Master</p>
-                     <p class="presentation">et Git Master</p>
-                     <p class="presentation">La Rochelle</p>
-
+{% block body %}
+	{# 
+					<div class="team-page">
+						<div class="team-page_group">
+							<div class="team-page_avatar">
+								<img src="{{ asset('assets/uploads/alex.jpg') }}" alt="">
+	                     <p class="presentation">Alex</p>
+	                     <p class="presentation">Scrum Master</p>
+	                     <p class="presentation">et Git Master</p>
+	                     <p class="presentation">La Rochelle</p>
+	
+							</div>
+							<div class="team-page_avatar">
+								<img src="{{ asset('assets/uploads/timothy.jpg') }}" alt="">
+	                     <p class="presentation">Timothy</p>
+	                     <p class="presentation">Lead dev front</p>
+	                     <p class="presentation">La réunion</p>
+							</div>
+							<div class="team-page_avatar">
+								<img src="{{ asset('assets/uploads/aimerick.png') }}" alt="">
+	                     <p class="presentation">Aimerick</p>
+	                     <p class="presentation">Lead dev back</p>
+	                     <p class="presentation">Paris</p>
+							</div>
+							<div class="team-page_avatar">
+								<img src="{{ asset('assets/uploads/daniel.png') }}" alt="">
+	                     <p class="presentation">Daniel</p>
+	                     <p class="presentation">Product Owner</p>
+	                     <p class="presentation">Bourges</p>
+							</div>
+	
 						</div>
-						<div class="team-page_avatar">
-							<img src="{{ asset('assets/uploads/timothy.jpg') }}" alt="">
-                     <p class="presentation">Timothy</p>
-                     <p class="presentation">Lead dev front</p>
-                     <p class="presentation">La réunion</p>
-						</div>
-						<div class="team-page_avatar">
-							<img src="{{ asset('assets/uploads/aimerick.png') }}" alt="">
-                     <p class="presentation">Aimerick</p>
-                     <p class="presentation">Lead dev back</p>
-                     <p class="presentation">Paris</p>
-						</div>
-						<div class="team-page_avatar">
-							<img src="{{ asset('assets/uploads/daniel.png') }}" alt="">
-                     <p class="presentation">Daniel</p>
-                     <p class="presentation">Product Owner</p>
-                     <p class="presentation">Bourges</p>
-						</div>
-
 					</div>
+				</div> #}
+
+
+	<div class="team-page">
+		<div class="team-page_group">
+			<div class="team-card-container">
+				<div class="team-card  animation arrive">
+					<figure class="front"><img src="{{asset('assets/images/profile_picture/daniel.png')}}"></figure>
+					<figure class="back">
+						<ul class="list-style p-0">
+							<li class="fw-bold">Daniel</li>
+							<li>Product Owner</li>
+							<li>Bourges</li>
+						</ul>
+					</figure>
 				</div>
 			</div>
-		{% endblock %}
+			<div class="team-card-container">
+				<div class="team-card animation arrive">
+					<figure class="front"><img src="{{asset('assets/images/profile_picture/alex.jpg')}}"></figure>
+					<figure class="back">
+						<ul class="list-style p-0">
+							<li class="fw-bold">Alex</li>
+							<li>Git & Scrum master</li>
+							<li>La Rochelle</li>
+						</ul>
+					</figure>
+				</div>
+			</div>
+			<div class="team-card-container">
+				<div class="team-card animation arrive">
+					<figure class="front"><img src="{{asset('assets/images/profile_picture/aimerick.png')}}"></figure>
+					<figure class="back">
+						<ul class="list-style p-0">
+							<li class="fw-bold">Aimerick</li>
+							<li>Lead Dev Back</li>
+							<li>Paris</li>
+						</ul>
+					</figure>
+				</div>
+			</div>
+			<div class="team-card-container">
+				<div class="team-card animation arrive">
+					<figure class="front"><img src="{{asset('assets/images/profile_picture/timothy.jpg')}}"></figure>
+					<figure class="back">
+						<ul class="list-style p-0">
+							<li class="fw-bold">Timothy</li>
+							<li>Lead Dev Front</li>
+							<li>La Réunion</li>
+						</ul>
+					</figure>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

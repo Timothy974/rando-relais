@@ -1,0 +1,101 @@
+.team-card-container {
+   width: 200px;
+   height: 200px;
+   margin-right: 2em;
+   position: relative;
+   top: 17em;
+   
+   
+}
+
+.team-card-container:hover .team-card {
+   transform: rotateY(180deg);
+}
+
+
+.team-card {
+   width: 200px;
+   height: 200px;
+   transition: transform 1s ease-in-out;
+   transform-style: preserve-3d;
+   border-radius: 50%;
+
+}
+
+.team-card figure {
+   width: 200px;
+   height: 200px;
+   position: absolute;
+   margin: 0;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+}
+
+.team-card .front {
+   width: 200px;
+   height: 200px;
+   
+   border-radius: 50%;
+
+}
+
+figure img {
+   width: 200px;
+   height: 200px;
+   background-size: cover;
+   border-radius: 50%;
+   
+}
+
+
+.team-card .back {
+   width: 200px;
+   height: 200px;
+   background-color: #76777c;
+   color: #ededed;
+   transform: rotateY(180deg);
+   text-align: center;
+   border-radius: 50%;
+   
+
+}
+
+.team-page{
+   background-image:url("../uploads/teambg.jpg");
+   background-size: cover;
+   
+   background-position: center;
+   background-repeat: no-repeat;
+   height: 120vh;
+}
+.team-page_group{
+   justify-content: center;
+   padding-top: 10em;
+   width: 100vw;
+   display: flex;
+   flex-direction: row;
+}
+
+.animation {
+   animation-duration: 5s;
+   animation-name: slide;
+   animation-iteration-count: initial;
+}
+
+.arrive {
+   animation-direction: normal;
+}
+
+@keyframes slide {
+   from {
+     margin-right: 800%;
+     width: 300%;
+   }
+ 
+   to {
+     margin-right: 0%;
+     width: 100%;
+   }
+ }
