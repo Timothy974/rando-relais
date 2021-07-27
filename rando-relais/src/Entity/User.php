@@ -11,6 +11,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
+
+
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
@@ -58,6 +60,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=10, nullable=true)
+     * 
      */
     private $zipCode;
 
@@ -83,6 +86,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="smallint")
+     * 
      */
     private $status;
 
@@ -98,11 +102,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\ManyToMany(targetEntity=Service::class, inversedBy="users")
+     *
      */
     private $services;
 
     /**
      * @ORM\OneToMany(targetEntity=Review::class, mappedBy="user", orphanRemoval=true)
+     * 
      */
     private $reviews;
 

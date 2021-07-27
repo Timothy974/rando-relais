@@ -17,10 +17,16 @@
 		{# Review header #}
 		<header class="text-center mb-3">
 			<h2 class="text-center mb-5">Laissez une évaluation à {{reviewedUser.firstName}}</h2>
-			<img src="{{ asset('assets/images/profile_picture/' ~ reviewedUser.picture )}}" alt="{{ reviewedUser.firstName }}" class="rounded-circle img-fluid" style="width: 15%">
+			{# If user has picture profile, display it. If not, display 'default-avatar.png' #}
+			{% if reviewedUser.picture %}
+				{% set reviewUserPicture = 'assets/images/profile_picture/' ~ reviewedUser.picture %}
+			{% else %}
+				{% set reviewUserPicture = 'assets/images/profile_picture/default-avatar.png' %}
+			{% endif %}
+			<img src="{{ asset(reviewUserPicture) }}" alt="Bootstrap" width="80" height="80" class="rounded-circle border border-white">
 		</header>
 		{# Review form #}
-      <section class="mt-5">
+      <section class="mt-5 col-lg-6 text-center mx-auto">
 			{{ form(reviewForm) }}
 		</section>
    	</div>

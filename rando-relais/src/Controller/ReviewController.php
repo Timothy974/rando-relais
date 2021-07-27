@@ -3,18 +3,23 @@
 namespace App\Controller;
 
 use App\Entity\Review;
+use App\Entity\User;
 use App\Form\ReviewType;
 use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
 
+/**
+ * @Route("/evaluation", name="review_")
+ */
 class ReviewController extends AbstractController
 {
     /**
-     * @Route("/review/{id}/add", name="add_review")
+     * @Route("/{id}/ajouter", name="add", methods={"GET","POST"})
      */
     public function add(int $id, Request $request, UserInterface $userInterface, UserRepository $userRepository): Response
     {
@@ -60,22 +65,56 @@ class ReviewController extends AbstractController
     }
 
     /**
-     * @Route("/review/{id}/madelist", name="madelist_review")
+     * @Route("/emis", name="made-list", methods="GET")
      */
-    public function madeList(int $id)
+    public function madeList(UserInterface $userInterface)
     {
-        return $this->render('review/madelist.html.twig', [
-            'id' => $id
+        // Get logged-in user'id
+        $loggedInUserId = $userInterface->getId();
+        // Entity Manager
+        $em = $this->getDoctrine()->getManager();
+        // Create the DQL query : SELECT * FROM `review` WHERE author_id = $loggedInUserId
+        $query = $em->createQuery(
+            'SELECT review 
+            FROM App\Entity\Review review 
+            WHERE review.authorId = ' . $loggedInUserId
+        );
+
+        // Fetch the reviews written by the logged-in user
+        $madeReviews = $query->getResult();
+
+        return $this->render('review/made-list.html.twig', [
+            'madeReviews' => $madeReviews
         ]);
     }
 
     /**
-     * @Route("/review/{id}/receivedlist", name="receivedlist_review")
+     * @Route("/recu", name="received-list", methods="GET")
      */
-    public function receivedList(int $id)
+    public function receivedList(UserRepository $userRepository, UserInterface $userInterface)
     {
-        return $this->render('review/receivedlist.html.twig', [
-            'id' => $id
+        // Get logged-in user'id
+        $loggedInUserId = $userInterface->getId();
+        // Fetch from DB logged-in user data
+        $currentUser = $userRepository->find($loggedInUserId);
+        // Get all received reviews from the logged-in user
+        $reviews = $currentUser->getReviews();
+
+        // Get the firstName of each review's author
+        $authorNameArray[] = '';
+
+        foreach ($reviews as $currentReview) {
+            // Get the author's id of the current review
+            $currentAuthorId = $currentReview->getAuthorId();
+            // Get the name of the current author's id
+            $currentAuthorName = $userRepository->find($currentAuthorId)->getFirstName();
+            // Fill an array with all the authors of the reviews
+            $authorNameArray[] = $currentAuthorName;
+        }
+
+        return $this->render('review/received-list.html.twig', [
+            'reviews' => $reviews,
+            'authorNameArray' => $authorNameArray,
         ]);
     }
 }

@@ -4,26 +4,18 @@ namespace App\Controller;
 
 use App\Repository\ReviewRepository;
 use App\Repository\UserRepository;
+use App\Service\WeatherApi;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class UserController extends AbstractController
 {
-    /**
-     * @Route("/user", name="user")
-     */
-    public function index(): Response
-    {
-        return $this->render('user/index.html.twig', [
-            'controller_name' => 'UserController',
-        ]);
-    }
 
     /**
      * @Route("/info/{id}", name="show_angel", requirements={"id" = "\d+"})
      */
-    public function showAngel(int $id, UserRepository $userRepository): Response
+    public function showAngel(int $id, UserRepository $userRepository, WeatherApi $weatherApi): Response
     {
         // Get the data of the specific angel called in the route ({id)}) in database
         $angelData = $userRepository->find($id);
@@ -59,13 +51,18 @@ class UserController extends AbstractController
             $averageRating = $totalRating / $totalReviewsCount;
         }
 
+        // Get user zipCode to use it for weatherApi service
+        $zipCode = $angelData->getZipCode();
+        $weather = $weatherApi->getWeather($zipCode);
+
         // Return the angel data to the view
         return $this->render('user/show-angel.html.twig', [
             'angelData' => $angelData,
             'userReviews' => $userReviews,
             'averageRating' => $averageRating,
             'totalReviewsCount' => $totalReviewsCount,
-            'authorNameArray' => $authorNameArray
+            'authorNameArray' => $authorNameArray,
+            'weather' => $weather
         ]);
     }
 
@@ -78,4 +75,5 @@ class UserController extends AbstractController
            'id' => $id
         ]);
     }
+
 }

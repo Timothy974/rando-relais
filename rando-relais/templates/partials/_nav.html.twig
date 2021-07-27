@@ -49,16 +49,16 @@
 												<a class="dropdown-item" href="{{ path('user_profile', {'id': app.user.id})}}">Gérer mon profil</a>
 											</li>
 											<li>
-												<a class="dropdown-item" href="{{ path('madelist_review', {'id': app.user.id})}}">Voir mes commentaires déposés</a>
+												<a class="dropdown-item" href="{{ path('review_made-list' )}}">Voir mes évaluations déposées</a>
 											</li>
 											<li>
-												<a class="dropdown-item" href="{{ path('receivedlist_review', {'id': app.user.id})}}">Voir mes commentaires reçus</a>
+												<a class="dropdown-item" href="{{ path('review_received-list') }}">Voir mes évaluations reçues</a>
 											</li>
+											{# TODO Décommenter les blocs "if" et "endif" quand les permissions seront opérationnelles #}
+											{% if is_granted('ROLE_ADMIN') %}
 											<li>
 												<hr class="dropdown-divider"/>
 											</li>
-											{# TODO Décommenter les blocs "if" et "endif" quand les permissions seront opérationnelles #}
-											{# {% if is_granted('ROLE_ADMIN') %} #}
 											<li>
 												<a class="dropdown-item" href="{{ path('admin_stat') }}">Statistiques</a>
 											</li>
@@ -68,7 +68,7 @@
 											<li>
 												<a class="dropdown-item" href="{{ path('admin_user_index') }}">Gestion des utilisateurs</a>
 											</li>
-											{# {% endif %} #}
+											{% endif %}
 											<li>
 												<hr class="dropdown-divider"/>
 											</li>

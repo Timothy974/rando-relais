@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
 
-			{% block body %}
-
-				<div class="team-page">
+{% block body %}
+{#
+<div class="team-page">
 					<div class="team-page_group">
 						<div class="team-page_avatar">
 							<img src="{{ asset('assets/uploads/alex.jpg') }}" alt="">
@@ -35,5 +35,58 @@
 					</div>
 				</div>
 			</div>
-
-		{% endblock %}
+#}
+	<div class="team-page">
+		<div class="team-page_group">
+			<div class="team-card-container">
+				<div class="team-card animation">
+					<figure class="front"><img src="{{asset('assets/images/profile_picture/daniel.png')}}"></figure>
+					<figure class="back">
+						<ul class="list-style p-0">
+							<li class="fw-bold">Daniel</li>
+							<li>Product Owner</li>
+							<li>Bourges</li>
+						</ul>
+					</figure>
+				</div>
+			</div>
+			<div class="team-card-container">
+				<div class="team-card animationTwo">
+					<figure class="front"><img src="{{asset('assets/images/profile_picture/alex.jpg')}}"></figure>
+					<figure class="back">
+						<ul class="list-style p-0">
+							<li class="fw-bold">Alex</li>
+							<li>Git & Scrum master</li>
+							<li>La Rochelle</li>
+						</ul>
+					</figure>
+				</div>
+			</div>
+			<div class="team-card-container">
+				<div class="team-card animationThree">
+					<figure class="front"><img src="{{asset('assets/images/profile_picture/aimerick.png')}}"></figure>
+					<figure class="back">
+						<ul class="list-style p-0">
+							<li class="fw-bold">Aimerick</li>
+							<li>Lead Dev Back</li>
+							<li>Paris</li>
+						</ul>
+					</figure>
+				</div>
+			</div>
+			<div class="team-card-container">
+				<div class="team-card animationFour">
+					<figure class="front"><img src="{{asset('assets/images/profile_picture/timothy.jpg')}}"></figure>
+					<figure class="back">
+						<ul class="list-style p-0">
+							<li class="fw-bold">Timothy</li>
+							<li>Lead Dev Front</li>
+							<li>La Réunion</li>
+						</ul>
+					</figure>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
