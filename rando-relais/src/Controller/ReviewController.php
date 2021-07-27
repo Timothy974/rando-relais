@@ -6,6 +6,7 @@ use App\Entity\Review;
 use App\Entity\User;
 use App\Form\ReviewType;
 use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -66,13 +67,29 @@ class ReviewController extends AbstractController
     /**
      * @Route("/emis", name="made-list", methods="GET")
      */
-    public function madeList()
+    public function madeList(UserInterface $userInterface)
     {
-        return $this->render('review/made-list.html.twig', []);
+        // Get logged-in user'id
+        $loggedInUserId = $userInterface->getId();
+        // Entity Manager
+        $em = $this->getDoctrine()->getManager();
+        // Create the DQL query : SELECT * FROM `review` WHERE author_id = $loggedInUserId
+        $query = $em->createQuery(
+            'SELECT review 
+            FROM App\Entity\Review review 
+            WHERE review.authorId = ' . $loggedInUserId
+        );
+
+        // Fetch the reviews written by the logged-in user
+        $madeReviews = $query->getResult();
+
+        return $this->render('review/made-list.html.twig', [
+            'madeReviews' => $madeReviews
+        ]);
     }
 
     /**
-     * @Route("/recues", name="received-list", methods="GET")
+     * @Route("/recu", name="received-list", methods="GET")
      */
     public function receivedList(UserRepository $userRepository, UserInterface $userInterface)
     {
