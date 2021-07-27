@@ -16,10 +16,12 @@ class MainController extends AbstractController
      *
      * @return Response
      */
-    public function index(UserRepository $angel, ServiceRepository $service): Response
+    public function index(UserRepository $user, ServiceRepository $service): Response
     {
+
+        $angels = $user->findAngelAndServices(2);
         return $this->render('main/index.html.twig', [
-            'angels' => $angel->findAll(),
+            'angels' => $angels
         ]);
     }
 
