@@ -24,28 +24,27 @@ class MainController extends AbstractController
         /* Counting of All registrants */
         $registeredUsersList = $user->findAll();
         $usersQuantity = count($registeredUsersList);
-        
+
         /* counting of all registrants by their status and if registrant's status is angel, define and counting his offered services*/
         $desactived = 0;
         $walker = 0;
         $angel = 0;
         $services = $service->findAll();
         $angels = $user->findAngelAndServices(2);
-        
-       foreach($services as $service){
-        $arrayResult[$service->getName()] = 0;
-       }
-       
+
+        foreach ($services as $service) {
+            $arrayResult[$service->getName()] = 0;
+        }
+
         foreach ($registeredUsersList as $user) {
             if ($user->getStatus() === 2) {
                 $angel++;
-               
                 foreach ($user->getServices() as $service) {
-               
+
                     if (in_array($service->getName(), (array)$user->getServices())) {
-                     $arrayResult[$service->getName()] ++;
+                        $arrayResult[$service->getName()]++;
                     }
-                  }
+                }
             } else if ($user->getStatus() === 1) {
                 $walker++;
             } else {
@@ -53,15 +52,9 @@ class MainController extends AbstractController
             }
         }
 
-        
-
-        
-
         $reviewList = $review->findAll();
         $reviewQuantity = count($reviewList);
         $reviewQuantityMonth = count($review->findByDate(-30));
-
-       
 
         return $this->render('admin/main/stat.html.twig', [
 
