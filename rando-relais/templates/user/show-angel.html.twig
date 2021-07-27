@@ -63,14 +63,14 @@
                                  {{weather.weather.0.description}}
                               </li>
 										<li>Température :
-											{{weather.main.temp}}
+											{{ weather.main.temp|round }}
 											°C
 										</li>
 										<li>Température minimale :
-											{{weather.main.temp_min}}
+											{{weather.main.temp_min|round}}
 											°C</li>
 										<li>Température maximale :
-											{{weather.main.temp_max}}
+											{{weather.main.temp_max|round}}
 											°C</li>
 										<li>Taux humidité :
 											{{weather.main.humidity}}
@@ -110,12 +110,12 @@
 							{{ averageRating | round(2, 'floor')}}<span class="text-muted">/5</span>
 							·
 							{{ totalReviewsCount }}
-							Commentaire
+							Evaluation
 						{% else %}
 							{{ averageRating | round(2, 'floor')}}<span class="text-muted">/5</span>
 							·
 							{{ totalReviewsCount }}
-							Commentaires
+							Evaluations
 						{% endif %}
 					{% else %}
 						{{ angelData.firstName | capitalize }}
@@ -147,7 +147,8 @@
 			</section>
 		</div>
 		{% else %}
-		{# TODO: Display a message when the user is not logged in, or redirect him to the homepage #}
-	{% endif %}
+			<div class="mt-5 mb-5 text-center">
+				Veuillez <a href="{{path('app_login')}}">vous connecter</a> pour accéder à la page information d'un Ange du chemin.
+			</div>
+		{% endif %}
 {% endblock %}
-
