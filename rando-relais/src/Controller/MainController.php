@@ -19,7 +19,7 @@ class MainController extends AbstractController
     public function index(UserRepository $angel, ServiceRepository $service): Response
     {
         return $this->render('main/index.html.twig', [
-            'angels' => $angel->findAll(),           
+            'angels' => $angel->findAll(),
         ]);
     }
 
@@ -50,11 +50,11 @@ class MainController extends AbstractController
             'angels' => $angelFilter,
         ]);
     }
-     /**
-     * @Route("/download", name="main_download", methods={"GET"})
-     *
-     * @return Response
-     */
+    /**
+    * @Route("/download", name="main_download", methods={"GET"})
+    *
+    * @return Response
+    */
     public function download(): Response
     {
         // The path to the files is relative to the public folder.
@@ -69,5 +69,37 @@ class MainController extends AbstractController
     public function team(): Response
     {
         return $this->render('main/team.html.twig', []);
+    }
+
+    /**
+    * @Route("/conditions-generales-utilisation", name="main_terms_of_services", methods={"GET"})
+    *
+    * @return Response
+    */
+    public function generalConditionsOfUse(): Response
+    {
+        // We display the page we want with a array who optional data.
+        return $this->render(
+            'main/terms-of-service.html.twig',
+            [],
+        // We specify the related HTTP response status code.
+        new Response('', 200)
+        );
+    }
+
+    /**
+    * @Route("/mentions-legales", name="main_legal_notices", methods={"GET"})
+    *
+    * @return Response
+    */
+    public function legalNotices(): Response
+    {
+        // We display the page we want with a array who optional data.
+        return $this->render(
+            'main/legal-notices.html.twig',
+            [],
+        // We specify the related HTTP response status code.
+        new Response('', 200)
+        );
     }
 }

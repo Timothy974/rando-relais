@@ -1,6 +1,5 @@
 const angelRegistration = {
   // Proprietes availables in our object.
-  selectedElement: null,
   angelSwitch: null,
   tentCheckBox: null,
   bedroomCheckBox: null,
@@ -13,19 +12,28 @@ const angelRegistration = {
   dinnerCheckBox: null,
   powerCheckBox: null,
   init: function () {
-    console.log("Hello ! I'm the angelResgistration component.")
+    console.log("Hello ! I'm the angelResgistration component.");
     // We get the DOM elements that we need to interate with.
-    // We add a listener & a handler on the click evt on each of them.
+    // We add a listener & a handler on the click event on each of them.
 
-    // Switch to angel registration element.
+    // Switch to Angel registration element.
     angelRegistration.angelSwitch = document.getElementById(
       "registration_form_status"
     );
+    // If angelRegistration.angelSwitch === true.
     if (angelRegistration.angelSwitch) {
+      // We add a listener on the click event and we callback the displayAngelData() method.
       angelRegistration.angelSwitch.addEventListener(
         "click",
-        angelRegistration.handleSelectElement
+        angelRegistration.displayAngelData
       );
+      // We check if the angelSwitch is checked.
+      if (angelRegistration.angelSwitch.checked === true) {
+        // If angelSwitch is checked we simulate a click on the angelSwitch.
+        angelRegistration.angelSwitch.click();
+        // With this click we want the angelSwitch to stay check.
+        angelRegistration.angelSwitch.checked = true;
+      } 
     }
 
     // Service Emplacement de tente icon element.
@@ -35,7 +43,7 @@ const angelRegistration = {
     if (angelRegistration.tentCheckBox) {
       angelRegistration.tentCheckBox.addEventListener(
         "click",
-        angelRegistration.handleSelectElement
+        angelRegistration.validateService
       );
     }
 
@@ -44,7 +52,7 @@ const angelRegistration = {
     if (angelRegistration.bedroomCheckBox) {
       angelRegistration.bedroomCheckBox.addEventListener(
         "click",
-        angelRegistration.handleSelectElement
+        angelRegistration.validateService
       );
     }
 
@@ -53,7 +61,7 @@ const angelRegistration = {
     if (angelRegistration.shelterCheckBox) {
       angelRegistration.shelterCheckBox.addEventListener(
         "click",
-        angelRegistration.handleSelectElement
+        angelRegistration.validateService
       );
     }
 
@@ -63,7 +71,7 @@ const angelRegistration = {
     if (angelRegistration.deliveryCheckBox) {
       angelRegistration.deliveryCheckBox.addEventListener(
         "click",
-        angelRegistration.handleSelectElement
+        angelRegistration.validateService
       );
     }
 
@@ -72,7 +80,7 @@ const angelRegistration = {
     if (angelRegistration.showerCheckBox) {
       angelRegistration.showerCheckBox.addEventListener(
         "click",
-        angelRegistration.handleSelectElement
+        angelRegistration.validateService
       );
     }
 
@@ -81,7 +89,7 @@ const angelRegistration = {
     if (angelRegistration.waterCheckBox) {
       angelRegistration.waterCheckBox.addEventListener(
         "click",
-        angelRegistration.handleSelectElement
+        angelRegistration.validateService
       );
     }
 
@@ -91,7 +99,7 @@ const angelRegistration = {
     if (angelRegistration.breakfastCheckBox) {
       angelRegistration.breakfastCheckBox.addEventListener(
         "click",
-        angelRegistration.handleSelectElement
+        angelRegistration.validateService
       );
     }
 
@@ -100,7 +108,7 @@ const angelRegistration = {
     if (angelRegistration.sandwichCheckBox) {
       angelRegistration.sandwichCheckBox.addEventListener(
         "click",
-        angelRegistration.handleSelectElement
+        angelRegistration.validateService
       );
     }
 
@@ -109,7 +117,7 @@ const angelRegistration = {
     if (angelRegistration.dinnerCheckBox) {
       angelRegistration.dinnerCheckBox.addEventListener(
         "click",
-        angelRegistration.handleSelectElement
+        angelRegistration.validateService
       );
     }
 
@@ -119,122 +127,53 @@ const angelRegistration = {
     if (angelRegistration.powerCheckBox) {
       angelRegistration.powerCheckBox.addEventListener(
         "click",
-        angelRegistration.handleSelectElement
+        angelRegistration.validateService
       );
     }
   },
-  // Method that handle the toggle of some CSS classes from a click event on selected DOM element.
-  handleSelectElement: function (evt) {
+  // Method who diplay the angel data if angelSwitch is clicked.
+  displayAngelData: function (evt) {
     // We get the DOM element from wich the event occured.
-    angelRegistration.selectedElement = evt.currentTarget;
-
-    // After retrieval of the selectedElement (clicked element) we check wich DOM element has been selected and we toggle some CSS classes.
-
-    // If the selectedElement is angelSwitch.
-    if (angelRegistration.selectedElement == angelRegistration.angelSwitch) {
-      // We get the DOM element on wich the CSS classes will be toggle.
-      // We get the toggle the CSS class with the JS API classList.
+    clickedElement = evt.currentTarget;
+    // We get the DOM element on wich the CSS classes will be toggle.
+    // We toggle the CSS class with the JS API classList.
+    if (clickedElement === angelRegistration.angelSwitch) {
       document
         .getElementById("angel_subscription_form")
         .classList.toggle("d-none");
     }
+  },
+  // Method who toggle CSS classes on a service after is checked.
+  validateService: function (evt) {
+    selectedService = evt.currentTarget;
 
-    // If the selectedElement is tentCheckBox.
-    if (angelRegistration.selectedElement == angelRegistration.tentCheckBox) {
-      // We get the DOM elements on wich the CSS classes will be toggle.
-      // We get the toggle the CSS classes with the JS API classList.
-      angelRegistration.tentCheckBox.classList.toggle("opacity-50");
-      document
-        .getElementById("validate-emplacement-de-tente")
-        .classList.toggle("d-none");
-    }
-
-    // If the selectedElement is bedroomCheckBox.
+    // We toggle a CSS class with the JS API classList.
     if (
-      angelRegistration.selectedElement == angelRegistration.bedroomCheckBox
+      selectedService === angelRegistration.tentCheckBox ||
+      selectedService === angelRegistration.bedroomCheckBox ||
+      selectedService === angelRegistration.shelterCheckBox ||
+      selectedService === angelRegistration.deliveryCheckBox ||
+      selectedService === angelRegistration.showerCheckBox ||
+      selectedService === angelRegistration.waterCheckBox ||
+      selectedService === angelRegistration.breakfastCheckBox
     ) {
-      // We get the DOM elements on wich the CSS classes will be toggle.
-      // We get the toggle the CSS classes with the JS API classList.
-      angelRegistration.bedroomCheckBox.classList.toggle("opacity-50");
-      document.getElementById("validate-lit").classList.toggle("d-none");
+      selectedService.classList.toggle("opacity-50");
+      // We get DOM element input of the service.
+      let serviceInput = selectedService.querySelector("input[type=checkbox]");
+      //
+      serviceInput.checked = !serviceInput.checked;
+      // We get the DOM element img validate.
+      let serviceValidateIcon = document.getElementById(
+        "validate-" + selectedService.id
+      );
+      // We toggle the CSS class with the JS API classList.
+      serviceValidateIcon.classList.toggle(
+        "d-none",
+        serviceValidateIcon.classList.contains("d-none")
+      );
     }
+    // Verifier sur quel service on a cliquer. 
 
-    // If the selectedElement is shelterCheckBox.
-    if (
-      angelRegistration.selectedElement == angelRegistration.shelterCheckBox
-    ) {
-      // We get the DOM elements on wich the CSS classes will be toggle.
-      // We get the toggle the CSS classes with the JS API classList.
-      angelRegistration.shelterCheckBox.classList.toggle("opacity-50");
-      document.getElementById("validate-abri").classList.toggle("d-none");
-    }
-
-    // If the selectedElement is deliveryCheckBox.
-    if (
-      angelRegistration.selectedElement == angelRegistration.deliveryCheckBox
-    ) {
-      // We get the DOM elements on wich the CSS classes will be toggle.
-      // We get the toggle the CSS classes with the JS API classList.
-      angelRegistration.deliveryCheckBox.classList.toggle("opacity-50");
-      document
-        .getElementById("validate-reception-de-colis")
-        .classList.toggle("d-none");
-    }
-
-    // If the selectedElement is showerCheckBox.
-    if (angelRegistration.selectedElement == angelRegistration.showerCheckBox) {
-      // We get the DOM elements on wich the CSS classes will be toggle.
-      // We get the toggle the CSS classes with the JS API classList.
-      angelRegistration.showerCheckBox.classList.toggle("opacity-50");
-      document.getElementById("validate-douche").classList.toggle("d-none");
-    }
-
-    // If the selectedElement is waterCheckBox.
-    if (angelRegistration.selectedElement == angelRegistration.waterCheckBox) {
-      // We get the DOM elements on wich the CSS classes will be toggle.
-      // We get the toggle the CSS classes with the JS API classList.
-      angelRegistration.waterCheckBox.classList.toggle("opacity-50");
-      document.getElementById("validate-eau").classList.toggle("d-none");
-    }
-
-    // If the selectedElement is breakfastCheckBox.
-    if (
-      angelRegistration.selectedElement == angelRegistration.breakfastCheckBox
-    ) {
-      // We get the DOM elements on wich the CSS classes will be toggle.
-      // We get the toggle the CSS classes with the JS API classList.
-      angelRegistration.breakfastCheckBox.classList.toggle("opacity-50");
-      document
-        .getElementById("validate-petit-dejeuner")
-        .classList.toggle("d-none");
-    }
-
-    // If the selectedElement is sandwichCheckBox.
-    if (
-      angelRegistration.selectedElement == angelRegistration.sandwichCheckBox
-    ) {
-      // We get the DOM elements on wich the CSS classes will be toggle.
-      // We get the toggle the CSS classes with the JS API classList.
-      angelRegistration.sandwichCheckBox.classList.toggle("opacity-50");
-      document.getElementById("validate-sandwich").classList.toggle("d-none");
-    }
-
-    // If the selectedElement is dinnerCheckBox.
-    if (angelRegistration.selectedElement == angelRegistration.dinnerCheckBox) {
-      // We get the DOM elements on wich the CSS classes will be toggle.
-      // We get the toggle the CSS classes with the JS API classList.
-      angelRegistration.dinnerCheckBox.classList.toggle("opacity-50");
-      document.getElementById("validate-diner").classList.toggle("d-none");
-    }
-
-    // If the selectedElement is powerCheckBox.
-    if (angelRegistration.selectedElement == angelRegistration.powerCheckBox) {
-      // We get the DOM elements on wich the CSS classes will be toggle.
-      // We get the toggle the CSS classes with the JS API classList.
-      angelRegistration.powerCheckBox.classList.toggle("opacity-50");
-      document
-        .getElementById("validate-prise-electrique")
-        .classList.toggle("d-none");
-    }
+    // 
   },
 };
