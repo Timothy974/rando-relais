@@ -63,14 +63,14 @@
                                  {{weather.weather.0.description}}
                               </li>
 										<li>Température :
-											{{weather.main.temp}}
+											{{ weather.main.temp|round }}
 											°C
 										</li>
 										<li>Température minimale :
-											{{weather.main.temp_min}}
+											{{weather.main.temp_min|round}}
 											°C</li>
 										<li>Température maximale :
-											{{weather.main.temp_max}}
+											{{weather.main.temp_max|round}}
 											°C</li>
 										<li>Taux humidité :
 											{{weather.main.humidity}}
@@ -152,4 +152,3 @@
 			</div>
 		{% endif %}
 {% endblock %}
-

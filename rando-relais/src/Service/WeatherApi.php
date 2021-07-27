@@ -6,9 +6,9 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class WeatherApi
 {
-   private $apiUrl = 'http://api.openweathermap.org/data/2.5/weather?q=';
+   private $apiUrl = 'http://api.openweathermap.org/data/2.5/weather?zip=';
    private $apiKey = '2667120b5deee742009a5e9cbde95b6e';
-   private $option = '&units=metric&lang=fr';
+   private $option = ',fr&units=metric&lang=fr';
    private $client;
 
     public function __construct(HttpClientInterface $client)
@@ -16,9 +16,9 @@ class WeatherApi
         $this->client = $client;
     }
 
-    public function getWeather(string $city)
+    public function getWeather(string $zipCode)
     {
-       $response = $this->client->request('GET', $this->apiUrl.$city.$this->option.'&appid='.$this->apiKey);
+       $response = $this->client->request('GET', $this->apiUrl.$zipCode.$this->option.'&appid='.$this->apiKey);
        
        return $response->toArray();
     }
