@@ -13,6 +13,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Count;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
@@ -23,6 +24,8 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+        // We use the addEventlistener method on PRE_SUBMIT to add form fields, before submitting the data to the form.
+            ->addEventListener(FormEvents::PRE_SUBMIT, [$this, 'onPreSubmit'])
             ->add('status', CheckboxType::class, [
                 'label'     => 'Ange du chemin',
                 'attr'      => [
@@ -65,14 +68,63 @@ class RegistrationFormType extends AbstractType
                     ])
                 ]
             ])
-            // ->add('agreeTerms', CheckboxType::class, [
-            //     'mapped'        => false,
-            //     'constraints'   => [
-            //         new IsTrue([
-            //             'message' => 'Merci d\'adhérer aux conditions générales.'
-            //         ])
-            //     ],
-            // ])
+            ->add('phonenumber', null, [
+                'required'  => false,
+                'label'     => false,
+                'attr'      => [
+                    'placeholder' => 'Numéro de téléphone'
+                ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Merci de saisir votre numéro de téléphone.'
+                    ]),
+                ]
+            ])
+            ->add('zipcode', null, [
+                'required'  => false,
+                'label'     => false,
+                'attr'      => [
+                    'placeholder' => 'Code postale'
+                ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Merci de saisir votre code postale.'
+                    ])
+                ]
+            ])
+            ->add('city', null, [
+                'required' => false,
+                'label'     => false,
+                'attr'  => [
+                    'placeholder' => 'Commune'
+                ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Merci de saisir le nom de votre commune.'
+                    ])
+                ]
+            ])
+            ->add('services', EntityType::class, [
+                'required'      =>  false,
+                'class'         => Service::class,
+                'by_reference'  => false,
+                'multiple'      => true,
+                'expanded'      => true,
+                'constraints'   => [
+                    new NotBlank([
+                        'message' => 'Merci de sélectionner au minimum un service.'
+                    ]),
+                ]
+            ])
+            ->add('agreeTerms', CheckboxType::class, [
+                'mapped'        => false,
+                'label'         => 'J\'ai lu et j\'accepte les conditions générales d\'utilisation',
+                'constraints'   => [
+                    new IsTrue([
+                        'message' => 'Merci d\'adhérer aux conditions générales.'
+                    ])
+                ],
+            ])
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
@@ -93,87 +145,30 @@ class RegistrationFormType extends AbstractType
                         'max'        => 4096,
                     ])
                 ],
-            ])
-            // // We add a event listener.
-            // ->addEventListener(
-            //     FormEvents::SUBMIT,
-            //     [$this, 'onSubmit']
-            // )
-            // ->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) {
+            ]);
+    }
 
-            //     $user = $event->getData();
-            //     $form = $event->getForm();
-        
-            //     $status = $form->get('status')->getData();
-        
-            //     // By default $required = true.
-            //     $required = true;
-        
-            //     // If the switch is checked $status === true : the user will be registered as a Angel (status = 1).
-            //     if ($status === true) {
-            //         // We display the fields required for the Angel status.
-            //         $required = true;
-            //     // Else if the switch is not checked $status === false, user will be registered as a marcheur (status = 2).
-            //     } elseif ($status === false) {
-            //         // We not display the fields required for the angel status but only the field for the Marcheur status
-            //         $required = false;
-            //     } else {
-            //         // we stop the execution of the programmme.
-            //         exit();
-            //     }
-        
-            //     // We dynamically add the fields we want to display according to the status
-            //     $form->add('phonenumber', TelType::class, [
-            //         'required'  => $required,
-            //         'label'     => false,
-            //         'attr'      => [
-            //             'placeholder' => 'Numéro de téléphone'
-            //         ],
-            //         'constraints' => [
-            //             new NotBlank([
-            //                 'message' => 'Merci de saisir votre numéro de téléphone.'
-            //             ]),
-            //         ]
-            //     ])
-            //     ->add('zipcode', null, [
-            //         'required'  => $required,
-            //         'label'     => false,
-            //         'attr'      => [
-            //             'placeholder' => 'Code postale'
-            //         ],
-            //         'constraints' => [
-            //             new NotBlank([
-            //                 'message' => 'Merci de saisir votre code postale.'
-            //             ])
-            //         ]
-            //     ])
-            //     ->add('city', null, [
-            //         'required'  => $required,
-            //         'label'     => false,
-            //         'attr'      => [
-            //             'placeholder' => 'Commune'
-            //         ],
-            //         'constraints' => [
-            //             new NotBlank([
-            //                 'message' => 'Merci de saisir le nom de votre commune.'
-            //             ])
-            //         ]
-            //     ])
-            //     ->add('services', EntityType::class, [
-            //         'required'      => $required,
-            //         'class'         => Service::class,
-            //         'by_reference'  => false,
-            //         'multiple'      => true,
-            //         'constraints'   => [
-            //             new NotBlank([
-            //                 'message' => 'Merci de sélectionner au minimum un service.'
-            //             ]),
-            //         ]
-            //     ]);
 
-            // });
-            ->add('phonenumber', TelType::class, [
-                'required'  => false,
+    /**
+     * Method wo display the form fields required for the angel registration if ($user['status']) === true / if the switch is checked.
+     *
+     * @param FormEvent $event
+     * @return void
+     */
+    public function onPreSubmit(FormEvent $event)
+    {
+        // We get the form data. 
+        $user = $event->getData();
+        $form = $event->getForm();
+
+        // We check if the switch button is checked.
+        // If $user['status'] === true that mean the user want to register as a Angel (status 2). 
+        // In order to collect the data related to the Angel's status we need to require the form fields related to this status. 
+        if ($user['status']) {
+            // We add the form fields related to the Angel's status with the attribute required => true.
+            $form
+            ->add('phonenumber', null, [
+                'required'  => true,
                 'label'     => false,
                 'attr'      => [
                     'placeholder' => 'Numéro de téléphone'
@@ -181,138 +176,48 @@ class RegistrationFormType extends AbstractType
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Merci de saisir votre numéro de téléphone.'
-                    ])
-                        
+                    ]),
                 ]
             ])
             ->add('zipcode', null, [
-                    'required'  => false,
-                    'label'     => false,
-                    'attr'      => [
-                        'placeholder' => 'Code postale'
-                    ],
-                    // 'constraints' => [
-                    //     new NotBlank([
-                    //         'message' => 'Merci de saisir votre code postale.'
-                    //     ])
-                    // ]
-            ])
-            ->add('city', null, [
-                'required'  => false,
+                'required'  => true,
                 'label'     => false,
                 'attr'      => [
-                     'placeholder' => 'Commune'
+                    'placeholder' => 'Code postale'
                 ],
-                    // 'constraints' => [
-                    //     new NotBlank([
-                    //         'message' => 'Merci de saisir le nom de votre commune.'
-                    //     ])
-                    // ]
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Merci de saisir votre code postale.'
+                    ])
+                ]
             ])
-                ->add('services', EntityType::class, [
-                    'required'      => false,
-                    'class'         => Service::class,
-                    'by_reference'  => false,
-                    'multiple'      => true,
-                    // 'constraints'   => [
-                    //     new NotBlank([
-                    //         'message' => 'Merci de sélectionner au minimum un service.'
-                    //     ])
-                        
-                    // ]
-                ]);
+            ->add('city', null, [
+                'required' => true,
+                'label'     => false,
+                'attr'  => [
+                    'placeholder' => 'Commune'
+                ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Merci de saisir le nom de votre commune.'
+                    ])
+                ]
+             ])
+            ->add('services', EntityType::class, [
+                'required'      => true,
+                'class'         => Service::class,
+                'by_reference'  => false,
+                'multiple'      => true,
+                'expanded'      => true,
+                'constraints'   => [
+                    new Count([
+                        'min' => 1,
+                        'minMessage' => 'Merci de sélectionner au minimum un {{ limit }} service.'
+                    ]),
+                ]
+            ]);
+        }
     }
-
-    // /**
-    //  * Undocumented function
-    //  *
-    //  * @return void
-    //  */
-    // public static function getSubscribedEvents()
-    // {
-    //     return [
-    //         FormEvents::SUBMIT => 'onSubmit',
-    //     ];
-    // }
-
-    // /**
-    //  * Undocumented function
-    //  *
-    //  * @param FormEvent $event
-    //  * @return void
-    //  */
-    // public function onSubmit(FormEvent $event)
-    // {
-    //     $user = $event->getData();
-    //     $form = $event->getForm();
-
-    //     $status = $form->get('status')->getData();
-
-    //     // By default $required = true.
-    //     $required = true;
-
-    //     // If the switch is checked $status === true : the user will be registered as a Angel (status = 1).
-    //     if ($status === true) {
-    //         // We display the fields required for the Angel status.
-    //         $required = true;
-    //     // Else if the switch is not checked $status === false, user will be registered as a marcheur (status = 2).
-    //     } elseif ($status === false) {
-    //         // We not display the fields required for the angel status but only the field for the Marcheur status
-    //         $required = false;
-    //     } else {
-    //         // we stop the execution of the programmme.
-    //         exit();
-    //     }
-
-    //     // We dynamically add the fields we want to display according to the status
-    //     $form->add('phonenumber', null, [
-    //         'required'  => $required,
-    //         'label'     => false,
-    //         'attr'      => [
-    //             'placeholder' => 'Numéro de téléphone'
-    //         ],
-    //         'constraints' => [
-    //             new NotBlank([
-    //                 'message' => 'Merci de saisir votre numéro de téléphone.'
-    //             ]),
-    //         ]
-    //     ])
-    //     ->add('zipcode', null, [
-    //         'required'  => $required,
-    //         'label'     => false,
-    //         'attr'      => [
-    //             'placeholder' => 'Code postale'
-    //         ],
-    //         'constraints' => [
-    //             new NotBlank([
-    //                 'message' => 'Merci de saisir votre code postale.'
-    //             ])
-    //         ]
-    //     ])
-    //     ->add('city', null, [
-    //         'required' => $required,
-    //         'label'     => false,
-    //         'attr'  => [
-    //             'placeholder' => 'Commune'
-    //         ],
-    //         'constraints' => [
-    //             new NotBlank([
-    //                 'message' => 'Merci de saisir le nom de votre commune.'
-    //             ])
-    //         ]
-    //     ])
-    //     ->add('services', EntityType::class, [
-    //         'required'      => $required,
-    //         'class'         => Service::class,
-    //         'by_reference'  => false,
-    //         'multiple'      => true,
-    //         'constraints'   => [
-    //             new NotBlank([
-    //                 'message' => 'Merci de sélectionner au minimum un service.'
-    //             ]),
-    //         ]
-    //     ]);
-    // }
 
     public function configureOptions(OptionsResolver $resolver)
     {
