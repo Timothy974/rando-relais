@@ -89,7 +89,7 @@ class ReviewController extends AbstractController
     }
 
     /**
-     * @Route("/recues", name="received-list", methods="GET")
+     * @Route("/recu", name="received-list", methods="GET")
      */
     public function receivedList(UserRepository $userRepository, UserInterface $userInterface)
     {

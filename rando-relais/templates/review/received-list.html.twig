@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 {% block body %}
 <div class="container text-center">
-   <h2 class="mb-5">Voici les évaluations que vous avez reçues</h1>
+   <h2 class="mb-5">{{ app.user.firstName | capitalize }}, voici les évaluations que vous avez reçues :</h1>
       {# List of all the reviews of the user #}
       <ul class="mt-4 row list-unstyled">
          {% set i = 1 %}

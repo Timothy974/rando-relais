@@ -1,7 +1,8 @@
 {% extends 'base.html.twig' %}
 {% block body %}
 <div class="container text-center">
-   <h2 class="mb-5">Voici les évaluations que vous avez émises</h1>
+   <h2 class="mb-5">{{ app.user.firstName | capitalize }}, voici les évaluations que vous avez émises :</h1>
+  
       {# List of all the reviews made by the user #}
       <ul class="mt-4 row list-unstyled">
          {% for madeReview in madeReviews %}
@@ -9,8 +10,24 @@
             <li>
                <div class="card text-dark bg-light mb-3" style="">
                   <div class="card-header">
-                     <h4>     
-                     <span class="btn btn-secondary">{{madeReview.rating}}/5</span>
+                     <h4>
+                       {# Default badge color: grey. 
+                        Rating = 5 : green
+                        Rating = 3 : grey
+                        Rating >= 1 && <= 2 : orange
+                        Rating = 0 : red
+                     #}
+                     {% set badgeType = 'badge bg-secondary' %}
+                     {% if  madeReview.rating == 5 %}
+                        {% set badgeType = 'badge bg-success' %}
+                     {% elseif madeReview.rating >= 1 and madeReview.rating <= 2 %}
+                        {% set badgeType = 'badge bg-warning' %}
+                     {% elseif madeReview.rating == 3  %}
+                        {% set badgeType = 'badge bg-secondary' %}
+                     {% elseif madeReview.rating == 0 %}
+                        {% set badgeType = 'badge bg-danger' %}
+                     {% endif %}     
+                     <span class="{{ badgeType }}">{{madeReview.rating}}/5</span>
                   </h4>
                   </div>
                   <div class="card-body">
