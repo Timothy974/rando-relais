@@ -107,18 +107,18 @@ const mode = {
         if (mode.backgroundColor == "light") {
           // We display the light mode backgroundImage to the headerHome.
           mode.headerHome.style.backgroundImage =
-            "url('assets/images/background/background-header.jpg')";
+            "url('/assets/images/background/background-header.jpg')";
         } // Else the value of mode is dark.
         else {
           // We display the dark mode backgroundImage to the headerHome.
           mode.headerHome.style.backgroundImage =
-            "url('assets/images/background/background-header-dark-mode.jpg')";
+            "url('/assets/images/background/background-header-dark-mode.jpg')";
         }
       } // Else we dont have a mode item in localStorage.
       else {
         // We display the light mode backgroundImage to the headerHome.
         mode.headerHome.style.backgroundImage =
-          "url('assets/images/background/background-header.jpg')";
+          "url('/assets/images/background/background-header.jpg')";
       }
     } // If headerShared === true.
     else if (mode.headerShared) {
@@ -127,18 +127,18 @@ const mode = {
         if (mode.backgroundColor == "light") {
           // We display the light mode backgroundImage to the headerShared.
           mode.headerShared.style.backgroundImage =
-            "url('assets/images/background/background-header.jpg')";
+            "url('/assets/images/background/background-header.jpg')";
         } // Else the value of mode is dark.
         else {
           // We display the dark mode backgroundImage to the headerShared.
           mode.headerShared.style.backgroundImage =
-            "url('assets/images/background/background-header-dark-mode.jpg')";
+            "url('/assets/images/background/background-header-dark-mode.jpg')";
         }
       } // Else we dont have a mode item in localStorage.
       else {
         // We display the light mode backgroundImage to the headerShared.
         mode.headerShared.style.backgroundImage =
-          "url('assets/images/background/background-header.jpg')";
+          "url('/assets/images/background/background-header.jpg')";
       }
     }
   },
