@@ -739,6 +739,11 @@ figure img {
    
 }
 
+#mapid {
+   height: 30em;
+   width: 70vw;
+}
+
 
 /* erase when confirm
 .team-page{
