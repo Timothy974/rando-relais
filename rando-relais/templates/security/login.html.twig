@@ -13,21 +13,6 @@
                 {{ error.messageKey|trans(error.messageData, 'security') }}
             </div>
         {% endif %}
-
-   {#      {% if app.user %}
-            <div class="mb-3">
-                You are logged in as 
-                                
-                {{ app.user.username }}
-                , 
-                                
-                <a href="{{ path('app_logout') }}">
-                    Logout
-                                    
-                </a>
-            </div>
-        {% endif %} #}
-
         {# Custom login form #}
         <div class="container">
             <!-- Connection title  -->
@@ -62,6 +47,9 @@
                                                 <p class="text-center">
                                                     <a href="{{ path('app_register') }}" class="text-decoration-none text-success">
                                                         Créer un compte                                               
+                                                    </a> |
+                                                    <a href="{{ path('app_forgot_password_request') }}" class="text-decoration-none text-success">
+                                                        Mot de passe oublié ?
                                                     </a>
                                                 </p>
                                             </form>
