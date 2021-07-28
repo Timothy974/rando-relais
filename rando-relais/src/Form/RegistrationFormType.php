@@ -27,10 +27,8 @@ class RegistrationFormType extends AbstractType
         // We use the addEventlistener method on PRE_SUBMIT to add form fields, before submitting the data to the form.
             ->addEventListener(FormEvents::PRE_SUBMIT, [$this, 'onPreSubmit'])
             ->add('status', CheckboxType::class, [
+                // 'mapped'    => false,
                 'label'     => 'Ange du chemin',
-                'attr'      => [
-                    'id'    => 'switch-to-angel-registration'
-                ]
             ])
             ->add('lastname', null, [
                 'label' => false,
@@ -74,11 +72,7 @@ class RegistrationFormType extends AbstractType
                 'attr'      => [
                     'placeholder' => 'Numéro de téléphone'
                 ],
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Merci de saisir votre numéro de téléphone.'
-                    ]),
-                ]
+                
             ])
             ->add('zipcode', null, [
                 'required'  => false,
@@ -86,23 +80,15 @@ class RegistrationFormType extends AbstractType
                 'attr'      => [
                     'placeholder' => 'Code postale'
                 ],
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Merci de saisir votre code postale.'
-                    ])
-                ]
+                
             ])
             ->add('city', null, [
-                'required' => false,
+                'required'  => false,
                 'label'     => false,
                 'attr'  => [
                     'placeholder' => 'Commune'
                 ],
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Merci de saisir le nom de votre commune.'
-                    ])
-                ]
+                
             ])
             ->add('services', EntityType::class, [
                 'required'      =>  false,
@@ -110,11 +96,6 @@ class RegistrationFormType extends AbstractType
                 'by_reference'  => false,
                 'multiple'      => true,
                 'expanded'      => true,
-                'constraints'   => [
-                    new NotBlank([
-                        'message' => 'Merci de sélectionner au minimum un service.'
-                    ]),
-                ]
             ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped'        => false,
@@ -157,14 +138,15 @@ class RegistrationFormType extends AbstractType
      */
     public function onPreSubmit(FormEvent $event)
     {
-        // We get the form data. 
+        // We get the form data.
         $user = $event->getData();
         $form = $event->getForm();
-
+        // if ($user['status'])
+       
         // We check if the switch button is checked.
-        // If $user['status'] === true that mean the user want to register as a Angel (status 2). 
-        // In order to collect the data related to the Angel's status we need to require the form fields related to this status. 
-        if ($user['status']) {
+        // If $user['status'] === true that mean the user want to register as a Angel (status 2).
+        // In order to collect the data related to the Angel's status we need to require the form fields related to this status.
+        if (isset($user['status']) ) {
             // We add the form fields related to the Angel's status with the attribute required => true.
             $form
             ->add('phonenumber', null, [
