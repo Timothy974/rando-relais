@@ -13,7 +13,7 @@ const switchToAngel = {
   dinnerCheckBox: null,
   powerCheckBox: null,
   init: function () {
-    onsole.log("Hello ! I'm the switchToAngel component.");
+    console.log("Hello ! I'm the switchToAngel component.");
     // We get the DOM elements that we need to interate with.
     // We add a listener & a handler on the click evt on each of them.
 
