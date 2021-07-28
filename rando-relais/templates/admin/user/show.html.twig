@@ -3,6 +3,8 @@
 {% block title %}Fiche utilsateur - {{parent()}}{% endblock %}
 
 {% block body %}
+{% include "partials/_admin-aside.html.twig" %}
+<div class="admin w-75 my-5">
     <h1 class='text-center'>Utilisateur : {{ user.firstName }} {{user.lastName}}</h1>
 <div class="my-3 col-lg-6 col-10 mx-5 mx-md-auto">
 
