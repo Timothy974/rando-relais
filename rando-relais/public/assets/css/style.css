@@ -84,9 +84,14 @@ h2 {
 /**** Dark & light mode ****/
 
 /* When mode = Dark */
+
+
 .dark {
    color: #fff;
    background-color: #2a2a2e;
+}
+.darktable{
+   background-color: rgb(104, 99, 99);
 }
 
 .h-white {

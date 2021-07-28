@@ -5,8 +5,16 @@ const mode = {
   switch: null,
   clickedSwitch: null,
   body: null,
+ // variables used for teh  background of admin's tables
+  darkTableBg : "dark",
+  darkTableBg1: "darktable",
+  lightTableBg:"table-striped",
+  lightTableBg1:null,
+  table:null,
+  // -----------------------------------------------
   headerHome: null,
   headerShared: null,
+  
   init: function () {
     // We get the DOM elements that we need to interate with.
     // We add a listener & a handler on the click evt on each of them.
@@ -22,7 +30,10 @@ const mode = {
 
     // The body element.
     mode.body = document.body;
-
+    // get the table element by his ID
+    mode.table = document.getElementById("mode");
+    
+   
     // The headers elements.
     mode.headerHome = document.querySelector(".header-home");
     mode.headerShared = document.querySelector(".header-shared");
@@ -38,16 +49,16 @@ const mode = {
     // We get the value backup in localStorage.
     mode.backgroundColor = localStorage.getItem("mode");
 
-    // If backgroundColor === true.
-    if (mode.backgroundColor) {
+    // If backgroundColor si dark.
+    if (mode.backgroundColor && mode.backgroundColor == "dark") {
       // We call the switchBackgroundColor() method to change the color with the value of backgroundColor.
-      mode.switchBackgroundColor(mode.backgroundColor);
+      mode.switchBackgroundColor(mode.backgroundColor, mode.darkTableBg, mode.darkTableBg1);
     } // Else backgroundColor === false.
     else {
       // We set a value by default to the mode key in localStorage.
       backgroundColorByDefault = localStorage.setItem("mode", "light");
       // We call the switchBackgroundColor() method to change the color with the value of backgroundColor.
-      mode.switchBackgroundColor(mode.backgroundColorByDefault);
+      mode.switchBackgroundColor(mode.backgroundColorByDefault, mode.lightTableBg, mode.lightTableBg1);
     }
   },
   handleSelectBackgroundColorSwitch: function (evt) {
@@ -61,15 +72,16 @@ const mode = {
       // We set the value dark to backgroundColor.
       mode.backgroundColor = "dark";
       // We call the switchBackgroundColor() method to change the background color with the backgroundColor in argument.
-      mode.switchBackgroundColor(mode.backgroundColor);
+      mode.switchBackgroundColor(mode.backgroundColor, mode.darkTableBg, mode.darkTableBg1);
     } // Else if the mode backup in localStorage have the dark value.
     else if (localStorage.getItem("mode") === "dark") {
       // We backup in localStorage the new value of the mode.
       localStorage.setItem("mode", "light");
       // We set the value dark to backgroundColor.
       mode.backgroundColor = "light";
+      
       // We call the switchBackgroundColor() method to change the background color with the backgroundColor in argument.
-      mode.switchBackgroundColor(mode.backgroundColor);
+      mode.switchBackgroundColor(mode.backgroundColor, mode.lightTableBg, mode.lightTableBg1);
     }
   },
   // Method who check or uncheck the switch according to the localStorage data.
@@ -143,14 +155,25 @@ const mode = {
     }
   },
   // Method who switch the current backgroundColor to a newBackgroumdColor.
-  switchBackgroundColor: function (newBackgroundColor) {
+  switchBackgroundColor: function (newBackgroundColor, newTableBg, newTableBg1) {
     // We use the JS API classList to interact with the classes of the DOM elements.
     mode.body.classList.remove("dark", "light");
-
+    if(mode.table){
+    mode.table.classList.remove("dark", "darktable", "table-striped");}
+    //mode.table1.classList.remove("dark", "darktable", "table-striped");
+    
     // If the backgroundColor is different than the backgroundColorByDefault.
     if (newBackgroundColor !== mode.backgroundColorByDefault) {
       // We toggle the correspondent class to the body.
       mode.body.classList.add(newBackgroundColor);
+    if(mode.table){
+      mode.table.classList.add(newTableBg);
+      mode.table.classList.add(newTableBg1);
+    }
+     // mode.table1.classList.add(newTableBg);
+    //mode.table1.classList.add(newTableBg1);
+
+      
     }
 
     // When we switch the backgroundColor we call the switchBackgroundImage() method to swtich the backgroundImage of the headers.
