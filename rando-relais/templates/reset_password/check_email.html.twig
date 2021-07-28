@@ -6,13 +6,18 @@
     <div class="container mt-5 mb-5">
     <h2 class="mb-5 text-center">Email de réinitialisation de mot de passe envoyé ! </h2>
         <p>
-            Si un compte correspondant à votre adresse email existe, vous recevrez un email très prochainement contenant un lien pour réinitialiser votre mot de passe.
-            Ce lien expirera dans 1 heure.
-            {# Ce lien expirera dans {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}. #}
+            Si un compte correspondant à votre adresse email existe, 
+            vous recevrez un email très prochainement contenant un lien pour réinitialiser votre mot de passe.
         </p>
         <p>
-            Si vous ne recevez pas cet email, veuillez s'il vous plaît vérifier votre dossier "Spam", 
-            ou <a href="{{ path('app_forgot_password_request') }}">retenter une fois de plus.</a>
+            Ce lien expirera dans 1 heure.
+        </p>
+        <p>
+            <strong>
+                Si vous ne recevez pas cet email, veuillez s'il vous plaît vérifier votre dossier "Spam",
+                ou
+            </strong> 
+            <a href="{{ path('app_forgot_password_request') }}">réessayer</a>
         </p>
     </div>
 {% endblock %}
