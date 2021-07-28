@@ -77,8 +77,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $picture;
 
     /**
-     * @ORM\Column(type="integer")
-     * @Groups({"users"})
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $phoneNumber;
 
