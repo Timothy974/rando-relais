@@ -11,6 +11,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 
@@ -30,18 +31,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=64)
+    //  * @Assert\NotBlank(message="Merci de saisir votre nom.")
      * @Groups({"users"})
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=64)
+    //  * @Assert\NotBlank(message="Merci de saisir votre prénom.")
      * @Groups({"users"})
      */
     private $lastName;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+    //  * @Assert\NotBlank(message="Merci de saisir votre adresse email.")
+    //  * @Assert\Email(message="L'adresse email saisie est invalide.")
      * @Groups({"users"})
      */
     private $email;
@@ -55,6 +60,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+    //  * @Assert\NotBlank(message="Merci de saisir un mot de passe.")
      */
     private $password;
 
