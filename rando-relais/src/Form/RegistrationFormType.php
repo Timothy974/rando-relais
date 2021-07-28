@@ -38,7 +38,7 @@ class RegistrationFormType extends AbstractType
                     new NotBlank([
                         'message' => 'Merci de saisir votre nom.'
                     ])
-                ]
+                ],
             ])
             ->add('firstname', null, [
                 'label' => false,

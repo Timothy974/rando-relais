@@ -59,7 +59,7 @@ class RegistrationController extends AbstractController
         }
 
         // We display the page we want with a array of optional data.
-        // We and we specify the related HTTP response status code.
+        // We specify the related HTTP response status code.
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
         ], new Response('', 200));
