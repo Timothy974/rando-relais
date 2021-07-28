@@ -7,7 +7,8 @@
     <h2 class="mb-5 text-center">Email de réinitialisation de mot de passe envoyé ! </h2>
         <p>
             Si un compte correspondant à votre adresse email existe, vous recevrez un email très prochainement contenant un lien pour réinitialiser votre mot de passe.
-            Ce lien expirera dans {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
+            Ce lien expirera dans 1 heure.
+            {# Ce lien expirera dans {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}. #}
         </p>
         <p>
             Si vous ne recevez pas cet email, veuillez s'il vous plaît vérifier votre dossier "Spam", 
