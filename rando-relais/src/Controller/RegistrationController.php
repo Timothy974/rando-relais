@@ -53,14 +53,15 @@ class RegistrationController extends AbstractController
             // We display a flash message for the user.
             $this->addFlash('success', 'Bonjour ' .$user->getFirstName(). '. Votre compte a bien été créé.');
 
-            // We redirect to user to the login page with a array of optional data & we specify the related HTTP response status code.
+            // We redirect to user to the login page with a array of optional data.
+            // We specify the related HTTP response status code.
             return $this->redirectToRoute('app_login', [], 301);
         }
 
         // We display the page we want with a array of optional data.
+        // We and we specify the related HTTP response status code.
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
-            // We specify the related HTTP response status code.
         ], new Response('', 200));
     }
 }

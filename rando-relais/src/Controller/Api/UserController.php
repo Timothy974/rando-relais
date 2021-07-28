@@ -44,22 +44,49 @@ class UserController extends AbstractController
         ]);
     }
 
-    // /**
-    //  * @Route("/{id}", name="user_create", methods={"GET"})
-    //  */
-    // public function create(Request $request, SerializerInterface $serializerInterface, ValidatorInterface $validatorInterface): Response
-    // {
-    //     // We get the data in JSON. 
-    //     $jsonData = $request->getContent();
+    /**
+     * @Route("", name="user_create", methods={"POST"})
+     */
+    public function create(Request $request, SerializerInterface $serializerInterface, ValidatorInterface $validatorInterface): Response
+    {
+        // We get the data in JSON.
+        $jsonData = $request->getContent();
 
-    //     // We use the deserialize() method to convert the JSON in objet => Deserialisation. 
-    //     $user = $serializer->deserialize($JsonData, User::class, 'json');
+        // We use the deserialize() method to convert the JSON in objet => Deserialisation.
+        $user = $serializerInterface->deserialize($jsonData, User::class, 'json');
 
-    //     // We check if the Asserts of the User Entity are respected
+        // We check if the Asserts of the User Entity are respected.
+        $errors = $validatorInterface->validate($user);
 
-    //     // We get all the user by is id.
-    //     // We display the page we want with a array who optional data.
-    //     // We specify the related HTTP response status code.
-    //     return $this->json(, 200, []);
-    // }
+        // If the number of error is upper to zero.
+        if (count($errors) > 0) {
+            // We detect at least one error.
+            $errorsString = (string) $errors;
+            // We return the errors.
+            // We specify the related HTTP response status code.
+            return $this->json(
+                [
+                    'error' => $errorsString
+                ],
+                500
+            );
+        } // We don't have any error.
+        else {
+            // We call the getManager().
+            $entityManager = $this->getDoctrine()->getManager();
+            // We persist the data.
+            $entityManager->persist($user);
+            // We backup the data in the database.
+            $entityManager->flush();
+
+            // We display a flash message for the user.
+            // We specify the related HTTP response status code.
+            return $this->json(
+                [
+                    'message' => 'L\'utilisateur ' .$user->getFirstName(). ' ' .$user->getLastName(). ' a bien été créé'
+                ],
+                201
+            );
+        }
+    }
 }
