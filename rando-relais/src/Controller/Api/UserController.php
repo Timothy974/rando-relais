@@ -18,7 +18,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  */
 class UserController extends AbstractController
 {
-    
+
     // Proprietes availables in the object.
     private $entityManager;
 
@@ -33,29 +33,24 @@ class UserController extends AbstractController
      */
     public function angelDetails(int $id, UserRepository $userRepository): Response
     {
-        // TODO : check to get only status 2.
-
-        // We get all the Angel user by is id.
+        // We get the user by is id.
         $user = $userRepository->find($id);
 
         // If the user's status is 2 (Angel). We can display the data.
         if ($user->getStatus() === 2) {
-            // dd("Status is : " .$user->getStatus());
-            // We display the page we want with a array who optional data.
+            // We display the data with a array of optional data.
             // We specify the related HTTP response status code.
-            return $this->json($userRepository, 200, [], [
+            return $this->json($user, 200, [], [
                 'groups' => 'users'
             ]);
-        } // Else the user have a status 1 (Marcheur). We can't display the data because the Marcheur don't have a information page.
+        } // Else the user have a status 1 (Marcheur).
         else {
-            // dd("Status is : " .$user->getStatus(). ". Information page dosen't exist.");
-
+            // We can't display the data because the status 1 (Marcheur) don't have a information page.
             // We display a flash message for the user.
-            $this->addFlash('info', 'L\'utilisateur ' .$user->getFirstName(). 'est un marcheur. De fait, il ne possède pas de page information.');
-
-            // We redirect to user to the home page with a array of optional data.
             // We specify the related HTTP response status code.
-            return $this->redirectToRoute('main_list_angels_and_services', [], 301);
+            return $this->json([
+                'message' => 'Un utilisateur marcheur ne possède pas de page information.'
+            ], 404);
         }
     }
 
@@ -65,7 +60,7 @@ class UserController extends AbstractController
     public function showUserProfil(User $user): Response
     {
         // We get all the Angel user by is id.
-        // We display the page we want with a array who optional data.
+        // We display the data with a array of optional data.
         // We specify the related HTTP response status code.
         return $this->json($user, 200, [], [
             'groups' => 'users'
@@ -86,8 +81,16 @@ class UserController extends AbstractController
         // We check if the Asserts of the User Entity are respected.
         $errors = $validatorInterface->validate($user);
 
-        // If the number of error is equal to 0.
-        if (count($errors) == 0) {
+        // If the number of error is uppder than 0.
+        if (count($errors) > 0) {
+            // We have at least one error.
+            // We display the eventual errors for the user.
+            // We specify the related HTTP response status code.
+            return $this->json([
+                'errors' => (string) $errors
+            ], 500);
+        } // Else we don't count any error.
+        else {
             // We call the getManager() method.
             $entityManager = $this->getDoctrine()->getManager();
             // We persist the data.
@@ -98,20 +101,14 @@ class UserController extends AbstractController
             // We display a flash message for the user.
             // We specify the related HTTP response status code.
             return $this->json([
-                'message' => 'L\'utilisateur ' .$user->getFirstName(). ' ' .$user->getLastName(). ' a bien été créé.'
+                'message' => 'L\'utilisateur ' . $user->getFirstName() . ' ' . $user->getLastName() . ' a bien été créé.'
             ], 201);
         }
-
-        // We display the eventual errors for the user.
-        // We specify the related HTTP response status code.
-        return $this->json([
-            'errors' => (string) $errors
-        ], 500);
     }
 
     /**
-    * @Route("/{id}", name="user_update", methods={"PUT|PATCH"})
-    */
+     * @Route("/{id}", name="user_update", methods={"PUT|PATCH"})
+     */
     public function update(user $user, Request $request, SerializerInterface $serializerInterface, ValidatorInterface $validatorInterface): Response
     {
         // We get the data in JSON.
@@ -123,9 +120,18 @@ class UserController extends AbstractController
         // We check if the Asserts of the User Entity are respected.
         $errors = $validatorInterface->validate($user);
 
-        // If the number of error is equal to 0.
-        if (count($errors) == 0) {
-            // We don't have any error.
+        // If the number of error is uppder than 0.
+        if (count($errors) > 0) {
+            // We have at least one error.
+            // We display the eventual errors for the user.
+            // We specify the related HTTP response status code.
+            // We display the eventual errors for the user.
+            // We specify the related HTTP response status code.
+            return $this->json([
+                'errors' => (string) $errors
+            ], 400);
+        } // Else we don't count any error.
+        else {
             // We call the getManager() method.
             // We backup the data in the database.
             $this->getDoctrine()->getManager()->flush();
@@ -133,20 +139,14 @@ class UserController extends AbstractController
             // We display a flash message for the user.
             // We specify the related HTTP response status code.
             return $this->json([
-                'message' => 'L\'utilisateur ' .$user->getFirstName(). ' ' .$user->getLastName(). ' a bien été mis à jour.'
+                'message' => 'L\'utilisateur ' . $user->getFirstName() . ' ' . $user->getLastName() . ' a bien été mis à jour.'
             ], 201);
         }
-
-        // We display the eventual errors for the user.
-        // We specify the related HTTP response status code.
-        return $this->json([
-            'errors' => (string) $errors
-        ], 400);
     }
 
     /**
-    * @Route("/{id}", name="user_delete", methods={"DELETE"})
-    */
+     * @Route("/{id}", name="user_delete", methods={"DELETE"})
+     */
     public function delete(User $user): Response
     {
         // We delete the user.
@@ -157,7 +157,7 @@ class UserController extends AbstractController
         // We display a flash message for the user.
         // We specify the related HTTP response status code.
         return $this->json([
-                'message' => 'L\'utilisateur ' .$user->getFirstName(). ' ' .$user->getLastName(). ' a bien été supprimé.'
+            'message' => 'L\'utilisateur ' . $user->getFirstName() . ' ' . $user->getLastName() . ' a bien été supprimé.'
         ], 200);
     }
 }

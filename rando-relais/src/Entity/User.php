@@ -31,7 +31,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=64)
-    //  * @Assert\NotBlank(message="Merci de saisir votre nom.")
      * @Groups({"users"})
      */
     private $firstName;
@@ -45,8 +44,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-    //  * @Assert\NotBlank(message="Merci de saisir votre adresse email.")
-    //  * @Assert\Email(message="L'adresse email saisie est invalide.")
      * @Groups({"users"})
      */
     private $email;
@@ -60,7 +57,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
-    //  * @Assert\NotBlank(message="Merci de saisir un mot de passe.")
      */
     private $password;
 

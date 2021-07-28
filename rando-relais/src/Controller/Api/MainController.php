@@ -21,7 +21,7 @@ class MainController extends AbstractController
         // We get all the users with the status 2 => angel and the services they offer.
         $angels = $userRepository->findAngelAndServices(2);
 
-        // We display the page we want with a array who optional data.
+        // We display the page with a array of optional data.
         // We specify the related HTTP response status code.
         return $this->json($angels, 200, [], [
             'groups' => 'users'
