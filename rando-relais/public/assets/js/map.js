@@ -1,5 +1,5 @@
 
-
+// Get the latitude and longitude of the angel
 let lat = document.querySelector('#mapid').dataset.lat;
 let lon = document.querySelector('#mapid').dataset.lon;
 
