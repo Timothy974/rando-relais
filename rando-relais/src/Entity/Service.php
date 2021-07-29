@@ -33,18 +33,21 @@ class Service
      *      minMessage = "Le nom du service doit comprendre au moins {{ limit }} charactères",
      *      maxMessage = "La longueur du nom du service ne peut excéder {{ limit }} charactères"
      * )
+     * @Groups({"services"})
      * 
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"services"})
      */
     private $description;
 
     
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
+     * @Groups({"services"})
      */
     private $image;
 
