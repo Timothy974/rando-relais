@@ -48,13 +48,12 @@ class RegistrationController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
-            // do anything else you need here, like send an email
+            // do anything else you need here, like send an email   
 
             // We display a flash message for the user.
             $this->addFlash('success', 'Bonjour ' .$user->getFirstName(). '. Votre compte a bien été créé.');
 
-            // We redirect to user to the login page with a array of optional data.
-            // We specify the related HTTP response status code.
+            // We redirect to user to the login page with a array of optional data & we specify the related HTTP response status code.
             return $this->redirectToRoute('app_login', [], 301);
         }
 

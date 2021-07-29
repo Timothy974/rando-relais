@@ -29,37 +29,28 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/information/{id}", name="user_angel_details", methods={"GET"})
+     * @Route("", name="user_list", methods={"GET"})
      */
-    public function angelDetails(int $id, UserRepository $userRepository): Response
+    public function list(UserRepository $userRepository): Response
     {
-        // We get the user by is id.
-        $user = $userRepository->find($id);
+        // We get all the users.
+        $user = $userRepository->findAll();
 
-        // If the user's status is 2 (Angel). We can display the data.
-        if ($user->getStatus() === 2) {
-            // We display the data with a array of optional data.
-            // We specify the related HTTP response status code.
-            return $this->json($user, 200, [], [
-                'groups' => 'users'
-            ]);
-        } // Else the user have a status 1 (Marcheur).
-        else {
-            // We can't display the data because the status 1 (Marcheur) don't have a information page.
-            // We display a flash message for the user.
-            // We specify the related HTTP response status code.
-            return $this->json([
-                'message' => 'Un utilisateur marcheur ne possède pas de page information.'
-            ], 404);
-        }
+        // We display the page with a array of optional data.
+        // We specify the related HTTP response status code.
+        return $this->json($user, 200, [], [
+            'groups' => 'users'
+        ]);
     }
 
     /**
-     * @Route("/{id}/profil", name="user_profil", methods={"GET"})
+     * @Route("/{id}/profil", name="user_details", methods={"GET"})
      */
-    public function showUserProfil(User $user): Response
+    public function details(int $id, UserRepository $userRepository): Response
     {
         // We get all the Angel user by is id.
+        $user = $userRepository->find($id);
+
         // We display the data with a array of optional data.
         // We specify the related HTTP response status code.
         return $this->json($user, 200, [], [
@@ -123,8 +114,6 @@ class UserController extends AbstractController
         // If the number of error is uppder than 0.
         if (count($errors) > 0) {
             // We have at least one error.
-            // We display the eventual errors for the user.
-            // We specify the related HTTP response status code.
             // We display the eventual errors for the user.
             // We specify the related HTTP response status code.
             return $this->json([

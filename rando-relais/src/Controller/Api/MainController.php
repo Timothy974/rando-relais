@@ -13,18 +13,5 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class MainController extends AbstractController
 {
-    /**
-     * @Route("", name="main_list_angels_and_services", methods={"GET"})
-     */
-    public function listAngelsAndServices(UserRepository $userRepository): Response
-    {
-        // We get all the users with the status 2 => angel and the services they offer.
-        $angels = $userRepository->findAngelAndServices(2);
-
-        // We display the page with a array of optional data.
-        // We specify the related HTTP response status code.
-        return $this->json($angels, 200, [], [
-            'groups' => 'users'
-        ]);
-    }
+    // TODO 
 }
