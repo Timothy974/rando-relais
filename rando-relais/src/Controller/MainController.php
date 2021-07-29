@@ -18,16 +18,19 @@ class MainController extends AbstractController
      *
      * @return Response
      */
-    public function index(UserRepository $user, ServiceRepository $service): Response
+    public function index(UserRepository $user, ServiceRepository $service, Request $request): Response
     {
         $data = new SearchFilter();
         $form = $this->createForm(SearchType::class, $data);
-        
+        $form->handleRequest($request);
+        $userData = $user->findSearch($data);
+ 
 
         $angels = $user->findAngelAndServices(2);
         return $this->render('main/index.html.twig', [
             'angels' => $angels,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'angels' => $userData
         ]);
     }
 
@@ -46,6 +49,7 @@ class MainController extends AbstractController
      *
      * @return Response
      */
+    /*
     public function search(Request $request, UserRepository $angel, ServiceRepository $service): Response
     {
         // Get the information from input search form
@@ -58,6 +62,8 @@ class MainController extends AbstractController
             'angels' => $angelFilter,
         ]);
     }
+    */
+    
     /**
     * @Route("/download", name="main_download", methods={"GET"})
     *

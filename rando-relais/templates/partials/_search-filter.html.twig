@@ -1,2 +1,13 @@
 {{form_start(form)}}
+<h4>Recherche par ville ou code postal</h4>
+<div class="d-flex justify-content-between">
+   {{form_row(form.city)}}
+   {{form_row(form.zipCode)}}
+</div>
+<h4>Ajouter un filtre par service</h4>
+<div class="d-flex">
+   {{form_row(form.service)}}
+</div>
+<button type="submit" class="btn btn-success">Filtrer</button>
+
 {{form_end(form)}}

@@ -34,7 +34,7 @@ class SearchType extends AbstractType
                'required' => false,
                'class' => Service::class,
                'expanded' => true,
-               'multiple' => true
+               'multiple' => true,
             ]);
    }
    public function configureOptions(OptionsResolver $resolver)
