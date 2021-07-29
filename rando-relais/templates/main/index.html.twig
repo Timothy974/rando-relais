@@ -21,10 +21,11 @@
 						<h1 class="mt-5 text-center">Marcher & Partager</h1>
 					</div>
 					<div class="container search">
-						<form class="d-flex mt-5" action="{{path('search')}}">
+						{# <form class="d-flex mt-5" action="{{path('search')}}">
 							<input class="form-control me-2" name="query" type="search" placeholder="Ex : Annecy" aria-label="Search">
 							<button class="btn btn-outline-secondary" type="submit">Filtrer</button>
-						</form>
+						</form> #}
+						{% include "partials/_search-filter.html.twig" %}
 					</div>
 					<div class="album py-5">
 						<div class="container-fluid ">

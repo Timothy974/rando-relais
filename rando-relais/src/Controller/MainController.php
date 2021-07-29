@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Data\SearchFilter;
+use App\Form\SearchType;
 use App\Repository\UserRepository;
 use App\Repository\ServiceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,9 +20,14 @@ class MainController extends AbstractController
      */
     public function index(UserRepository $user, ServiceRepository $service): Response
     {
+        $data = new SearchFilter();
+        $form = $this->createForm(SearchType::class, $data);
+        
+
         $angels = $user->findAngelAndServices(2);
         return $this->render('main/index.html.twig', [
-            'angels' => $angels
+            'angels' => $angels,
+            'form' => $form->createView()
         ]);
     }
 
