@@ -27,7 +27,6 @@ class RegistrationFormType extends AbstractType
         // We use the addEventlistener method on PRE_SUBMIT to add form fields, before submitting the data to the form.
             ->addEventListener(FormEvents::PRE_SUBMIT, [$this, 'onPreSubmit'])
             ->add('status', CheckboxType::class, [
-                // 'mapped'    => false,
                 'label'     => 'Ange du chemin',
             ])
             ->add('lastname', null, [
@@ -39,7 +38,7 @@ class RegistrationFormType extends AbstractType
                     new NotBlank([
                         'message' => 'Merci de saisir votre nom.'
                     ])
-                ]
+                ],
             ])
             ->add('firstname', null, [
                 'label' => false,
