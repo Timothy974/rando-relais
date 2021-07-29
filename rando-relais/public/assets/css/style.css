@@ -185,7 +185,7 @@ input:checked+.slider:before {
 /* size of the map feature */
 #mapid {
    height: 30em;
-   width: 70vw;
+   width: 100%;
 }
 
 /**** MODAL INFORMATION ****/
