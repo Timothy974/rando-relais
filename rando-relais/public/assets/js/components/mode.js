@@ -5,16 +5,16 @@ const mode = {
   switch: null,
   clickedSwitch: null,
   body: null,
- // variables used for teh  background of admin's tables
-  darkTableBg : "dark",
+  // variables used for teh  background of admin's tables
+  darkTableBg: "dark",
   darkTableBg1: "darktable",
-  lightTableBg:"table-striped",
-  lightTableBg1:null,
-  table:null,
+  lightTableBg: "table-striped",
+  lightTableBg1: null,
+  table: null,
   // -----------------------------------------------
   headerHome: null,
   headerShared: null,
-  
+
   init: function () {
     // We get the DOM elements that we need to interate with.
     // We add a listener & a handler on the click evt on each of them.
@@ -32,11 +32,14 @@ const mode = {
     mode.body = document.body;
     // get the table element by his ID
     mode.table = document.getElementById("mode");
-    
-   
     // The headers elements.
     mode.headerHome = document.querySelector(".header-home");
     mode.headerShared = document.querySelector(".header-shared");
+    // Connection form elements
+    mode.connectionForm = document.getElementById('connection-form');
+    mode.createAccount = document.getElementById('create-account');
+    mode.lostPassword = document.getElementById('lost-password');
+    mode.pipe = document.getElementById('pipe');
 
     // When the app is loaded we load to the page the backgroundColor wich is backup in localSatorage.
     mode.loadMode();
@@ -64,7 +67,6 @@ const mode = {
   handleSelectBackgroundColorSwitch: function (evt) {
     // We get the DOM element from wich the event occured.
     mode.clickedSwitch = evt.currentTarget;
-
     // If the mode backup in localStorage have the light value.
     if (localStorage.getItem("mode") === "light") {
       // We backup in localStorage the new value of the mode.
@@ -79,7 +81,7 @@ const mode = {
       localStorage.setItem("mode", "light");
       // We set the value dark to backgroundColor.
       mode.backgroundColor = "light";
-      
+
       // We call the switchBackgroundColor() method to change the background color with the backgroundColor in argument.
       mode.switchBackgroundColor(mode.backgroundColor, mode.lightTableBg, mode.lightTableBg1);
     }
@@ -117,6 +119,7 @@ const mode = {
       if (mode.backgroundColor) {
         // If this the value of mode is light.
         if (mode.backgroundColor == "light") {
+          ;
           // We display the light mode backgroundImage to the headerHome.
           mode.headerHome.style.backgroundImage =
             "url('/assets/images/background/background-header.jpg')";
@@ -137,11 +140,15 @@ const mode = {
       if (mode.backgroundColor) {
         // If this the value of mode is light.
         if (mode.backgroundColor == "light") {
+          // Change connection form colors
+          mode.changeConnectionForm(mode.backgroundColor);
           // We display the light mode backgroundImage to the headerShared.
           mode.headerShared.style.backgroundImage =
             "url('/assets/images/background/background-header.jpg')";
         } // Else the value of mode is dark.
         else {
+          // Change connection form colors
+          mode.changeConnectionForm(mode.backgroundColor);
           // We display the dark mode backgroundImage to the headerShared.
           mode.headerShared.style.backgroundImage =
             "url('/assets/images/background/background-header-dark-mode.jpg')";
@@ -154,26 +161,49 @@ const mode = {
       }
     }
   },
+  // Method to change the connection form colors (background, text color, etc...)
+  changeConnectionForm: function (currentBackgroundColor) {
+    // If current mode is 'dark', change the connection form background to white, remove the white border and set links color to black.
+    if (mode.connectionForm && mode.createAccount && mode.lostPassword && mode.pipe) {
+      if (currentBackgroundColor == 'light') {
+        mode.connectionForm.classList.remove('dark')
+        mode.connectionForm.classList.remove('border-secondary');
+        mode.createAccount.classList.remove('text-white');
+        mode.lostPassword.classList.remove('text-white');
+        mode.pipe.classList.add('text-success');
+      }
+      // If current mode is 'light', change the connection form background to dark, add a white border and set links color to green.
+      else {
+        mode.connectionForm.classList.add('dark');
+        mode.connectionForm.classList.add('border-secondary');
+        mode.connectionForm.classList.add('text-white');
+        mode.createAccount.classList.add('text-white');
+        mode.lostPassword.classList.add('text-white');
+        mode.pipe.classList.remove('text-success');
+      }
+    }
+  },
   // Method who switch the current backgroundColor to a newBackgroumdColor.
   switchBackgroundColor: function (newBackgroundColor, newTableBg, newTableBg1) {
     // We use the JS API classList to interact with the classes of the DOM elements.
     mode.body.classList.remove("dark", "light");
-    if(mode.table){
-    mode.table.classList.remove("dark", "darktable", "table-striped");}
+    if (mode.table) {
+      mode.table.classList.remove("dark", "darktable", "table-striped");
+    }
     //mode.table1.classList.remove("dark", "darktable", "table-striped");
-    
+
     // If the backgroundColor is different than the backgroundColorByDefault.
     if (newBackgroundColor !== mode.backgroundColorByDefault) {
       // We toggle the correspondent class to the body.
       mode.body.classList.add(newBackgroundColor);
-    if(mode.table){
-      mode.table.classList.add(newTableBg);
-      mode.table.classList.add(newTableBg1);
-    }
-     // mode.table1.classList.add(newTableBg);
-    //mode.table1.classList.add(newTableBg1);
+      if (mode.table) {
+        mode.table.classList.add(newTableBg);
+        mode.table.classList.add(newTableBg1);
+      }
+      // mode.table1.classList.add(newTableBg);
+      //mode.table1.classList.add(newTableBg1);
 
-      
+
     }
 
     // When we switch the backgroundColor we call the switchBackgroundImage() method to swtich the backgroundImage of the headers.

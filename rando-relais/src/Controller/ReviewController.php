@@ -19,7 +19,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class ReviewController extends AbstractController
 {
     /**
-     * @Route("/{id}/ajouter", name="add", methods={"GET","POST"})
+     * @Route("/{id}/ajouter", name="add", methods={"GET","POST"}, requirements={"id" = "\d+"})
      */
     public function add(int $id, Request $request, UserInterface $userInterface, UserRepository $userRepository): Response
     {
@@ -67,7 +67,7 @@ class ReviewController extends AbstractController
     /**
      * @Route("/emis", name="made-list", methods="GET")
      */
-    public function madeList(UserInterface $userInterface)
+    public function madeList(UserInterface $userInterface) : Response
     {
         // Get logged-in user'id
         $loggedInUserId = $userInterface->getId();
@@ -91,7 +91,7 @@ class ReviewController extends AbstractController
     /**
      * @Route("/recu", name="received-list", methods="GET")
      */
-    public function receivedList(UserRepository $userRepository, UserInterface $userInterface)
+    public function receivedList(UserRepository $userRepository, UserInterface $userInterface) : Response
     {
         // Get logged-in user'id
         $loggedInUserId = $userInterface->getId();
