@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Repository\ServiceRepository;
+use App\Service\AddressApi;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,7 +17,7 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/inscription", name="app_register")
      */
-    public function register(Request $request, UserPasswordHasherInterface $UserPasswordHasherInterface): Response
+    public function register(Request $request, UserPasswordHasherInterface $UserPasswordHasherInterface, AddressApi $addressApi): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -47,6 +48,22 @@ class RegistrationController extends AbstractController
           
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
+
+            // if a someone create an angel account we use addressApi service to get the gps coordinates of his city
+            if ($user->getStatus() === 2) {
+                // Get city and zipCode of the new subscriber to use addressApi service
+                $city = $user->getCity();
+                $zipCode = $user->getZipCode();
+                // Get an array of data with latitude and longitude of the subscriber's city
+                $dataArray = $addressApi->getCoordinatesWithAddress($city, $zipCode);
+                // Recover the latitude and longitude of the city
+                $lat = $dataArray["features"][0]["geometry"]["coordinates"][1];
+                $lon = $dataArray["features"][0]["geometry"]["coordinates"][0];
+                // Set the latitude and longitude of the subscriber before flush in database
+                $user->setLatitude($lat);
+                $user->setLongitude($lon);
+            }
+
             $entityManager->flush();
             // do anything else you need here, like send an email   
 

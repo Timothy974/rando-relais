@@ -24,6 +24,7 @@ class WeatherApi
      */
     public function getWeather(string $zipCode)
     {
+        // client do the request to the api
        $response = $this->client->request('GET', $this->apiUrl.$zipCode.$this->option.'&appid='.$this->apiKey);
        
        return $response->toArray();
