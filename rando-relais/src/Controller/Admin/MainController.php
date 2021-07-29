@@ -40,10 +40,10 @@ class MainController extends AbstractController
             if ($user->getStatus() === 2) {
                 $angel++;
                 foreach ($user->getServices() as $service) {
-
-                    if (in_array($service->getName(), (array)$user->getServices())) {
+                    /* Check if service is offered by angel, and if yes, add one more in the array popularity of services for this service */
+                   
                         $arrayResult[$service->getName()]++;
-                    }
+                   
                 }
             } else if ($user->getStatus() === 1) {
                 $walker++;
