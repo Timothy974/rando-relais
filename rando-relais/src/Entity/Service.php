@@ -8,6 +8,7 @@ use App\Repository\ServiceRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
@@ -44,7 +45,6 @@ class Service
     
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
-     * 
      */
     private $image;
 
@@ -60,7 +60,6 @@ class Service
 
     /**
      * @ORM\ManyToMany(targetEntity=User::class, mappedBy="services")
-     * 
      */
     private $users;
 

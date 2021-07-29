@@ -5,6 +5,7 @@ namespace App\Entity;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ReviewRepository::class)
