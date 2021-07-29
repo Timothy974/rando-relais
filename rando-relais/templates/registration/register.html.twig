@@ -42,17 +42,8 @@
 			</div>
 			{# Services icons #}
 			{# TODO START : improve display like in the integration. #}
-			<div class="row justify-content-center">
+			<div class="mb-3 col-lg-6 mx-auto">
 				{{ form_row(registrationForm.services) }}
-				{# {% for key,item in registrationForm.services %}
-									<div
-										class="col-lg-2 col-md-4 text-center opacity-50" id="{{ item.vars.label|slug|lower }}" class="serviceImg">
-										<label for="{{ item.vars.label|slug|lower }}">
-										<img src="{{ asset('assets/images/service_icons/' ~ sitem.vars.label|slug|lower ) }}" alt="service-icon" class="rounded-circle w-25 "></label>
-										{{ form_widget(item,{'attr': {'class': item.vars.label|slug|lower}}) }}
-										<img src="{{ asset('assets/images/service_icons/validate-20x20.png') }}" id="{{ 'validate-' ~ item.vars.label|slug|lower }}" class="d-none">
-									</div>
-								{% endfor %} #}
 			</div>
 			{# TODO END #}
 		</div>

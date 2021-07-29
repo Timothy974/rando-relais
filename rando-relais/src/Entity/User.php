@@ -10,6 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 
 
@@ -23,21 +25,25 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"users"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=64)
+     * @Groups({"users"})
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=64)
+     * @Groups({"users"})
      */
     private $lastName;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Groups({"users"})
      */
     private $email;
 
@@ -55,17 +61,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
+     * @Groups({"users"})
      */
     private $city;
 
     /**
      * @ORM\Column(type="string", length=10, nullable=true)
-     * 
+     * @Groups({"users"})
      */
     private $zipCode;
 
     /**
      * @ORM\Column(type="string", length=150, nullable=true)
+     * @Groups({"users"})
      */
     private $picture;
 
@@ -86,7 +94,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="smallint")
-     * 
+     * @Groups({"users"})
      */
     private $status;
 
@@ -102,13 +110,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\ManyToMany(targetEntity=Service::class, inversedBy="users")
-     *
+     * @Groups({"users"})
      */
     private $services;
 
     /**
      * @ORM\OneToMany(targetEntity=Review::class, mappedBy="user", orphanRemoval=true)
-     * 
+     * @Groups({"users"})
      */
     private $reviews;
 
