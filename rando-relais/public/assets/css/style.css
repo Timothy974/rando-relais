@@ -377,6 +377,7 @@ figure img {
    transform: rotateY(180deg);
    text-align: center;
    border-radius: 50%;
+   backface-visibility: hidden;
 }
 
 /* background */
