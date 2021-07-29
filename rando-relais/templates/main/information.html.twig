@@ -41,9 +41,10 @@
 				</thead>
 				<tbody>
 				{# For each service in the variable services #}
+				src="{{ asset('assets/uploads/' ~ service.image ) }}
 					{% for service in services %}
 						<tr>
-							<th scope="row"><img src="{{ asset('assets/uploads/' ~ service.image) }}" alt="" width="30px"></th>
+							<th scope="row"><img src="{{ asset('assets/uploads/' ~ service.image ) }}" alt="" width="30px"></th>
 							</td>
 							<td>{{ service.name }}
 							<td>{{ service.description }}</td>
