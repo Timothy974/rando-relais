@@ -32,12 +32,14 @@ const mode = {
     mode.body = document.body;
     // get the table element by his ID
     mode.table = document.getElementById("mode");
-    
-   
     // The headers elements.
     mode.headerHome = document.querySelector(".header-home");
     mode.headerShared = document.querySelector(".header-shared");
-
+    // Connection form elements
+    mode.connectionForm = document.getElementById('connection-form');
+    mode.createAccount = document.getElementById('create-account');
+    mode.lostPassword = document.getElementById('lost-password');
+    mode.pipe = document.getElementById('pipe');
     // When the app is loaded we load to the page the backgroundColor wich is backup in localSatorage.
     mode.loadMode();
 
@@ -64,7 +66,6 @@ const mode = {
   handleSelectBackgroundColorSwitch: function (evt) {
     // We get the DOM element from wich the event occured.
     mode.clickedSwitch = evt.currentTarget;
-
     // If the mode backup in localStorage have the light value.
     if (localStorage.getItem("mode") === "light") {
       // We backup in localStorage the new value of the mode.
@@ -116,7 +117,7 @@ const mode = {
       // If backgroundColor === true.
       if (mode.backgroundColor) {
         // If this the value of mode is light.
-        if (mode.backgroundColor == "light") {
+        if (mode.backgroundColor == "light") {;
           // We display the light mode backgroundImage to the headerHome.
           mode.headerHome.style.backgroundImage =
             "url('/assets/images/background/background-header.jpg')";
@@ -137,11 +138,15 @@ const mode = {
       if (mode.backgroundColor) {
         // If this the value of mode is light.
         if (mode.backgroundColor == "light") {
+          // Change connection form colors
+          mode.changeConnectionForm(mode.backgroundColor);
           // We display the light mode backgroundImage to the headerShared.
           mode.headerShared.style.backgroundImage =
             "url('/assets/images/background/background-header.jpg')";
         } // Else the value of mode is dark.
         else {
+          // Change connection form colors
+          mode.changeConnectionForm(mode.backgroundColor);
           // We display the dark mode backgroundImage to the headerShared.
           mode.headerShared.style.backgroundImage =
             "url('/assets/images/background/background-header-dark-mode.jpg')";
@@ -152,6 +157,26 @@ const mode = {
         mode.headerShared.style.backgroundImage =
           "url('/assets/images/background/background-header.jpg')";
       }
+    }
+  },
+  // Method to change the connection form colors (background, text color, etc...)
+  changeConnectionForm: function (currentBackgroundColor) {
+    // If current mode is 'dark', change the connection form background to white, remove the white border and set links color to black.
+    if (currentBackgroundColor == 'light') {
+      mode.connectionForm.classList.remove('dark')
+      mode.connectionForm.classList.remove('border-white');
+      mode.createAccount.classList.remove('text-white');
+      mode.lostPassword.classList.remove('text-white');
+      mode.pipe.classList.add('text-success');
+    }
+    // If current mode is 'light', change the connection form background to dark, add a white border and set links color to green.
+    else {
+      mode.connectionForm.classList.add('dark');
+      mode.connectionForm.classList.add('border-white');
+      mode.connectionForm.classList.add('text-white');
+      mode.createAccount.classList.add('text-white');
+      mode.lostPassword.classList.add('text-white');
+      mode.pipe.classList.remove('text-success');
     }
   },
   // Method who switch the current backgroundColor to a newBackgroumdColor.
