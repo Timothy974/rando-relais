@@ -773,5 +773,18 @@ figure img {
    
 }
 
+.checkbox {
+   display: flex;
+   flex-direction: column;
+   flex-wrap: wrap;
+   /*
+   height: 7em;
+   width: 80vw;
+   */
+}
+
+.drop-filter-service {
+   background-color: white;
+}
 
 
