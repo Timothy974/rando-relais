@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Data\SearchFilter;
+use App\Form\SearchType;
 use App\Repository\UserRepository;
 use App\Repository\ServiceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,11 +18,19 @@ class MainController extends AbstractController
      *
      * @return Response
      */
-    public function index(UserRepository $user, ServiceRepository $service): Response
+    public function index(UserRepository $user, ServiceRepository $service, Request $request): Response
     {
+        $data = new SearchFilter();
+        $form = $this->createForm(SearchType::class, $data);
+        $form->handleRequest($request);
+        $userData = $user->findSearch($data);
+ 
+
         $angels = $user->findAngelAndServices(2);
         return $this->render('main/index.html.twig', [
-            'angels' => $angels
+            'angels' => $angels,
+            'form' => $form->createView(),
+            'angels' => $userData
         ]);
     }
 
@@ -33,24 +43,7 @@ class MainController extends AbstractController
     {
         return $this->render('main/404.html.twig', []);
     }
-
-    /**
-     * @Route("/filtrer", name="search", methods={"GET"})
-     *
-     * @return Response
-     */
-    public function search(Request $request, UserRepository $angel, ServiceRepository $service): Response
-    {
-        // Get the information from input search form
-        $searchValue = $request->get('query');
-
-        // use the custom query with the search value
-        $angelFilter = $angel->findUserByCity($searchValue);
-
-        return $this->render('main/index.html.twig', [
-            'angels' => $angelFilter,
-        ]);
-    }
+    
     /**
     * @Route("/download", name="main_download", methods={"GET"})
     *
