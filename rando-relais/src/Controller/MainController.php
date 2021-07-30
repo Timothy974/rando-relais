@@ -103,4 +103,16 @@ class MainController extends AbstractController
             new Response('', 200)
         );
     }
+
+    /**
+     * This road allow access to a video which introduce the back-office
+     * 
+     * @Route("/back-office", name="back-office", methods={"GET"})
+     * 
+     */
+    public function visitTheBackoffice()
+    {
+
+        return $this->render('main/back-office.html.twig');
+    }
 }

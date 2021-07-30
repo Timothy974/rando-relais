@@ -20,7 +20,7 @@
                 Connexion               
             </h2>
             <!-- Connection card (image)  -->
-            <div class="card mb-3 mt-3">
+            <div class="card mb-3 mt-3" id="connection-form">
                 <div class="row g-0">
                     <!-- Card Left part -->
                     <div class="col-md-4">
@@ -44,11 +44,12 @@
                                                     </button>
                                                 </div>
                                                 <!-- Annotation -->
-                                                <p class="text-center">
-                                                    <a href="{{ path('app_register') }}" class="text-decoration-none text-success">
+                                                <p class="text-center mt-2">
+                                                    <a href="{{ path('app_register') }}" class="text-decoration-none text-success" id="create-account">
                                                         Créer un compte                                               
-                                                    </a> |
-                                                    <a href="{{ path('app_forgot_password_request') }}" class="text-decoration-none text-success">
+                                                    </a> 
+                                                    <span id="pipe">|</span>
+                                                    <a href="{{ path('app_forgot_password_request') }}" class="text-decoration-none text-success" id="lost-password">
                                                         Mot de passe oublié ?
                                                     </a>
                                                 </p>
