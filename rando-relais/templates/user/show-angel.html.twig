@@ -6,7 +6,7 @@
 
 {% block body %}
 	<div
-		class="container">
+		class="container my-5">
 		{# If user is logged in (either ROLE_USER or ROLE_ADMIN), display the Angel profile #}
 		{% if is_granted('ROLE_USER') or is_granted('ROLE_ADMIN') %}
 			<!-- information about the Angel -->
@@ -56,7 +56,7 @@
 							<div class="col-md-8">
 								<div class="card-body">
 									<h5 class="card-title">Aujourd'hui à
-										{{weather.name}}
+										{{angelData.city}}
 									</h5>
 									<ul class="list-style ps-0">
                               <li>
@@ -82,6 +82,8 @@
 						</div>
 					</div>
 				</div>
+				<!-- Map -->
+				<div id="mapid" data-lat="{{angelData.latitude}}" data-lon="{{angelData.longitude}}" class="mb-5 rounded-3"></div>
 			</section>
 			<hr/>
 			<!-- information about the service -->
@@ -139,7 +141,7 @@
 				</ul>
 				{# Make a review of the user #}
 				<p>
-					<a href="{{ path('review_add', {'id': angelData.id }) }}">
+					<a href="{{ path('review_add', {'id': angelData.id }) }}" id="leave-review">
 						Laisser un commentaire à
 						{{ angelData.firstName | capitalize }}
 					</a>
