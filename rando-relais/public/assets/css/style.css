@@ -103,6 +103,10 @@ h2 {
    background-color: rgba(134, 134, 134, 0.3);
 }
 
+.drop-filter-service {
+   background-color: white;
+}
+
 /**** Dark & light mode ****/
 
 /* When mode = Dark */
@@ -773,15 +777,7 @@ figure img {
    
 }
 
-.checkbox {
-   display: flex;
-   flex-direction: column;
-   flex-wrap: wrap;
-   /*
-   height: 7em;
-   width: 80vw;
-   */
-}
+
 
 .drop-filter-service {
    background-color: white;
