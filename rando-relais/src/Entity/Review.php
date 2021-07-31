@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use DateTime;
+use App\Repository\ReviewRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -45,9 +46,15 @@ class Review
      */
     private $authorId;
 
+    /**
+     * @ORM\Column(type="smallint")
+     */
+    private $status;
+
     public function __construct()
     {
         $this->createdAt = new DateTime();
+        $this->status = 0;
     }
 
     public function getId(): ?int
@@ -111,6 +118,26 @@ class Review
     public function setAuthorId(int $authorId): self
     {
         $this->authorId = $authorId;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of status
+     */ 
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Set the value of status
+     *
+     * @return  self
+     */ 
+    public function setStatus($status)
+    {
+        $this->status = $status;
 
         return $this;
     }
