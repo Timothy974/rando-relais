@@ -129,9 +129,17 @@
 					{% set i = 1 %}
 					{% for review in userReviews %}
 						<li class="col-md-4 col-sm-6 mb-3">
-							<p class="fw-bold m-0">{{ authorNameArray[i] }}<span class="fw-normal">|
+							{# If the author still exists, display his name #}
+							{% if authorNameArray[i] is defined %}
+								<p class="fw-bold m-0">{{ authorNameArray[i] }}<span class="fw-normal">|
 									{{review.rating}}/5</span>
-							</p>
+								</p>
+							{% else %}
+							{# If not, display "Compte supprim #}
+								<small class="fw-light m-0">Compte supprimé<span class="fw-normal">|
+									{{review.rating}}/5</span>
+								</small>
+							{% endif %}
 							<small class="text-secondary">Le
 								{{review.createdAt | date("m/d/Y")}}</small>
 							<p>{{review.comment}}</p>

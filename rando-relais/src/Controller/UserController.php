@@ -40,13 +40,21 @@ class UserController extends AbstractController
             $currentRating = $currentReview->getRating();
             // Calculate the total rating of the current review
             $totalRating = $totalRating + $currentRating;
-
             // Get the author's id of the current review
             $currentAuthorId = $currentReview->getAuthorId();
-            // Get the name of the current author's id
-            $currentAuthorName = $userRepository->find($currentAuthorId)->getFirstName();
-            // Fill an array with all the authors of the reviews
-            $authorNameArray[] = $currentAuthorName;
+
+            // If there is a authorId in this review
+            if ($currentAuthorId !== 0) {
+                // Get the Author's object of a review
+                $currentAuthor = $userRepository->find($currentAuthorId);
+                // Get the name of the current author's id
+                if ($currentAuthor !== null) {
+                    // Get the firstName of the Author
+                    $currentAuthorName = $currentAuthor->getFirstName();
+                    // Fill an array with all the authors of the reviews
+                    $authorNameArray[] = $currentAuthorName;
+                }
+            }
         }
 
         // Calculate the average rating of all reviews
@@ -114,7 +122,7 @@ class UserController extends AbstractController
             $entityManager->flush();
 
             // We display a flash message for the user.
-            $this->addFlash('success', 'Bonjour, ' . $user->getFirstName(). ' votre compte a bien été modifié.');
+            $this->addFlash('success', 'Bonjour, ' . $user->getFirstName() . ' votre compte a bien été modifié.');
 
             // We redirect to user to the logout page page so he his logout & we specify the related HTTP response status code.
             return $this->redirectToRoute('main', [], 301);
