@@ -13,8 +13,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\Groups;
 
-
-
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
@@ -31,18 +29,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=64)
+     * @Assert\NotBlank(message="Merci de saisir votre nom.")
      * @Groups({"users"})
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=64)
+     * @Assert\NotBlank(message="Merci de saisir votre prénom.")
      * @Groups({"users"})
      */
     private $lastName;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\NotBlank(message="Merci de saisir votre email.")
+     * @Assert\Email(message="L'adresse email saisie est invalide.")
      * @Groups({"users"})
      */
     private $email;
@@ -79,6 +81,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"users"})
      */
     private $phoneNumber;
 

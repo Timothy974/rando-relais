@@ -7,6 +7,7 @@ use App\Repository\ReviewRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ReviewRepository::class)
@@ -17,16 +18,21 @@ class Review
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"reviews"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="smallint")
+     * @Assert\NotBlank(message="Une review doit contenir une note sur 5.")
+     * @Groups({"users", "reviews"})
      */
     private $rating;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank(message="Une review doit contenir un commentaire.")
+     * @Groups({"users", "reviews"})
      */
     private $comment;
 
@@ -43,6 +49,7 @@ class Review
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"users", "reviews"})
      */
     private $authorId;
 
