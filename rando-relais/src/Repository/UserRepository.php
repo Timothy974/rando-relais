@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Data\SearchFilter;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -52,6 +53,7 @@ class UserRepository extends ServiceEntityRepository
      * Method to get all user filtered by city
      * 
      */
+    /*
     public function findUserByCity($cityName)
     {
         $qb = $this->createQueryBuilder('user');
@@ -64,6 +66,40 @@ class UserRepository extends ServiceEntityRepository
 
         return $query->getResult();
     }
+*/
+
+    /***
+     * Method to get filtered user
+     * 
+     */
+    public function findSearch(SearchFilter $search)
+    {
+        $query = $this
+            ->createQueryBuilder('u')
+            ->select('u', 's')
+            ->join('u.services', 's');
+
+        if (!empty($search->city)){
+            $query = $query 
+                ->andWhere('u.city like :city')
+                ->setParameter('city', "%{$search->city}%");
+        }
+
+        if (!empty($search->zipCode)){
+            $query = $query 
+                ->andWhere('u.zipCode like :zipCode')
+                ->setParameter('zipCode', "%{$search->zipCode}%");
+        }
+
+        if (!empty($search->service)){
+            $query = $query 
+                ->andWhere('s.id IN (:service)')
+                ->setParameter('service', $search->service);
+        }
+
+        return $query->getQuery()->getResult();
+    }
+
 
 
     /**

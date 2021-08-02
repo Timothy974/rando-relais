@@ -15,12 +15,15 @@
 			<div class="form-switch form-switch d-flex justify-content-center">
 				{{ form_row(registrationForm.status) }}
 			</div>
+		<div class="mb-3 col-lg-6 mx-auto">
+			{{ form_row(registrationForm.picture) }}
+		</div>
 		</div>
 		<div class="mb-3 col-lg-6 mx-auto">
-			{{ form_row(registrationForm.lastname) }}
+			{{ form_row(registrationForm.firstName) }}
 		</div>
 		<div class="mb-3 col-lg-6 mx-auto">
-			{{ form_row(registrationForm.firstname) }}
+			{{ form_row(registrationForm.lastName) }}
 		</div>
 		<div class="mb-3 col-lg-6 mx-auto">
 			{{ form_row(registrationForm.email) }}
@@ -32,20 +35,18 @@
 		{# After a click on the switch the status switch form 1 => ("Marcheur" to 2 => "Angel") and we display the angel data. #}
 		<div class="d-none" id="angel_subscription_form">
 			<div class="mb-3 col-lg-6 mx-auto">
-				{{ form_row(registrationForm.phonenumber) }}
+				{{ form_row(registrationForm.phoneNumber) }}
 			</div>
 			<div class="mb-3 col-lg-6 mx-auto">
-				{{ form_row(registrationForm.zipcode) }}
+				{{ form_row(registrationForm.zipCode) }}
 			</div>
 			<div class="mb-3 col-lg-6 mx-auto">
 				{{ form_row(registrationForm.city) }}
 			</div>
 			{# Services icons #}
-			{# TODO START : improve display like in the integration. #}
 			<div class="mb-3 col-lg-6 mx-auto">
 				{{ form_row(registrationForm.services) }}
 			</div>
-			{# TODO END #}
 		</div>
 		<div class="mb-3 col-lg-6 mx-auto">
 			{{ form_row(registrationForm.agreeTerms) }}

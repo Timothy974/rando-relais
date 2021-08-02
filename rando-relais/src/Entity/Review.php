@@ -3,9 +3,11 @@
 namespace App\Entity;
 
 use DateTime;
+use App\Repository\ReviewRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ReviewRepository::class)
@@ -16,16 +18,21 @@ class Review
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"reviews"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="smallint")
+     * @Assert\NotBlank(message="Une review doit contenir une note sur 5.")
+     * @Groups({"users", "reviews"})
      */
     private $rating;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank(message="Une review doit contenir un commentaire.")
+     * @Groups({"users", "reviews"})
      */
     private $comment;
 
@@ -42,12 +49,19 @@ class Review
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"users", "reviews"})
      */
     private $authorId;
+
+    /**
+     * @ORM\Column(type="smallint")
+     */
+    private $status;
 
     public function __construct()
     {
         $this->createdAt = new DateTime();
+        $this->status = 0;
     }
 
     public function getId(): ?int
@@ -111,6 +125,26 @@ class Review
     public function setAuthorId(int $authorId): self
     {
         $this->authorId = $authorId;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of status
+     */ 
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Set the value of status
+     *
+     * @return  self
+     */ 
+    public function setStatus($status)
+    {
+        $this->status = $status;
 
         return $this;
     }
