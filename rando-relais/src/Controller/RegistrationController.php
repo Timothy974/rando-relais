@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Repository\ServiceRepository;
 use App\Service\ImageUploader;
+use App\Service\AddressApi;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,7 +25,7 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/inscription", name="app_register")
      */
-    public function register(Request $request, UserPasswordHasherInterface $UserPasswordHasherInterface, ImageUploader $imageIploader): Response
+    public function register(Request $request, UserPasswordHasherInterface $UserPasswordHasherInterface, ImageUploader $imageIploader, AddressApi $addressApi): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -72,6 +73,10 @@ class RegistrationController extends AbstractController
           
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
+
+            // use this service to get the coordinates for an angel
+            $user = $addressApi->getCoordinatesWithAddress($user);
+
             $entityManager->flush();
             // do anything else you need here, like send an email
 

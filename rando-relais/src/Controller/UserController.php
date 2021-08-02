@@ -15,7 +15,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class UserController extends AbstractController
 {
-
     /**
      * @Route("/info/{id}", name="show_angel", requirements={"id" = "\d+"})
      */
