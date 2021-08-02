@@ -1,13 +1,11 @@
 {% extends 'base.html.twig' %}
 
-			{% set currentRoute = app.request.get('_route') %}
-
 			{% block header %}
 
-				{% if currentRoute == 'main' %}
-					{% include "layout/header-home.html.twig" %}
-				{% else %}
+				{% if app.user %}
 					{% include "layout/header-shared.html.twig" %}
+				{% else %}
+					{% include "layout/header-home.html.twig" %}
 				{% endif %}
 
 			{% endblock %}
