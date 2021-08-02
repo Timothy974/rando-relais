@@ -13,17 +13,8 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ServiceController extends AbstractController
 {
-    // Proprietes availables in the object.
-    private $entityManager;
-
-    // Proprietes availables in every method of the object.
-    public function __construct(EntityManagerInterface $entityManager)
-    {
-        $this->entityManager = $entityManager;
-    }
-
     /**
-     * @Route("", name="service_list", methods={"GET"})
+     * @Route("", name="api_service_list", methods={"GET"})
      */
     public function list(ServiceRepository $serviceRepository): Response
     {
@@ -31,6 +22,22 @@ class ServiceController extends AbstractController
         $service = $serviceRepository->findAll();
 
         // We display the page with a array of optional data.
+        // We specify the related HTTP response status code.
+        return $this->json($service, 200, [], [
+            'groups' => 'services'
+        ]);
+    }
+
+    /**
+     * @Route("/{id}", name="api_service_details", methods={"GET"})
+     */
+    public function details(int $id, ServiceRepository $service): Response
+    {
+        // We get the user by is id.
+        $service = $service->find($id);
+
+        // If the user's status is 2 (Angel). We can display the data.
+        // We display the data with a array of optional data.
         // We specify the related HTTP response status code.
         return $this->json($service, 200, [], [
             'groups' => 'services'

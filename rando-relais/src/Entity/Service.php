@@ -22,6 +22,7 @@ class Service
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"users", "services"})
      */
     private $id;
 
@@ -33,21 +34,23 @@ class Service
      *      minMessage = "Le nom du service doit comprendre au moins {{ limit }} charactères",
      *      maxMessage = "La longueur du nom du service ne peut excéder {{ limit }} charactères"
      * )
-     * @Groups({"services"})
+     * @Groups({"services", "users"})
      * 
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"services"})
+     * @Assert\NotBlank(message="Le service doit contenir une description.")
+     * @Groups({"users", "services"})
      */
     private $description;
 
     
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
-     * @Groups({"services"})
+     * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank(message="Le service doit contenir une image.")
+     * @Groups({"users", "services"})
      */
     private $image;
 
@@ -68,6 +71,7 @@ class Service
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank(message="Le service doit contenir un slug.")
      */
     private $slug;
 

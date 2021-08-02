@@ -4,10 +4,10 @@ const app = {
     mode.init();
 
     // We load the component angelInscrption.js.
-    angelRegistration.init();
+    registration.init();
 
-    // We load the component switchToAngel.js.
-    switchToAngel.init();
+    // We load the component updateUserProfil.js.
+    userProfile.init();
   },
 };
 

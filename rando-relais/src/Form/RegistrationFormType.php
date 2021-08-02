@@ -7,6 +7,7 @@ use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -27,45 +28,59 @@ class RegistrationFormType extends AbstractType
         // We use the addEventlistener method on PRE_SUBMIT to add form fields, before submitting the data to the form.
             ->addEventListener(FormEvents::PRE_SUBMIT, [$this, 'onPreSubmit'])
             ->add('status', CheckboxType::class, [
+                // Instead of being set onto the object directly, this is read and encoded in the RegistrationController. 
                 'label'     => 'Ange du chemin',
             ])
-            ->add('lastname', null, [
-                'label' => false,
-                'attr'  => [
-                    'placeholder' => 'Nom'
+            ->add('picture', FileType::class, [
+                'label'         => 'Photo de profil',
+                'label_attr'    => [
+                    'class' => 'd-none'
                 ],
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Merci de saisir votre nom.'
-                    ])
-                ],
+                'data_class'    => null,
             ])
-            ->add('firstname', null, [
+            ->add('firstName', null, [
                 'label' => false,
                 'attr'  => [
                     'placeholder' => 'Prénom'
                 ],
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Merci de saisir votre prénom.'
-                    ])
-                ]
+            ])
+            ->add('lastName', null, [
+                'label' => false,
+                'attr'  => [
+                    'placeholder' => 'Nom'
+                ],
             ])
             ->add('email', null, [
                 'label' => false,
                 'attr'  => [
                     'placeholder' => 'Adresse email'
                 ],
+            ])
+            ->add('plainPassword', PasswordType::class, [
+                // instead of being set onto the object directly,
+                // this is read and encoded in the controller
+                'mapped' => false,
+                'label'         => "Mot de passe",
+                'label_attr'    => [
+                    'class' => "d-none"
+                ],
+                'attr'          => [
+                    'autocomplete'  => 'new-password',
+                    'placeholder'   => 'Mot de passe'
+                ],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Merci de saisir votre adresse email.'
+                        'message'       => 'Merci de saisir un mot de passe.'
                     ]),
-                    new Email([
-                        'message' => 'L\'adresse email saisie est invalide.'
+                    new Length([
+                        'min'           => 6,
+                        'minMessage'    => 'Votre mot de passe doit contenir au moins {{ limit }} characteres.',
+                        // max length allowed by Symfony for security reasons
+                        'max'           => 4096,
                     ])
-                ]
+                ],
             ])
-            ->add('phonenumber', null, [
+            ->add('phoneNumber', TelType::class, [
                 'required'  => false,
                 'label'     => false,
                 'attr'      => [
@@ -73,7 +88,7 @@ class RegistrationFormType extends AbstractType
                 ],
                 
             ])
-            ->add('zipcode', null, [
+            ->add('zipCode', null, [
                 'required'  => false,
                 'label'     => false,
                 'attr'      => [
@@ -84,13 +99,17 @@ class RegistrationFormType extends AbstractType
             ->add('city', null, [
                 'required'  => false,
                 'label'     => false,
-                'attr'  => [
+                'attr'      => [
                     'placeholder' => 'Commune'
                 ],
                 
             ])
             ->add('services', EntityType::class, [
                 'required'      =>  false,
+                'label'         => false,
+                // 'label_attr'    => [
+                //     'class' => "d-none"
+                // ],
                 'class'         => Service::class,
                 'by_reference'  => false,
                 'multiple'      => true,
@@ -104,30 +123,8 @@ class RegistrationFormType extends AbstractType
                         'message' => 'Merci d\'adhérer aux conditions générales.'
                     ])
                 ],
-            ])
-            ->add('plainPassword', PasswordType::class, [
-                // instead of being set onto the object directly,
-                // this is read and encoded in the controller
-                'mapped' => false,
-                'label'  => false,
-                'attr'   => [
-                    'autocomplete'  => 'new-password',
-                    'placeholder'   => 'Mot de passe'
-                ],
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Merci de saisir un mot de passe.'
-                    ]),
-                    new Length([
-                        'min'        => 6,
-                        'minMessage' => 'Votre mot de passe doit contenir au moins {{ limit }} characteres.',
-                        // max length allowed by Symfony for security reasons
-                        'max'        => 4096,
-                    ])
-                ],
             ]);
     }
-
 
     /**
      * Method wo display the form fields required for the angel registration if ($user['status']) === true / if the switch is checked.
@@ -140,30 +137,35 @@ class RegistrationFormType extends AbstractType
         // We get the form data.
         $user = $event->getData();
         $form = $event->getForm();
-        // if ($user['status'])
        
         // We check if the switch button is checked.
         // If $user['status'] === true that mean the user want to register as a Angel (status 2).
         // In order to collect the data related to the Angel's status we need to require the form fields related to this status.
-        if (isset($user['status']) ) {
+        if (isset($user['status'])) {
             // We add the form fields related to the Angel's status with the attribute required => true.
             $form
-            ->add('phonenumber', null, [
-                'required'  => true,
-                'label'     => false,
-                'attr'      => [
+            ->add('phoneNumber', null, [
+                'required'      => true,
+                'label'         => "Numéro de téléphone",
+                'label_attr'    => [
+                    'class' => "d-none"
+                ],
+                'attr'          => [
                     'placeholder' => 'Numéro de téléphone'
                 ],
-                'constraints' => [
+                'constraints'   => [
                     new NotBlank([
                         'message' => 'Merci de saisir votre numéro de téléphone.'
                     ]),
                 ]
             ])
-            ->add('zipcode', null, [
-                'required'  => true,
-                'label'     => false,
-                'attr'      => [
+            ->add('zipCode', null, [
+                'required'      => true,
+                'label'         => "Code postale",
+                'label_attr'    => [
+                    'class' => "d-none"
+                ],
+                'attr'          => [
                     'placeholder' => 'Code postale'
                 ],
                 'constraints' => [
@@ -173,9 +175,12 @@ class RegistrationFormType extends AbstractType
                 ]
             ])
             ->add('city', null, [
-                'required' => true,
-                'label'     => false,
-                'attr'  => [
+                'required'      => true,
+                'label'         => "Numéro de téléphone",
+                'label_attr'    => [
+                    'class' => "d-none"
+                ],
+                'attr'          => [
                     'placeholder' => 'Commune'
                 ],
                 'constraints' => [
@@ -186,6 +191,10 @@ class RegistrationFormType extends AbstractType
              ])
             ->add('services', EntityType::class, [
                 'required'      => true,
+                'label'         => false,
+                // 'label_attr'    => [
+                //     'class' => "d-none"
+                // ],
                 'class'         => Service::class,
                 'by_reference'  => false,
                 'multiple'      => true,
