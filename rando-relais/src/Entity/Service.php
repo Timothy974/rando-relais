@@ -80,6 +80,7 @@ class Service
         $this->created_at = new DateTime();
         $this->updated_at = new DateTime();
         $this->users = new ArrayCollection();
+        $this->slug = "this-slug";
     }
 
     public function __toString()
