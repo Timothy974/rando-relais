@@ -152,7 +152,7 @@ class UserProfileType extends AbstractType
         $hikerStatus = RegistrationController::HIKER_STATUS;
         // We set to $angelStatus the value of ANGEL_STATUS.
         $angelStatus = RegistrationController::ANGEL_STATUS;
-
+        
         // If the user's status is HIKER_STATUS.
         if ($user->getStatus() === $hikerStatus) {
             // We uncheck the checkbox.
@@ -165,10 +165,6 @@ class UserProfileType extends AbstractType
             $switchValue = true;
             // We set the label's value.
             $label = "Décocher pour redevenir Marcheur";
-        } // Else, we should not drop here but just in case.
-        else {
-            // We stop the execution of the condition.
-            exit();
         }
 
         // We dynamically check or uncheck the switch according to the user's staus.

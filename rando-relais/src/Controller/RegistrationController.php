@@ -63,12 +63,7 @@ class RegistrationController extends AbstractController
             elseif ($status === false) {
                 // We set the value 1 to the status.
                 $user->setStatus($hikerStatus);
-            } // Else. We should not drop here but just in case.
-            else {
-                // We stop the execution of the condition.
-                exit();
-            }
-            
+            } 
             // We get the picture uploaded by the user.
             $newFileName = $imageIploader->imageUpload($form, 'picture');
             // If $newFileName === true.
@@ -103,10 +98,8 @@ class RegistrationController extends AbstractController
             // We display a flash message for the user.
             $this->addFlash('success', 'Bonjour ' . $user->getFirstName() . ', votre compte a bien été créé.');
             
-            
-
-            // We redirect to user to the login 
-            //return $this->redirectToRoute('app_login');
+            // We redirect to user to the login page, with a array of optional data, & we specify the related HTTP response status code.
+            return $this->redirectToRoute('app_login', [], 301);
         }
 
         // We display the page we want with a array of optional data.
