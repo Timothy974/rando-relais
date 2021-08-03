@@ -18,7 +18,6 @@ class MainController extends AbstractController
      */
     public function index(UserRepository $user, ServiceRepository $service): Response
     {
-
         $angels = $user->findAngelAndServices(2);
         return $this->render('main/index.html.twig', [
             'angels' => $angels
@@ -80,12 +79,12 @@ class MainController extends AbstractController
     */
     public function generalConditionsOfUse(): Response
     {
-        // We display the page we want with a array who optional data.
+        // We display the page we want with a array of optional data.
+        // We specify the related HTTP response status code.
         return $this->render(
             'main/terms-of-service.html.twig',
             [],
-        // We specify the related HTTP response status code.
-        new Response('', 200)
+            new Response('', 200)
         );
     }
 
@@ -96,12 +95,24 @@ class MainController extends AbstractController
     */
     public function legalNotices(): Response
     {
-        // We display the page we want with a array who optional data.
+        // We display the page we want with a array of optional data.
+        // We specify the related HTTP response status code.
         return $this->render(
             'main/legal-notices.html.twig',
             [],
-        // We specify the related HTTP response status code.
-        new Response('', 200)
+            new Response('', 200)
         );
+    }
+
+    /**
+     * This road allow access to a video which introduce the back-office
+     * 
+     * @Route("/back-office", name="back-office", methods={"GET"})
+     * 
+     */
+    public function visitTheBackoffice()
+    {
+
+        return $this->render('main/back-office.html.twig');
     }
 }

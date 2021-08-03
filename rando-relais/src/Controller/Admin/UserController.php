@@ -19,6 +19,8 @@ class UserController extends AbstractController
 {
     /**
      * @Route("/", name="index", methods={"GET"})
+     * 
+     * Method to display all users
      */
     public function index(UserRepository $userRepository): Response
     {
@@ -29,6 +31,8 @@ class UserController extends AbstractController
 
     /**
      * @Route("/new", name="new", methods={"GET","POST"})
+     * 
+     * Method to create a user
      */
     public function new(Request $request, UserPasswordHasherInterface $UserPasswordHasherInterface, ImageUploader $imageUploader): Response
     {
@@ -38,6 +42,7 @@ class UserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            // We hash the password when form is submitted
             $user->setPassword(
                 $UserPasswordHasherInterface->hashPassword(
                     $user,
@@ -45,7 +50,9 @@ class UserController extends AbstractController
                 )
             );
 
+            // We store the uploaded picture
             $newFileName = $imageUploader->imageUpload($form, 'picture');
+            // We set the picture property with the uploaded picture
             $user->setpicture($newFileName);
 
             $entityManager = $this->getDoctrine()->getManager();
@@ -64,6 +71,8 @@ class UserController extends AbstractController
 
     /**
      * @Route("/{id}", name="show", methods={"GET"})
+     * 
+     * Method to display an user details
      */
     public function show(User $user): Response
     {
@@ -74,6 +83,8 @@ class UserController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="edit", methods={"GET","POST"})
+     * 
+     * Method to edit a user
      */
     public function edit(Request $request, User $user, ImageUploader $imageUploader): Response
     {
@@ -102,6 +113,8 @@ class UserController extends AbstractController
 
     /**
      * @Route("/{id}", name="delete", methods={"POST"})
+     * 
+     * Method to delete a user
      */
     public function delete(Request $request, User $user): Response
     {
