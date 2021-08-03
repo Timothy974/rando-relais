@@ -32,13 +32,13 @@ class AddressApi
          // Get city and zipCode of the new subscriber to use addressApi service
          $city = $user->getCity();
          $zipCode = $user->getZipCode();
+      
          // We slug the city name
          $citySlug = $this->slugger->slug($city);
          // client do the request
          $response = $this->client->request('GET', $this->ApiUrl.$citySlug.'&postcode='.$zipCode);
-
          $arrayResponse = $response->toArray();
-
+        
          // Recover the latitude and longitude of the city
          $lat = $arrayResponse["features"][0]["geometry"]["coordinates"][1];
          $lon = $arrayResponse["features"][0]["geometry"]["coordinates"][0];
