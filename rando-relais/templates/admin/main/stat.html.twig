@@ -24,8 +24,14 @@
 							<strong>{{ angel }}</strong>
 						</li>
 						<li>
-							Compte{{ desactived == 0 ? '' :  's' }}
-							désactivé{{ desactived == 0 ? '' :  's' }}
+						{% if desactived == 0 or desactived == 1 %}
+						Compte désactivé
+						{% else %}
+						Comptes désactivés
+						{% endif %}
+						
+							{#Compte{{ desactived == 0 ? '' :  's' }}
+							désactivé{{ desactived == 0 ? '' :  's' }}#}
 							:
 							<strong>{{ desactived }}</strong>
 						</li>
