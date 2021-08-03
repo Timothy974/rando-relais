@@ -28,8 +28,11 @@
 								
 					
 							<td>{{ review.createdAt|date('Y-m-d H:i:s')}}</td>
-                     <td> {{ authorNameArray[i] }}</td>
-							
+							{% if authorNameArray[i] is defined %}
+                     <td> {{ authorNameArray[i] }} </td>
+							{% else %}
+							<td>Auteur Supprimé</td>
+							{% endif %}
                      <td>{{ review.user }}</td>
                      <td>{{ review.rating }}</td>
                      <td>{{ review.comment }}</td>
