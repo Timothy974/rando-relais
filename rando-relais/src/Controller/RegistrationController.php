@@ -5,13 +5,17 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Repository\ServiceRepository;
+use App\Repository\UserRepository;
 use App\Service\ImageUploader;
 use App\Service\AddressApi;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Address;
 
 class RegistrationController extends AbstractController
 {
@@ -25,7 +29,7 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/inscription", name="app_register")
      */
-    public function register(Request $request, UserPasswordHasherInterface $UserPasswordHasherInterface, ImageUploader $imageIploader, AddressApi $addressApi): Response
+    public function register(Request $request, UserPasswordHasherInterface $UserPasswordHasherInterface, ImageUploader $imageIploader, AddressApi $addressApi, MailerInterface $mailer): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -39,7 +43,9 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
-            
+            // we generate an activation's token
+            $user->setActivationToken(md5(uniqid()));
+
             // We set to $hikerStatus the value of HIKER_STATUS.
             $hikerStatus = RegistrationController::HIKER_STATUS;
             // We set to $angelStatus the value of ANGEL_STATUS.
@@ -79,12 +85,28 @@ class RegistrationController extends AbstractController
 
             $entityManager->flush();
             // do anything else you need here, like send an email
+            $token = $user->getActivationToken();
+            // we create the mail 
+          
+            $email = (new TemplatedEmail())
+            ->from(new Address('noreply@rando-relais.fr', 'Rando Relais'))
+            ->to($user->getEmail())
+            ->subject('[Rando Relais]Activation de votre compte')
+            ->htmlTemplate('registration/activation.html.twig')
+            ->context([
+                'token' => $token,
+            ]);
+
+             // we send the mail
+            $mailer->send($email);
 
             // We display a flash message for the user.
-            $this->addFlash('success', 'Bonjour ' .$user->getFirstName(). '. votre compte a bien été créé.');
+            $this->addFlash('success', 'Bonjour ' . $user->getFirstName() . ', votre compte a bien été créé.');
+            
+            
 
-            // We redirect to user to the login page with a array of optional data & we specify the related HTTP response status code.
-            return $this->redirectToRoute('app_login', [], 301);
+            // We redirect to user to the login 
+            //return $this->redirectToRoute('app_login');
         }
 
         // We display the page we want with a array of optional data.
@@ -93,4 +115,36 @@ class RegistrationController extends AbstractController
             'registrationForm' => $form->createView(),
         ], new Response('', 200));
     }
+
+    /**
+     * @Route("/activation/{token}", name="activation")
+     *
+     * @return void
+     */
+    public function activation($token, UserRepository $userRepo)
+    {   
+        // we check if a user have this token
+        $user = $userRepo->findOneBy(['activation_token'=>$token]);
+
+        //if we don't find any user with this token
+        if(!$user){
+            throw $this->createNotFoundException('Cet utilisateur n\'existe pas');
+        }
+
+        // if user exist, we remove the token
+        $user->setActivationToken(null);
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($user);
+        $em->flush();
+
+        //we send a flash message
+        $this->addFlash('success', 'votre compte a bien été activé');
+
+        //then we redirect to connexion form
+        return $this->redirectToRoute('app_login');
+    }
+
+    
+
+   
 }
