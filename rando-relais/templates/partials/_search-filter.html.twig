@@ -3,10 +3,10 @@
 	<h4 class="mb-3">Recherche par ville ou code postal</h4>
 	<div class="d-flex justify-content-center">
 		<div class="me-3">
-			{{form_row(form.city)}}
+			{{form_row(form.city, {'attr' : {'class': 'text-opacity-50'}})}}
 		</div>
 		<div class="me-3">
-			{{form_row(form.zipCode)}}
+			{{form_row(form.zipCode, {'attr' : {'class': 'text-opacity-50'}})}}
 		</div>
 		<div class="dropdown">
 			<button class="btn drop-filter-service dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
