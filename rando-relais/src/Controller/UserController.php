@@ -92,10 +92,6 @@ class UserController extends AbstractController
         elseif ($user->getStatus() === $angelStatus) {
             // We set the $status the value Ange.
             $status = 'Ange';
-        } // Else, we should not drop here but just in case.
-        else {
-            // We stop the execution of the condition.
-            exit();
         }
 
         // If the form is submitted & if the form is valid.
@@ -106,7 +102,7 @@ class UserController extends AbstractController
             if ($newFileName) {
                 // We set the picture property with the $newFileName.
                 $user->setPicture($newFileName);
-            }
+            } 
 
             // We call the getManager() method.
             $entityManager = $this->getDoctrine()->getManager();
@@ -114,10 +110,11 @@ class UserController extends AbstractController
             $entityManager->flush();
 
             // We display a flash message for the user.
-            $this->addFlash('success', 'Bonjour, ' . $user->getFirstName(). ' votre compte a bien été modifié.');
+            $this->addFlash('success', 'Bonjour, ' . $user->getFirstName(). ' votre profil a bien été modifié.');
 
-            // We redirect to user to the logout page page so he his logout & we specify the related HTTP response status code.
-            return $this->redirectToRoute('main', [], 301);
+            // We redirect the user to the profile page with a array of optional data.
+            // We specify the related HTTP response status code.
+            return $this->redirectToRoute('user_profile', ['id' => $user->getId() ], 301);
         }
 
         // We display the page we want with a array of optional data.
@@ -175,7 +172,8 @@ class UserController extends AbstractController
         // // We display a flash message for the user.
         // $this->addFlash('success', 'Bonjour ' . $user->getFirstName() . ', votre statut a bien été modifié.');
 
-        // We redirect to user to the page we want with a array of optional data & we specify the related HTTP response status code.
+        // We redirect to user to the home page with a array of optional data.
+        // We specify the related HTTP response status code.
         return $this->redirectToRoute('main', [], 301);
         // ! TODO END.
     }
@@ -185,27 +183,21 @@ class UserController extends AbstractController
      */
     public function delete(Request $request, User $user): Response
     {
-        // We catch the csrfToken that the user submit after his click on the delete button.
+        // We catch the Token that the user submit after his click on the delete button.
         $submitedToken = $request->request->get('token') ??  $request->query->get('token');
 
         // If the submitedToken is valid.
         if ($this->isCsrfTokenValid('delete-user' . $user->getId(), $submitedToken)) {
-            // We get the user's status.
-            $status = $user->getStatus();
-            // The status Desactivate have the value 0.
+            // We set to $desactivateStatus the value of DESACTIVATE_STATUS.
             $desactivateStatus = RegistrationController::DESACTIVATE_STATUS;
-            // If the status of the current user different than 0.
-            if ($status != $desactivateStatus) {
-                // We set the value of his status to 0.
-                $user->setStatus($desactivateStatus);
 
+            // If the status of the current user different than DESACTIVATE_STATUS.
+            if ($user->getStatus() != $desactivateStatus) {
+                // We set the value of his status to DESACTIVATE_STATUS.
+                $user->setStatus($desactivateStatus);
                 // We call the getManager() method.
                 // We backup the data in the database.
                 $this->getDoctrine()->getManager()->flush();
-            } // Else, we should not drop here but just in case.
-            else {
-                // We stop the execution of the condition.
-                exit();
             }
 
             // TODO START : flash message not working.
@@ -213,11 +205,13 @@ class UserController extends AbstractController
             // $this->addFlash('success', 'Le compte de ' . $user->getFirstName() . ' ' . $user->getLastName() . ' sera prochainement supprimé.');
             // TODO END.
 
-            // We redirect to user to the logout page page so he his logout & we specify the related HTTP response status code.
+            // We redirect the user to the logout page with a array of optional data.
+            // We specify the related HTTP response status code.
             return $this->redirectToRoute('app_logout', [], 301);
-        } // Else somebody try to hack us.
+        } // Else, somebody try to hack us.
         else {
-            // We redirect to user to the logout page page so he his logout & we specify the related HTTP response status code.
+            // We redirect the user to the page 403.
+            // We specify the related HTTP response status code.
             return new Response('Action interdite', 403);
         }
 
