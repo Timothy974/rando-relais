@@ -23,7 +23,7 @@ class MainController extends AbstractController
     public function index(UserRepository $user, ServiceRepository $service, Request $request): Response
     {
         // We set to $desactivateStatus the value of DESACTIVATE_STATUS.
-        $desactivateStatus = RegistrationController::DESACTIVATE_STATUS;
+        $desactivateStatus = User::DESACTIVATE_STATUS;
 
         // If a user logged in acces the home page. 
         if ($this->isGranted('ROLE_USER')) {
@@ -157,9 +157,9 @@ class MainController extends AbstractController
         // If the submitedToken is valid.
         if ($this->isCsrfTokenValid('reactivate-user-account' . $user->getId(), $submitedToken)) {
             // We set to $desactivateStatus the value of DESACTIVATE_STATUS.
-            $desactivateStatus = RegistrationController::DESACTIVATE_STATUS;
+            $desactivateStatus = User::DESACTIVATE_STATUS;
             // We set to $hikerStatus the value of HIKER_STATUS.
-            $hikerStatus = RegistrationController::HIKER_STATUS;
+            $hikerStatus = User::HIKER_STATUS;
          
             // If the status of the current user is DESACTIVATE_STATUS.
             if ($user->getStatus() === $desactivateStatus) {

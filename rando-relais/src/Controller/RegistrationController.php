@@ -19,13 +19,6 @@ use Symfony\Component\Mime\Address;
 
 class RegistrationController extends AbstractController
 {
-    // The status Desactivate have the value 0.
-    const DESACTIVATE_STATUS = 0;
-    // The status Marcheur have the value 1.
-    const HIKER_STATUS = 1;
-    // The status Ange have the value 2.
-    const ANGEL_STATUS = 2;
-
     /**
      * @Route("/inscription", name="app_register")
      */
@@ -47,9 +40,9 @@ class RegistrationController extends AbstractController
             $user->setActivationToken(md5(uniqid()));
 
             // We set to $hikerStatus the value of HIKER_STATUS.
-            $hikerStatus = RegistrationController::HIKER_STATUS;
+            $hikerStatus = User::HIKER_STATUS;
             // We set to $angelStatus the value of ANGEL_STATUS.
-            $angelStatus = RegistrationController::ANGEL_STATUS;
+            $angelStatus = User::ANGEL_STATUS;
 
             // We check if the switch button is checked.
             // We get the value of the checkbox (true or false).
@@ -63,7 +56,7 @@ class RegistrationController extends AbstractController
             elseif ($status === false) {
                 // We set the value 1 to the status.
                 $user->setStatus($hikerStatus);
-            } 
+            }
             // We get the picture uploaded by the user.
             $newFileName = $imageIploader->imageUpload($form, 'picture');
             // If $newFileName === true.
@@ -81,7 +74,7 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
             // do anything else you need here, like send an email
             $token = $user->getActivationToken();
-            // we create the mail 
+            // we create the mail
           
             $email = (new TemplatedEmail())
             ->from(new Address('noreply@rando-relais.fr', 'Rando Relais'))
@@ -92,7 +85,7 @@ class RegistrationController extends AbstractController
                 'token' => $token,
             ]);
 
-             // we send the mail
+            // we send the mail
             $mailer->send($email);
 
             // We display a flash message for the user.
@@ -115,12 +108,12 @@ class RegistrationController extends AbstractController
      * @return void
      */
     public function activation($token, UserRepository $userRepo)
-    {   
+    {
         // we check if a user have this token
         $user = $userRepo->findOneBy(['activation_token'=>$token]);
 
         //if we don't find any user with this token
-        if(!$user){
+        if (!$user) {
             throw $this->createNotFoundException('Cet utilisateur n\'existe pas');
         }
 
@@ -136,8 +129,4 @@ class RegistrationController extends AbstractController
         //then we redirect to connexion form
         return $this->redirectToRoute('app_login');
     }
-
-    
-
-   
 }

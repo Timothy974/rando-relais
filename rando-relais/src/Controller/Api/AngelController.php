@@ -2,7 +2,7 @@
 
 namespace App\Controller\Api;
 
-use App\Controller\RegistrationController;
+use App\Entity\User;
 use App\Repository\ServiceRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -39,7 +39,7 @@ class AngelController extends AbstractController
         $user = $userRepository->find($id);
 
         // The status Ange have the value 2
-        $angelStatus = RegistrationController::ANGEL_STATUS;
+        $angelStatus = User::ANGEL_STATUS;
         // If the user's status is 2 (Ange). We can display the data.
         if ($user->getStatus() ===  $angelStatus) {
             // We display the data with a array of optional data.

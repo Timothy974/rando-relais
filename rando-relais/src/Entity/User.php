@@ -19,6 +19,13 @@ use Symfony\Component\Serializer\Annotation\Groups;
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+    // The status Desactivate have the value 0.
+    const DESACTIVATE_STATUS = 0;
+    // The status Marcheur have the value 1.
+    const HIKER_STATUS = 1;
+    // The status Ange have the value 2.
+    const ANGEL_STATUS = 2;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -139,7 +146,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __toString()
     {
         return $this->firstName . ' ' . $this->firstName;
-
     }
 
     public function getId(): ?int
@@ -368,7 +374,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-       /**
+    /**
      * Returning a salt is only needed, if you are not using a modern
      * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
      *

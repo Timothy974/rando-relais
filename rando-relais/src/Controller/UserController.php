@@ -87,9 +87,9 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         // We set to $hikerStatus the value of HIKER_STATUS.
-        $hikerStatus = RegistrationController::HIKER_STATUS;
+        $hikerStatus = User::HIKER_STATUS;
         // We set to $angelStatus the value of ANGEL_STATUS.
-        $angelStatus = RegistrationController::ANGEL_STATUS;
+        $angelStatus = User::ANGEL_STATUS;
 
         // We get the user's status.
         // If the user's status is HIKER_STATUS.
@@ -149,9 +149,9 @@ class UserController extends AbstractController
         // $userId = $user->getId();
 
         // // We set to $hikerStatus the value of HIKER_STATUS.
-        // $hikerStatus = RegistrationController::HIKER_STATUS;
+        // $hikerStatus = User::HIKER_STATUS;
         // // We set to $angelStatus the value of ANGEL_STATUS.
-        // $angelStatus = RegistrationController::ANGEL_STATUS;
+        // $angelStatus = User::ANGEL_STATUS;
 
 
         // // If the user's status is HIKER_STATUS.
@@ -171,11 +171,8 @@ class UserController extends AbstractController
         //     $entityManager = $this->getDoctrine()->getManager();
         //     // We backup the data in the database.
         //     $entityManager->flush();
-        // } // Else, we should not drop here but just in case.
-        // else {
-        //     // We stop the execution of the condition.
-        //     exit();
-        // }
+        // } 
+    
 
         // // We display a flash message for the user.
         // $this->addFlash('success', 'Bonjour ' . $user->getFirstName() . ', votre statut a bien été modifié.');
@@ -197,7 +194,7 @@ class UserController extends AbstractController
         // If the submitedToken is valid.
         if ($this->isCsrfTokenValid('delete-user' . $user->getId(), $submitedToken)) {
             // We set to $desactivateStatus the value of DESACTIVATE_STATUS.
-            $desactivateStatus = RegistrationController::DESACTIVATE_STATUS;
+            $desactivateStatus = User::DESACTIVATE_STATUS;
 
             // If the status of the current user different than DESACTIVATE_STATUS.
             if ($user->getStatus() != $desactivateStatus) {

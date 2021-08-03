@@ -2,7 +2,6 @@
 
 namespace App\Controller\Api;
 
-use App\Controller\RegistrationController;
 use App\Entity\User;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -124,7 +123,7 @@ class UserController extends AbstractController
         $user = $serializerInterface->deserialize($jsonData, User::class, 'json', [AbstractNormalizer::OBJECT_TO_POPULATE => $user]);
         
         // We set to $desactivateStatus the value of DESACTIVATE_STATUS.
-        $desactivateStatus = RegistrationController::DESACTIVATE_STATUS;
+        $desactivateStatus = User::DESACTIVATE_STATUS;
 
         // We get the user's status.
         $status = $user->getStatus();

@@ -2,7 +2,6 @@
 
 namespace App\Form;
 
-use App\Controller\RegistrationController;
 use App\Entity\Service;
 use App\Entity\User;
 use Doctrine\ORM\Query\Expr\From;
@@ -150,9 +149,9 @@ class UserProfileType extends AbstractType
         $form = $event->getForm();
 
         // We set to $hikerStatus the value of HIKER_STATUS.
-        $hikerStatus = RegistrationController::HIKER_STATUS;
+        $hikerStatus = User::HIKER_STATUS;
         // We set to $angelStatus the value of ANGEL_STATUS.
-        $angelStatus = RegistrationController::ANGEL_STATUS;
+        $angelStatus = User::ANGEL_STATUS;
         
         // If the user's status is HIKER_STATUS.
         if ($user->getStatus() === $hikerStatus) {
