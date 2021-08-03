@@ -22,6 +22,7 @@ class Service
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"users", "services"})
      */
     private $id;
 
@@ -33,18 +34,23 @@ class Service
      *      minMessage = "Le nom du service doit comprendre au moins {{ limit }} charactères",
      *      maxMessage = "La longueur du nom du service ne peut excéder {{ limit }} charactères"
      * )
+     * @Groups({"services", "users"})
      * 
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Le service doit contenir une description.")
+     * @Groups({"users", "services"})
      */
     private $description;
 
     
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
+     * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank(message="Le service doit contenir une image.")
+     * @Groups({"users", "services"})
      */
     private $image;
 
@@ -65,6 +71,7 @@ class Service
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank(message="Le service doit contenir un slug.")
      */
     private $slug;
 
@@ -73,6 +80,7 @@ class Service
         $this->created_at = new DateTime();
         $this->updated_at = new DateTime();
         $this->users = new ArrayCollection();
+        $this->slug = "this-slug";
     }
 
     public function __toString()

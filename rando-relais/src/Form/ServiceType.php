@@ -19,7 +19,6 @@ class ServiceType extends AbstractType
         $builder
             ->add('name')
             ->add('description')
-            ->add('slug')
             ->add('image', FileType::class, [
                 'label'=> 'Téléchargez une icone du service',
                 'mapped' =>false,

@@ -158,7 +158,7 @@ class ResetPasswordController extends AbstractController
         }
 
         $email = (new TemplatedEmail())
-            ->from(new Address('noreplay@rando-relais.fr', 'Rando Relais'))
+            ->from(new Address('noreply@rando-relais.fr', 'Rando Relais'))
             ->to($user->getEmail())
             ->subject('[Rando Relais] Mot de passe oublié')
             ->htmlTemplate('reset_password/email.html.twig')

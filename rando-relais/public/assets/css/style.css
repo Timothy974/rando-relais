@@ -103,6 +103,10 @@ h2 {
    background-color: rgba(134, 134, 134, 0.3);
 }
 
+.drop-filter-service {
+   background-color: white;
+}
+
 /**** Dark & light mode ****/
 
 /* When mode = Dark */
@@ -246,6 +250,10 @@ input:checked+.slider:before {
    opacity: 0.5;
 }
 
+.text-opacity-50::placeholder {
+   opacity: 0.5;
+}
+
 .services-icons {
    cursor: pointer;
 }
@@ -263,6 +271,11 @@ input[type="password"] {
 
 .form-control::placeholder {
    color: #333;
+}
+
+/* drop down service filter */
+.drop-filter-service {
+   background-color: white;
 }
 
 /**** FOOTER ****/
@@ -705,6 +718,7 @@ figure img {
    }
 
    /* team page */
+
    .team-page_group{
       align-items: center;
       width: 100vw;
@@ -774,5 +788,3 @@ figure img {
    }
    
 }
-
-

@@ -40,7 +40,7 @@
 				   {# For each service in the variable services #}
 				   {% for service in listService.shareService %}
 					   <tr>
-						   <th scope="row"><img src="{{ asset('assets/images/service_icons/' ~ service.image) }}" alt="" width="30px"></th>
+						   <th scope="row"><img src="{{ asset('assets/uploads/' ~ service.image) }}" alt="" width="30px"></th>
 				         <td>{{ service.name }}</td>
 				         <td>{{ service.description }}</td>
 					   </tr>

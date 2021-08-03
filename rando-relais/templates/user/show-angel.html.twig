@@ -19,8 +19,8 @@
 						<div class="mb-3 mt-4 d-inline-flex flex flex-column flex-md-row">
 							<div class="d-flex justify-content-center">
 								<!-- angel's avatar -->
-								{# <img src="{{ asset('assets/images/profile_picture/' ~ angelData.picture) }}" class="rounded avatar-size mb-2" alt="photo de profile"> #}
-							<img src="{{ asset('assets/uploads/' ~ random(['aimerick.png','alex.jpg','daniel.png','timothy.jpg'])) }}" class="rounded avatar-size mb-2" alt="photo de profile"> </div>
+								<img src="{{ asset('assets/uploads/' ~ angelData.picture) }}" class="rounded avatar-size mb-2" alt="photo de profile">
+							 </div>
 							<div
 								class="card-body d-flex flex-column align-items-center align-items-md-start pt-0">
 								<!-- first name of the angel -->
@@ -36,7 +36,14 @@
 									<!-- phone number -->
 									<li>
 										<i class="fas fa-mobile-alt"></i>
-										{{ angelData.phoneNumber }}</li>
+										{# Add a '0' before the phone number #}
+										{% set realPhoneNumber = '0' ~ angelData.phoneNumber %}
+										{# Split each group of two digits in an array #}
+										{% set phoneArray = realPhoneNumber | split('', 2) %}
+										{# Join each group of two digits, adding a '.' between them : xx.xx.xx.xx.xx #}
+										{% set formattedPhoneNumber = phoneArray| join('.') %}
+										{# Display formatted phone number #}
+										{{ formattedPhoneNumber }}</li>
 									<!-- email address -->
 									<li>
 										<i class="far fa-envelope"></i>
@@ -129,9 +136,17 @@
 					{% set i = 1 %}
 					{% for review in userReviews %}
 						<li class="col-md-4 col-sm-6 mb-3">
-							<p class="fw-bold m-0">{{ authorNameArray[i] }}<span class="fw-normal">|
+							{# If the author still exists, display his name #}
+							{% if authorNameArray[i] is defined %}
+								<p class="fw-bold m-0">{{ authorNameArray[i] }}<span class="fw-normal">|
 									{{review.rating}}/5</span>
-							</p>
+								</p>
+							{% else %}
+							{# If not, display "Compte supprim #}
+								<small class="fw-light m-0">Compte supprimé<span class="fw-normal">|
+									{{review.rating}}/5</span>
+								</small>
+							{% endif %}
 							<small class="text-secondary">Le
 								{{review.createdAt | date("m/d/Y")}}</small>
 							<p>{{review.comment}}</p>

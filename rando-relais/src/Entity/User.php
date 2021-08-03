@@ -13,8 +13,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\Groups;
 
-
-
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
@@ -31,18 +29,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=64)
+     * @Assert\NotBlank(message="Merci de saisir votre nom.")
      * @Groups({"users"})
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=64)
+     * @Assert\NotBlank(message="Merci de saisir votre prénom.")
      * @Groups({"users"})
      */
     private $lastName;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\NotBlank(message="Merci de saisir votre email.")
+     * @Assert\Email(message="L'adresse email saisie est invalide.")
      * @Groups({"users"})
      */
     private $email;
@@ -79,6 +81,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"users"})
      */
     private $phoneNumber;
 
@@ -119,6 +122,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @Groups({"users"})
      */
     private $reviews;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $activation_token;
 
     public function __construct()
     {
@@ -406,6 +414,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $review->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getActivationToken(): ?string
+    {
+        return $this->activation_token;
+    }
+
+    public function setActivationToken(?string $activation_token): self
+    {
+        $this->activation_token = $activation_token;
 
         return $this;
     }
