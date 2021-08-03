@@ -40,7 +40,6 @@ class AngelController extends AbstractController
 
         // The status Ange have the value 2
         $angelStatus = RegistrationController::ANGEL_STATUS;
-
         // If the user's status is 2 (Ange). We can display the data.
         if ($user->getStatus() ===  $angelStatus) {
             // We display the data with a array of optional data.

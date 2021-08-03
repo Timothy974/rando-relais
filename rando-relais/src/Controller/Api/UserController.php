@@ -128,7 +128,7 @@ class UserController extends AbstractController
 
         // We get the user's status.
         $status = $user->getStatus();
-
+        
         // If the status of the current user different than 0.
         if ($status != $desactivateStatus) {
             // We set the value of his status to DESACTIVATE_STATUS.
@@ -137,12 +137,8 @@ class UserController extends AbstractController
             // We call the getManager() method.
             // We backup the data in the database.
             $this->getDoctrine()->getManager()->flush();
-        } // Else, we should not drop here but just in case.
-        else {
-            // We stop the execution of the condition.
-            exit();
         }
-
+        
         // We display a flash message for the user.
         // We specify the related HTTP response status code.
         return $this->json([
