@@ -20,9 +20,9 @@
 				{{ form_row(UserProfileForm.status) }}
 			</div>
 		</div>
-		{# <div class="d-flex justify-content-center mb-4">
-			<img src="{{ asset('assets/images/profile_picture/' ~ app.user.firstName.'png') }}" class="img-fluid w-25 rounded-circle align-self-center" alt="photo de profil"/>
-		</div> #}
+	   <div class="d-flex justify-content-center mb-4">
+			<img src="{{ asset('assets/uploads/' ~ app.user.firstName.'png') }}" class="img-fluid w-25 rounded-circle align-self-center" alt="photo de profil"/>
+		</div>
 		<div class="mb-3 col-lg-6 mx-auto">
 			{{ form_row(UserProfileForm.picture) }}
 		</div>
