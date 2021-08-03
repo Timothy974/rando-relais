@@ -12,6 +12,8 @@ const userProfile = {
   phoneNumberField: null,
   zipCodeField: null,
   cityField: null,
+  servicesField: null,
+  angelFields: null,
   tentCheckBox: null,
   bedroomCheckBox: null,
   shelterCheckBox: null,
@@ -23,12 +25,17 @@ const userProfile = {
   dinnerCheckBox: null,
   powerCheckBox: null,
   init: function () {
-    console.log("Hello ! I'm the userProfile component.");
     // We get the DOM elements that we need to interate with.
     // We add a listener & a handler on the click evt on each of them.
 
     // Switch to become Angel element.
-    userProfile.angelSwitch = document.getElementById("user_profil_status");
+    userProfile.angelSwitch = document.getElementById("user_profile_status");
+    
+    // Form fields specific to the angel.  
+    userProfile.angelFields = document.getElementById(
+      "angel_subscription_form"
+    );
+
     // If userProfile.angelSwitch === true.
     if (userProfile.angelSwitch) {
       // We add a listener on the click event and we callback the displayAngelData() method.
@@ -42,6 +49,8 @@ const userProfile = {
         userProfile.angelSwitch.click();
         // With this click we want the angelSwitch to stay check.
         userProfile.angelSwitch.checked = true;
+        // We toggle the CSS class with the JS API classList.
+        userProfile.angelFields.classList.toggle("d-none");
       }
     }
 
@@ -79,17 +88,23 @@ const userProfile = {
     }
 
     // Form fields elements.
-    userProfile.firstNameField = document.getElementById(
-      "user_profil_firstName"
-    );
+    userProfile.angelSwitch = document.getElementById("user_profile_status");
     userProfile.pictureField = document.getElementById("user_profile_picture");
-    userProfile.lastNameField = document.getElementById("user_profil_lastName");
-    userProfile.emailField = document.getElementById("user_profil_email");
-    userProfile.phoneNumberField = document.getElementById(
-      "user_profil_phoneNumber"
+    userProfile.firstNameField = document.getElementById(
+      "user_profile_firstName"
     );
-    userProfile.zipCodeField = document.getElementById("user_profil_zipCode");
-    userProfile.cityField = document.getElementById("user_profil_city");
+    userProfile.lastNameField = document.getElementById(
+      "user_profile_lastName"
+    );
+    userProfile.emailField = document.getElementById("user_profile_email");
+    userProfile.phoneNumberField = document.getElementById(
+      "user_profile_phoneNumber"
+    );
+    userProfile.zipCodeField = document.getElementById("user_profile_zipCode");
+    userProfile.cityField = document.getElementById("user_profile_city");
+    userProfile.servicesField = document.getElementById(
+      "user_profile_services"
+    );
 
     // TODO START : use this code later for improve the services's display.
     // // Service Emplacement de tente icon element.
@@ -191,7 +206,7 @@ const userProfile = {
   handleProfileUpdate: function (evt) {
     // We get the DOM element from wich the event occured.
     clickedElement = evt.currentTarget;
-    console.log(clickedElement);
+
     // If selectedElement is modifyButton.
     if (clickedElement == userProfile.modifyButton) {
       // We get the DOM element on wich the CSS classes will be toggle.
@@ -207,20 +222,7 @@ const userProfile = {
         // We toggle the CSS class display none to pictureField.
         userProfile.pictureField.classList.remove("d-none");
       }
-
-
-      // if (userProfile.angelSwitch) {
-      //   // We remove the HTML's attributes disabled & placeholder.
-      //   // We set a attribute placeholder with the label of the field.
-      //   userProfile.angelSwitch.removeAttribute("disabled");
-      // }
-      // // If the form fields elements exits.
-      // if (userProfile.firstNameField) {
-      //   // We remove the HTML's attributes disabled & placeholder.
-      //   // We set a attribute placeholder with the label of the field.
-      //   userProfile.firstNameField.removeAttribute("disabled");
-      // }
-
+      // If the form fields elements exist.
       if (
         userProfile.angelSwitch &&
         userProfile.firstNameField &&
@@ -228,43 +230,33 @@ const userProfile = {
         userProfile.emailField &&
         userProfile.phoneNumberField &&
         userProfile.zipCodeField &&
-        userProfile.cityField
+        userProfile.cityField &&
+        userProfile.servicesField
       ) {
-      // We remove the HTML's attributes disabled & placeholder.
-      // We set a attribute placeholder with the label of the field.
-      userProfile.angelSwitch.removeAttribute("disabled");
-      // We remove the HTML's attributes disabled & placeholder.
-      // We set a attribute placeholder with the label of the field.
-      userProfile.firstNameField.removeAttribute("disabled");
-        // We remove the HTML's attributes disabled & placeholder.
-        // We set a attribute placeholder with the label of the field.
+        // We remove the HTML's attribute disabled.
+        userProfile.angelSwitch.removeAttribute("disabled");
         userProfile.firstNameField.removeAttribute("disabled");
-        // userProfile.firstNameField.removeAttribute("placeholder");
-        // userProfile.firstNameField.setAttribute("placeholder", "Prénom");
+        userProfile.firstNameField.removeAttribute("disabled");
         userProfile.lastNameField.removeAttribute("disabled");
-        // userProfile.lastNameField.removeAttribute("placeholder");
-        // userProfile.lastNameField.setAttribute("placeholder", "Nom");
         userProfile.emailField.removeAttribute("disabled");
-        // userProfile.emailField.removeAttribute("placeholder");
-        // userProfile.emailField.setAttribute(
-        //   "placeholder",
-        //   "Adresse Email"
-        // );
         userProfile.phoneNumberField.removeAttribute("disabled");
-        // userProfile.phoneNumberField.removeAttribute("placeholder");
-        // userProfile.phoneNumberField.setAttribute(
-        //   "placeholder",
-        //   "Numéro de téléphone"
-        // );
         userProfile.zipCodeField.removeAttribute("disabled");
-        // userProfile.zipCodeField.removeAttribute("placeholder");
-        // userProfile.zipCodeField.setAttribute(
-        //   "placeholder",
-        //   "Code Postale"
-        // );
         userProfile.cityField.removeAttribute("disabled");
-        // userProfile.cityField.removeAttribute("placeholder");
-        // userProfile.cityField.setAttribute("placeholder", "Commune");
+
+        // We get all the checkbox in the block userProfile.servicesField
+        let servicesFieldCheckboxes =
+          userProfile.servicesField.querySelectorAll('[type="checkbox"]');
+
+        // For each checkbox among servicesFieldCheckboxes.
+        for (let serviceCheckbox of servicesFieldCheckboxes) {
+          // We remove the HTML's attributes disabled.
+          serviceCheckbox.removeAttribute("disabled");
+        }
+      }
+      // If the angelSwitch is checked.
+      if (userProfile.angelSwitch.checked === true) {
+        // We toggle the CSS class with the JS API classList.
+        userProfile.angelFields.classList.toggle("d-none");
       }
     }
   },
@@ -275,9 +267,7 @@ const userProfile = {
     // We get the DOM element on wich the CSS classes will be toggle.
     // We toggle the CSS class with the JS API classList.
     if (clickedElement === userProfile.angelSwitch) {
-      document
-        .getElementById("angel_subscription_form")
-        .classList.toggle("d-none");
+      userProfile.angelFields.classList.toggle("d-none");
     }
   },
 };
