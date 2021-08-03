@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -95,7 +96,7 @@ class UserProfileType extends AbstractType
                     'disabled' => true,
                 ]
             ])
-            ->add('zipCode', null, [
+            ->add('zipCode', TextType::class, [
                 'required'      => false,
                 'label'         => "Code postale",
                 'label_attr'    => [
