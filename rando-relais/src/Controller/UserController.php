@@ -86,39 +86,26 @@ class UserController extends AbstractController
         $form = $this->createForm(UserProfileType::class, $user);
         $form->handleRequest($request);
 
-        // We set to $hikerStatus the value of HIKER_STATUS.
-        $hikerStatus = User::HIKER_STATUS;
-        // We set to $angelStatus the value of ANGEL_STATUS.
-        $angelStatus = User::ANGEL_STATUS;
-
-        // We get the user's status.
-        // If the user's status is HIKER_STATUS.
-        if ($user->getStatus() === $hikerStatus) {
-            // We set the $status the value Marcheur.
-            $status = 'Marcheur';
-        } // Else if, the user's status is ANGEL_STATUS.
-        elseif ($user->getStatus() === $angelStatus) {
-            // We set the $status the value Ange.
-            $status = 'Ange';
-        }
-
         // If the form is submitted & if the form is valid.
         if ($form->isSubmitted() && $form->isValid()) {
-            // We get the picture uploaded by the user.
-            $newFileName = $imageIploader->imageUpload($form, 'picture');
-            // If $newFileName === true.
-            if ($newFileName) {
-                // We set the picture property with the $newFileName.
-                $user->setPicture($newFileName);
-            } 
-
+            // If the form field picture has data.
+            if ($form->has('picture')) {
+                // We get the picture uploaded by the user.
+                $newFileName = $imageIploader->imageUpload($form, 'picture');
+                // If $newFileName === true.
+                if ($newFileName) {
+                    // We set the picture property with the $newFileName.
+                    $user->setPicture($newFileName);
+                }
+            }
+            
             // We call the getManager() method.
             $entityManager = $this->getDoctrine()->getManager();
             // We backup the data in the database.
             $entityManager->flush();
 
             // We display a flash message for the user.
-            $this->addFlash('success', 'Bonjour, ' . $user->getFirstName(). ' votre profil a bien été modifié.');
+            $this->addFlash('success', 'Bonjour ' . $user->getFirstName(). ', votre profil a bien été modifié.');
 
             // We redirect the user to the profile page with a array of optional data.
             // We specify the related HTTP response status code.
@@ -129,58 +116,8 @@ class UserController extends AbstractController
         // We specify the related HTTP response status code.
         return $this->render('user/profile.html.twig', [
             'UserProfileForm' => $form->createView(),
-            'status'          => $status,
+            'status' => $user->getStatusName(),
         ], new Response('', 200));
-    }
-
-    /**
-     * @Route("/user/{id}/profil/statut", name="user_switch_status", methods={"GET"})
-     */
-    public function switchStatus(Request $request, User $user): Response
-    {
-        // ! START DON'T TOUCH.  Maybe usefull later.
-        // // We create the form.
-        // $form = $this->createForm(UserProfilType::class, $user);
-        // $form->handleRequest($request);
-
-        // // We check if the switch button is checked.
-        // // We get the value of the checkbox (true or false).
-        // $status = $user->getStatus();
-        // $userId = $user->getId();
-
-        // // We set to $hikerStatus the value of HIKER_STATUS.
-        // $hikerStatus = User::HIKER_STATUS;
-        // // We set to $angelStatus the value of ANGEL_STATUS.
-        // $angelStatus = User::ANGEL_STATUS;
-
-
-        // // If the user's status is HIKER_STATUS.
-        // if ($status === $hikerStatus) {
-        //     // We set to the status the value of ANGEL_STATUS.
-        //     $user->setStatus($angelStatus);
-        //     // We call the getManager() method.
-        //     $entityManager = $this->getDoctrine()->getManager();
-        //     // We backup the data in the database.
-        //     $entityManager->flush();
-        // }
-        // // Else, the user's status is ANGEL_STATUS.
-        // elseif ($status === $angelStatus) {
-        //     // We set to the status the value of HIKER_STATUS.
-        //     $user->setStatus($hikerStatus);
-        //     // We call the getManager() method.
-        //     $entityManager = $this->getDoctrine()->getManager();
-        //     // We backup the data in the database.
-        //     $entityManager->flush();
-        // } 
-    
-
-        // // We display a flash message for the user.
-        // $this->addFlash('success', 'Bonjour ' . $user->getFirstName() . ', votre statut a bien été modifié.');
-
-        // We redirect to user to the home page with a array of optional data.
-        // We specify the related HTTP response status code.
-        return $this->redirectToRoute('main', [], 301);
-        // ! TODO END.
     }
 
     /**
@@ -193,13 +130,10 @@ class UserController extends AbstractController
 
         // If the submitedToken is valid.
         if ($this->isCsrfTokenValid('delete-user' . $user->getId(), $submitedToken)) {
-            // We set to $desactivateStatus the value of DESACTIVATE_STATUS.
-            $desactivateStatus = User::DESACTIVATE_STATUS;
-
-            // If the status of the current user different than DESACTIVATE_STATUS.
-            if ($user->getStatus() != $desactivateStatus) {
-                // We set the value of his status to DESACTIVATE_STATUS.
-                $user->setStatus($desactivateStatus);
+            // If the status of the current user different than User::DESACTIVATE_STATUS.
+            if ($user->getStatus() != User::DESACTIVATE_STATUS) {
+                // We set the status with the value of User::DESACTIVATE_STATUS.
+                $user->setStatus(User::DESACTIVATE_STATUS);
                 // We call the getManager() method.
                 // We backup the data in the database.
                 $this->getDoctrine()->getManager()->flush();
@@ -207,7 +141,7 @@ class UserController extends AbstractController
 
             // TODO START : flash message not working.
             // We display a flash message for the user.
-            // $this->addFlash('success', 'Le compte de ' . $user->getFirstName() . ' ' . $user->getLastName() . ' sera prochainement supprimé.');
+            $this->addFlash('success', 'Bonjour ' .$user->getFirstName(). ', votre compte est désactivé et sera prochainement supprimé.');
             // TODO END.
 
             // We redirect the user to the logout page with a array of optional data.

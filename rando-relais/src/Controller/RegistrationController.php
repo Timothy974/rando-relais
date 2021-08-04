@@ -39,24 +39,20 @@ class RegistrationController extends AbstractController
             // we generate an activation's token
             $user->setActivationToken(md5(uniqid()));
 
-            // We set to $hikerStatus the value of HIKER_STATUS.
-            $hikerStatus = User::HIKER_STATUS;
-            // We set to $angelStatus the value of ANGEL_STATUS.
-            $angelStatus = User::ANGEL_STATUS;
-
             // We check if the switch button is checked.
             // We get the value of the checkbox (true or false).
             $status = $form->get('status')->getData();
-            // If the switch is checked $status === true : the user will be registered with a ANGEL_STATUS.
+            // If the switch is checked $status === true the user will be registered with a User::ANGEL_STATUS.
             if ($status === true) {
-                // We set the value 2 to the status.
-                $user->setStatus($angelStatus);
+                // We set the status with the value of User::ANGEL_STATUS.
+                $user->setStatus(User::ANGEL_STATUS);
             }
-            // Else if the switch is not checked $status === false : the user will be registered with a HIKER_STATUS.
+            // Else if the switch is not checked $status === false the user will be registered with a User::HIKER_STATUS.
             elseif ($status === false) {
-                // We set the value 1 to the status.
-                $user->setStatus($hikerStatus);
+                // We set the status with the value of User::HIKER_STATUS.
+                $user->setStatus(User::HIKER_STATUS);
             }
+
             // We get the picture uploaded by the user.
             $newFileName = $imageIploader->imageUpload($form, 'picture');
             // If $newFileName === true.
@@ -89,7 +85,7 @@ class RegistrationController extends AbstractController
             $mailer->send($email);
 
             // We display a flash message for the user.
-            $this->addFlash('success', 'Bonjour ' . $user->getFirstName() . ', votre compte a bien été créé.');
+            $this->addFlash('success', 'Bonjour ' . $user->getFirstName() . ', votre compte a bien été créé. Vous avez reçu un e-mail contenant un lien. Cliquez sur ce lien pour valider votre inscription. Sinon, pensez à regarder dans les spams.');
             
             // We redirect to user to the login page, with a array of optional data, & we specify the related HTTP response status code.
             return $this->redirectToRoute('app_login', [], 301);

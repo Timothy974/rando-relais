@@ -35,6 +35,7 @@ const registration = {
       }
     }
 
+    // ! START DON'T TOUCH.
     // TODO START : use this code later for improve the services's display.
     // // Service Emplacement de tente icon element.
     // registration.tentCheckBox = document.getElementById(
@@ -43,7 +44,7 @@ const registration = {
     // if (registration.tentCheckBox) {
     //   registration.tentCheckBox.addEventListener(
     //     "click",
-    //     registration.validateService
+    //     registration.handleProfileUpdate
     //   );
     // }
 
@@ -52,7 +53,7 @@ const registration = {
     // if (registration.bedroomCheckBox) {
     //   registration.bedroomCheckBox.addEventListener(
     //     "click",
-    //     registration.validateService
+    //     registration.handleProfileUpdate
     //   );
     // }
 
@@ -61,17 +62,18 @@ const registration = {
     // if (registration.shelterCheckBox) {
     //   registration.shelterCheckBox.addEventListener(
     //     "click",
-    //     registration.validateService
-    //   );
+    //     registration.handleProfileUpdate
+    //   );;
     // }
 
     // // Serice Réception de colis icon element.
     // registration.deliveryCheckBox =
     //   document.getElementById("reception-de-colis");
+
     // if (registration.deliveryCheckBox) {
     //   registration.deliveryCheckBox.addEventListener(
     //     "click",
-    //     registration.validateService
+    //     registration.handleProfileUpdate
     //   );
     // }
 
@@ -80,7 +82,7 @@ const registration = {
     // if (registration.showerCheckBox) {
     //   registration.showerCheckBox.addEventListener(
     //     "click",
-    //     registration.validateService
+    //     registration.handleProfileUpdate
     //   );
     // }
 
@@ -89,17 +91,16 @@ const registration = {
     // if (registration.waterCheckBox) {
     //   registration.waterCheckBox.addEventListener(
     //     "click",
-    //     registration.validateService
+    //     registration.handleProfileUpdate
     //   );
     // }
 
     // // Service Petit déjeuner icon element.
-    // registration.breakfastCheckBox =
-    //   document.getElementById("petit-dejeuner");
+    // registration.breakfastCheckBox = document.getElementById("petit-dejeuner");
     // if (registration.breakfastCheckBox) {
     //   registration.breakfastCheckBox.addEventListener(
     //     "click",
-    //     registration.validateService
+    //     registration.handleProfileUpdate
     //   );
     // }
 
@@ -108,29 +109,29 @@ const registration = {
     // if (registration.sandwichCheckBox) {
     //   registration.sandwichCheckBox.addEventListener(
     //     "click",
-    //     registration.validateService
+    //     registration.handleProfileUpdate
     //   );
     // }
 
-    // // Service Dîner icon element.
+    // // Service Diner icon element.
     // registration.dinnerCheckBox = document.getElementById("diner");
     // if (registration.dinnerCheckBox) {
     //   registration.dinnerCheckBox.addEventListener(
     //     "click",
-    //     registration.validateService
+    //     registration.handleProfileUpdate
     //   );
     // }
 
     // // Serice Prise électrique icon element.
-    // registration.powerCheckBox =
-    //   document.getElementById("prise-electrique");
+    // registration.powerCheckBox = document.getElementById("prise-electrique");
     // if (registration.powerCheckBox) {
     //   registration.powerCheckBox.addEventListener(
     //     "click",
-    //     registration.validateService
+    //     registration.handleProfileUpdate
     //   );
     // }
     // TODO END.
+    // ! END.
   },
   // Method who diplay the angel data if angelSwitch is clicked.
   displayAngelData: function (evt) {

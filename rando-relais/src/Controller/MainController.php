@@ -11,7 +11,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 class MainController extends AbstractController
 {
@@ -22,13 +21,10 @@ class MainController extends AbstractController
      */
     public function index(UserRepository $user, ServiceRepository $service, Request $request): Response
     {
-        // We set to $desactivateStatus the value of DESACTIVATE_STATUS.
-        $desactivateStatus = User::DESACTIVATE_STATUS;
-
-        // If a user logged in acces the home page. 
+        // If a user logged in acces the home page.
         if ($this->isGranted('ROLE_USER')) {
             // If the user's status is DESACTIVATE_STATUS.
-            if ($this->getUser()->getStatus() === $desactivateStatus) {
+            if ($this->getUser()->getStatus() === User::DESACTIVATE_STATUS) {
                 // We redirect the user to the page who allo him to reactivate is account.
                 // We specify the related HTTP response status code.
                 return $this->redirectToRoute('main_allow_account_reactivation', ['id' => $this->getUser()->getId() ], 301);
@@ -156,15 +152,10 @@ class MainController extends AbstractController
 
         // If the submitedToken is valid.
         if ($this->isCsrfTokenValid('reactivate-user-account' . $user->getId(), $submitedToken)) {
-            // We set to $desactivateStatus the value of DESACTIVATE_STATUS.
-            $desactivateStatus = User::DESACTIVATE_STATUS;
-            // We set to $hikerStatus the value of HIKER_STATUS.
-            $hikerStatus = User::HIKER_STATUS;
-         
-            // If the status of the current user is DESACTIVATE_STATUS.
-            if ($user->getStatus() === $desactivateStatus) {
-                // We set the value of his status to HIKER_STATUS.
-                $user->setStatus($hikerStatus);
+            // If the status of the current user is User::DESACTIVATE_STATUS.
+            if ($user->getStatus() === User::DESACTIVATE_STATUS) {
+                // We set the status with the value of User::HIKER_STATUS.
+                $user->setStatus(User::HIKER_STATUS);
                 // We call the getManager() method.
                 // We backup the data in the database.
                 $this->getDoctrine()->getManager()->flush();
@@ -173,7 +164,7 @@ class MainController extends AbstractController
             // We display a flash message for the user.
             $this->addFlash('success', 'Bonjour ' .$user->getFirstName(). ', votre compte a bien été réactivé.');
            
-            // We redirect the user to the profile page with a array of optional data. 
+            // We redirect the user to the profile page with a array of optional data.
             // We specify the related HTTP response status code.
             return $this->redirectToRoute('user_profile', ['id' => $user->getId() ], 301);
         }  // Else, somebody try to hack us.

@@ -19,7 +19,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
-    // The status Desactivate have the value 0.
+    // The status Désactiver have the value 0.
     const DESACTIVATE_STATUS = 0;
     // The status Marcheur have the value 1.
     const HIKER_STATUS = 1;
@@ -36,14 +36,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=64)
-     * @Assert\NotBlank(message="Merci de saisir votre nom.")
+     * @Assert\NotBlank(message="Merci de saisir votre prénom.")
      * @Groups({"users"})
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=64)
-     * @Assert\NotBlank(message="Merci de saisir votre prénom.")
+     * @Assert\NotBlank(message="Merci de saisir votre nom.")
      * @Groups({"users"})
      */
     private $lastName;
@@ -314,9 +314,25 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getStatus(): ?int
+    public function getStatus(): int
     {
         return $this->status;
+    }
+    
+    public function getStatusName(): string
+    {
+        switch ($this->status) {
+            case self::ANGEL_STATUS:
+                return "Ange";
+            break;
+            case self::HIKER_STATUS:
+                return "Marcheur";
+            break;
+            case self::DESACTIVATE_STATUS:
+                return "Désactivé";
+            break;
+
+       }
     }
 
     public function setStatus(int $status): self

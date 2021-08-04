@@ -3,6 +3,8 @@
 namespace App\Controller\Api;
 
 use App\Entity\Review;
+use App\Entity\User;
+use App\Repository\ReviewRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -33,8 +35,7 @@ class ReviewController extends AbstractController
      */
     public function madeList(UserInterface $userInterface): Response
     {
-
-         // We get the current user who is logged in.
+        // We get the current user who is logged in.
         $loggedInUserId = $userInterface->getId();
         // Entity Manager
         $em = $this->getDoctrine()->getManager();
@@ -53,7 +54,6 @@ class ReviewController extends AbstractController
         return $this->json($madeReviews, 200, [], [
              'groups' => 'reviews'
          ]);
-
 
         // TODO START : try with QueryBuilder.
         // We get the current user who is logged in.
@@ -90,73 +90,71 @@ class ReviewController extends AbstractController
      */
     public function receivedList(UserRepository $userRepository, UserInterface $userInterface): Response
     {
-        // TODO START.
-        // We get the current user who is logged in.
-        $loggedInUserId = $userInterface->getId();
-        // We fetch form the database the data of the logged in user.
-        $loggedInUser = $userRepository->find($loggedInUserId);
-        // We get all the reviews received by the user.
-        $reviews = $loggedInUser->getReviews();
-        // We set a empty array to get the first name of each review's author.
-        $authorNames[] = null;
+        // TODO START : not working.
+        // // We get the current user who is logged in.
+        // $loggedInUserId = $userInterface->getId();
+        // // We fetch form the database the data of the logged in user.
+        // $loggedInUser = $userRepository->find($loggedInUserId);
+        // // We get all the reviews received by the user.
+        // $reviews = $loggedInUser->getReviews();
+        // // We set a empty array to get the first name of each review's author.
+        // $authorNames[] = null;
 
-        foreach ($reviews as $currentReview) {
-            // We get the author's id of the current review.
-            $authorId = $currentReview->getAuthorId();
-            // W get the name of the current author's id.
-            $authorName = $userRepository->find($authorId)->getFirstName();
-            // We fill in the array with all the authors of the reviews.
-            $authorsNamesList[] = $authorName;
-        }
-        // dd($authorsNamesList);
+        // foreach ($reviews as $currentReview) {
+        //     // We get the author's id of the current review.
+        //     $authorId = $currentReview->getAuthorId();
+        //     // W get the name of the current author's id.
+        //     $authorName = $userRepository->find($authorId)->getFirstName();
+        //     // We fill in the array with all the authors of the reviews.
+        //     $authorsNamesList[] = $authorName;
+        // }
 
-        // We display the page with a array of optional data.
-        // We specify the related HTTP response status code.
-        return $this->json($reviews, 200, [
-            'groups' => 'reviews'
-        ]);
+        // // We display the page with a array of optional data.
+        // // We specify the related HTTP response status code.
+        // return $this->json($reviews, 200, [
+        //     'groups' => 'reviews'
+        // ]);
         // TODO END.
     }
 
     /**
-     * @Route("/{id}/ajouter", name="api_review_create", methods={"GET|POST"})
+     * @Route("", name="api_review_create", methods={"POST"})
      */
     public function create(Request $request, SerializerInterface $serializerInterface, ValidatorInterface $validatorInterface): Response
     {
-        // TODO START.
-        // We get the data in JSON.
-        $jsonData = $request->getContent();
+        // TODO START : not working.
+        // // We get the data in JSON.
+        // $jsonData = $request->getContent();
 
-        // We use the deserialize() method to convert the JSON in objet => Deserialisation.
-        $review = $serializerInterface->deserialize($jsonData, Review::class, 'json');
+        // // We use the deserialize() method to convert the JSON in objet.
+        // $review = $serializerInterface->deserialize($jsonData, Review::class, 'json');
 
-        // We check if the Asserts of the Review Entity are respected.
-        $errors = $validatorInterface->validate($review);
+        // // We check if the Asserts of the Review Entity are respected.
+        // $errors = $validatorInterface->validate($review);
 
-        // If the number of error is uppder than 0.
-        if (count($errors) > 0) {
-            // We have at least one error.
-            // We display the eventual errors for the user.
-            // We specify the related HTTP response status code.
-            return $this->json([
-                'errors' => (string) $errors
-            ], 500);
-        } // Else we don't count any error.
-        else {
-            // We call the getManager() method.
-            $entityManager = $this->getDoctrine()->getManager();
-            // We persist the data.
-            $entityManager->persist($review);
-            // We backup the data in the database.
-            $entityManager->flush();
+        // // If the number of error is uppder than 0.
+        // if (count($errors) > 0) {
+        //     // We have at least one error.
+        //     // We display the eventual errors for the user.
+        //     // We specify the related HTTP response status code.
+        //     return $this->json([
+        //         'errors' => (string) $errors
+        //     ], 500);
+        // } // Else we don't count any error.
+        // else {
+        //     // We call the getManager() method.
+        //     $entityManager = $this->getDoctrine()->getManager();
+        //     // We persist the data.
+        //     $entityManager->persist($review);
+        //     // We backup the data in the database.
+        //     $entityManager->flush();
 
-            // We display a flash message for the user.
-            // We specify the related HTTP response status code.
-            return $this->json([
-                'message' => 'La review a bien été créee.'
-            ], 201);
-        }
-
+        //     // We display a flash message for the user.
+        //     // We specify the related HTTP response status code.
+        //     return $this->json([
+        //         'message' => 'La review a bien été créee.'
+        //     ], 201);
+        // }
         // TODO END.
     }
 
@@ -165,8 +163,6 @@ class ReviewController extends AbstractController
      */
     public function delete(Review $review): Response
     {
-        // TODO START.
-
         // We delete the review.
         $this->entityManager->remove($review);
         // We backup in database the information specifying that it be deleted.
@@ -175,9 +171,7 @@ class ReviewController extends AbstractController
         // We display a flash message for the user.
         // We specify the related HTTP response status code.
         return $this->json([
-            'message' => 'La review de ' .$user->getFirstName(). ' a bien été supprimé.'
+            'message' => 'La review que vous avez adressée à ' .$review->getAuthorId(). ' a bien été supprimé.'
         ], 200);
-        
-        // TODO END.
     }
 }
