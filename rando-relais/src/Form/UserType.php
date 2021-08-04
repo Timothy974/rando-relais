@@ -9,6 +9,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -32,7 +33,7 @@ class UserType extends AbstractType
                 'expanded' => true
             ])
             ->add('city')
-            ->add('zipCode')
+            ->add('zipCode', TextType::class)
             ->add('picture', FileType::class, [
                 'label'=> 'Téléchargez un Avatar',
                 'mapped' =>false,
