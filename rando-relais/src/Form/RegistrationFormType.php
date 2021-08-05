@@ -16,7 +16,6 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Count;
-use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -140,8 +139,8 @@ class RegistrationFormType extends AbstractType
         $form = $event->getForm();
        
         // We check if the switch button is checked.
-        // If $user['status'] === true that mean the user want to register as a Angel (status 2).
-        // In order to collect the data related to the Angel's status we need to require the form fields related to this status.
+        // If $user['status'] === true that mean the user will be registered with a User::ANGEL_STATUS.
+        // In order to collect the data related to the  User::ANGEL_STATUS we need to require the form fields related to this status.
         if (isset($user['status'])) {
             // We add the form fields related to the Angel's status with the attribute required => true.
             $form

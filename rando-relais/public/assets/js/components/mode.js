@@ -17,10 +17,10 @@ const mode = {
 
   init: function () {
     // We get the DOM elements that we need to interate with.
-    // We add a listener & a handler on the click evt on each of them.
     mode.switch = document.getElementById("switch-mode-checkbox");
-
+    // If mode.switch === true.
     if (mode.switch) {
+      // We add a listener and a handler on the click evt.
       mode.switch.addEventListener(
         "click",
         mode.handleSelectBackgroundColorSwitch
@@ -36,10 +36,10 @@ const mode = {
     mode.headerHome = document.querySelector(".header-home");
     mode.headerShared = document.querySelector(".header-shared");
     // Connection form elements
-    mode.connectionForm = document.getElementById('connection-form');
-    mode.createAccount = document.getElementById('create-account');
-    mode.lostPassword = document.getElementById('lost-password');
-    mode.pipe = document.getElementById('pipe');
+    mode.connectionForm = document.getElementById("connection-form");
+    mode.createAccount = document.getElementById("create-account");
+    mode.lostPassword = document.getElementById("lost-password");
+    mode.pipe = document.getElementById("pipe");
 
     // When the app is loaded we load to the page the backgroundColor wich is backup in localSatorage.
     mode.loadMode();
@@ -52,16 +52,24 @@ const mode = {
     // We get the value backup in localStorage.
     mode.backgroundColor = localStorage.getItem("mode");
 
-    // If backgroundColor si dark.
-    if (mode.backgroundColor && mode.backgroundColor == "dark") {
+    // If backgroundColor is dark.
+    if (mode.backgroundColor && mode.backgroundColor === "dark") {
       // We call the switchBackgroundColor() method to change the color with the value of backgroundColor.
-      mode.switchBackgroundColor(mode.backgroundColor, mode.darkTableBg, mode.darkTableBg1);
+      mode.switchBackgroundColor(
+        mode.backgroundColor,
+        mode.darkTableBg,
+        mode.darkTableBg1
+      );
     } // Else backgroundColor === false.
     else {
       // We set a value by default to the mode key in localStorage.
       backgroundColorByDefault = localStorage.setItem("mode", "light");
       // We call the switchBackgroundColor() method to change the color with the value of backgroundColor.
-      mode.switchBackgroundColor(mode.backgroundColorByDefault, mode.lightTableBg, mode.lightTableBg1);
+      mode.switchBackgroundColor(
+        mode.backgroundColorByDefault,
+        mode.lightTableBg,
+        mode.lightTableBg1
+      );
     }
   },
   handleSelectBackgroundColorSwitch: function (evt) {
@@ -74,16 +82,23 @@ const mode = {
       // We set the value dark to backgroundColor.
       mode.backgroundColor = "dark";
       // We call the switchBackgroundColor() method to change the background color with the backgroundColor in argument.
-      mode.switchBackgroundColor(mode.backgroundColor, mode.darkTableBg, mode.darkTableBg1);
+      mode.switchBackgroundColor(
+        mode.backgroundColor,
+        mode.darkTableBg,
+        mode.darkTableBg1
+      );
     } // Else if the mode backup in localStorage have the dark value.
     else if (localStorage.getItem("mode") === "dark") {
       // We backup in localStorage the new value of the mode.
       localStorage.setItem("mode", "light");
-      // We set the value dark to backgroundColor.
+      // We set the value light to backgroundColor.
       mode.backgroundColor = "light";
-
       // We call the switchBackgroundColor() method to change the background color with the backgroundColor in argument.
-      mode.switchBackgroundColor(mode.backgroundColor, mode.lightTableBg, mode.lightTableBg1);
+      mode.switchBackgroundColor(
+        mode.backgroundColor,
+        mode.lightTableBg,
+        mode.lightTableBg1
+      );
     }
   },
   // Method who check or uncheck the switch according to the localStorage data.
@@ -94,12 +109,12 @@ const mode = {
     // If backgroundColor === true.
     if (mode.backgroundColor) {
       // If this the value of mode is light.
-      if (mode.backgroundColor == "light") {
+      if (mode.backgroundColor === "light") {
         // The switch must be not checked so we uncheck him.
         mode.switch.checked = false;
       } // Else the value of mode is dark.
       else {
-        // The switch must be checked (the user check him to swtich to the dark mode) so we check him.
+        // The switch must be checked because the user check him to swtich to the dark mode. So we check him.
         mode.switch.checked = true;
       }
     } // Else we dont have a mode item in localStorage.
@@ -119,7 +134,6 @@ const mode = {
       if (mode.backgroundColor) {
         // If this the value of mode is light.
         if (mode.backgroundColor == "light") {
-          ;
           // We display the light mode backgroundImage to the headerHome.
           mode.headerHome.style.backgroundImage =
             "url('/assets/images/background/background-header.jpg')";
@@ -164,33 +178,41 @@ const mode = {
   // Method to change the connection form colors (background, text color, etc...)
   changeConnectionForm: function (currentBackgroundColor) {
     // If current mode is 'dark', change the connection form background to white, remove the white border and set links color to black.
-    if (mode.connectionForm && mode.createAccount && mode.lostPassword && mode.pipe) {
-      if (currentBackgroundColor == 'light') {
-        mode.connectionForm.classList.remove('dark')
-        mode.connectionForm.classList.remove('border-secondary');
-        mode.createAccount.classList.remove('text-white');
-        mode.lostPassword.classList.remove('text-white');
-        mode.pipe.classList.add('text-success');
+    if (
+      mode.connectionForm &&
+      mode.createAccount &&
+      mode.lostPassword &&
+      mode.pipe
+    ) {
+      if (currentBackgroundColor == "light") {
+        mode.connectionForm.classList.remove("dark");
+        mode.connectionForm.classList.remove("border-secondary");
+        mode.createAccount.classList.remove("text-white");
+        mode.lostPassword.classList.remove("text-white");
+        mode.pipe.classList.add("text-success");
       }
       // If current mode is 'light', change the connection form background to dark, add a white border and set links color to green.
       else {
-        mode.connectionForm.classList.add('dark');
-        mode.connectionForm.classList.add('border-secondary');
-        mode.connectionForm.classList.add('text-white');
-        mode.createAccount.classList.add('text-white');
-        mode.lostPassword.classList.add('text-white');
-        mode.pipe.classList.remove('text-success');
+        mode.connectionForm.classList.add("dark");
+        mode.connectionForm.classList.add("border-secondary");
+        mode.connectionForm.classList.add("text-white");
+        mode.createAccount.classList.add("text-white");
+        mode.lostPassword.classList.add("text-white");
+        mode.pipe.classList.remove("text-success");
       }
     }
   },
-  // Method who switch the current backgroundColor to a newBackgroumdColor.
-  switchBackgroundColor: function (newBackgroundColor, newTableBg, newTableBg1) {
+  // Method who switch the current backgroundColor to a newBackgroundColor.
+  switchBackgroundColor: function (
+    newBackgroundColor,
+    newTableBg,
+    newTableBg1
+  ) {
     // We use the JS API classList to interact with the classes of the DOM elements.
     mode.body.classList.remove("dark", "light");
     if (mode.table) {
       mode.table.classList.remove("dark", "darktable", "table-striped");
     }
-    //mode.table1.classList.remove("dark", "darktable", "table-striped");
 
     // If the backgroundColor is different than the backgroundColorByDefault.
     if (newBackgroundColor !== mode.backgroundColorByDefault) {
@@ -200,10 +222,6 @@ const mode = {
         mode.table.classList.add(newTableBg);
         mode.table.classList.add(newTableBg1);
       }
-      // mode.table1.classList.add(newTableBg);
-      //mode.table1.classList.add(newTableBg1);
-
-
     }
 
     // When we switch the backgroundColor we call the switchBackgroundImage() method to swtich the backgroundImage of the headers.
