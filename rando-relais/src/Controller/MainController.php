@@ -27,7 +27,7 @@ class MainController extends AbstractController
             if ($this->getUser()->getStatus() === User::DESACTIVATE_STATUS) {
                 // We redirect the user to the page who allo him to reactivate is account.
                 // We specify the related HTTP response status code.
-                return $this->redirectToRoute('main_allow_account_reactivation', ['id' => $this->getUser()->getId() ], 301);
+                return $this->redirectToRoute('user_allow_account_reactivation', ['id' => $this->getUser()->getId() ], 301);
             }
         }
 
