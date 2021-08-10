@@ -28,11 +28,19 @@ class ReviewController extends AbstractController
             // Get the author's id of the current review
             $currentAuthorId = $currentReview->getAuthorId();
             // Get the name of the current author's id
-            $currentAuthorFirstName = $userRepository->find($currentAuthorId)->getFirstName();
-            $currentAuthorLastName = $userRepository->find($currentAuthorId)->getLastName();
-            // Fill an array with all the authors of the reviews
-            $currentAuthorName = $currentAuthorFirstName . ' ' . $currentAuthorLastName;
-            $authorNameArray[] = $currentAuthorName;
+
+            if ($currentAuthorId !== 0) {
+                // Get the Author's object of a review
+                $currentAuthor = $userRepository->find($currentAuthorId);
+
+                if ($currentAuthor !== null) {
+                    $currentAuthorFirstName = $currentAuthor->getFirstName();
+                    $currentAuthorLastName = $currentAuthor->getLastName();
+                    // Fill an array with all the authors of the reviews
+                    $currentAuthorName = $currentAuthorFirstName . ' ' . $currentAuthorLastName;
+                    $authorNameArray[] = $currentAuthorName;
+                }
+            }
         }
         return $this->render('admin/review/index.html.twig', [
          'reviews' => $reviews,

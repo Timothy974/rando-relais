@@ -11,13 +11,11 @@
 		{# Registration form #}
 		{{ form_start(registrationForm, {'attr': {'novalidate': 'novalidate'}}) }}
 		{# After a click on the switch the status switch form 1 => "Marcheur" to 2 => "Angel"#}
-		<div class="mb-3 col-lg-6 mx-auto">
-			<div class="form-switch form-switch d-flex justify-content-center">
-				{{ form_row(registrationForm.status) }}
-			</div>
+		<div class="form-switch form-switch d-flex justify-content-center">
+			{{ form_row(registrationForm.status) }}
+		</div>
 		<div class="mb-3 col-lg-6 mx-auto">
 			{{ form_row(registrationForm.picture) }}
-		</div>
 		</div>
 		<div class="mb-3 col-lg-6 mx-auto">
 			{{ form_row(registrationForm.firstName) }}

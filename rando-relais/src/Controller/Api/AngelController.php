@@ -2,7 +2,7 @@
 
 namespace App\Controller\Api;
 
-use App\Controller\RegistrationController;
+use App\Entity\User;
 use App\Repository\ServiceRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -38,11 +38,8 @@ class AngelController extends AbstractController
         // We get the user by is id.
         $user = $userRepository->find($id);
 
-        // The status Ange have the value 2
-        $angelStatus = RegistrationController::ANGEL_STATUS;
-
-        // If the user's status is 2 (Ange). We can display the data.
-        if ($user->getStatus() ===  $angelStatus) {
+        // If the user's status is User::ANGEL_STATUS.
+        if ($user->getStatus() === User::ANGEL_STATUS) {
             // We display the data with a array of optional data.
             // We specify the related HTTP response status code.
             return $this->json($user, 200, [], [
@@ -64,10 +61,10 @@ class AngelController extends AbstractController
     */
     public function search(Request $request, UserRepository $userRepository, ServiceRepository $serviceRepository): Response
     {
-        // TODO
-
+        // TODO START.
         // We display the data with a array of optional data.
         // We specify the related HTTP response status code.
         return $this->json([], 200);
+        // TODO END.
     }
 }

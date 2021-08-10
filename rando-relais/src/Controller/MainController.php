@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Data\SearchFilter;
+use App\Entity\User;
 use App\Form\SearchType;
 use App\Repository\UserRepository;
 use App\Repository\ServiceRepository;
@@ -20,18 +21,29 @@ class MainController extends AbstractController
      */
     public function index(UserRepository $user, ServiceRepository $service, Request $request): Response
     {
+        // If a user logged in acces the home page.
+        if ($this->isGranted('ROLE_USER')) {
+            // If the user's status is DESACTIVATE_STATUS.
+            if ($this->getUser()->getStatus() === User::DESACTIVATE_STATUS) {
+                // We redirect the user to the page who allo him to reactivate is account.
+                // We specify the related HTTP response status code.
+                return $this->redirectToRoute('user_allow_account_reactivation', ['id' => $this->getUser()->getId() ], 301);
+            }
+        }
+
         $data = new SearchFilter();
         $form = $this->createForm(SearchType::class, $data);
         $form->handleRequest($request);
         $userData = $user->findSearch($data);
- 
-
         $angels = $user->findAngelAndServices(2);
+
+        // We display the page we want with a array of optional data.
+        // We specify the related HTTP response status code.
         return $this->render('main/index.html.twig', [
-            'angels' => $angels,
-            'form' => $form->createView(),
-            'angels' => $userData
-        ]);
+                'angels' => $angels,
+                'form' => $form->createView(),
+                'angels' => $userData
+            ]);
     }
 
     /**
@@ -99,13 +111,12 @@ class MainController extends AbstractController
 
     /**
      * This road allow access to a video which introduce the back-office
-     * 
+     *
      * @Route("/back-office", name="back-office", methods={"GET"})
-     * 
+     *
      */
     public function visitTheBackoffice()
     {
-
         return $this->render('main/back-office.html.twig');
     }
 }
