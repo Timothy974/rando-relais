@@ -11,7 +11,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 class MainController extends AbstractController
 {
@@ -22,16 +21,13 @@ class MainController extends AbstractController
      */
     public function index(UserRepository $user, ServiceRepository $service, Request $request): Response
     {
-        // We set to $desactivateStatus the value of DESACTIVATE_STATUS.
-        $desactivateStatus = RegistrationController::DESACTIVATE_STATUS;
-
-        // If a user logged in acces the home page. 
+        // If a user logged in acces the home page.
         if ($this->isGranted('ROLE_USER')) {
             // If the user's status is DESACTIVATE_STATUS.
-            if ($this->getUser()->getStatus() === $desactivateStatus) {
+            if ($this->getUser()->getStatus() === User::DESACTIVATE_STATUS) {
                 // We redirect the user to the page who allo him to reactivate is account.
                 // We specify the related HTTP response status code.
-                return $this->redirectToRoute('main_allow_account_reactivation', ['id' => $this->getUser()->getId() ], 301);
+                return $this->redirectToRoute('user_allow_account_reactivation', ['id' => $this->getUser()->getId() ], 301);
             }
         }
 
@@ -122,65 +118,5 @@ class MainController extends AbstractController
     public function visitTheBackoffice()
     {
         return $this->render('main/back-office.html.twig');
-    }
-
-    /**
-     * @Route("/{id}/reactiver-mon-compte", name="main_allow_account_reactivation", methods={"GET"})
-     *
-     * @return Response
-     */
-    public function allowAccountReactivation(): Response
-    {
-        // We display the page we want with a array of optional data.
-        // We specify the related HTTP response status code.
-        return $this->render(
-            'main/reactivate-account.html.twig',
-            [
-                'userId'        => $this->getUser()->getId(),
-                'userFirstName' => $this->getUser()->getFirstName(),
-                'userEmail'     => $this->getUser()->getEmail()
-            ],
-            new Response('', 200)
-        );
-    }
-
-    /**
-     * @Route("/{id}/reactivation", name="main_reactivate_account", methods={"GET|POST"})
-     *
-     * @return Response
-     */
-    public function reactivateUserAccount(Request $request, User $user): Response
-    {
-        // We catch the Token that the user submit after his click on the delete button.
-        $submitedToken = $request->request->get('token') ??  $request->query->get('token');
-
-        // If the submitedToken is valid.
-        if ($this->isCsrfTokenValid('reactivate-user-account' . $user->getId(), $submitedToken)) {
-            // We set to $desactivateStatus the value of DESACTIVATE_STATUS.
-            $desactivateStatus = RegistrationController::DESACTIVATE_STATUS;
-            // We set to $hikerStatus the value of HIKER_STATUS.
-            $hikerStatus = RegistrationController::HIKER_STATUS;
-         
-            // If the status of the current user is DESACTIVATE_STATUS.
-            if ($user->getStatus() === $desactivateStatus) {
-                // We set the value of his status to HIKER_STATUS.
-                $user->setStatus($hikerStatus);
-                // We call the getManager() method.
-                // We backup the data in the database.
-                $this->getDoctrine()->getManager()->flush();
-            }
-
-            // We display a flash message for the user.
-            $this->addFlash('success', 'Bonjour ' .$user->getFirstName(). ', votre compte a bien été réactivé.');
-           
-            // We redirect the user to the profile page with a array of optional data. 
-            // We specify the related HTTP response status code.
-            return $this->redirectToRoute('user_profile', ['id' => $user->getId() ], 301);
-        }  // Else, somebody try to hack us.
-        else {
-            // We redirect the user to the page 403.
-            // We specify the related HTTP response status code.
-            return new Response('Action interdite', 403);
-        }
     }
 }

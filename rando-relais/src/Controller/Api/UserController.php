@@ -2,7 +2,6 @@
 
 namespace App\Controller\Api;
 
-use App\Controller\RegistrationController;
 use App\Entity\User;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -42,11 +41,8 @@ class UserController extends AbstractController
         // We get the data in JSON.
         $jsonData = $request->getContent();
 
-        // We use the deserialize() method to convert the JSON in objet => Deserialisation.
+        // We use the deserialize() method to convert the JSON in objet.
         $user = $serializerInterface->deserialize($jsonData, User::class, 'json');
-
-        // $status = $user->getStatus();
-        // dd($status);
 
         // We check if the Asserts of the User Entity are respected.
         $errors = $validatorInterface->validate($user);
@@ -84,7 +80,7 @@ class UserController extends AbstractController
         // We get the data in JSON.
         $jsonData = $request->getContent();
 
-        // We use the deserialize() method to convert the JSON in objet => Deserialisation.
+        // We use the deserialize() method to convert the JSON in objet.
         $user = $serializerInterface->deserialize($jsonData, User::class, 'json', [AbstractNormalizer::OBJECT_TO_POPULATE => $user]);
 
         // We check if the Asserts of the User Entity are respected.
@@ -120,20 +116,13 @@ class UserController extends AbstractController
         // We get the data in JSON.
         $jsonData = $request->getContent();
 
-        // We use the deserialize() method to convert the JSON in objet => Deserialisation.
+        // We use the deserialize() method to convert the JSON in objet.
         $user = $serializerInterface->deserialize($jsonData, User::class, 'json', [AbstractNormalizer::OBJECT_TO_POPULATE => $user]);
         
-        // We set to $desactivateStatus the value of DESACTIVATE_STATUS.
-        $desactivateStatus = RegistrationController::DESACTIVATE_STATUS;
-
-        // We get the user's status.
-        $status = $user->getStatus();
-        
-        // If the status of the current user different than 0.
-        if ($status != $desactivateStatus) {
-            // We set the value of his status to DESACTIVATE_STATUS.
-            $user->setStatus($desactivateStatus);
-
+        // If the status of the current user different than User::DESACTIVATE_STATUS.
+        if ($user->getStatus() != User::DESACTIVATE_STATUS) {
+            // We set the status with the value of User::DESACTIVATE_STATUS.
+            $user->setStatus(User::DESACTIVATE_STATUS);
             // We call the getManager() method.
             // We backup the data in the database.
             $this->getDoctrine()->getManager()->flush();

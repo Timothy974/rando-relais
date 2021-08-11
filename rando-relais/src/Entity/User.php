@@ -19,6 +19,13 @@ use Symfony\Component\Serializer\Annotation\Groups;
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+    // The status Désactiver have the value 0.
+    const DESACTIVATE_STATUS = 0;
+    // The status Marcheur have the value 1.
+    const HIKER_STATUS = 1;
+    // The status Ange have the value 2.
+    const ANGEL_STATUS = 2;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -29,14 +36,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=64)
-     * @Assert\NotBlank(message="Merci de saisir votre nom.")
+     * @Assert\NotBlank(message="Merci de saisir votre prénom.")
      * @Groups({"users"})
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=64)
-     * @Assert\NotBlank(message="Merci de saisir votre prénom.")
+     * @Assert\NotBlank(message="Merci de saisir votre nom.")
      * @Groups({"users"})
      */
     private $lastName;
@@ -139,7 +146,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __toString()
     {
         return $this->firstName . ' ' . $this->firstName;
-
     }
 
     public function getId(): ?int
@@ -248,12 +254,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getZipCode(): ?int
+    public function getZipCode(): ?string
     {
         return $this->zipCode;
     }
 
-    public function setZipCode(?int $zipCode): self
+    public function setZipCode(?string $zipCode): self
     {
         $this->zipCode = $zipCode;
 
@@ -308,9 +314,25 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getStatus(): ?int
+    public function getStatus(): int
     {
         return $this->status;
+    }
+    
+    public function getStatusName(): string
+    {
+        switch ($this->status) {
+            case self::ANGEL_STATUS:
+                return "Ange";
+            break;
+            case self::HIKER_STATUS:
+                return "Marcheur";
+            break;
+            case self::DESACTIVATE_STATUS:
+                return "Désactivé";
+            break;
+
+       }
     }
 
     public function setStatus(int $status): self
@@ -368,7 +390,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-       /**
+    /**
      * Returning a salt is only needed, if you are not using a modern
      * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
      *

@@ -2,7 +2,6 @@
 
 namespace App\Form;
 
-use App\Controller\RegistrationController;
 use App\Entity\Service;
 use App\Entity\User;
 use Doctrine\ORM\Query\Expr\From;
@@ -10,8 +9,10 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -21,6 +22,8 @@ use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\IsTrue;
+use Symfony\Component\Validator\Constraints\NotNull;
+use Symfony\Component\Validator\Constraints\NotNullValidator;
 
 class UserProfileType extends AbstractType
 {
@@ -31,10 +34,12 @@ class UserProfileType extends AbstractType
             ->addEventListener(FormEvents::PRE_SET_DATA, [$this, 'onPreSetData'])
             // We use the addEventlistener method on PRE_SUBMIT to add form fields, before submitting the data to the form.
             ->addEventListener(FormEvents::PRE_SUBMIT, [$this, 'onPreSubmit'])
-            ->add('status', CheckboxType::class, [
+            ->add('currentStatus', CheckboxType::class, [
                 'label'     => 'Ange du chemin',
                 'disabled'  => true,
+                'mapped' => false,
             ])
+            ->add('status', HiddenType::class, [])
             ->add('picture', FileType::class, [
                 'label'         => 'Photo de profil',
                 'label_attr'    => [
@@ -52,7 +57,8 @@ class UserProfileType extends AbstractType
                 ],
                 'attr'          => [
                     'disabled' => true,
-                ]
+                ],
+                'empty_data' => ''
             ])
             ->add('lastName', null, [
                 'label'         => "Nom",
@@ -72,6 +78,8 @@ class UserProfileType extends AbstractType
                     'disabled' => true,
                 ]
             ])
+            // ! START DON'T TOUCH.
+            // TODO START : not working so we comment the field UserProfileForm.plainPassword in the templates\user\profil.html.twig.
             // ->add('plainPassword', PasswordType::class, [
             //     // Instead of being set onto the object directly, this is read and encoded in the UserController.
             //     'mapped'        => false,
@@ -85,6 +93,8 @@ class UserProfileType extends AbstractType
             //         'placeholder'   => 'Mot de passe'
             //     ],
             // ])
+            // TODO END.
+            // ! END.
             ->add('phoneNumber', TelType::class, [
                 'required'      => false,
                 'label'         => "Numéro de téléphone",
@@ -95,7 +105,7 @@ class UserProfileType extends AbstractType
                     'disabled' => true,
                 ]
             ])
-            ->add('zipCode', null, [
+            ->add('zipCode', TextType::class, [
                 'required'      => false,
                 'label'         => "Code postale",
                 'label_attr'    => [
@@ -147,35 +157,30 @@ class UserProfileType extends AbstractType
         // We get the form data.
         $user = $event->getData();
         $form = $event->getForm();
-
-        // We set to $hikerStatus the value of HIKER_STATUS.
-        $hikerStatus = RegistrationController::HIKER_STATUS;
-        // We set to $angelStatus the value of ANGEL_STATUS.
-        $angelStatus = RegistrationController::ANGEL_STATUS;
         
-        // If the user's status is HIKER_STATUS.
-        if ($user->getStatus() === $hikerStatus) {
+        // If the user's status is User::HIKER_STATUS.
+        if ($user->getStatus() === User::HIKER_STATUS) {
             // We uncheck the checkbox.
             $switchValue = false;
             // We set the label's value.
-            $label = "Cocher pour devenir Ange";
-        } // Else if, the user's status is ANGEL_STATUS.
-        elseif ($user->getStatus() === $angelStatus) {
+            $label = "Modifier et cocher pour devenir Ange";
+        } // Else if, the user's status is User::ANGEL_STATUS.
+        elseif ($user->getStatus() === User::ANGEL_STATUS) {
             // We check the checkbox.
             $switchValue = true;
             // We set the label's value.
-            $label = "Décocher pour redevenir Marcheur";
+            $label = "Modifier et décocher pour redevenir Marcheur";
         }
 
         // We dynamically check or uncheck the switch according to the user's staus.
         $form
-            ->add('status', CheckboxType::class, [
+            ->add('currentStatus', CheckboxType::class, [
             'label'     => $label,
             'data'      => $switchValue,
+            'mapped'    => false,
             'disabled'  => true
         ]);
 
-        
         
         // TODO START : not working so we comment the field UserProfileForm.plainPassword in the templates\user\profil.html.twig.
         // // If we have a user in the databse.
@@ -231,10 +236,12 @@ class UserProfileType extends AbstractType
         $form = $event->getForm();
        
         // We check if the switch button is checked.
-        // If $user['status'] === true that mean the user want to register as a Angel (status 2).
-        // In order to collect the data related to the Angel's status we need to require the form fields related to this status.
-        if (isset($user['status'])) {
-            // We add the form fields related to the Angel's status with the attribute required => true.
+        // If the status is different than null it's a User::ANGEL_STATUS else it's a User::HIKER_STATUS.
+        $user['status']  = isset($user['currentStatus']) ? User::ANGEL_STATUS : User::HIKER_STATUS;
+
+        // In order to collect the data related to the User::ANGEL_STATUS we need to require the form fields related to this status.
+        if (isset($user['currentStatus']) && ($user['currentStatus'])) {
+            // We add the form fields related to the User::ANGEL_STATUS with the attribute required => true.
             $form
                 ->add('phoneNumber', null, [
                     'required'      => true,
@@ -297,8 +304,16 @@ class UserProfileType extends AbstractType
                             'minMessage' => 'Merci de sélectionner au minimum un {{ limit }} service.'
                         ]),
                     ],
-                    'disabled' => true
                 ]);
         }
+        // If the picture fiel is null.
+        if ($user['picture'] === null) {
+            // We destroy the picture field.
+            unset($user['picture']);
+            // We remove the picture field of from the form.
+            $form->remove('picture');
+        }
+        // We set the data of the event to the user.
+        $event->setData($user);
     }
 }

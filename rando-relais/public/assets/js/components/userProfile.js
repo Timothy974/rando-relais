@@ -29,9 +29,11 @@ const userProfile = {
     // We add a listener & a handler on the click evt on each of them.
 
     // Switch to become Angel element.
-    userProfile.angelSwitch = document.getElementById("user_profile_status");
-    
-    // Form fields specific to the angel.  
+    userProfile.angelSwitch = document.getElementById(
+      "user_profile_currentStatus"
+    );
+
+    // Form fields related to the angel.
     userProfile.angelFields = document.getElementById(
       "angel_subscription_form"
     );
@@ -88,7 +90,6 @@ const userProfile = {
     }
 
     // Form fields elements.
-    userProfile.angelSwitch = document.getElementById("user_profile_status");
     userProfile.pictureField = document.getElementById("user_profile_picture");
     userProfile.firstNameField = document.getElementById(
       "user_profile_firstName"
@@ -106,6 +107,7 @@ const userProfile = {
       "user_profile_services"
     );
 
+    // ! START DON'T TOUCH.
     // TODO START : use this code later for improve the services's display.
     // // Service Emplacement de tente icon element.
     // userProfile.tentCheckBox = document.getElementById(
@@ -201,6 +203,7 @@ const userProfile = {
     //   );
     // }
     // TODO END.
+    // ! END.
   },
   // Method who, after a click on the modifyButton, allow the uer to acces the form's fields to modify is data.
   handleProfileUpdate: function (evt) {
@@ -234,7 +237,7 @@ const userProfile = {
         userProfile.servicesField
       ) {
         // We remove the HTML's attribute disabled.
-        userProfile.angelSwitch.removeAttribute("disabled");
+        userProfile.angelSwitch.removeAttribute("disabled")
         userProfile.firstNameField.removeAttribute("disabled");
         userProfile.firstNameField.removeAttribute("disabled");
         userProfile.lastNameField.removeAttribute("disabled");
@@ -252,11 +255,6 @@ const userProfile = {
           // We remove the HTML's attributes disabled.
           serviceCheckbox.removeAttribute("disabled");
         }
-      }
-      // If the angelSwitch is checked.
-      if (userProfile.angelSwitch.checked === true) {
-        // We toggle the CSS class with the JS API classList.
-        userProfile.angelFields.classList.toggle("d-none");
       }
     }
   },
