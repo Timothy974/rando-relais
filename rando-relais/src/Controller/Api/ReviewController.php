@@ -31,7 +31,7 @@ class ReviewController extends AbstractController
     }
 
     /**
-     * @Route("/emis", name="api_review_made_list", methods={"GET"})
+     * @Route("/made", name="api_review_made_list", methods={"GET"})
      */
     public function madeList(UserInterface $userInterface): Response
     {
@@ -86,7 +86,7 @@ class ReviewController extends AbstractController
     }
  
     /**
-     * @Route("/recu", name="api_review_received_list", methods={"GET"})
+     * @Route("/received", name="api_review_received_list", methods={"GET"})
      */
     public function receivedList(UserRepository $userRepository, UserInterface $userInterface): Response
     {
