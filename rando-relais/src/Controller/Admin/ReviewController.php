@@ -22,29 +22,45 @@ class ReviewController extends AbstractController
     public function index(ReviewRepository $reviewRepository, UserRepository $userRepository): Response
     {
          // Get the firstName of each review's author
-        $authorNameArray[] = '';
-         $reviews = $reviewRepository->findAll();
-        foreach ($reviews as $currentReview) {
+            $authorNameArray[] = '';
+            $reviews = $reviewRepository->findAll();
+         
+        foreach ($reviews as $review) {
             // Get the author's id of the current review
-            $currentAuthorId = $currentReview->getAuthorId();
-            // Get the name of the current author's id
-
-            if ($currentAuthorId !== 0) {
-                // Get the Author's object of a review
-                $currentAuthor = $userRepository->find($currentAuthorId);
-
-                if ($currentAuthor !== null) {
-                    $currentAuthorFirstName = $currentAuthor->getFirstName();
-                    $currentAuthorLastName = $currentAuthor->getLastName();
-                    // Fill an array with all the authors of the reviews
-                    $currentAuthorName = $currentAuthorFirstName . ' ' . $currentAuthorLastName;
-                    $authorNameArray[] = $currentAuthorName;
-                }
-            }
+            $authorId[] = $review->getAuthorId();
         }
+        foreach($authorId as $id){
+            $users[] = $userRepository->find($id);}
+            // Get the name of the current author's id
+            foreach($users as $user){
+            if ($user ==  null){
+                $authorFirstName = "auteur supprimé";
+                
+            }else{
+                $authorFirstName = $user->getFirstName();
+                
+            }
+            $authorList[]=$authorFirstName;}
+        
+        
+            // if ($currentAuthorId !== 0) {
+            //     // Get the Author's object of a review
+            //     $currentAuthor = $userRepository->find($currentAuthorId);
+            //     if ($currentAuthor !== null ) {
+            //         $currentAuthorFirstName = $currentAuthor->getFirstName();
+            //         $currentAuthorLastName = $currentAuthor->getLastName();
+            //         // Fill an array with all the authors of the reviews
+            //         $currentAuthorName = $currentAuthorFirstName . ' ' . $currentAuthorLastName;
+            //         $authorNameArray[] = $currentAuthorName;
+            //     }
+            // }
+            
+        
+
+        
         return $this->render('admin/review/index.html.twig', [
          'reviews' => $reviews,
-         'authorNameArray' => $authorNameArray,
+         'authorList' => $authorList,
             
         ]);
     }
