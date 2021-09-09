@@ -25,8 +25,18 @@
 		<div class="d-flex justify-content-center mb-4">
 			<img src="{{ asset('assets/uploads/' ~ app.user.picture) }}" class="img-fluid w-25 rounded-circle align-self-center" alt="photo de profil"/>
 		</div>
+		<div class="col-lg-6 mx-auto">
+		{# TODO START : Form not working. #}
+			{# <form action="{{ path('user_delete_picture', {id:app.user.id}) }}" method="post">
+				<input type="hidden" name="_method" value="DELETE">
+				<input type="hidden" name="token" value="{{ csrf_token('user_delete_picture' ~ app.user.id) }}">
+				<button class="btn btn-danger w-100 mb-3 d-none" id="delete-picture-button">Supprimer ma photo</button>
+			</form> #}
+		{# TODO END. #}
+			<a class="btn btn-danger w-100 mb-3 d-none" id="delete-picture-button" href="{{ path('user_delete_picture', {id:app.user.id, token:csrf_token('user-delete-picture' ~ app.user.id)}) }}">Supprimer ma photo</a>
+		</div>
 		<div class="mb-3 col-lg-6 mx-auto">
-			{{ form_row(UserProfileForm.picture) }}
+			{{ form_row(UserProfileForm.upload) }}
 		</div>
 		<div class="mb-3 col-lg-6 mx-auto">
 			{{ form_row(UserProfileForm.firstName) }}
@@ -60,13 +70,16 @@
 		{# Submit buttom #}
 		<div class="col-lg-6 mx-auto">
 			<button type="button" class="btn btn-warning w-100 mb-3" id="modify-button">Modifier</button>
-			<!-- Submit button for backup the update of the user profil -->
+			{# Submit button for backup the update of the user profil #}
 			<button type="submit" class="btn btn-success w-100 mb-3 d-none" id="save-button">Enregistrer</button>
 			{{ form_rest(UserProfileForm) }}
 			{{ form_end(UserProfileForm) }}
-			<a class="btn btn-danger w-100 mb-3 d-none" id="delete-button" href="{{ path('user_delete', {id:app.user.id, token:csrf_token('delete-user' ~ app.user.id)}) }}">Supprimer mon compte</a>
-
-			{# {{ form_end(UserProfileForm) }} #}
+			<form action="{{ path('user_deactivate', {id:app.user.id}) }}" method="post">
+				<input type="hidden" name="_method" value="PATCH">
+				<input type="hidden" name="token" value="{{ csrf_token('user-deactivate' ~ app.user.id) }}">
+				<button class="btn btn-danger w-100 mb-3 d-none" id="delete-button">Supprimer</button>
+			</form>
+			{# <a class="btn btn-danger w-100 mb-3 d-none" id="delete-button" href="{{ path('user_delete', {id:app.user.id, token:csrf_token('delete-user' ~ app.user.id)}) }}">Supprimer mon compte</a> #}
 		</div>
 	</div>
 {% endblock %}

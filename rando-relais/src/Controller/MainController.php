@@ -21,15 +21,31 @@ class MainController extends AbstractController
      */
     public function index(UserRepository $user, ServiceRepository $service, Request $request): Response
     {
+        // ! START DON'T TOUCH : code working with User::DEACTIVATE_STATUS.
         // If a user logged in acces the home page.
         if ($this->isGranted('ROLE_USER')) {
-            // If the user's status is DESACTIVATE_STATUS.
-            if ($this->getUser()->getStatus() === User::DESACTIVATE_STATUS) {
+            // If the user's status is User::DEACTIVATE_STATUS.
+            if ($this->getUser()->getStatus() === User::DEACTIVATE_STATUS) {
                 // We redirect the user to the page who allo him to reactivate is account.
                 // We specify the related HTTP response status code.
                 return $this->redirectToRoute('user_allow_account_reactivation', ['id' => $this->getUser()->getId() ], 301);
             }
         }
+        // ! END.
+
+        // ! START DON'T TOUCH : Code working with User::DEACTIVATE_STATUS.
+        // // If a user with the role User::ROLE_DEACTIVATE acces the home page.
+        // if ($this->isGranted("ROLE_DEACTIVATE")) {
+        //     // We redirect the user to the page who allo him to reactivate is account.
+        //     // We specify the related HTTP response status code.
+        //     return $this->redirectToRoute('user_allow_account_reactivation', ['id' => $this->getUser()->getId() ], 301);
+        // } // Else if a user with the role User::ROLE_BANNED acces the home page.
+        // elseif ($this->isGranted("ROLE_BANNED")) {
+        //     // We redirect the user to the banned page.
+        //     // We specify the related HTTP response status code.
+        //     return $this->redirectToRoute('user_banned_account', ['id' => $this->getUser()->getId() ], 301);
+        // }
+        // ! END.
 
         $data = new SearchFilter();
         $form = $this->createForm(SearchType::class, $data);

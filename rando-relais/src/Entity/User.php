@@ -19,12 +19,22 @@ use Symfony\Component\Serializer\Annotation\Groups;
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
-    // The status Désactiver have the value 0.
-    const DESACTIVATE_STATUS = 0;
-    // The status Marcheur have the value 1.
+    // The User role have the value ["ROLE_USER"].
+    const ROLE_USER = ["ROLE_USER"];
+    // The Admin role have the value ["ROLE_ADMIN"].
+    const ROLE_ADMIN = ["ROLE_ADMIN"];
+    // The Desactivate role have the value ["ROLE_DEACTIVATE"].
+    const ROLE_DEACTIVATE = ["ROLE_DEACTIVATE"];
+    // The BANNED role have the value ["ROLE_BANNED"].
+    const ROLE_BANNED = ["ROLE_BANNED"];
+    // The Desactivate status have the value 0.
+    const DEACTIVATE_STATUS = 0;
+    // The Marcheur status have the value 1.
     const HIKER_STATUS = 1;
-    // The status Ange have the value 2.
+    // The Ange Status have the value 2.
     const ANGEL_STATUS = 2;
+    // The value of the profile picture by default.
+    const PROFILE_PICTURE_BY_DEFAULT = 'default-avatar.png';
 
     /**
      * @ORM\Id
@@ -158,7 +168,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->firstName;
     }
 
-    public function setFirstName(string $firstName): self
+    public function setFirstName(?string $firstName): self
     {
         $this->firstName = $firstName;
 
@@ -170,7 +180,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->lastName;
     }
 
-    public function setLastName(string $lastName): self
+    public function setLastName(?string $lastName): self
     {
         $this->lastName = $lastName;
 
@@ -182,7 +192,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->email;
     }
 
-    public function setEmail(string $email): self
+    public function setEmail(?string $email): self
     {
         $this->email = $email;
 
@@ -283,7 +293,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->phoneNumber;
     }
 
-    public function setPhoneNumber(int $phoneNumber): self
+    public function setPhoneNumber(?int $phoneNumber): self
     {
         $this->phoneNumber = $phoneNumber;
 
@@ -328,7 +338,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             case self::HIKER_STATUS:
                 return "Marcheur";
             break;
-            case self::DESACTIVATE_STATUS:
+            case self::DEACTIVATE_STATUS:
                 return "Désactivé";
             break;
 
