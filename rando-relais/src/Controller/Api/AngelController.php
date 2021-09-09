@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/api/v1/ange")
+ * @Route("/api/v1/angel")
  */
 class AngelController extends AbstractController
 {
@@ -31,7 +31,7 @@ class AngelController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/information/", name="api_angel_details", methods={"GET"})
+     * @Route("/{id}/information", name="api_angel_details", methods={"GET"})
      */
     public function details(int $id, UserRepository $userRepository): Response
     {
@@ -45,7 +45,7 @@ class AngelController extends AbstractController
             return $this->json($user, 200, [], [
                 'groups' => 'users'
             ]);
-        } // Else the user have a status 1 (Marcheur) or 0 (Desactiver).
+        } // Else the user have a User::HIKER_STATUS or a User::ROLE_DEACTIVATE.
         else {
             // We can't display the data because the status 1 (Marcheur) don't have a information page.
             // We display a flash message for the user.
@@ -54,6 +54,27 @@ class AngelController extends AbstractController
                 'message' => 'Un utilisateur marcheur ou désactivé ne possède pas de page information.'
             ], 404);
         }
+
+        // ! START DON'T TOUCH.
+        // TODO START : try with User::ROLE_DEACTIVATE.
+        // // If the user's status is User::ANGEL_STATUS and if the user's role is different than User::ROLE_DEACTIVATE.
+        // if ($user->getStatus() === User::ANGEL_STATUS && $user->getRoles() != User::ROLE_DEACTIVATE) {
+        //     // We display the data with a array of optional data.
+        //     // We specify the related HTTP response status code.
+        //     return $this->json($user, 200, [], [
+        //         'groups' => 'users'
+        //     ]);
+        // } // Else the user have a User::HIKER_STATUS or have a  User::ROLE_DEACTIVATE.
+        // else {
+        //     // We can't display the data because of the user's role.
+        //     // We display a flash message for the user.
+        //     // We specify the related HTTP response status code.
+        //     return $this->json([
+        //         'message' => 'Un utilisateur marcheur ou désactivé ne possède pas de page information.'
+        //     ], 404);
+        // }
+        // TODO END.
+        // ! END.
     }
 
     /**

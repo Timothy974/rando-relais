@@ -19,7 +19,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class UserController extends AbstractController
 {
     /**
-     * @Route("/{id}/profil", name="api_user_details", methods={"GET"})
+     * @Route("/{id}/profile", name="api_user_details", methods={"GET"})
      */
     public function details(int $id, UserRepository $userRepository): Response
     {
@@ -109,25 +109,40 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="api_user_delete", methods={"DELETE"})
+     * @Route("/{id}", name="api_user_deactivate", methods={"PATCH"})
      */
-    public function delete(Request $request, User $user, SerializerInterface $serializerInterface): Response
+    public function deactivateUserAccount(Request $request, User $user, SerializerInterface $serializerInterface): Response
     {
         // We get the data in JSON.
         $jsonData = $request->getContent();
 
         // We use the deserialize() method to convert the JSON in objet.
         $user = $serializerInterface->deserialize($jsonData, User::class, 'json', [AbstractNormalizer::OBJECT_TO_POPULATE => $user]);
-        
-        // If the status of the current user different than User::DESACTIVATE_STATUS.
-        if ($user->getStatus() != User::DESACTIVATE_STATUS) {
-            // We set the status with the value of User::DESACTIVATE_STATUS.
-            $user->setStatus(User::DESACTIVATE_STATUS);
+
+        // ! START DON'T TOUCH : code working with User::DEACTIVATE_STATUS.
+        // If the status of the current user different than User::DEACTIVATE_STATUS.
+        if ($user->getStatus() != User::DEACTIVATE_STATUS) {
+            // We set the status with the value of User::DEACTIVATE_STATUS.
+            $user->setStatus(User::DEACTIVATE_STATUS);
             // We call the getManager() method.
             // We backup the data in the database.
             $this->getDoctrine()->getManager()->flush();
         }
-        
+        // ! END.
+
+        // ! START DON'T TOUCH.
+        // TODO START : try with User::ROLE_DEACTIVATE.
+        // // If the role of the current user different than User::ROLE_DEACTIVATE.
+        // if ($user->getRoles() != User::ROLE_DEACTIVATE) {
+        //     // We set the role with the value of User::ROLE_DEACTIVATE.
+        //     $user->setRoles(User::ROLE_DEACTIVATE);
+        //     // We call the getManager() method.
+        //     // We backup the data in the database.
+        //     $this->getDoctrine()->getManager()->flush();
+        // }
+        // TODO END.
+        // ! END.
+    
         // We display a flash message for the user.
         // We specify the related HTTP response status code.
         return $this->json([

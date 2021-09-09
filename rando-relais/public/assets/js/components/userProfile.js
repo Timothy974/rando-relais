@@ -3,8 +3,10 @@ const userProfile = {
   modifyButton: null,
   saveButton: null,
   deleteButton: null,
+  deletePicureButton: null,
   angelSwitch: null,
   pictureField: null,
+  uploadField: null,
   firstNameField: null,
   lastNameField: null,
   emailField: null,
@@ -89,7 +91,20 @@ const userProfile = {
       );
     }
 
+    // Delete picture button element.
+    userProfile.deletePicureButton = document.getElementById(
+      "delete-picture-button"
+    );
+    if (userProfile.deletePicureButton) {
+      // We add a listener on the click event and we callback the handleProfilUpdate() method.
+      userProfile.deletePicureButton.addEventListener(
+        "click",
+        userProfile.handleProfileUpdate
+      );
+    }
+
     // Form fields elements.
+    userProfile.uploadField = document.getElementById("user_profile_upload");
     userProfile.pictureField = document.getElementById("user_profile_picture");
     userProfile.firstNameField = document.getElementById(
       "user_profile_firstName"
@@ -212,19 +227,9 @@ const userProfile = {
 
     // If selectedElement is modifyButton.
     if (clickedElement == userProfile.modifyButton) {
-      // We get the DOM element on wich the CSS classes will be toggle.
-      // We get the toggle the CSS class with the JS API classList.
+      // We call our method.
+      userProfile.handleDisplayNone();
 
-      // We add the CSS class display none to modifyButton.
-      userProfile.modifyButton.classList.add("d-none");
-      // We toggle the CSS class display none to saveButton.
-      userProfile.saveButton.classList.toggle("d-none");
-      // We toggle the CSS class display none to delete-button.
-      userProfile.deleteButton.classList.toggle("d-none");
-      if (userProfile.pictureField) {
-        // We toggle the CSS class display none to pictureField.
-        userProfile.pictureField.classList.remove("d-none");
-      }
       // If the form fields elements exist.
       if (
         userProfile.angelSwitch &&
@@ -236,29 +241,13 @@ const userProfile = {
         userProfile.cityField &&
         userProfile.servicesField
       ) {
-        // We remove the HTML's attribute disabled.
-        userProfile.angelSwitch.removeAttribute("disabled")
-        userProfile.firstNameField.removeAttribute("disabled");
-        userProfile.firstNameField.removeAttribute("disabled");
-        userProfile.lastNameField.removeAttribute("disabled");
-        userProfile.emailField.removeAttribute("disabled");
-        userProfile.phoneNumberField.removeAttribute("disabled");
-        userProfile.zipCodeField.removeAttribute("disabled");
-        userProfile.cityField.removeAttribute("disabled");
-
-        // We get all the checkbox in the block userProfile.servicesField
-        let servicesFieldCheckboxes =
-          userProfile.servicesField.querySelectorAll('[type="checkbox"]');
-
-        // For each checkbox among servicesFieldCheckboxes.
-        for (let serviceCheckbox of servicesFieldCheckboxes) {
-          // We remove the HTML's attributes disabled.
-          serviceCheckbox.removeAttribute("disabled");
-        }
+        // We call our methods.
+        userProfile.removeDisabledAttribute();
+        userProfile.setPlaceholderAttribute();
       }
     }
   },
-  // Method who display the form fields for the status Ange.
+  // Method who display the form fields for the User::ANGEL_STATUS.
   displayAngelData: function (evt) {
     // We get the DOM element from wich the event occured.
     clickedElement = evt.currentTarget;
@@ -266,6 +255,65 @@ const userProfile = {
     // We toggle the CSS class with the JS API classList.
     if (clickedElement === userProfile.angelSwitch) {
       userProfile.angelFields.classList.toggle("d-none");
+    }
+  },
+  // Method who add and toggle the display none class on our DOM elements.
+  handleDisplayNone: function () {
+    // We get the DOM element on wich the CSS classes will be toggle.
+    // We get the toggle the CSS class with the JS API classList.
+
+    // We add the CSS class display none to modifyButton.
+    userProfile.modifyButton.classList.add("d-none");
+    // We toggle the CSS class display none to saveButton.
+    userProfile.saveButton.classList.toggle("d-none");
+    // We toggle the CSS class display none to delete-button.
+    userProfile.deleteButton.classList.toggle("d-none");
+    // We toggle the CSS class display none to delete-picture-button.
+    userProfile.deletePicureButton.classList.toggle("d-none");
+    // We toggle the CSS class display none to uploadedField.
+    userProfile.uploadField.classList.toggle("d-none");
+  },
+  // Method who, after a click on the userProfile.modifyButton, remove the disabled attribute on the form fields.
+  removeDisabledAttribute: function () {
+    // We remove the HTML's attribute disabled.
+    userProfile.angelSwitch.removeAttribute("disabled");
+    userProfile.firstNameField.removeAttribute("disabled");
+    userProfile.firstNameField.removeAttribute("disabled");
+    userProfile.lastNameField.removeAttribute("disabled");
+    userProfile.emailField.removeAttribute("disabled");
+    userProfile.phoneNumberField.removeAttribute("disabled");
+    userProfile.zipCodeField.removeAttribute("disabled");
+    userProfile.cityField.removeAttribute("disabled");
+
+    // We get all the checkbox in the block userProfile.servicesField
+    let servicesFieldCheckboxes =
+      userProfile.servicesField.querySelectorAll('[type="checkbox"]');
+
+    // For each checkbox among servicesFieldCheckboxes.
+    for (let serviceCheckbox of servicesFieldCheckboxes) {
+      // We remove the HTML's attributes disabled.
+      serviceCheckbox.removeAttribute("disabled");
+    }
+  },
+  // Method who set plaholders on the form fields related to the User::ANGEL_STATUS if they don't contains data.
+  setPlaceholderAttribute: function () {
+    // If the form filed have the placeholder attribute.
+    if (
+      userProfile.phoneNumberField.hasAttribute("placeholder") &&
+      userProfile.zipCodeField.hasAttribute("placeholder") &&
+      userProfile.cityField.hasAttribute("placeholder")
+    ) {
+      // We do nothing.
+      return;
+    } // Else they don't have the placeholder attribute.
+    else {
+      // We set placeholders to them.
+      userProfile.phoneNumberField.setAttribute(
+        "placeholder",
+        "Numéro de téléphone"
+      );
+      userProfile.zipCodeField.setAttribute("placeholder", "Code postal");
+      userProfile.cityField.setAttribute("placeholder", "Commune");
     }
   },
 };

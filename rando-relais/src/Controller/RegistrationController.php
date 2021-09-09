@@ -41,14 +41,13 @@ class RegistrationController extends AbstractController
 
             // We check if the switch button is checked.
             // We get the value of the checkbox (true or false).
-            $status = $form->get('status')->getData();
-            // If the switch is checked $status === true the user will be registered with a User::ANGEL_STATUS.
-            if ($status === true) {
+            // If the switch is checked $form->get('status')->getData()  === true the user will be registered with a User::ANGEL_STATUS.
+            if ($form->get('status')->getData() === true) {
                 // We set the status with the value of User::ANGEL_STATUS.
                 $user->setStatus(User::ANGEL_STATUS);
             }
-            // Else if the switch is not checked $status === false the user will be registered with a User::HIKER_STATUS.
-            elseif ($status === false) {
+            // Else if the switch is not checked $form->get('status')->getData() === false the user will be registered with a User::HIKER_STATUS.
+            elseif ($form->get('status')->getData() === false) {
                 // We set the status with the value of User::HIKER_STATUS.
                 $user->setStatus(User::HIKER_STATUS);
             }
@@ -59,6 +58,10 @@ class RegistrationController extends AbstractController
             if ($newFileName) {
                 // We set the picture property with the $newFileName.
                 $user->setPicture($newFileName);
+            } // $newFileName === false.
+            else {
+                // We set to picture the value of User::PROFILE_PICTURE_BY_DEFAULT.
+                $user->setPicture(User::PROFILE_PICTURE_BY_DEFAULT);
             }
           
             $entityManager = $this->getDoctrine()->getManager();

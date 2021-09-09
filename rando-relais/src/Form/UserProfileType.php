@@ -40,7 +40,10 @@ class UserProfileType extends AbstractType
                 'mapped' => false,
             ])
             ->add('status', HiddenType::class, [])
-            ->add('picture', FileType::class, [
+            ->add('picture', HiddenType::class, [])
+            ->add('upload', FileType::class, [
+                "mapped" => false,
+                "required" => false,
                 'label'         => 'Photo de profil',
                 'label_attr'    => [
                     'class' => 'd-none'
@@ -157,7 +160,7 @@ class UserProfileType extends AbstractType
         // We get the form data.
         $user = $event->getData();
         $form = $event->getForm();
-        
+
         // If the user's status is User::HIKER_STATUS.
         if ($user->getStatus() === User::HIKER_STATUS) {
             // We uncheck the checkbox.
@@ -231,10 +234,12 @@ class UserProfileType extends AbstractType
     */
     public function onPreSubmit(FormEvent $event)
     {
+        
         // We get the form data.
         $user = $event->getData();
         $form = $event->getForm();
-       
+
+        
         // We check if the switch button is checked.
         // If the status is different than null it's a User::ANGEL_STATUS else it's a User::HIKER_STATUS.
         $user['status']  = isset($user['currentStatus']) ? User::ANGEL_STATUS : User::HIKER_STATUS;
@@ -258,7 +263,7 @@ class UserProfileType extends AbstractType
                         ]),
                     ]
                 ])
-                    ->add('zipCode', null, [
+                ->add('zipCode', null, [
                     'required'      => true,
                     'label'         => "Code postale",
                     'label_attr'    => [
@@ -306,13 +311,7 @@ class UserProfileType extends AbstractType
                     ],
                 ]);
         }
-        // If the picture fiel is null.
-        if ($user['picture'] === null) {
-            // We destroy the picture field.
-            unset($user['picture']);
-            // We remove the picture field of from the form.
-            $form->remove('picture');
-        }
+        
         // We set the data of the event to the user.
         $event->setData($user);
     }
